@@ -37,7 +37,7 @@ from cover_retrieval.pipeline import (
     write_per_query,
 )
 from cover_retrieval.retrieval.rank import rank_protocol
-from cover_retrieval.utils.io import git_commit, load_config, read_json, write_json
+from cover_retrieval.utils.io import git_commit, load_config, parse_overrides, read_json, write_json
 
 
 def alignment_only_scores(config: dict, protocol, store, block: int = 500) -> tuple[np.ndarray, float]:
@@ -68,12 +68,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, default=Path("configs/benchmark.yaml"))
     parser.add_argument("--checkpoint", type=Path, default=None)
     parser.add_argument("--with-alignment-only", action="store_true")
+    parser.add_argument(
+        "--set", action="append", default=[], metavar="KEY=VALUE", help="override a config value"
+    )
+    parser.add_argument("--tag", default="", help="suffix for output files, to keep variants side by side")
     args = parser.parse_args(argv)
-    config = load_config(args.config)
+    config = load_config(args.config, parse_overrides(args.set))
     torch_threads(config)
     out = results_dir(config)
+    tag = f"_{args.tag}" if args.tag else ""
 
-    calibration_path = out / "hybrid_calibration.json"
+    calibration_path = out / f"hybrid_calibration{tag}.json"
     if not calibration_path.exists():
         raise SystemExit(
             "run scripts/run_hybrid_retrieval.py first: alpha/K must be locked before the benchmark"
@@ -140,10 +145,10 @@ def main(argv: list[str] | None = None) -> int:
         "git_commit": git_commit(),
         "config_path": str(args.config),
     }
-    write_json(out / "benchmark.json", payload)
-    write_per_query(out / "benchmark_per_query.csv", protocol, systems)
+    write_json(out / f"benchmark{tag}.json", payload)
+    write_per_query(out / f"benchmark_per_query{tag}.csv", protocol, systems)
     table = markdown_table(rows, METRIC_COLUMNS)
-    (out / "benchmark_table.md").write_text(table + "\n")
+    (out / f"benchmark_table{tag}.md").write_text(table + "\n")
     print(table)
     for name, ci in comparisons.items():
         print(f"{name}: dAP {ci['delta']:+.4f} [{ci['ci_low']:+.4f}, {ci['ci_high']:+.4f}]")

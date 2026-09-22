@@ -36,6 +36,19 @@ def load_config(path: str | Path, overrides: Mapping[str, Any] | None = None) ->
     return config
 
 
+def parse_overrides(items: list[str]) -> dict[str, Any]:
+    """``["a.b=value"]`` -> ``{"a": {"b": value}}`` (values parsed as YAML scalars)."""
+    overrides: dict[str, Any] = {}
+    for item in items:
+        key, _, raw = item.partition("=")
+        node = overrides
+        *parents, leaf = key.split(".")
+        for part in parents:
+            node = node.setdefault(part, {})
+        node[leaf] = yaml.safe_load(raw)
+    return overrides
+
+
 def write_json(path: str | Path, payload: Any) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)

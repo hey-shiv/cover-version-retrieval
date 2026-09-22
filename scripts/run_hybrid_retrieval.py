@@ -45,7 +45,14 @@ from cover_retrieval.pipeline import (
 )
 from cover_retrieval.retrieval.hybrid import calibrate_alpha
 from cover_retrieval.retrieval.rank import ranking_rows
-from cover_retrieval.utils.io import deep_merge, git_commit, load_config, write_csv, write_json
+from cover_retrieval.utils.io import (
+    deep_merge,
+    git_commit,
+    load_config,
+    parse_overrides,
+    write_csv,
+    write_json,
+)
 
 
 def calibrate(config: dict, model, k: int) -> dict:
@@ -75,10 +82,15 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--config", type=Path, default=Path("configs/hybrid_dev.yaml"))
     parser.add_argument("--checkpoint", type=Path, default=None)
+    parser.add_argument(
+        "--set", action="append", default=[], metavar="KEY=VALUE", help="override a config value"
+    )
+    parser.add_argument("--tag", default="", help="suffix for output files, to keep variants side by side")
     args = parser.parse_args(argv)
-    config = load_config(args.config)
+    config = load_config(args.config, parse_overrides(args.set))
     torch_threads(config)
     out, figs = results_dir(config), figures_dir(config)
+    tag = f"_{args.tag}" if args.tag else ""
     checkpoint = (
         args.checkpoint or run_dir(config, config["encoder"].get("run_name", "encoder")) / "encoder_best.pt"
     )
@@ -89,12 +101,12 @@ def main(argv: list[str] | None = None) -> int:
     # 1. calibration (locks alpha)
     calib = calibrate(config, model, k)
     write_json(
-        out / "hybrid_calibration.json", {**calib, "checkpoint": str(checkpoint), "git_commit": git_commit()}
+        out / f"hybrid_calibration{tag}.json", {**calib, "checkpoint": str(checkpoint), "git_commit": git_commit()}
     )
     plot_alpha_curve(
         calib["table"],
         calib["alpha"],
-        figs / "calibration_alpha_curve.png",
+        figs / f"calibration_alpha_curve{tag}.png",
         f"Calibration MAP vs alpha (K={k})",
     )
     alpha = calib["alpha"]
@@ -216,7 +228,7 @@ def main(argv: list[str] | None = None) -> int:
                     "top_false_positive_global_cosine": float(global_run.scores[qi, fp_cand]),
                     "top_false_positive_alignment_score": 1.0 - fp_diag.dtw.normalized_cost,
                     "top_false_positive_shift": fp_diag.shift,
-                    "figure": f"figures/error_{kind}_{query.pid}.png",
+                    "figure": f"figures/error_{kind}_{query.pid}{tag}.png",
                 }
             )
             plot_alignment_grid(
@@ -234,7 +246,7 @@ def main(argv: list[str] | None = None) -> int:
                         f"rank {fp_pos + 1}, shift {fp_diag.shift}, cost {fp_diag.dtw.normalized_cost:.3f}",
                     ),
                 ],
-                figs / f"error_{kind}_{query.pid}.png",
+                figs / f"error_{kind}_{query.pid}{tag}.png",
             )
 
     payload = {
@@ -257,16 +269,16 @@ def main(argv: list[str] | None = None) -> int:
         "git_commit": git_commit(),
         "config_path": str(args.config),
     }
-    write_json(out / "hybrid_dev.json", payload)
-    write_per_query(out / "hybrid_dev_per_query.csv", protocol, systems)
+    write_json(out / f"hybrid_dev{tag}.json", payload)
+    write_per_query(out / f"hybrid_dev_per_query{tag}.csv", protocol, systems)
     rank_rows = ranking_rows(hybrid_ranked, protocol, global_run.scores, top_n=10)
-    write_csv(out / "hybrid_dev_rankings_top10.csv", rank_rows, list(rank_rows[0]))
-    write_csv(out / "error_cases.csv", case_rows, list(case_rows[0]))
+    write_csv(out / f"hybrid_dev_rankings_top10{tag}.csv", rank_rows, list(rank_rows[0]))
+    write_csv(out / f"error_cases{tag}.csv", case_rows, list(case_rows[0]))
     table = markdown_table(rows, METRIC_COLUMNS)
     ablation_table = markdown_table(
         ablation, ["system", "K", "alpha", "shortlist_recall", "MAP", "Hit@1", "Hit@10", "rerank_s"]
     )
-    (out / "hybrid_dev_table.md").write_text(table + "\n\n" + ablation_table + "\n")
+    (out / f"hybrid_dev_table{tag}.md").write_text(table + "\n\n" + ablation_table + "\n")
     print(table)
     print(ablation_table)
     for name, ci in comparisons.items():

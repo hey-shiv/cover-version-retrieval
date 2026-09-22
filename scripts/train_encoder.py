@@ -11,26 +11,11 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import yaml
-
 from cover_retrieval.data.manifests import load_split_tracks
 from cover_retrieval.evaluation.analysis import plot_training_history
 from cover_retrieval.models.training import train_encoder
 from cover_retrieval.pipeline import figures_dir, results_dir, run_dir, split_store
-from cover_retrieval.utils.io import git_commit, load_config, write_csv, write_json
-
-
-def parse_overrides(items: list[str]) -> dict:
-    """``a.b=value`` strings -> nested dict (values parsed as YAML scalars)."""
-    overrides: dict = {}
-    for item in items:
-        key, _, raw = item.partition("=")
-        node = overrides
-        *parents, leaf = key.split(".")
-        for part in parents:
-            node = node.setdefault(part, {})
-        node[leaf] = yaml.safe_load(raw)
-    return overrides
+from cover_retrieval.utils.io import git_commit, load_config, parse_overrides, write_csv, write_json
 
 
 def main(argv: list[str] | None = None) -> int:
