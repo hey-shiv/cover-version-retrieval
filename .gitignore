@@ -1,0 +1,22 @@
+# Python / tooling
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Da-TACOS metadata and features are CC BY-NC-SA 4.0: never commit them.
+# (download with scripts/download_datacos.py; see DATASET_CARD.md)
+data/external/
+*.h5
+*.zip
+
+# Preprocessed-feature caches, checkpoints, raw rankings, smoke-test outputs
+data/cache/
+runs/
+*.pt
+*.npz
+*.npy

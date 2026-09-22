@@ -1,0 +1,34 @@
+# Synthetic end-to-end smoke test. Every path lives under runs/smoke/ (git-ignored),
+# so synthetic numbers can never be mistaken for Da-TACOS results.
+extends: hybrid_dev.yaml
+
+paths:
+  datacos_root: runs/smoke/da-tacos
+  manifests_dir: runs/smoke/manifests
+  cache_dir: runs/smoke/cache
+  runs_dir: runs/smoke/runs
+  reports_dir: runs/smoke/reports
+
+splits:
+  n_calibration: 4
+  n_query: 6
+  n_distractor: 10
+  n_validation: 10
+  n_train: 60
+
+encoder:
+  cache_frames: 128
+  input_frames: 64
+  channels: 32
+  n_blocks: 3
+  embedding_dim: 32
+
+training:
+  epochs: 4
+  batch_wids: 8
+  patience: 10
+  num_threads: 2
+
+retrieval:
+  shortlist_k: 8
+  alpha_grid_step: 0.25

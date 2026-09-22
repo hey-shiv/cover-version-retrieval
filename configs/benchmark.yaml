@@ -1,0 +1,9 @@
+# FINAL benchmark evaluation. Reuses the checkpoint, alpha and K locked by
+# hybrid_dev (reports/results/hybrid_calibration.json). Nothing here is tuned.
+extends: hybrid_dev.yaml
+
+data:
+  # No benchmark track may be dropped: non-finite values are zeroed and counted,
+  # and short tracks are upsampled instead of rejected.
+  nonfinite_policy: zero
+  min_frames: 1

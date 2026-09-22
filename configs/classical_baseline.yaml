@@ -1,0 +1,2 @@
+# Classical alignment-only baseline on the fixed development protocol.
+extends: base.yaml

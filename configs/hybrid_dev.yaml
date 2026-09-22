@@ -1,0 +1,5 @@
+# Encoder training + hybrid calibration + development evaluation.
+extends: base.yaml
+
+encoder:
+  run_name: encoder_supcon_tcn

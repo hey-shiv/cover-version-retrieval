@@ -1,0 +1,70 @@
+# Shared settings. Other configs use `extends: base.yaml` and override keys.
+# Every path is relative to the repository root.
+
+seed: 20260817
+
+paths:
+  datacos_root: data/external/da-tacos
+  manifests_dir: data/manifests
+  cache_dir: data/cache          # gitignored preprocessed-feature cache
+  runs_dir: runs                 # gitignored checkpoints / raw rankings
+  reports_dir: reports           # committed human-readable summaries
+
+data:
+  metadata_dir: da-tacos_metadata
+  coveranalysis_features_dir: da-tacos_coveranalysis_subset_hpcp
+  benchmark_features_dir: da-tacos_benchmark_subset_hpcp
+  zenodo_record: "4717628"
+  # Non-finite HPCP values: "reject" marks a track invalid (used for split
+  # selection); "zero" replaces them with 0 and counts them (used for the
+  # official benchmark, where no track may be dropped).
+  nonfinite_policy: reject
+  min_frames: 96
+
+# WID-level, mutually disjoint roles drawn from the Cover Analysis subset.
+# Order of assignment along the seeded WID permutation is the order below.
+splits:
+  seed: 20260817
+  n_calibration: 10     # 20 tracks: calibrates the hybrid blend weight only
+  n_query: 20           # 20 queries (lowest PID per WID), partners are relevant
+  n_distractor: 40      # 80 tracks
+  n_validation: 150     # 300 tracks: encoder early stopping / model selection
+  n_train: 1500         # 3000 tracks: encoder training (bandwidth budget, see D-010)
+
+features:
+  layout: auto          # auto | time_by_pitch | pitch_by_time
+  n_frames: 96          # classical alignment resolution (declared pilot constraint)
+
+alignment:
+  rotation_selection: profile_cosine   # profile_cosine | exhaustive_dtw
+  step_sizes: [[1, 1], [2, 1], [1, 2]]
+  step_weights: [1.0, 2.0, 1.0]
+  subsequence: true
+
+encoder:
+  cache_frames: 512     # intermediate resolution kept in the cache (augmentation source)
+  input_frames: 256
+  channels: 128
+  n_blocks: 6
+  kernel_size: 3
+  embedding_dim: 128
+  dropout: 0.1
+
+training:
+  device: cpu           # cpu gives bitwise-reproducible runs; "auto" picks cuda/mps
+  epochs: 60
+  batch_wids: 32        # each batch = 32 works x 2 recordings
+  lr: 0.001
+  weight_decay: 0.0001
+  temperature: 0.1
+  patience: 12
+  crop_min_fraction: 0.6
+  pitch_shift_augment: true
+  num_threads: 8
+
+retrieval:
+  shortlist_k: 30
+  alpha_grid_step: 0.05
+  test_time_rotations: false
+  backend: numpy        # numpy (exact, default) | faiss (optional)
+  dtw_batch_size: 4096

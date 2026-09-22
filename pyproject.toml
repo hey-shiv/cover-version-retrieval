@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cover-retrieval"
+version = "0.1.0"
+description = "Structure-aware hybrid retrieval for cover song identification on Da-TACOS HPCP features"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Shivashant" }]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "h5py>=3.10",
+    "pandas>=2.1",
+    "PyYAML>=6.0",
+    "matplotlib>=3.8",
+    "torch>=2.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "nbformat>=5.9", "nbconvert>=7", "ipykernel>=6"]
+faiss = ["faiss-cpu>=1.8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["slow: end-to-end tests that train a tiny model"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+ignore = ["E501"]
