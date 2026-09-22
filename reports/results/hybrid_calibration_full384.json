@@ -1,0 +1,121 @@
+{
+  "alpha": 0.15,
+  "shortlist_k": 30,
+  "table": [
+    {
+      "alpha": 0.0,
+      "map": 0.44287054830415934,
+      "mean_first_rank": 36.4
+    },
+    {
+      "alpha": 0.05,
+      "map": 0.44662054830415937,
+      "mean_first_rank": 36.25
+    },
+    {
+      "alpha": 0.1,
+      "map": 0.4412634054470165,
+      "mean_first_rank": 36.4
+    },
+    {
+      "alpha": 0.15,
+      "map": 0.478308859992471,
+      "mean_first_rank": 36.3
+    },
+    {
+      "alpha": 0.2,
+      "map": 0.47580744836062455,
+      "mean_first_rank": 36.4
+    },
+    {
+      "alpha": 0.25,
+      "map": 0.4498240115076225,
+      "mean_first_rank": 36.55
+    },
+    {
+      "alpha": 0.3,
+      "map": 0.4489311543647654,
+      "mean_first_rank": 36.6
+    },
+    {
+      "alpha": 0.35,
+      "map": 0.4725422654758765,
+      "mean_first_rank": 36.65
+    },
+    {
+      "alpha": 0.4,
+      "map": 0.43667882336243447,
+      "mean_first_rank": 36.95
+    },
+    {
+      "alpha": 0.45,
+      "map": 0.4265800091331854,
+      "mean_first_rank": 37.3
+    },
+    {
+      "alpha": 0.5,
+      "map": 0.4258090643916524,
+      "mean_first_rank": 37.45
+    },
+    {
+      "alpha": 0.55,
+      "map": 0.39577243435502235,
+      "mean_first_rank": 37.7
+    },
+    {
+      "alpha": 0.6,
+      "map": 0.39157471178773456,
+      "mean_first_rank": 37.7
+    },
+    {
+      "alpha": 0.65,
+      "map": 0.38561766230127337,
+      "mean_first_rank": 38.05
+    },
+    {
+      "alpha": 0.7,
+      "map": 0.380987336486737,
+      "mean_first_rank": 38.35
+    },
+    {
+      "alpha": 0.75,
+      "map": 0.3808808201960102,
+      "mean_first_rank": 38.35
+    },
+    {
+      "alpha": 0.8,
+      "map": 0.3553149291838949,
+      "mean_first_rank": 38.65
+    },
+    {
+      "alpha": 0.85,
+      "map": 0.3520484296016059,
+      "mean_first_rank": 38.75
+    },
+    {
+      "alpha": 0.9,
+      "map": 0.31742841654194753,
+      "mean_first_rank": 39.1
+    },
+    {
+      "alpha": 0.95,
+      "map": 0.31739345595206697,
+      "mean_first_rank": 39.15
+    },
+    {
+      "alpha": 1.0,
+      "map": 0.3173101226187337,
+      "mean_first_rank": 39.2
+    }
+  ],
+  "protocol": {
+    "queries": 20,
+    "candidates": 320,
+    "query_wids": "calibration split only",
+    "pool": "calibration + validation tracks (no development or benchmark WIDs)"
+  },
+  "global_only_map": 0.3173101226187337,
+  "shortlist_recall": 0.7,
+  "checkpoint": "runs/encoder_full_train/encoder_best.pt",
+  "git_commit": "9a8937a-dirty"
+}

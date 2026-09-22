@@ -7,7 +7,7 @@
     "query": 20,
     "distractor": 40,
     "validation": 150,
-    "train": 1500
+    "train": null
   },
   "validation_rules": {
     "pids_per_wid": 2,
@@ -16,7 +16,7 @@
     "labels_must_match_manifest": true
   },
   "selection": "lexicographic sort -> numpy default_rng(seed).permutation -> skip invalid -> fill calibration, query, distractor, validation, train",
-  "config": "configs/base.yaml",
+  "config": "configs/full_train.yaml",
   "role_counts": {
     "calibration": {
       "wids": 10,
@@ -35,8 +35,8 @@
       "tracks": 300
     },
     "train": {
-      "wids": 1500,
-      "tracks": 3000
+      "wids": 4780,
+      "tracks": 9560
     }
   },
   "n_excluded_wids": 0,

@@ -1,0 +1,10 @@
+# Experiment 3 (D-020): encoder trained on every usable Cover Analysis work.
+# The split order is unchanged, so calibration/query/distractor/validation works —
+# and the first 1,500 training works — are identical to the bandwidth-budget run.
+extends: hybrid_dev.yaml
+
+splits:
+  n_train: all
+
+encoder:
+  run_name: encoder_full_train
