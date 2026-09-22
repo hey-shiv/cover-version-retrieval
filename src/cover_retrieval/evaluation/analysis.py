@@ -13,7 +13,8 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.use("Agg")
+if "inline" not in matplotlib.get_backend():  # headless scripts; keep Jupyter's inline backend
+    matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
@@ -98,7 +99,11 @@ def plot_alignment(
     own = ax is None
     if own:
         fig, ax = plt.subplots(figsize=(4.2, 3.8))
-    image = ax.imshow(cost, origin="lower", aspect="auto", cmap="viridis_r", vmin=0.0, vmax=1.0)
+    # robust per-matrix colour range: HPCP cosine costs usually occupy a narrow band
+    low, high = np.percentile(cost, [1, 99])
+    image = ax.imshow(
+        cost, origin="lower", aspect="auto", cmap="viridis_r", vmin=low, vmax=max(high, low + 1e-6)
+    )
     if path_ij is not None:
         ax.plot(path_ij[:, 1], path_ij[:, 0], color="red", linewidth=1.2)
     ax.set_xlabel("candidate frame")
@@ -152,3 +157,24 @@ def plot_alpha_curve(table: Sequence[dict[str, float]], chosen: float, path: str
     ax.set_title(title, fontsize=10)
     ax.legend(fontsize=8)
     _save(fig, path)
+
+
+# ------------------------------------------------------------------ hubness
+def tonal_dispersion(features: np.ndarray) -> np.ndarray:
+    """Mean cosine distance of each frame to the track's own mean chroma profile.
+
+    ``features`` is ``(N, 12, T)`` with unit-norm frames. Low values = harmonically
+    static tracks, which get uniformly low alignment cost against many candidates.
+    """
+    profiles = features.mean(axis=2)
+    profiles = profiles / np.maximum(np.linalg.norm(profiles, axis=1, keepdims=True), 1e-12)
+    return 1.0 - np.einsum("npt,np->nt", features, profiles).mean(axis=1)
+
+
+def hub_counts(rows: Sequence[dict], top_n: int = 10) -> dict[str, int]:
+    """How often each candidate appears as a *non-relevant* item within the top ``top_n``."""
+    counts: dict[str, int] = {}
+    for row in rows:
+        if int(row["rank"]) <= top_n and str(row["is_relevant"]) in ("False", "false", "0"):
+            counts[row["candidate_pid"]] = counts.get(row["candidate_pid"], 0) + 1
+    return counts

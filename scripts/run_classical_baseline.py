@@ -40,7 +40,7 @@ from cover_retrieval.pipeline import (
     write_per_query,
 )
 from cover_retrieval.retrieval.rank import rank_protocol, ranking_rows
-from cover_retrieval.utils.io import git_commit, load_config, write_csv, write_json
+from cover_retrieval.utils.io import deep_merge, git_commit, load_config, write_csv, write_json
 
 
 def calibration_diagnostics(config: dict, out_fig: Path) -> list[dict]:
@@ -88,6 +88,13 @@ def main(argv: list[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("--config", type=Path, default=Path("configs/classical_baseline.yaml"))
+    parser.add_argument(
+        "--resolution-sweep",
+        type=int,
+        nargs="*",
+        default=[],
+        help="extra n_frames values to analyse, e.g. 48 192 384",
+    )
     args = parser.parse_args(argv)
     config = load_config(args.config)
     torch_threads(config)
@@ -126,6 +133,16 @@ def main(argv: list[str] | None = None) -> int:
             )
 
     diagnostics = calibration_diagnostics(config, figs)
+
+    # Resolution sensitivity (analysis only: the declared default n_frames is not changed).
+    sweep = []
+    for n_frames in args.resolution_sweep:
+        cfg = deep_merge(config, {"features": {"n_frames": n_frames}})
+        for name in ("calibration", "dev"):
+            proto = load_protocol(cfg["paths"]["manifests_dir"], name)
+            run = run_classical(cfg, proto, protocol_store(cfg, proto, "coveranalysis"))
+            row = metrics_row(f"{name}_n{n_frames}", run.ranked, ms_per_pair=run.timings["ms_per_pair"])
+            sweep.append({"protocol": name, "n_frames": n_frames, **row})
     payload = {
         "protocol": {
             "name": "dev",
@@ -138,6 +155,7 @@ def main(argv: list[str] | None = None) -> int:
         "metrics": rows,
         "bootstrap_vs_baseline": comparisons,
         "calibration_pair_diagnostics": diagnostics,
+        "resolution_sweep_ANALYSIS_ONLY": sweep,
         "git_commit": git_commit(),
         "config_path": str(args.config),
     }
@@ -148,6 +166,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     write_csv(out / "classical_dev_rankings.csv", rank_rows, list(rank_rows[0]))
     table = markdown_table(rows, METRIC_COLUMNS + ["ms_per_pair"])
+    if sweep:
+        table += "\n\nResolution sensitivity (analysis only; default stays at the configured n_frames):\n\n"
+        table += markdown_table(
+            sweep, ["protocol", "n_frames", "n_queries", "MAP", "Hit@10", "mean_first_rank", "ms_per_pair"]
+        )
     (out / "classical_dev_table.md").write_text(table + "\n")
     print(table)
     for name, ci in comparisons.items():

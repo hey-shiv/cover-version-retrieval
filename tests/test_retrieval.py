@@ -159,3 +159,20 @@ def test_error_case_selection_is_deterministic():
     assert cases.successes == [0, 5, 3]
     assert cases.false_negatives == [6, 2, 4]
     assert all(r > 1 for r in (np.array([1, 5, 30, 2, 12, 1, 60])[cases.false_positives]))
+
+
+def test_tonal_dispersion_and_hub_counts():
+    from cover_retrieval.evaluation.analysis import hub_counts, tonal_dispersion
+
+    static = np.zeros((12, 10))
+    static[0] = 1.0
+    varied = l2_normalize_frames(np.eye(12)[:, np.arange(10) % 12] + 1e-3)
+    d = tonal_dispersion(np.stack([static, varied]))
+    assert d[0] == pytest.approx(0.0, abs=1e-12) and d[1] > 0.5
+    rows = [
+        {"rank": 1, "candidate_pid": "P_1", "is_relevant": "False"},
+        {"rank": 2, "candidate_pid": "P_2", "is_relevant": "True"},
+        {"rank": 11, "candidate_pid": "P_1", "is_relevant": "False"},
+        {"rank": 3, "candidate_pid": "P_1", "is_relevant": "False"},
+    ]
+    assert hub_counts(rows) == {"P_1": 2}

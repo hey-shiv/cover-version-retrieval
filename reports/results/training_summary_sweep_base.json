@@ -1,0 +1,42 @@
+{
+  "best_epoch": 50,
+  "best_val_map": 0.18097026232938931,
+  "epochs_run": 60,
+  "n_parameters": 645504,
+  "receptive_field_frames": 253,
+  "device": "cpu",
+  "train_tracks": 3000,
+  "train_wids": 1500,
+  "val_tracks": 300,
+  "total_seconds": 2220.7512084169975,
+  "checkpoint": "runs/sweep_base/encoder_best.pt",
+  "git_commit": "55e914a-dirty",
+  "config_path": "configs/hybrid_dev.yaml",
+  "overrides": [
+    "training.patience=60",
+    "training.num_threads=2",
+    "encoder.run_name=sweep_base"
+  ],
+  "encoder": {
+    "cache_frames": 512,
+    "input_frames": 256,
+    "channels": 128,
+    "n_blocks": 6,
+    "kernel_size": 3,
+    "embedding_dim": 128,
+    "dropout": 0.1,
+    "run_name": "sweep_base"
+  },
+  "training": {
+    "device": "cpu",
+    "epochs": 60,
+    "batch_wids": 32,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "temperature": 0.1,
+    "patience": 60,
+    "crop_min_fraction": 0.6,
+    "pitch_shift_augment": true,
+    "num_threads": 2
+  }
+}

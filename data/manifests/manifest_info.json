@@ -1,0 +1,47 @@
+{
+  "seed": 20260817,
+  "subset": "coveranalysis",
+  "n_metadata_wids": 5000,
+  "split_sizes": {
+    "calibration": 10,
+    "query": 20,
+    "distractor": 40,
+    "validation": 150,
+    "train": 1500
+  },
+  "validation_rules": {
+    "pids_per_wid": 2,
+    "nonfinite_policy": "reject",
+    "min_frames": 96,
+    "labels_must_match_manifest": true
+  },
+  "selection": "lexicographic sort -> numpy default_rng(seed).permutation -> skip invalid -> fill calibration, query, distractor, validation, train",
+  "config": "configs/base.yaml",
+  "role_counts": {
+    "calibration": {
+      "wids": 10,
+      "tracks": 20
+    },
+    "query": {
+      "wids": 20,
+      "tracks": 40
+    },
+    "distractor": {
+      "wids": 40,
+      "tracks": 80
+    },
+    "validation": {
+      "wids": 150,
+      "tracks": 300
+    },
+    "train": {
+      "wids": 1500,
+      "tracks": 3000
+    }
+  },
+  "n_excluded_wids": 0,
+  "n_dev_queries": 20,
+  "n_dev_candidates": 120,
+  "n_calibration_queries": 20,
+  "n_calibration_candidates": 320
+}

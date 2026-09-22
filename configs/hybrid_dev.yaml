@@ -1,5 +1,11 @@
 # Encoder training + hybrid calibration + development evaluation.
+# Training settings were chosen by validation MAP only (encoder sweep, D-016):
+# the base hyperparameters with early stopping effectively disabled won.
 extends: base.yaml
 
 encoder:
-  run_name: encoder_supcon_tcn
+  run_name: sweep_base
+
+training:
+  patience: 60        # no early stopping within 60 epochs; best epoch kept by validation MAP
+  num_threads: 2      # thread count used for the selected run (results match 8 threads)
