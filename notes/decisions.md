@@ -127,3 +127,18 @@ Every design choice that can affect validity or compute. Format: date, decision,
 - **Evidence:** `reports/results/benchmark.json` — 13,000 queries; shortlist recall 0.021; Recall@100 identical (0.053) for global and hybrid; work-level bootstrap intervals exclude zero for every comparison.
 - **Rejected:** raising K, retuning alpha, or retraining on the benchmark evidence and reporting only the improved run.
 - **Impact:** The headline claim of the project changes from "hybrid retrieval works" to "hybrid retrieval is 137x cheaper than exhaustive alignment but, with this Stage 1, much less accurate; shortlist recall is the constraint".
+
+## D-018 — Hubness correction with an inductive probe reference
+- **Date:** 2026-09-23
+- **Decision:** Penalise each candidate by its general score level: `corrected[q, c] = score[q, c] - lam * reference[c]`. The reference is estimated against a **fixed probe set of 200 training-split tracks** (`mean` or `topk` of the probe scores), never from the evaluation queries and never from labels. `lam` and the method are grid-searched on the calibration protocol only.
+- **Rationale:** The development error analysis showed tonally static tracks dominating false positives (dispersion vs. hub count, Spearman −0.77). A probe-based reference keeps the definition identical at any protocol size and costs 200 x C alignments (about 3M pairs on the benchmark) instead of the C x C matrix (225M).
+- **Evidence:** `reports/results/hubness_correction*.json`. At 96 frames, calibration MAP 0.206 → 0.379 (lam = 0.5, mean) and development MAP 0.248 → 0.289 (ΔAP +0.041, CI [−0.045, +0.131]). The probe reference correlates with tonal dispersion at ρ = −0.81 (96 frames) and −0.90 (384 frames).
+- **Rejected:** the query-side CSLS term (constant within a query's ranking, so it cannot reorder it); a transductive column-mean reference over the evaluation queries (cheap on the cached benchmark matrix, but its meaning changes with the query set).
+- **Impact:** One extra scalar, calibrated on 10 works. At 384 frames the correction still wins on calibration (0.304 → 0.407) but *loses* on development (0.384 → 0.355), so the two mechanisms overlap; both numbers are reported.
+
+## D-019 — Alignment resolution for the reranker chosen on calibration works
+- **Date:** 2026-09-23
+- **Decision:** Keep `features.n_frames: 96` as the declared default of the base configuration, and additionally evaluate a 384-frame variant whose selection is justified by calibration MAP (0.206 at 96 vs. 0.304 at 384). Only the shortlist reranker can afford it at benchmark scale.
+- **Rationale:** The resolution sweep in `reports/classical_baseline.md` showed 96 frames to be the binding limit of the classical stage. Reranking 30 candidates per query at 384 frames costs about 16x more per pair but only touches 0.2% of the pairs.
+- **Evidence:** Development (locked settings): classical alignment 0.248 → 0.384, hybrid 0.262 → 0.362, ΔAP for hybrid over Stage 1 +0.173 [+0.044, +0.324] — the first development comparison whose interval excludes zero by a clear margin.
+- **Rejected:** alignment-only retrieval at 384 frames over the whole benchmark (about 42 h of compute); changing the base default, which would invalidate comparisons with the already-reported runs.
