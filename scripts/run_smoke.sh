@@ -10,5 +10,7 @@ rm -rf runs/smoke
 "$PY" scripts/run_classical_baseline.py --config configs/smoke.yaml
 "$PY" scripts/train_encoder.py --config configs/smoke.yaml
 "$PY" scripts/run_hybrid_retrieval.py --config configs/smoke.yaml
-"$PY" scripts/run_benchmark.py --config configs/smoke.yaml --with-alignment-only
+"$PY" scripts/run_hubness_correction.py --config configs/smoke.yaml --n-probes 8
+"$PY" scripts/run_benchmark.py --config configs/smoke.yaml --with-alignment-only \
+  --hub-correction runs/smoke/reports/results/hubness_correction.json --n-probes 8
 echo "SMOKE PIPELINE OK (synthetic data; numbers are not Da-TACOS results)"

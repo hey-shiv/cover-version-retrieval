@@ -101,7 +101,8 @@ def main(argv: list[str] | None = None) -> int:
     # 1. calibration (locks alpha)
     calib = calibrate(config, model, k)
     write_json(
-        out / f"hybrid_calibration{tag}.json", {**calib, "checkpoint": str(checkpoint), "git_commit": git_commit()}
+        out / f"hybrid_calibration{tag}.json",
+        {**calib, "checkpoint": str(checkpoint), "git_commit": git_commit()},
     )
     plot_alpha_curve(
         calib["table"],

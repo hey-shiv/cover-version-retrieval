@@ -46,12 +46,12 @@ def test_correction_demotes_a_hub_without_hurting_a_specific_match():
     )
     relevant = np.array([False, False, True])
     order_before, _ = ranking_from_scores(scores[1], relevant)
-    assert order_before[0] == 0                      # the hub wins before correction
+    assert order_before[0] == 0  # the hub wins before correction
 
     reference = hub_reference(scores, "topk", k=2)
     corrected = apply_hub_correction(scores, reference, lam=1.0)
     order_after, rel_after = ranking_from_scores(corrected[1], relevant)
-    assert order_after[0] == 2                       # the specific match wins after
+    assert order_after[0] == 2  # the specific match wins after
     assert rel_after[0]
 
 

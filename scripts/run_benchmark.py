@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import time
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -33,16 +34,30 @@ from cover_retrieval.pipeline import (
     run_dir,
     run_global,
     run_hybrid_shortlists,
+    split_store,  # noqa: F401  (used by probe_reference_scores)
     torch_threads,
     write_per_query,
 )
+from cover_retrieval.retrieval.hybrid import HybridRun
+from cover_retrieval.retrieval.normalization import apply_hub_correction, hub_reference
 from cover_retrieval.retrieval.rank import rank_protocol
 from cover_retrieval.utils.io import git_commit, load_config, parse_overrides, read_json, write_json
 
 
+def probe_reference_scores(config: dict, candidate_features: np.ndarray, n_probes: int) -> np.ndarray:
+    """``(P, C)`` alignment scores of fixed training-split probe queries (see D-018)."""
+    from cover_retrieval.data.manifests import load_split_tracks
+
+    probes = load_split_tracks(config["paths"]["manifests_dir"], "train")[:n_probes]
+    probe_store = split_store(config, probes, f"probe{n_probes}")
+    scores, _ = aligner_from_config(config).score_matrix(probe_store.views["classical"], candidate_features)
+    return scores
+
+
 def alignment_only_scores(config: dict, protocol, store, block: int = 500) -> tuple[np.ndarray, float]:
+    """Full query x candidate alignment, cached per resolution in blocks of 500 queries."""
     aligner = aligner_from_config(config)
-    work = run_dir(config, "benchmark_alignment")
+    work = run_dir(config, f"benchmark_alignment_n{int(config['features']['n_frames'])}")
     queries = store.get("classical", [t.pid for t in protocol.queries])
     n = queries.shape[0]
     seconds = 0.0
@@ -68,6 +83,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, default=Path("configs/benchmark.yaml"))
     parser.add_argument("--checkpoint", type=Path, default=None)
     parser.add_argument("--with-alignment-only", action="store_true")
+    parser.add_argument(
+        "--hub-correction",
+        type=Path,
+        default=None,
+        help="hubness_correction*.json with the method/k/lambda locked on calibration works",
+    )
+    parser.add_argument("--n-probes", type=int, default=200)
     parser.add_argument(
         "--set", action="append", default=[], metavar="KEY=VALUE", help="override a config value"
     )
@@ -97,6 +119,7 @@ def main(argv: list[str] | None = None) -> int:
     global_run = run_global(config, model, protocol, store)
     print(f"global: MAP {metrics_row('g', global_run.ranked)['MAP']:.4f}", flush=True)
     hybrid = run_hybrid_shortlists(config, global_run, protocol, store, k)
+    k_shortlist = k
     systems = {
         "global_embedding": global_run.ranked,
         f"hybrid_K{k}_alpha{alpha:.2f}": hybrid.rank(alpha),
@@ -110,13 +133,46 @@ def main(argv: list[str] | None = None) -> int:
         "rerank_s": hybrid.timings["rerank_seconds"],
         "rerank_ms_per_query": 1e3 * hybrid.timings["rerank_seconds"] / len(protocol.queries),
     }
+    alignment_scores = None
     if args.with_alignment_only:
-        scores, seconds = alignment_only_scores(config, protocol, store)
-        systems["classical_alignment"] = rank_protocol(scores, protocol)
+        alignment_scores, seconds = alignment_only_scores(config, protocol, store)
+        systems["classical_alignment"] = rank_protocol(alignment_scores, protocol)
         runtime["alignment_only_s"] = seconds
         runtime["alignment_only_ms_per_pair"] = (
             1e3 * seconds / (len(protocol.queries) * (len(protocol.candidates) - 1))
         )
+
+    # ---- optional hubness correction (settings locked on calibration works) -------
+    if args.hub_correction:
+        locked = read_json(args.hub_correction)["locked"]
+        lam, method, ref_k = float(locked["lambda"]), locked["method"], int(locked["k"])
+        t0 = time.perf_counter()
+        probe_scores = probe_reference_scores(config, store.views["classical"], args.n_probes)
+        reference = hub_reference(probe_scores, method, ref_k)
+        runtime["hub_reference_s"] = time.perf_counter() - t0
+        runtime["hub_reference_pairs"] = int(probe_scores.size)
+        payload_hub = {
+            "lambda": lam,
+            "method": method,
+            "k": ref_k,
+            "n_probes": args.n_probes,
+            "source": str(args.hub_correction),
+        }
+        corrected = HybridRun(
+            [
+                replace(s_, align_scores=s_.align_scores - lam * reference[s_.shortlist])
+                for s_ in hybrid.shortlists
+            ],
+            hybrid.k,
+            hybrid.timings,
+        )
+        systems[f"hybrid_hubcorr_K{k_shortlist}_alpha{alpha:.2f}"] = corrected.rank(alpha)
+        if alignment_scores is not None:
+            systems["classical_alignment_hubcorr"] = rank_protocol(
+                apply_hub_correction(alignment_scores, reference, lam), protocol
+            )
+    else:
+        payload_hub = None
 
     rows = [metrics_row(name, ranked) for name, ranked in systems.items()]
     groups = [q.wid for q in protocol.queries]
@@ -136,7 +192,13 @@ def main(argv: list[str] | None = None) -> int:
             "noise_tracks": sum(1 for t in protocol.candidates) - len(protocol.queries),
             "self_excluded": True,
         },
-        "locked_from_calibration": {"alpha": alpha, "shortlist_k": k, "checkpoint": str(checkpoint)},
+        "locked_from_calibration": {
+            "alpha": alpha,
+            "shortlist_k": k,
+            "checkpoint": str(checkpoint),
+            "n_frames": config["features"]["n_frames"],
+            "hub_correction": payload_hub,
+        },
         "nonfinite_values_zeroed": int(store.stats["n_nonfinite"].sum()),
         "metrics": rows,
         "shortlist_recall": hybrid.shortlist_recall(),
