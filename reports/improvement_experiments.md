@@ -11,9 +11,21 @@ Three experiments run after the first benchmark evaluation exposed its two failu
 Commands:
 
 ```bash
+# 1. hubness correction (lambda/method calibrated on calibration works)
 python scripts/run_hubness_correction.py --config configs/hybrid_dev.yaml
 python scripts/run_hubness_correction.py --config configs/hybrid_dev.yaml --set features.n_frames=384 --tag n384
+# 2. 384-frame reranking
 python scripts/run_hybrid_retrieval.py   --config configs/hybrid_dev.yaml --set features.n_frames=384 --tag n384
+# 3. encoder trained on every usable work
+python scripts/build_manifests.py        --config configs/full_train.yaml
+python scripts/train_encoder.py          --config configs/full_train.yaml
+python scripts/run_hybrid_retrieval.py   --config configs/full_train.yaml --tag full96
+python scripts/run_hybrid_retrieval.py   --config configs/full_train.yaml --set features.n_frames=384 --tag full384
+# final benchmark runs
+python scripts/run_benchmark.py --config configs/full_train.yaml --tag full96 --with-alignment-only \
+    --hub-correction reports/results/hubness_correction.json
+python scripts/run_benchmark.py --config configs/full_train.yaml --tag full384 \
+    --set features.n_frames=384 --hub-correction reports/results/hubness_correction_n384.json
 ```
 
 ---

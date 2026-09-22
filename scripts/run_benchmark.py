@@ -44,13 +44,27 @@ from cover_retrieval.retrieval.rank import rank_protocol
 from cover_retrieval.utils.io import git_commit, load_config, parse_overrides, read_json, write_json
 
 
-def probe_reference_scores(config: dict, candidate_features: np.ndarray, n_probes: int) -> np.ndarray:
-    """``(P, C)`` alignment scores of fixed training-split probe queries (see D-018)."""
+def probe_reference_scores(
+    config: dict, candidate_features: np.ndarray, n_probes: int, cache_key: str = ""
+) -> np.ndarray:
+    """``(P, C)`` alignment scores of fixed training-split probe queries (see D-018).
+
+    The probe set and the candidates are fixed by the manifests, so the result depends
+    only on the resolution; it is cached to avoid recomputing 3M alignments per run.
+    """
     from cover_retrieval.data.manifests import load_split_tracks
 
+    n_frames = int(config["features"]["n_frames"])
+    cache = run_dir(config, "probe_reference") / f"probe{n_probes}_n{n_frames}_{cache_key}.npy"
+    if cache.exists():
+        cached = np.load(cache)
+        if cached.shape == (n_probes, candidate_features.shape[0]):
+            print(f"[probe] reusing {cache}", flush=True)
+            return cached
     probes = load_split_tracks(config["paths"]["manifests_dir"], "train")[:n_probes]
     probe_store = split_store(config, probes, f"probe{n_probes}")
     scores, _ = aligner_from_config(config).score_matrix(probe_store.views["classical"], candidate_features)
+    np.save(cache, scores)
     return scores
 
 
@@ -147,7 +161,7 @@ def main(argv: list[str] | None = None) -> int:
         locked = read_json(args.hub_correction)["locked"]
         lam, method, ref_k = float(locked["lambda"]), locked["method"], int(locked["k"])
         t0 = time.perf_counter()
-        probe_scores = probe_reference_scores(config, store.views["classical"], args.n_probes)
+        probe_scores = probe_reference_scores(config, store.views["classical"], args.n_probes, "benchmark")
         reference = hub_reference(probe_scores, method, ref_k)
         runtime["hub_reference_s"] = time.perf_counter() - t0
         runtime["hub_reference_pairs"] = int(probe_scores.size)

@@ -66,6 +66,8 @@ Across the 20 queries, the hybrid puts the partner at rank 1 for 3 queries and i
 
 # Benchmark-scale error behaviour (13,000 queries x 15,000 candidates)
 
+> This section analyses the **first** benchmark evaluation (1,500-work encoder, 96-frame alignment, no hubness correction). Its two diagnoses — hubness and Stage-1 recall — drove the follow-up experiments in `improvement_experiments.md`, which raised the best system from 0.084 to 0.136 MAP and the hybrid from 0.018 to 0.068. The analysis is left as written, since it is what motivated those changes.
+
 Computed from `results/benchmark_per_query.csv` (rank of the first correct cover per query, per system).
 
 | statistic | global | hybrid (K=30, alpha=0.05) | classical alignment |

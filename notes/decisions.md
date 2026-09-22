@@ -134,6 +134,7 @@ Every design choice that can affect validity or compute. Format: date, decision,
 - **Rationale:** The development error analysis showed tonally static tracks dominating false positives (dispersion vs. hub count, Spearman −0.77). A probe-based reference keeps the definition identical at any protocol size and costs 200 x C alignments (about 3M pairs on the benchmark) instead of the C x C matrix (225M).
 - **Evidence:** `reports/results/hubness_correction*.json`. At 96 frames, calibration MAP 0.206 → 0.379 (lam = 0.5, mean) and development MAP 0.248 → 0.289 (ΔAP +0.041, CI [−0.045, +0.131]). The probe reference correlates with tonal dispersion at ρ = −0.81 (96 frames) and −0.90 (384 frames).
 - **Rejected:** the query-side CSLS term (constant within a query's ranking, so it cannot reorder it); a transductive column-mean reference over the evaluation queries (cheap on the cached benchmark matrix, but its meaning changes with the query set).
+- **Cost:** 148 s at 96 frames and 2,220 s at 384 frames for the benchmark catalogue, cached under `runs/probe_reference/` because probes, candidates and resolution fully determine it. It is a one-off per catalogue, not per query.
 - **Impact:** One extra scalar, calibrated on 10 works. At 384 frames the correction still wins on calibration (0.304 → 0.407) but *loses* on development (0.384 → 0.355), so the two mechanisms overlap; both numbers are reported.
 
 ## D-019 — Alignment resolution for the reranker chosen on calibration works
