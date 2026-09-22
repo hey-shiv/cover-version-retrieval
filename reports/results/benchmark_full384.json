@@ -1,0 +1,117 @@
+{
+  "label": "FINAL Da-TACOS benchmark evaluation (no tuning on this set)",
+  "protocol": {
+    "queries": 13000,
+    "candidates": 15000,
+    "noise_tracks": 2000,
+    "self_excluded": true
+  },
+  "locked_from_calibration": {
+    "alpha": 0.15,
+    "shortlist_k": 30,
+    "checkpoint": "runs/encoder_full_train/encoder_best.pt",
+    "n_frames": 384,
+    "hub_correction": {
+      "lambda": 0.6,
+      "method": "mean",
+      "k": 0,
+      "n_probes": 200,
+      "source": "reports/results/hubness_correction_n384.json"
+    }
+  },
+  "nonfinite_values_zeroed": 0,
+  "metrics": [
+    {
+      "system": "global_embedding",
+      "n_queries": 13000,
+      "MAP": 0.03437645976921654,
+      "MRR": 0.13008783503950805,
+      "Recall@1": 0.0060384615384615386,
+      "Recall@10": 0.03483974358974359,
+      "Recall@100": 0.14621794871794871,
+      "Hit@1": 0.07246153846153847,
+      "Hit@10": 0.243,
+      "Hit@100": 0.5941538461538461,
+      "mean_first_rank": 280.9746153846154,
+      "median_first_rank": 59.0
+    },
+    {
+      "system": "hybrid_K30_alpha0.15",
+      "n_queries": 13000,
+      "MAP": 0.062408456741924835,
+      "MRR": 0.2707568120472025,
+      "Recall@1": 0.0197051282051282,
+      "Recall@10": 0.0585,
+      "Recall@100": 0.14621794871794871,
+      "Hit@1": 0.23646153846153847,
+      "Hit@10": 0.3263846153846154,
+      "Hit@100": 0.5941538461538461,
+      "mean_first_rank": 279.0748461538462,
+      "median_first_rank": 59.0
+    },
+    {
+      "system": "rerank_only_K30_alpha0.00",
+      "n_queries": 13000,
+      "MAP": 0.06250914327666784,
+      "MRR": 0.27154113293236587,
+      "Recall@1": 0.019858974358974355,
+      "Recall@10": 0.058339743589743594,
+      "Recall@100": 0.14621794871794871,
+      "Hit@1": 0.2383076923076923,
+      "Hit@10": 0.32653846153846156,
+      "Hit@100": 0.5941538461538461,
+      "mean_first_rank": 279.08453846153844,
+      "median_first_rank": 59.0
+    },
+    {
+      "system": "hybrid_hubcorr_K30_alpha0.15",
+      "n_queries": 13000,
+      "MAP": 0.06779762484406568,
+      "MRR": 0.3005197065522763,
+      "Recall@1": 0.022647435897435893,
+      "Recall@10": 0.06244871794871795,
+      "Recall@100": 0.14621794871794871,
+      "Hit@1": 0.27176923076923076,
+      "Hit@10": 0.34284615384615386,
+      "Hit@100": 0.5941538461538461,
+      "mean_first_rank": 278.70884615384614,
+      "median_first_rank": 59.0
+    }
+  ],
+  "shortlist_recall": 0.0717051282051282,
+  "runtime": {
+    "feature_loading_s": 61.698469916998874,
+    "embedding_s": 68.12998529199831,
+    "global_search_s": 0.07136216599610634,
+    "shortlist_s": 9.440274656524707,
+    "rerank_s": 494.3403924993254,
+    "rerank_ms_per_query": 38.026184038409646,
+    "hub_reference_s": 2220.120133209006,
+    "hub_reference_pairs": 3000000
+  },
+  "bootstrap_vs_global": {
+    "hybrid_K30_alpha0.15 - global_embedding": {
+      "delta": 0.02803199697270829,
+      "ci_low": 0.0256273104018834,
+      "ci_high": 0.03051298583840096,
+      "n_groups": 1000,
+      "n_boot": 10000
+    },
+    "rerank_only_K30_alpha0.00 - global_embedding": {
+      "delta": 0.02813268350745131,
+      "ci_low": 0.025699906954848594,
+      "ci_high": 0.030605170366808834,
+      "n_groups": 1000,
+      "n_boot": 10000
+    },
+    "hybrid_hubcorr_K30_alpha0.15 - global_embedding": {
+      "delta": 0.03342116507484912,
+      "ci_low": 0.030778563242845624,
+      "ci_high": 0.036125563863491375,
+      "n_groups": 1000,
+      "n_boot": 10000
+    }
+  },
+  "git_commit": "ecd00e9-dirty",
+  "config_path": "configs/full_train.yaml"
+}

@@ -142,3 +142,12 @@ Every design choice that can affect validity or compute. Format: date, decision,
 - **Rationale:** The resolution sweep in `reports/classical_baseline.md` showed 96 frames to be the binding limit of the classical stage. Reranking 30 candidates per query at 384 frames costs about 16x more per pair but only touches 0.2% of the pairs.
 - **Evidence:** Development (locked settings): classical alignment 0.248 → 0.384, hybrid 0.262 → 0.362, ΔAP for hybrid over Stage 1 +0.173 [+0.044, +0.324] — the first development comparison whose interval excludes zero by a clear margin.
 - **Rejected:** alignment-only retrieval at 384 frames over the whole benchmark (about 42 h of compute); changing the base default, which would invalidate comparisons with the already-reported runs.
+
+
+## D-020 — Retrain the encoder on every usable Cover Analysis work
+- **Date:** 2026-09-23
+- **Decision:** Once the full Cover Analysis subset finished downloading, rebuild the manifests with `splits.n_train: all` (4,780 works / 9,560 tracks) and retrain with unchanged hyperparameters (`configs/full_train.yaml`). The earlier 1,500-work checkpoint and its results are kept for comparison.
+- **Rationale:** The first benchmark evaluation showed Stage-1 recall (0.021) to be the binding constraint, and the 1,500-work limit was a bandwidth artefact (D-010), not a design choice.
+- **Evidence:** Validation MAP 0.181 → 0.319; development global MAP 0.189 → 0.394; benchmark global MAP 0.010 → 0.034 and hybrid 0.018 → 0.058.
+- **Split integrity:** roles are filled along the same seeded permutation, so calibration/query/distractor/validation are unchanged and the old training works are a strict subset of the new ones (asserted before training).
+- **Impact:** No leakage: evaluation and calibration works were never in any training split. The loss was still falling at epoch 60, so this is a lower bound on what the architecture supports.

@@ -4,5 +4,5 @@
 | coveranalysis/query | 20 | 40 | 10418 | 18401 | 34815 | 0 | 0.66 |
 | coveranalysis/distractor | 40 | 80 | 10518 | 17933 | 31360 | 0 | 0.77 |
 | coveranalysis/validation | 150 | 300 | 10434 | 17884 | 40925 | 0 | 0.87 |
-| coveranalysis/train | 1500 | 3000 | 10325 | 18250 | 41294 | 0 | 0.88 |
+| coveranalysis/train | 4780 | 9560 | 9305 | 18175 | 41294 | 0 | 0.92 |
 | benchmark/all | 3000 | 15000 | 6225 | 16684 | 41285 | 0 | 1.08 |

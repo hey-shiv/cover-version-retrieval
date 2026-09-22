@@ -56,8 +56,79 @@ Shortlist sweep at 384 frames shows MAP still rising at K = 50 (0.394), consiste
 
 ## 3. Encoder trained on all Cover Analysis works
 
-<!-- EXPERIMENT-3 -->
+**Method (D-020).** With the whole Cover Analysis subset downloaded, the training split was rebuilt with `splits.n_train: all` and the encoder retrained with identical hyperparameters. Role assignment walks the same seeded permutation, so calibration, query, distractor and validation works are byte-identical to the bandwidth-budget run, and the previous 1,500 training works are exactly positions 220–1720 of that order and a strict subset of the new 4,780 (verified).
+
+| | bandwidth budget (D-010) | full data |
+|---|---|---|
+| training works / tracks | 1,500 / 3,000 | **4,780 / 9,560** |
+| best validation MAP | 0.181 | **0.319** |
+| best epoch | 50 / 60 | 58 / 60 |
+| training time (8 CPU threads) | 37 min | 56 min |
+
+Validation MAP improves **76%** from data alone. The training loss was still falling at epoch 60 (2.50), so the model is not yet converged; longer training is an obvious and untested further gain.
+
+**Effect on the development protocol** (alpha recalibrated on calibration works for each resolution):
+
+| system | old encoder, 96 | full encoder, 96 | full encoder, 384 |
+|---|---|---|---|
+| global embedding (Stage 1) | 0.189 | **0.394** | 0.394 |
+| global + 12-rotation test-time max | 0.200 | 0.436 | 0.436 |
+| classical alignment (all candidates) | 0.248 | 0.248 | 0.384 |
+| hybrid, K = 30 | 0.262 | 0.353 | **0.423** |
+| shortlist recall at K = 30 | 0.75 | 0.80 | 0.80 |
+
+Two things change qualitatively. First, Stage 1 stops being the weakest system and becomes stronger than classical alignment. Second, the **96-frame reranker now hurts** (hybrid 0.353 below global 0.394): a weak alignment score drags down a good shortlist. Only at 384 frames does reranking add to the better Stage 1 (hybrid 0.423, ΔAP over classical +0.039 [+0.019, +0.063]).
+
+The best development system overall is Stage 1 with 12-rotation test-time matching (0.436), which was evaluated as an ablation and not carried into the benchmark; see Limitations.
 
 ## Final benchmark evaluation of the improved system
 
-<!-- FINAL-BENCHMARK -->
+Two additional benchmark evaluations, both with every setting fixed beforehand (encoder from validation works, alpha and lambda from calibration works). No benchmark number changed any setting; the first evaluation's results are kept and reported unchanged.
+
+**Benchmark run 2** — `--tag full96`, full-data encoder, 96-frame alignment, cached alignment matrix reused, hubness correction lambda = 0.5.
+**Benchmark run 3** — `--tag full384`, full-data encoder, 384-frame reranking, hubness correction lambda = 0.6. Alignment-only at 384 frames is not run (about 42 h).
+
+| system | encoder | frames | hub corr. | MAP | MRR | Hit@1 | Hit@10 | median first rank |
+|---|---|---|---|---|---|---|---|---|
+| global embedding | 1,500 works | — | — | 0.010 | 0.052 | 0.025 | 0.096 | 185 |
+| hybrid K=30 | 1,500 works | 96 | no | 0.018 | 0.124 | 0.102 | 0.154 | 185 |
+| global embedding | **full** | — | — | 0.034 | 0.130 | 0.072 | 0.243 | 59 |
+| hybrid K=30 | full | 96 | no | 0.058 | 0.247 | 0.205 | 0.318 | 59 |
+| hybrid K=30 | full | 96 | yes | 0.062 | 0.271 | 0.234 | 0.330 | 59 |
+| hybrid K=30 | full | 384 | no | 0.062 | 0.271 | 0.236 | 0.326 | 59 |
+| **hybrid K=30** | **full** | **384** | **yes** | **0.068** | **0.301** | **0.272** | **0.343** | **59** |
+| classical alignment (all pairs) | — | 96 | no | 0.084 | 0.282 | 0.244 | 0.352 | 77 |
+| **classical alignment (all pairs)** | — | **96** | **yes** | **0.136** | **0.397** | **0.350** | **0.481** | **14** |
+
+Work-level bootstrap vs. the full-data Stage 1 (1,000 cliques, 10,000 resamples): hybrid 96 +0.0233 [+0.0212, +0.0255]; hybrid 96 + hub +0.0278 [+0.0254, +0.0302]; hybrid 384 + hub +0.0334 [+0.0308, +0.0361]; classical +0.0492 [+0.0439, +0.0545]; **classical + hub +0.1013 [+0.0936, +0.1090]**. Every interval excludes zero.
+
+### What the three experiments bought
+
+| | first evaluation | best after experiments | change |
+|---|---|---|---|
+| Stage 1 (global) MAP | 0.010 | 0.034 | **3.4x** |
+| hybrid MAP | 0.018 | 0.068 | **3.8x** |
+| best system MAP | 0.084 (classical) | 0.136 (classical + hub) | **1.6x** |
+| shortlist recall at K = 30 | 0.021 | 0.072 | **3.4x** |
+| median rank of first correct cover | 77 | 14 | **5.5x better** |
+
+**Hubness correction transfers to scale, and is the single biggest win.** Predicted from a dev-set correlation, calibrated on 10 works, it raises classical alignment by 62% relative (0.084 → 0.136) and cuts the median first-correct rank from 77 to 14. It also helps the hybrid at both resolutions. This is the clearest confirmation that the error analysis identified a real mechanism rather than noise.
+
+**The full-data encoder tripled Stage 1** and, with it, the hybrid. Shortlist recall rose from 0.021 to 0.072 — a 3.4x gain that is still the binding constraint.
+
+**The architectural conclusion is unchanged, and still negative.** The best hybrid (0.068) remains **half** as accurate as exhaustive corrected alignment (0.136). A K = 30 shortlist over 15,000 candidates simply discards too many covers, no matter how good the reranker. What the hybrid buys is cost: 38 ms per query of reranking at 384 frames versus 2.63 h of exhaustive alignment at 96 frames.
+
+**Untested and probably the strongest system: classical alignment at 384 frames with hubness correction.** Development suggests resolution helps the classical stage substantially (0.248 → 0.384), and hubness correction helps at scale, but the combination over all 1.95 x 10^8 pairs needs about 42 h of CPU and was not run. Any claim about it would be extrapolation.
+
+### Runtime (13,000 x 15,000)
+
+| stage | 96 frames | 384 frames |
+|---|---|---|
+| embedding 15,000 tracks | 68 s | 68 s |
+| exact cosine search | 0.09 s | 0.07 s |
+| shortlist construction | 9.3 s | 9.4 s |
+| alignment rerank (13,000 x 30) | 69 s (5.3 ms/query) | 494 s (38 ms/query) |
+| hubness probe reference (200 x 15,000) | 148 s | 2,220 s |
+| alignment-only (1.95 x 10^8 pairs) | 9,458 s (2.63 h) | about 42 h (not run) |
+
+The probe reference is a one-off per catalogue, not per query.

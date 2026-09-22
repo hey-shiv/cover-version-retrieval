@@ -31,7 +31,7 @@ Verified locally from the metadata: WID sets **and** PID sets of the two subsets
 ## How the data is split (see `data/manifests/`, D-001, D-008, D-010)
 
 1. Cover Analysis WIDs are sorted lexicographically and permuted with `numpy.random.default_rng(20260817)`.
-2. Walking that order, a WID is **usable** only if it has exactly two PIDs and both HPCP files exist, are readable, carry matching labels, are finite, not silent, and have >= 96 frames. Unusable WIDs are logged in `coveranalysis_excluded.csv`.
+2. Walking that order, a WID is **usable** only if it has exactly two PIDs and both HPCP files exist, are readable, carry matching labels, are finite, not silent, and have >= 96 frames. Unusable WIDs are logged in `coveranalysis_excluded.csv` (in practice: none of the 5,000 works failed).
 3. Usable WIDs fill the roles in fixed order:
 
 | Role | WIDs | Tracks | Use |
@@ -40,11 +40,13 @@ Verified locally from the metadata: WID sets **and** PID sets of the two subsets
 | query | 20 | 40 | 20 development queries (lexicographically lowest PID per WID); the partner is the single relevant item |
 | distractor | 40 | 80 | development negatives |
 | validation | 150 | 300 | encoder checkpoint selection / early stopping; extra negatives for calibration |
-| train | 1,500 | 3,000 | encoder training |
+| train | 4,780 | 9,560 | encoder training (`splits.n_train: all`; the first 1,500 of these works were used for the earlier bandwidth-budget run, D-010 / D-020) |
 
 Development protocol: 20 queries ranked against 120 candidates (query + distractor tracks), self excluded, 119 ranked items per query. Every role is WID-disjoint from every other role; tests enforce this.
 
-The Benchmark is never used for training, tuning, model selection or calibration. It is evaluated once, with settings locked beforehand: 13,000 clique tracks as queries, all 15,000 tracks as candidates (the 2,000 noise tracks stay in the pool), self excluded. No benchmark track is dropped: non-finite values would be zeroed and counted, and short tracks upsampled.
+The Benchmark is never used for training, tuning, model selection or calibration. Protocol: 13,000 clique tracks as queries, all 15,000 tracks as candidates (the 2,000 noise tracks stay in the pool), self excluded. No benchmark track is dropped: non-finite values would be zeroed and counted (in practice there were none), and short tracks upsampled.
+
+Three benchmark evaluations were run in total — the original system, and one for each of the two improved configurations (`reports/improvement_experiments.md`). **Every setting in each run was fixed beforehand** from validation works (the encoder) and calibration works (alpha, lambda, resolution); no benchmark result was ever used to choose a setting, and no run was repeated after seeing its result.
 
 ## Leakage rules
 

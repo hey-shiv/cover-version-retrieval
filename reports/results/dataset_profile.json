@@ -8,7 +8,7 @@
       "query": 20,
       "distractor": 40,
       "validation": 150,
-      "train": 1500
+      "train": null
     },
     "validation_rules": {
       "pids_per_wid": 2,
@@ -17,7 +17,7 @@
       "labels_must_match_manifest": true
     },
     "selection": "lexicographic sort -> numpy default_rng(seed).permutation -> skip invalid -> fill calibration, query, distractor, validation, train",
-    "config": "configs/base.yaml",
+    "config": "configs/full_train.yaml",
     "role_counts": {
       "calibration": {
         "wids": 10,
@@ -36,8 +36,8 @@
         "tracks": 300
       },
       "train": {
-        "wids": 1500,
-        "tracks": 3000
+        "wids": 4780,
+        "tracks": 9560
       }
     },
     "n_excluded_wids": 0,
@@ -46,13 +46,13 @@
     "n_calibration_queries": 20,
     "n_calibration_candidates": 320
   },
-  "coveranalysis_selected_tracks": 3440,
+  "coveranalysis_selected_tracks": 10000,
   "coveranalysis_selected_raw_frames": {
-    "min": 10325.0,
-    "p05": 11685.8,
-    "median": 18196.5,
-    "mean": 19112.17122093023,
-    "p95": 30530.25,
+    "min": 9305.0,
+    "p05": 11688.85,
+    "median": 18157.0,
+    "mean": 19095.6174,
+    "p95": 30647.149999999998,
     "max": 41294.0
   },
   "n_excluded_wids": 0,
