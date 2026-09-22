@@ -61,3 +61,24 @@ Across the 20 queries, the hybrid puts the partner at rank 1 for 3 queries and i
 * A tonal-dispersion prior or penalty, and whether it survives on the benchmark.
 * Local (Qmax-style) alignment versus subsequence DTW for structure-changed covers (P_411001, P_385477).
 * A larger K or a better Stage-1 encoder (full Cover Analysis training) for the recall failures.
+
+---
+
+# Benchmark-scale error behaviour (13,000 queries x 15,000 candidates)
+
+Computed from `results/benchmark_per_query.csv` (rank of the first correct cover per query, per system).
+
+| statistic | global | hybrid (K=30, alpha=0.05) | classical alignment |
+|---|---|---|---|
+| queries with a correct cover at rank 1 | 319 | 1,325 | **3,167** |
+| queries with a correct cover in the top 10 | 1,245 | 2,002 | **4,578** |
+| median rank of first correct cover | 185 | 185 | **77** |
+| mean rank of first correct cover | 492 | 490 | 528 |
+
+**1. Reranking only moves the head, and only where Stage 1 was already close.** Compared with Stage 1, the hybrid improves the first-correct rank for 1,723 queries, leaves 10,889 unchanged and makes 388 worse. The unchanged majority is structural: if no cover reaches the top 30, the hybrid ranking is the Stage-1 ranking by construction. Shortlist recall is 0.021 over all relevant items.
+
+**2. Classical alignment wins on most queries, but not all.** It beats the hybrid on 7,195 queries and loses on 4,808. So the reranker is not useless — it is starved. The same alignment function applied to a better shortlist would inherit those wins.
+
+**3. Mean rank versus median disagree for classical alignment** (median 77, best of all systems; mean 528, worst). Its failures are catastrophic rather than uniform: when the tonal profile mismatches, the true cover ends up deep in the ranking. This is the hubness mechanism from the development analysis operating at scale — static, low-dispersion tracks crowd the head of many rankings and push genuine covers far down.
+
+**4. What this implies for the architecture.** The development protocol's conclusion (hybrid best) came from a pool where K = 30 covered a quarter of the candidates. At 15,000 candidates the same K covers 0.2%. The evidence points at Stage-1 recall and hubness correction as the two things worth fixing, in that order, before any further work on the alignment function itself.

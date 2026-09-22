@@ -94,4 +94,48 @@ Tonally static tracks, whose frames all lie close to their own mean chroma, get 
 
 ## 6. Final benchmark evaluation
 
-<!-- BENCHMARK-RESULTS -->
+The single, final run. Nothing was tuned here: the encoder checkpoint came from validation works, and alpha = 0.05 / K = 30 from calibration works, both locked in files before this script ran (it refuses to start otherwise). 13,000 clique tracks as queries, all 15,000 tracks as candidates (2,000 noise tracks kept), self excluded, **12 relevant items per query**. No track was dropped and no non-finite value needed zeroing.
+
+| system | MAP | MRR | Recall@1 | Recall@10 | Recall@100 | Hit@1 | Hit@10 | Hit@100 | mean / median first rank |
+|---|---|---|---|---|---|---|---|---|---|
+| global embedding (Stage 1 only) | 0.010 | 0.052 | 0.002 | 0.010 | 0.053 | 0.025 | 0.096 | 0.371 | 492 / 185 |
+| hybrid (K = 30, alpha = 0.05) | 0.018 | 0.124 | 0.009 | 0.017 | 0.053 | 0.102 | 0.154 | 0.371 | 490 / 185 |
+| rerank only (K = 30, alpha = 0) | 0.019 | 0.125 | 0.009 | 0.017 | 0.053 | 0.103 | 0.154 | 0.371 | 490 / 185 |
+| **classical alignment (all 15,000 candidates)** | **0.084** | **0.282** | **0.020** | **0.085** | **0.155** | **0.244** | **0.352** | **0.524** | 528 / **77** |
+
+Recall@k is the fraction of all 12 relevant items retrieved; Hit@k is "at least one". A random ranking scores about 0.0008 MAP.
+
+Paired work-level bootstrap over the 1,000 query cliques (10,000 resamples), ΔAP vs. Stage 1:
+
+| comparison | ΔAP | 95% CI |
+|---|---|---|
+| hybrid − global | +0.0084 | [+0.0075, +0.0094] |
+| rerank-only − global | +0.0084 | [+0.0075, +0.0094] |
+| classical alignment − global | +0.0735 | [+0.0669, +0.0800] |
+
+With 13,000 queries the intervals are narrow, so these differences are real.
+
+### The development result does not survive at scale (negative result)
+
+On the 20-query development protocol the hybrid was the best system (MAP 0.262 vs. 0.248 for classical alignment). **On the benchmark the ordering reverses: classical alignment beats the hybrid by 4.6x** (0.084 vs. 0.018). Reranking still beats Stage 1 alone, significantly, but the two-stage design as configured is the wrong architecture here.
+
+The cause is Stage-1 recall, and it is measurable rather than speculative:
+
+* **Shortlist recall is 0.021.** Only 2.1% of all relevant items reach the K = 30 shortlist (about 0.25 of the 12 covers per query). Stage 2 can only reorder what Stage 1 hands it.
+* **Recall@100 is identical (0.053) for global and hybrid**, because past rank 30 the hybrid ranking *is* the Stage-1 ranking. The hybrid's gains are confined to the head: Hit@1 rises from 0.025 to 0.102 and MRR from 0.052 to 0.124, which is why it looks much better on a one-relevant-item protocol.
+* The development protocol had 119 candidates, so K = 30 covered a quarter of the pool and shortlist recall was 0.75. At 15,000 candidates the same K covers 0.2% of the pool. **A protocol with 120 candidates cannot predict behaviour at 15,000.**
+
+All four systems are far below published CSI systems on this benchmark (Da-TACOS paper, Table 2). That is expected: the classical stage runs at a 96-frame pilot resolution (D-005), and the encoder saw 1,500 works of two recordings each (D-010).
+
+### Runtime (13,000 queries x 15,000 candidates, laptop CPU)
+
+| stage | total | per unit |
+|---|---|---|
+| feature preprocessing of 15,000 tracks (cold) | under 4 min, observed once; reused from cache afterwards (0.10 s) | — |
+| embedding 15,000 tracks | 68.6 s | 4.6 ms / track |
+| exact cosine search (13,000 x 15,000) | 0.09 s | 7 us / query |
+| shortlist construction | 9.3 s | 0.7 ms / query |
+| **alignment rerank (13,000 x 30)** | **69.1 s** | **5.3 ms / query** |
+| **alignment only (1.95 x 10^8 pairs)** | **9,458 s (2.63 h)** | **0.0485 ms / pair** |
+
+The hybrid is **137x cheaper** than exhaustive alignment (69 s vs. 9,458 s of alignment work) and answers a query in about 6 ms after indexing. That trade-off is the point of the architecture; on this benchmark it currently buys speed at a large cost in accuracy. A Stage 1 with much better recall, or a larger K, is what the numbers demand — not a better reranker.

@@ -118,3 +118,12 @@ Every design choice that can affect validity or compute. Format: date, decision,
 - **Evidence:** `reports/results/encoder_sweep.csv`, `training_history_sweep_*.csv`, `figures/training_history_sweep_*.png`. The base run with 2 threads reproduced the 8-thread run's losses exactly.
 - **Rejected:** choosing by development metrics; larger sweeps (the differences between the top two runs are within validation noise).
 - **Impact:** Five training runs in total. The selected model is a validation-selected best-of-4, which is slightly optimistic on validation; that is harmless because evaluation happens on disjoint works.
+
+
+## D-017 — Report the benchmark reversal as a negative result
+- **Date:** 2026-09-23
+- **Decision:** The final benchmark run shows classical alignment (MAP 0.084) beating the hybrid (0.018) and Stage 1 alone (0.010), reversing the development ordering. This is reported as the headline finding in the README and `reports/hybrid_results.md`, rather than leading with the favourable development numbers. Nothing was re-tuned afterwards and the benchmark was not re-run.
+- **Rationale:** The benchmark is the protocol that matters and it was evaluated once, with every setting locked beforehand. Re-tuning after seeing it would destroy the only unbiased estimate this project has.
+- **Evidence:** `reports/results/benchmark.json` — 13,000 queries; shortlist recall 0.021; Recall@100 identical (0.053) for global and hybrid; work-level bootstrap intervals exclude zero for every comparison.
+- **Rejected:** raising K, retuning alpha, or retraining on the benchmark evidence and reporting only the improved run.
+- **Impact:** The headline claim of the project changes from "hybrid retrieval works" to "hybrid retrieval is 137x cheaper than exhaustive alignment but, with this Stage 1, much less accurate; shortlist recall is the constraint".

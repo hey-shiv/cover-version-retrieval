@@ -57,6 +57,18 @@
   },
   "n_excluded_wids": 0,
   "excluded": [],
-  "benchmark": null,
+  "benchmark": {
+    "tracks": 15000,
+    "clique_tracks": 13000,
+    "noise_tracks": 2000,
+    "raw_frames": {
+      "min": 6225.0,
+      "p05": 11691.0,
+      "median": 16684.0,
+      "mean": 18124.4562,
+      "p95": 29483.0,
+      "max": 41285.0
+    }
+  },
   "coveranalysis_metadata_wids": 5000
 }

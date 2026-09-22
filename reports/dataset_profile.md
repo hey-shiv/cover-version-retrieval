@@ -28,6 +28,13 @@ Figure: `figures/profile_raw_vs_resampled.png` (raw vs. 96-frame HPCP for the fi
 
 ## Benchmark (final test set)
 
-The benchmark manifest `data/manifests/benchmark_tracks.csv` has 15,000 PIDs: 13,000 in 1,000 cliques of 13, plus 2,000 single-track "noise" works. The benchmark feature profile is appended below after the full benchmark download (see `reports/hybrid_results.md` for status).
+The benchmark manifest `data/manifests/benchmark_tracks.csv` has 15,000 PIDs: 13,000 in 1,000 cliques of 13, plus 2,000 single-track "noise" works. All 15,000 HPCP files were downloaded (selective member fetch, every member CRC-32 verified) and profiled with
+`python scripts/profile_data.py --config configs/benchmark.yaml --include-benchmark`:
 
-<!-- BENCHMARK-PROFILE -->
+| subset | WIDs | tracks | clique tracks | noise tracks | min frames | median frames | max frames | non-finite values | mean silent-frame % |
+|---|---|---|---|---|---|---|---|---|---|
+| benchmark / all | 3,000 | 15,000 | 13,000 | 2,000 | 6,225 | 16,684 | 41,285 | 0 | 1.08 |
+
+Raw HPCP length: 5th percentile 11,691, mean 18,124, 95th percentile 29,483 frames.
+
+**No benchmark track was dropped or repaired.** The lenient benchmark policy (`nonfinite_policy: zero`, `min_frames: 1`, D-014) was never actually needed: every file was readable, label-consistent, finite and far longer than 96 frames. Benchmark tracks are slightly shorter and marginally more silent than the Cover Analysis selection (median 16,684 vs. 18,197 frames).

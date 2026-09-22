@@ -94,7 +94,8 @@ CELLS: list[tuple[str, str]] = [
     (
         "md",
         "### Reading the plots\n\n"
-        "* A true cover typically shows a darker diagonal band that the path follows; non-covers produce a flatter matrix.\n"
+        "* Low cost is bright yellow (reversed viridis, per-matrix colour range). A faithful cover shows a low-cost diagonal band that the path follows.\n"
+        "* At this resolution many matrices are dominated by horizontal and vertical stripes (frames that are tonally central or atypical for the whole track) rather than diagonals.\n"
         "* At 96 frames per track each column averages a large stretch of raw frames, so the band is coarse; "
         "see the resolution sensitivity analysis in `reports/classical_baseline.md`.\n"
         "* A low cost for a non-cover (shared common progression) is exactly the false-positive mechanism discussed in `reports/error_analysis.md`.",
