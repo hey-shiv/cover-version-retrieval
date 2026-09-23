@@ -1,0 +1,293 @@
+{
+ "id": "Q10",
+ "query": "cover song detection cross recurrence quantification Qmax",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Cross recurrence quantification for cover song identification",
+    "doi": "10.1088/1367-2630/11/9/093017",
+    "year": 2009,
+    "venue": "New Journal of Physics",
+    "cites": 102,
+    "authors": [
+     "Serr\u00e0",
+     "Serra",
+     "Andrzejak"
+    ]
+   },
+   {
+    "title": "Analyzing Multivariate Dynamics Using Cross-Recurrence Quantification Analysis (CRQA), Diagonal-Cross-Recurrence Profiles (DCRP), and Multidimensional Recurrence Quantification Analysis (MdRQA) \u2013 A Tutorial in R",
+    "doi": "10.3389/fpsyg.2018.02232",
+    "year": 2018,
+    "venue": "Frontiers in Psychology",
+    "cites": 126,
+    "authors": [
+     "Wallot",
+     "Leonardi"
+    ]
+   },
+   {
+    "title": "Hard disk drive failure detection with recurrence quantification\n                    analysis",
+    "doi": "10.17760/d20385579",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Li"
+    ]
+   },
+   {
+    "title": "Combined recurrence and cross recurrence quantification of MCI EEG",
+    "doi": "10.1109/picc.2015.7455807",
+    "year": 2015,
+    "venue": "2015 International Conference on Power, Instrumentation, Control and Computing (PICC)",
+    "cites": 0,
+    "authors": [
+     "Timothy",
+     "Krishna",
+     "Nair"
+    ]
+   },
+   {
+    "title": "Cross-recurrence plot quantification analysis of input and output signals for the detection of chatter in turning",
+    "doi": "10.1007/s11071-013-1124-0",
+    "year": 2013,
+    "venue": "Nonlinear Dynamics",
+    "cites": 38,
+    "authors": [
+     "Elias",
+     "Narayanan Namboothiri"
+    ]
+   },
+   {
+    "title": "Magnetotelluric strong interference detection and signal reconstruction via recurrence quantification analysis and deep learning",
+    "doi": "10.1007/s11770-026-1545-4",
+    "year": 2026,
+    "venue": "Applied Geophysics",
+    "cites": 0,
+    "authors": [
+     "Zhang",
+     "Wang",
+     "Song",
+     "Luo"
+    ]
+   },
+   {
+    "title": "Classification-Based Detection and Quantification of Cross-Domain Data Bias in Materials Discovery",
+    "doi": "10.1021/acs.jcim.4c01766.s001",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Recurrence Quantification Analysis for Scene Change Detection and Foreground/Background Segmentation in Videos",
+    "doi": "10.20944/preprints202502.1532.v1",
+    "year": 2025,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Kyprianidi",
+     "Doutsi",
+     "Tsakalides"
+    ]
+   },
+   {
+    "title": "Quantifying Collaborative Strategies and Identifying Performance Breakdowns of UAV C2 Teams Using Multidimensional Cross-Recurrence Quantification Analysis",
+    "doi": "10.2139/ssrn.5119475",
+    "year": 2025,
+    "venue": "",
+    "cites": 4,
+    "authors": [
+     "Atweh",
+     "Riggs"
+    ]
+   },
+   {
+    "title": "Concept drift detection on social network data using cross-recurrence quantification analysis",
+    "doi": "10.1063/1.5024241",
+    "year": 2018,
+    "venue": "Chaos: An Interdisciplinary Journal of Nonlinear Science",
+    "cites": 8,
+    "authors": [
+     "de Mello",
+     "Rios",
+     "Pagliosa",
+     "Lopes"
+    ]
+   },
+   {
+    "title": "Recurrence Plot and Recurrence Quantification of the Dynamic Properties of Cross-Shaped Laminated Energy Harvester",
+    "doi": "10.4028/www.scientific.net/amm.849.95",
+    "year": 2016,
+    "venue": "Applied Mechanics and Materials",
+    "cites": 12,
+    "authors": [
+     "Harris",
+     "Litak",
+     "Iwaniec",
+     "Bowen"
+    ]
+   },
+   {
+    "title": "Classification of mild cognitive impairment EEG using combined recurrence and cross recurrence quantification analysis",
+    "doi": "10.1016/j.ijpsycho.2017.07.006",
+    "year": 2017,
+    "venue": "International Journal of Psychophysiology",
+    "cites": 46,
+    "authors": [
+     "Timothy",
+     "Krishna",
+     "Nair"
+    ]
+   }
+  ],
+  "arxiv": [],
+  "openalex": [
+   {
+    "title": "Accurate and scalable version identification using musically-motivated embeddings",
+    "doi": "https://doi.org/10.1109/icassp40776.2020.9053793",
+    "year": 2020,
+    "cites": 46,
+    "venue": "Repositori digital de la UPF (Universitat Pompeu Fabra)",
+    "authors": [
+     "Yesiler",
+     "Joan",
+     "1975-"
+    ]
+   },
+   {
+    "title": "International Urogynecology consultation chapter 2 committee 3: the clinical evaluation of pelvic organ prolapse including investigations into associated morbidity/pelvic floor dysfunction",
+    "doi": "https://doi.org/10.1007/s00192-023-05629-8",
+    "year": 2023,
+    "cites": 24,
+    "venue": "International Urogynecology Journal",
+    "authors": [
+     "Barbier",
+     "Carberry",
+     "Karjalainen",
+     "Mahoney"
+    ]
+   },
+   {
+    "title": "Da-TACOS: A Dataset for Cover Song Identification and Understanding",
+    "doi": "https://doi.org/10.5281/zenodo.3520367",
+    "year": 2019,
+    "cites": 16,
+    "venue": "RECERCAT (Consorci de Serveis Universitaris de Catalunya)",
+    "authors": [
+     "Yesiler",
+     "Tralie",
+     "Correya",
+     "Silva"
+    ]
+   },
+   {
+    "title": "A heuristic for distance fusion in cover song identification",
+    "doi": "https://doi.org/10.1109/wiamis.2013.6616128",
+    "year": 2013,
+    "cites": 11,
+    "venue": null,
+    "authors": [
+     "Degani",
+     "Dalai",
+     "Leonardi",
+     "Migliorati"
+    ]
+   },
+   {
+    "title": "Two-layer similarity fusion model for cover song identification",
+    "doi": "https://doi.org/10.1186/s13636-017-0108-2",
+    "year": 2017,
+    "cites": 6,
+    "venue": "EURASIP Journal on Audio Speech and Music Processing",
+    "authors": [
+     "Chen",
+     "Li",
+     "Xiao"
+    ]
+   },
+   {
+    "title": "Mesoporous silica nanoparticles in glioblastoma: smart nano-platforms for targeted therapy and precision diagnosis",
+    "doi": "https://doi.org/10.1007/s13205-025-04639-1",
+    "year": 2026,
+    "cites": 4,
+    "venue": "3 Biotech",
+    "authors": [
+     "Hiremath",
+     "Naik",
+     "Roy",
+     "Kudarha"
+    ]
+   },
+   {
+    "title": "Abstracts",
+    "doi": "https://doi.org/10.1111/iju.14397",
+    "year": 2020,
+    "cites": 4,
+    "venue": "International Journal of Urology",
+    "authors": [
+     "Farag",
+     "Jack",
+     "Wong",
+     "Bolton"
+    ]
+   },
+   {
+    "title": "Assessing Algorithmic Biases for Musical Version Identification",
+    "doi": "https://doi.org/10.1145/3488560.3498397",
+    "year": 2022,
+    "cites": 2,
+    "venue": "Proceedings of the Fifteenth ACM International Conference on Web Search and Data Mining",
+    "authors": [
+     "Yesiler",
+     "Miron",
+     "Serr\u00e0",
+     "G\u00f3mez"
+    ]
+   },
+   {
+    "title": "Accurate and Scalable Version Identification Using Musically-Motivated Embeddings",
+    "doi": "https://doi.org/10.1109/icassp40776.2020.9053793",
+    "year": 2020,
+    "cites": 1,
+    "venue": null,
+    "authors": [
+     "Yesiler",
+     "Serr\u00e0",
+     "G\u00f3mez"
+    ]
+   },
+   {
+    "title": "Elucidation of Impulse Voltage Degradation Mechanism in Cast Resin Transformers",
+    "doi": "https://doi.org/10.18997/0002002149",
+    "year": 2025,
+    "cites": 0,
+    "venue": "Institutional Repositories DataBase (IRDB)",
+    "authors": [
+     "Yao"
+    ]
+   },
+   {
+    "title": "Poster Presentations",
+    "doi": "https://doi.org/10.1002/ohn.982",
+    "year": 2025,
+    "cites": 0,
+    "venue": "Otolaryngology",
+    "authors": []
+   },
+   {
+    "title": "Analysis of the Similarity Estimation Schemes for Music and Applications",
+    "doi": "https://doi.org/10.11648/j.ijecs.20230806.16",
+    "year": 2023,
+    "cites": 0,
+    "venue": null,
+    "authors": [
+     "Chen",
+     "Li"
+    ]
+   }
+  ]
+ }
+}

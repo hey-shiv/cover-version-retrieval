@@ -1,0 +1,341 @@
+{
+ "aucouturier2008": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "A scale-free distribution of false positives for a large class of audio similarity measures",
+  "doi": "10.1016/j.patcog.2007.04.012",
+  "type": "journal-article",
+  "year": 2008,
+  "venue": "Pattern Recognition",
+  "authors": [
+   "Aucouturier",
+   "Pachet"
+  ]
+ },
+ "radovanovic2010": {
+  "src": "crossref",
+  "ratio": 0.788,
+  "title": "Nearest neighbors in high-dimensional data",
+  "doi": "10.1145/1553374.1553485",
+  "type": "proceedings-article",
+  "year": 2009,
+  "venue": "Proceedings of the 26th Annual International Conference on Machine Learning",
+  "authors": [
+   "Radovanovi\u0107",
+   "Nanopoulos",
+   "Ivanovi\u0107"
+  ]
+ },
+ "schnitzer2012": {
+  "src": "crossref",
+  "ratio": 0.568,
+  "title": "Homeless/global: Scaling places",
+  "doi": "10.4324/9780203977781-15",
+  "type": "book-chapter",
+  "year": 2012,
+  "venue": "Mapping the Futures",
+  "authors": []
+ },
+ "flexer2012mirex": {
+  "src": "crossref",
+  "ratio": 0.356,
+  "title": "Musical Genre, Similarity, and Mood",
+  "doi": "10.1002/9781118393550.ch8",
+  "type": "other",
+  "year": 2012,
+  "venue": "An Introduction to Audio Content Analysis",
+  "authors": []
+ },
+ "seo2022": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy",
+  "doi": "10.1587/transinf.2021edl8075",
+  "type": "journal-article",
+  "year": 2022,
+  "venue": "IEICE Transactions on Information and Systems",
+  "authors": [
+   "SEO"
+  ]
+ },
+ "li2018": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "A Robust Cover Song Identification System with Two-Level Similarity Fusion and Post-Processing",
+  "doi": "10.3390/app8081383",
+  "type": "journal-article",
+  "year": 2018,
+  "venue": "Applied Sciences",
+  "authors": [
+   "Li",
+   "Chen"
+  ]
+ },
+ "suco2019": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Enhanced Feature Summarizing for Effective Cover Song Identification",
+  "doi": "10.1109/taslp.2019.2942157",
+  "type": "journal-article",
+  "year": 2019,
+  "venue": "IEEE/ACM Transactions on Audio, Speech, and Language Processing",
+  "authors": [
+   "Hu",
+   "Chen"
+  ]
+ },
+ "serra2008": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Chroma Binary Similarity and Local Alignment Applied to Cover Song Identification",
+  "doi": "10.1109/tasl.2008.924595",
+  "type": "journal-article",
+  "year": 2008,
+  "venue": "IEEE Transactions on Audio, Speech, and Language Processing",
+  "authors": [
+   "Serra",
+   "Gomez",
+   "Herrera",
+   "Serra"
+  ]
+ },
+ "serra2009": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Cross recurrence quantification for cover song identification",
+  "doi": "10.1088/1367-2630/11/9/093017",
+  "type": "journal-article",
+  "year": 2009,
+  "venue": "New Journal of Physics",
+  "authors": [
+   "Serr\u00e0",
+   "Serra",
+   "Andrzejak"
+  ]
+ },
+ "serra2012community": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Characterization and exploitation of community structure in cover song networks",
+  "doi": "10.1016/j.patrec.2012.02.013",
+  "type": "journal-article",
+  "year": 2012,
+  "venue": "Pattern Recognition Letters",
+  "authors": [
+   "Serr\u00e0",
+   "Zanin",
+   "Herrera",
+   "Serra"
+  ]
+ },
+ "move2020": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Accurate and Scalable Version Identification Using Musically-Motivated Embeddings",
+  "doi": "10.1109/icassp40776.2020.9053793",
+  "type": "proceedings-article",
+  "year": 2020,
+  "venue": "ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "authors": [
+   "Yesiler",
+   "Serra",
+   "Gomez"
+  ]
+ },
+ "remove2020": {
+  "src": "arxiv",
+  "ratio": 1.0,
+  "title": "Less is more: Faster and better music version identification with embedding distillation",
+  "id": "http://arxiv.org/abs/2010.03284v1",
+  "year": "2020",
+  "authors": [
+   "Furkan Yesiler",
+   "Joan Serr\u00e0",
+   "Emilia G\u00f3mez"
+  ]
+ },
+ "bytecover2021": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Bytecover: Cover Song Identification Via Multi-Loss Training",
+  "doi": "10.1109/icassp39728.2021.9414128",
+  "type": "proceedings-article",
+  "year": 2021,
+  "venue": "ICASSP 2021 - 2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "authors": [
+   "Du",
+   "Yu",
+   "Zhu",
+   "Chen",
+   "Ma"
+  ]
+ },
+ "yesiler2021spm": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Audio-Based Musical Version Identification: Elements and challenges",
+  "doi": "10.1109/msp.2021.3105941",
+  "type": "journal-article",
+  "year": 2021,
+  "venue": "IEEE Signal Processing Magazine",
+  "authors": [
+   "Yesiler",
+   "Doras",
+   "Bittner",
+   "Tralie",
+   "Serra"
+  ]
+ },
+ "yesiler2022bias": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Assessing Algorithmic Biases for Musical Version Identification",
+  "doi": "10.1145/3488560.3498397",
+  "type": "proceedings-article",
+  "year": 2022,
+  "venue": "Proceedings of the Fifteenth ACM International Conference on Web Search and Data Mining",
+  "authors": [
+   "Yesiler",
+   "Miron",
+   "Serr\u00e0",
+   "G\u00f3mez"
+  ]
+ },
+ "conneau2018": {
+  "src": "arxiv",
+  "ratio": 1.0,
+  "title": "Word Translation Without Parallel Data",
+  "id": "http://arxiv.org/abs/1710.04087v3",
+  "year": "2017",
+  "authors": [
+   "Alexis Conneau",
+   "Guillaume Lample",
+   "Marc'Aurelio Ranzato",
+   "Ludovic Denoyer"
+  ]
+ },
+ "bogolin2022": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Cross Modal Retrieval with Querybank Normalisation",
+  "doi": "10.1109/cvpr52688.2022.00513",
+  "type": "proceedings-article",
+  "year": 2022,
+  "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "authors": [
+   "Bogolin",
+   "Croitoru",
+   "Jin",
+   "Liu",
+   "Albanie"
+  ]
+ },
+ "feldbauer2019": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "A comprehensive empirical comparison of hubness reduction in high-dimensional spaces",
+  "doi": "10.1007/s10115-018-1205-y",
+  "type": "journal-article",
+  "year": 2018,
+  "venue": "Knowledge and Information Systems",
+  "authors": [
+   "Feldbauer",
+   "Flexer"
+  ]
+ },
+ "flexer2018bias": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "Hubness as a Case of Technical Algorithmic Bias in Music Recommendation",
+  "doi": "10.1109/icdmw.2018.00154",
+  "type": "proceedings-article",
+  "year": 2018,
+  "venue": "2018 IEEE International Conference on Data Mining Workshops (ICDMW)",
+  "authors": [
+   "Flexer",
+   "Dorfler",
+   "Schluter",
+   "Grill"
+  ]
+ },
+ "schnitzer2014case": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "A Case for Hubness Removal in High\u2013Dimensional Multimedia Retrieval",
+  "doi": "10.1007/978-3-319-06028-6_77",
+  "type": "book-chapter",
+  "year": 2014,
+  "venue": "Lecture Notes in Computer Science",
+  "authors": [
+   "Schnitzer",
+   "Flexer",
+   "Toma\u0161ev"
+  ]
+ },
+ "feldbauer2020skhub": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "scikit-hubness: Hubness Reduction and Approximate Neighbor Search",
+  "doi": "10.21105/joss.01957",
+  "type": "journal-article",
+  "year": 2020,
+  "venue": "Journal of Open Source Software",
+  "authors": [
+   "Feldbauer",
+   "Rattei",
+   "Flexer"
+  ]
+ },
+ "smucker2007": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "A comparison of statistical significance tests for information retrieval evaluation",
+  "doi": "10.1145/1321440.1321528",
+  "type": "proceedings-article",
+  "year": 2007,
+  "venue": "Proceedings of the sixteenth ACM conference on Conference on information and knowledge management",
+  "authors": [
+   "Smucker",
+   "Allan",
+   "Carterette"
+  ]
+ },
+ "mueller2021fmp": {
+  "src": "crossref",
+  "ratio": 0.646,
+  "title": "Fundamentals of Music Processing",
+  "doi": "10.1007/978-3-030-69808-9",
+  "type": "book",
+  "year": 2021,
+  "venue": "",
+  "authors": [
+   "M\u00fcller"
+  ]
+ },
+ "doras2020": {
+  "src": "crossref",
+  "ratio": 1.0,
+  "title": "A Prototypical Triplet Loss for Cover Detection",
+  "doi": "10.1109/icassp40776.2020.9054619",
+  "type": "proceedings-article",
+  "year": 2020,
+  "venue": "ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "authors": [
+   "Doras",
+   "Peeters"
+  ]
+ },
+ "khosla2020": {
+  "src": "arxiv",
+  "ratio": 1.0,
+  "title": "Supervised Contrastive Learning",
+  "id": "http://arxiv.org/abs/2004.11362v5",
+  "year": "2020",
+  "authors": [
+   "Prannay Khosla",
+   "Piotr Teterwak",
+   "Chen Wang",
+   "Aaron Sarna"
+  ]
+ }
+}

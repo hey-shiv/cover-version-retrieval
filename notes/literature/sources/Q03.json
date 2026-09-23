@@ -1,0 +1,336 @@
+{
+ "id": "Q03",
+ "query": "hubness nearest neighbors high-dimensional data",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Can Shared Nearest Neighbors Reduce Hubness in High-Dimensional Spaces?",
+    "doi": "10.1109/icdmw.2013.101",
+    "year": 2013,
+    "venue": "2013 IEEE 13th International Conference on Data Mining Workshops",
+    "cites": 10,
+    "authors": [
+     "Flexer",
+     "Schnitzer"
+    ]
+   },
+   {
+    "title": "Nearest Neighbors Search Algorithm for High Dimensional Data",
+    "doi": "10.5373/jardcs/v12sp8/20202636",
+    "year": 2020,
+    "venue": "Journal of Advanced Research in Dynamical and Control Systems",
+    "cites": 1,
+    "authors": [
+     "G"
+    ]
+   },
+   {
+    "title": "Array-index: a plug&amp;search K nearest neighbors method for high-dimensional data",
+    "doi": "10.1016/s0169-023x(04)00126-0",
+    "year": 2005,
+    "venue": "Data &amp; Knowledge Engineering",
+    "cites": 14,
+    "authors": [
+     "AGHBARI"
+    ]
+   },
+   {
+    "title": "Nearest Neighbors in High-Dimensional Spaces",
+    "doi": "10.1201/9781420035315-39",
+    "year": 2004,
+    "venue": "Handbook of Discrete and Computational Geometry, Second Edition",
+    "cites": 4,
+    "authors": []
+   },
+   {
+    "title": "Array-index: a plug&amp;search K nearest neighbors method for high-dimensional data",
+    "doi": "10.1016/j.datak.2004.06.015",
+    "year": 2005,
+    "venue": "Data &amp; Knowledge Engineering",
+    "cites": 10,
+    "authors": [
+     "Aghbari"
+    ]
+   },
+   {
+    "title": "Weighted k-nearest neighbors feature selection for high-dimensional multi-class data",
+    "doi": "10.1109/smc.2019.8914434",
+    "year": 2019,
+    "venue": "2019 IEEE International Conference on Systems, Man and Cybernetics (SMC)",
+    "cites": 1,
+    "authors": [
+     "Bugata",
+     "Drotar"
+    ]
+   },
+   {
+    "title": "Evidential K-Nearest Neighbors with Cognitive-Inspired Feature Selection for High-Dimensional Data",
+    "doi": "10.3390/bdcc9080202",
+    "year": 2025,
+    "venue": "Big Data and Cognitive Computing",
+    "cites": 1,
+    "authors": [
+     "Liu",
+     "Zhang",
+     "Wang",
+     "Qu"
+    ]
+   },
+   {
+    "title": "QPAD: Quantile-Preserving Approximate Dimension Reduction for Nearest Neighbors Preservation in High-Dimensional Vector Search",
+    "doi": "10.1109/icde65706.2026.00265",
+    "year": 2026,
+    "venue": "2026 IEEE 42nd International Conference on Data Engineering (ICDE)",
+    "cites": 0,
+    "authors": [
+     "Fu",
+     "Zhao"
+    ]
+   },
+   {
+    "title": "Hubness-Based Fuzzy Measures for High-Dimensional k-Nearest Neighbor Classification",
+    "doi": "10.1007/978-3-642-23199-5_2",
+    "year": 2011,
+    "venue": "Lecture Notes in Computer Science",
+    "cites": 13,
+    "authors": [
+     "Toma\u0161ev",
+     "Radovanovi\u0107",
+     "Mladeni\u0107",
+     "Ivanovi\u0107"
+    ]
+   },
+   {
+    "title": "Hubness-aware shared neighbor distances for high-dimensional $$k$$ -nearest neighbor classification",
+    "doi": "10.1007/s10115-012-0607-5",
+    "year": 2013,
+    "venue": "Knowledge and Information Systems",
+    "cites": 16,
+    "authors": [
+     "Toma\u0161ev",
+     "Mladeni\u0107"
+    ]
+   },
+   {
+    "title": "Clustering High-Dimensional Data using AE-Hubness",
+    "doi": "10.1109/icbase51474.2020.00027",
+    "year": 2020,
+    "venue": "2020 International Conference on Big Data &amp; Artificial Intelligence &amp; Software Engineering (ICBASE)",
+    "cites": 0,
+    "authors": [
+     "Yang"
+    ]
+   },
+   {
+    "title": "Nearest neighbors in high-dimensional data",
+    "doi": "10.1145/1553374.1553485",
+    "year": 2009,
+    "venue": "Proceedings of the 26th Annual International Conference on Machine Learning",
+    "cites": 68,
+    "authors": [
+     "Radovanovi\u0107",
+     "Nanopoulos",
+     "Ivanovi\u0107"
+    ]
+   }
+  ],
+  "arxiv": [
+   {
+    "title": "scikit-hubness: Hubness Reduction and Approximate Neighbor Search",
+    "id": "http://arxiv.org/abs/1912.00706v1",
+    "year": "2019",
+    "authors": [
+     "Feldbauer",
+     "Rattei",
+     "Flexer"
+    ]
+   },
+   {
+    "title": "GICDM: Mitigating Hubness for Reliable Distance-Based Generative Model Evaluation",
+    "id": "http://arxiv.org/abs/2602.16449v3",
+    "year": "2026",
+    "authors": [
+     "Salvy",
+     "Talbot",
+     "Thirion"
+    ]
+   },
+   {
+    "title": "Empowering Graph-based Approximate Nearest Neighbor Search with Adaptive Awareness Capabilities",
+    "id": "http://arxiv.org/abs/2506.15986v1",
+    "year": "2025",
+    "authors": [
+     "Ruan",
+     "Chen",
+     "Yang",
+     "Ke"
+    ]
+   },
+   {
+    "title": "Mitigating dimensionality effects with robust graph constructions for testing",
+    "id": "http://arxiv.org/abs/2307.15205v4",
+    "year": "2023",
+    "authors": [
+     "Zhu",
+     "Chen"
+    ]
+   },
+   {
+    "title": "CFOF: A Concentration Free Measure for Anomaly Detection",
+    "id": "http://arxiv.org/abs/1901.04992v2",
+    "year": "2019",
+    "authors": [
+     "Angiulli"
+    ]
+   }
+  ],
+  "openalex": [
+   {
+    "title": "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+    "doi": "https://doi.org/10.1038/s41592-019-0686-2",
+    "year": 2020,
+    "cites": 40161,
+    "venue": "Nature Methods",
+    "authors": [
+     "Virtanen",
+     "Gommers",
+     "Oliphant",
+     "Haberland"
+    ]
+   },
+   {
+    "title": "Greedy function approximation: A gradient boosting machine.",
+    "doi": "https://doi.org/10.1214/aos/1013203451",
+    "year": 2001,
+    "cites": 30593,
+    "venue": "The Annals of Statistics",
+    "authors": [
+     "Friedman"
+    ]
+   },
+   {
+    "title": "FastTree 2 \u2013 Approximately Maximum-Likelihood Trees for Large Alignments",
+    "doi": "https://doi.org/10.1371/journal.pone.0009490",
+    "year": 2010,
+    "cites": 16398,
+    "venue": "PLoS ONE",
+    "authors": [
+     "Price",
+     "Dehal",
+     "Arkin"
+    ]
+   },
+   {
+    "title": "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+    "doi": "https://doi.org/10.17863/cam.64134",
+    "year": 2019,
+    "cites": 11571,
+    "venue": "LA Referencia (Red Federada de Repositorios Institucionales de Publicaciones Cient\u00edficas)",
+    "authors": [
+     "Virtanen",
+     "Gommers",
+     "Oliphant",
+     "Haberland"
+    ]
+   },
+   {
+    "title": "Inference and analysis of cell-cell communication using CellChat",
+    "doi": "https://doi.org/10.1038/s41467-021-21246-9",
+    "year": 2021,
+    "cites": 8891,
+    "venue": "Nature Communications",
+    "authors": [
+     "Jin",
+     "Guerrero\u2010Juarez",
+     "Zhang",
+     "Chang"
+    ]
+   },
+   {
+    "title": "Enrichr: interactive and collaborative HTML5 gene list enrichment analysis tool",
+    "doi": "https://doi.org/10.1186/1471-2105-14-128",
+    "year": 2013,
+    "cites": 8650,
+    "venue": "BMC Bioinformatics",
+    "authors": [
+     "Chen",
+     "Tan",
+     "Kou",
+     "Duan"
+    ]
+   },
+   {
+    "title": "Multivariate Adaptive Regression Splines",
+    "doi": "https://doi.org/10.1214/aos/1176347963",
+    "year": 1991,
+    "cites": 8138,
+    "venue": "The Annals of Statistics",
+    "authors": [
+     "Friedman"
+    ]
+   },
+   {
+    "title": "Additive logistic regression: a statistical view of boosting (With discussion and a rejoinder by the authors)",
+    "doi": "https://doi.org/10.1214/aos/1016218223",
+    "year": 2000,
+    "cites": 6998,
+    "venue": "The Annals of Statistics",
+    "authors": [
+     "Friedman",
+     "Hastie",
+     "Tibshirani"
+    ]
+   },
+   {
+    "title": "Dictionary learning for integrative, multimodal and scalable single-cell analysis",
+    "doi": "https://doi.org/10.1038/s41587-023-01767-y",
+    "year": 2023,
+    "cites": 5523,
+    "venue": "Nature Biotechnology",
+    "authors": [
+     "Hao",
+     "Stuart",
+     "Kowalski",
+     "Choudhary"
+    ]
+   },
+   {
+    "title": "BrainNet Viewer: A Network Visualization Tool for Human Brain Connectomics",
+    "doi": "https://doi.org/10.1371/journal.pone.0068910",
+    "year": 2013,
+    "cites": 4387,
+    "venue": "PLoS ONE",
+    "authors": [
+     "Xia",
+     "Wang",
+     "He"
+    ]
+   },
+   {
+    "title": "Epidemic processes in complex networks",
+    "doi": "https://doi.org/10.1103/revmodphys.87.925",
+    "year": 2015,
+    "cites": 3842,
+    "venue": "Reviews of Modern Physics",
+    "authors": [
+     "Pastor\u2010Satorras",
+     "Castellano",
+     "Mieghem",
+     "Vespignani"
+    ]
+   },
+   {
+    "title": "Light field rendering",
+    "doi": "https://doi.org/10.1145/237170.237199",
+    "year": 1996,
+    "cites": 3785,
+    "venue": null,
+    "authors": [
+     "Levoy",
+     "Hanrahan"
+    ]
+   }
+  ]
+ }
+}

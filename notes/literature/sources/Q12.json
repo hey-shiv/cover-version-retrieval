@@ -1,0 +1,293 @@
+{
+ "id": "Q12",
+ "query": "local scaling shared nearest neighbors hub reduction",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Spatiotemporal density peaks clustering algorithm based on local covariance and shared spatiotemporal nearest neighbors",
+    "doi": "10.2139/ssrn.6159867",
+    "year": 2026,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Li",
+     "Zhu",
+     "Pan",
+     "Lee"
+    ]
+   },
+   {
+    "title": "Scaling out-of-core k-nearest neighbors computation on single machines",
+    "doi": "10.70675/8e4e8bbcz91f7z4066za633z6d30a2072811",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Olivares"
+    ]
+   },
+   {
+    "title": "K-Nearest Neighbors",
+    "doi": "10.1007/978-3-642-38652-7_2",
+    "year": 2013,
+    "venue": "Intelligent Systems Reference Library",
+    "cites": 597,
+    "authors": [
+     "Kramer"
+    ]
+   },
+   {
+    "title": "Spatiotemporal density peaks clustering algorithm based on local covariance and shared spatiotemporal nearest neighbors",
+    "doi": "10.1016/j.asoc.2026.115727",
+    "year": 2026,
+    "venue": "Applied Soft Computing",
+    "cites": 0,
+    "authors": [
+     "Li",
+     "Zhu",
+     "Pan",
+     "Lee"
+    ]
+   },
+   {
+    "title": "A Novel Cluster Validity Index Based on Augmented Non-Shared Nearest Neighbors",
+    "doi": "10.2139/ssrn.4209101",
+    "year": 2022,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Duan",
+     "Ma",
+     "Huang",
+     "Wang"
+    ]
+   },
+   {
+    "title": "A Local Model Reduction Method Based on $k$-Nearest-Neighbors for Parametrized Nonlocal Problems",
+    "doi": "10.4208/cicp.oa-2024-0028",
+    "year": 2025,
+    "venue": "Communications in Computational Physics",
+    "cites": 0,
+    "authors": [
+     "Nan",
+     "Li",
+     "Song"
+    ]
+   },
+   {
+    "title": "Nearest Neighbors",
+    "doi": "10.1007/springerreference_62524",
+    "year": null,
+    "venue": "SpringerReference",
+    "cites": 3,
+    "authors": []
+   },
+   {
+    "title": "VOTING NEAREST NEIGHBORS: SVM CONSTRAINTS SELECTION ALGORITHM BASED ON K-NEAREST NEIGHBORS",
+    "doi": "10.23860/diss-moreira-da-costa-leandro-2019",
+    "year": null,
+    "venue": "",
+    "cites": 1,
+    "authors": [
+     "",
+     "Moreira da Costa"
+    ]
+   },
+   {
+    "title": "Dimensionality Reduction",
+    "doi": "10.1007/978-3-642-38652-7_4",
+    "year": 2013,
+    "venue": "Intelligent Systems Reference Library",
+    "cites": 0,
+    "authors": [
+     "Kramer"
+    ]
+   },
+   {
+    "title": "Image Retrieval with Reciprocal and Shared Nearest Neighbors",
+    "doi": "10.5220/0004672303210328",
+    "year": 2014,
+    "venue": "Proceedings of the 9th International Conference on Computer Vision Theory and Applications",
+    "cites": 6,
+    "authors": []
+   },
+   {
+    "title": "STSNN-DPC: spatio-temporal shared nearest neighbors and density peaks based clustering method",
+    "doi": "10.21203/rs.3.rs-5381784/v1",
+    "year": 2024,
+    "venue": "",
+    "cites": 2,
+    "authors": [
+     "Zhang",
+     "Huang",
+     "Zhang",
+     "Luo"
+    ]
+   },
+   {
+    "title": "Dimensionality Reduction with Unsupervised Nearest Neighbors",
+    "doi": "10.1007/978-3-642-38652-7",
+    "year": 2013,
+    "venue": "Intelligent Systems Reference Library",
+    "cites": 245,
+    "authors": [
+     "Kramer"
+    ]
+   }
+  ],
+  "arxiv": [],
+  "openalex": [
+   {
+    "title": "Multivariate Adaptive Regression Splines",
+    "doi": "https://doi.org/10.1214/aos/1176347963",
+    "year": 1991,
+    "cites": 8138,
+    "venue": "The Annals of Statistics",
+    "authors": [
+     "Friedman"
+    ]
+   },
+   {
+    "title": "Additive logistic regression: a statistical view of boosting (With discussion and a rejoinder by the authors)",
+    "doi": "https://doi.org/10.1214/aos/1016218223",
+    "year": 2000,
+    "cites": 6998,
+    "venue": "The Annals of Statistics",
+    "authors": [
+     "Friedman",
+     "Hastie",
+     "Tibshirani"
+    ]
+   },
+   {
+    "title": "Dictionary learning for integrative, multimodal and scalable single-cell analysis",
+    "doi": "https://doi.org/10.1038/s41587-023-01767-y",
+    "year": 2023,
+    "cites": 5523,
+    "venue": "Nature Biotechnology",
+    "authors": [
+     "Hao",
+     "Stuart",
+     "Kowalski",
+     "Choudhary"
+    ]
+   },
+   {
+    "title": "Mapping the Structural Core of Human Cerebral Cortex",
+    "doi": "https://doi.org/10.1371/journal.pbio.0060159",
+    "year": 2008,
+    "cites": 4412,
+    "venue": "PLoS Biology",
+    "authors": [
+     "Hagmann",
+     "Cammoun",
+     "Gigandet",
+     "Meuli"
+    ]
+   },
+   {
+    "title": "Epidemic processes in complex networks",
+    "doi": "https://doi.org/10.1103/revmodphys.87.925",
+    "year": 2015,
+    "cites": 3842,
+    "venue": "Reviews of Modern Physics",
+    "authors": [
+     "Pastor\u2010Satorras",
+     "Castellano",
+     "Mieghem",
+     "Vespignani"
+    ]
+   },
+   {
+    "title": "Topological photonics",
+    "doi": "https://doi.org/10.1103/revmodphys.91.015006",
+    "year": 2019,
+    "cites": 3735,
+    "venue": "Reviews of Modern Physics",
+    "authors": [
+     "Ozawa",
+     "Price",
+     "Amo",
+     "Goldman"
+    ]
+   },
+   {
+    "title": "Current best practices in single\u2010cell RNA\u2010seq analysis: a tutorial",
+    "doi": "https://doi.org/10.15252/msb.20188746",
+    "year": 2019,
+    "cites": 2497,
+    "venue": "Molecular Systems Biology",
+    "authors": [
+     "Luecken",
+     "Theis"
+    ]
+   },
+   {
+    "title": "The Pervasive Effects of an Antibiotic on the Human Gut Microbiota, as Revealed by Deep 16S rRNA Sequencing",
+    "doi": "https://doi.org/10.1371/journal.pbio.0060280",
+    "year": 2008,
+    "cites": 2385,
+    "venue": "PLoS Biology",
+    "authors": [
+     "Dethlefsen",
+     "Huse",
+     "Sogin",
+     "Relman"
+    ]
+   },
+   {
+    "title": "Event-Based Vision: A Survey",
+    "doi": "https://doi.org/10.1109/tpami.2020.3008413",
+    "year": 2020,
+    "cites": 2292,
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "authors": [
+     "Gallego",
+     "Delbruck",
+     "Orchard",
+     "Bartolozzi"
+    ]
+   },
+   {
+    "title": "SMOTE for Learning from Imbalanced Data: Progress and Challenges, Marking the 15-year Anniversary",
+    "doi": "https://doi.org/10.1613/jair.1.11192",
+    "year": 2018,
+    "cites": 2243,
+    "venue": "Journal of Artificial Intelligence Research",
+    "authors": [
+     "Fern\u00e1ndez",
+     "Garc\u00eda",
+     "Herrera",
+     "Chawla"
+    ]
+   },
+   {
+    "title": "Definitions, methods, and applications in interpretable machine learning",
+    "doi": "https://doi.org/10.1073/pnas.1900654116",
+    "year": 2019,
+    "cites": 2179,
+    "venue": "Proceedings of the National Academy of Sciences",
+    "authors": [
+     "Murdoch",
+     "Singh",
+     "Kumbier",
+     "Abbasi-Asl"
+    ]
+   },
+   {
+    "title": "Ultracold atomic gases in optical lattices: mimicking condensed matter physics and beyond",
+    "doi": "https://doi.org/10.1080/00018730701223200",
+    "year": 2007,
+    "cites": 2142,
+    "venue": "Advances In Physics",
+    "authors": [
+     "Lewenstein",
+     "Sanpera",
+     "Ahufinger",
+     "Damski"
+    ]
+   }
+  ]
+ }
+}

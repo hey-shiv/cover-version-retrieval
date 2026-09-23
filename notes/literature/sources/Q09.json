@@ -1,0 +1,339 @@
+{
+ "id": "Q09",
+ "query": "musical version identification embedding",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "An English Version Wanted",
+    "doi": "10.2307/913901",
+    "year": 1922,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Symphonies k297/300a 1st Version, k385, k543, k504, k297/300a 2nd Version, k550 First Version, k551",
+    "doi": "10.2307/961715",
+    "year": 1983,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "King",
+     "Mozart",
+     "Academy of Ancient Music",
+     "Hogwood"
+    ]
+   },
+   {
+    "title": "Assessing Algorithmic Biases for Musical Version Identification",
+    "doi": "10.1145/3488560.3498397",
+    "year": 2022,
+    "venue": "Proceedings of the Fifteenth ACM International Conference on Web Search and Data Mining",
+    "cites": 1,
+    "authors": [
+     "Yesiler",
+     "Miron",
+     "Serr\u00e0",
+     "G\u00f3mez"
+    ]
+   },
+   {
+    "title": "Metrical Version of Canticles",
+    "doi": "10.2307/953252",
+    "year": 1969,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Faulkner"
+    ]
+   },
+   {
+    "title": "The Prayer Book Version of the Psalms and Its Musical Rendering",
+    "doi": "10.2307/914819",
+    "year": 1930,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Gardner"
+    ]
+   },
+   {
+    "title": "The Prayer Book Version of the Psalms and Its Musical Rendering",
+    "doi": "10.2307/915411",
+    "year": 1930,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Gardiner"
+    ]
+   },
+   {
+    "title": "Anna Karenina: An Operatic Version",
+    "doi": "10.2307/961890",
+    "year": 1981,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Hamilton"
+    ]
+   },
+   {
+    "title": "The Prayer Book Version of the Psalms, and Its Musical Rendering",
+    "doi": "10.2307/914550",
+    "year": 1929,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Richards"
+    ]
+   },
+   {
+    "title": "Petrushka (1947 Version)",
+    "doi": "10.2307/950824",
+    "year": 1961,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Greenfield",
+     "Stravinsky",
+     "Sym."
+    ]
+   },
+   {
+    "title": "The Seven Last Words, Orchestral Version",
+    "doi": "10.2307/950891",
+    "year": 1962,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Haydn",
+     "Unverricht"
+    ]
+   },
+   {
+    "title": "Mahler's Tenth Symphony. 2: The Performing Version",
+    "doi": "10.2307/958541",
+    "year": 1976,
+    "venue": "The Musical Times",
+    "cites": 0,
+    "authors": [
+     "Cooke"
+    ]
+   },
+   {
+    "title": "Embedding Representations",
+    "doi": "10.1007/978-3-642-36098-5_3",
+    "year": 2013,
+    "venue": "Nonlinearities and Synchronization in Musical Acoustics and Music Psychology",
+    "cites": 0,
+    "authors": [
+     "Bader"
+    ]
+   }
+  ],
+  "arxiv": [
+   {
+    "title": "Accurate and Scalable Version Identification Using Musically-Motivated Embeddings",
+    "id": "http://arxiv.org/abs/1910.12551v2",
+    "year": "2019",
+    "authors": [
+     "Yesiler",
+     "Serr\u00e0",
+     "G\u00f3mez"
+    ]
+   },
+   {
+    "title": "Less is more: Faster and better music version identification with embedding distillation",
+    "id": "http://arxiv.org/abs/2010.03284v1",
+    "year": "2020",
+    "authors": [
+     "Yesiler",
+     "Serr\u00e0",
+     "G\u00f3mez"
+    ]
+   },
+   {
+    "title": "Scalable Music Cover Retrieval Using Lyrics-Aligned Audio Embeddings",
+    "id": "http://arxiv.org/abs/2601.11262v2",
+    "year": "2026",
+    "authors": [
+     "Affolter",
+     "Martin",
+     "Epure",
+     "Meseguer-Brocal"
+    ]
+   },
+   {
+    "title": "From Real to Cloned Singer Identification",
+    "id": "http://arxiv.org/abs/2407.08647v1",
+    "year": "2024",
+    "authors": [
+     "Desblancs",
+     "Meseguer-Brocal",
+     "Hennequin",
+     "Moussallam"
+    ]
+   },
+   {
+    "title": "CoverHunter: Cover Song Identification with Refined Attention and Alignments",
+    "id": "http://arxiv.org/abs/2306.09025v1",
+    "year": "2023",
+    "authors": [
+     "Liu",
+     "Tuo",
+     "Xu",
+     "Han"
+    ]
+   },
+   {
+    "title": "A Prototypical Triplet Loss for Cover Detection",
+    "id": "http://arxiv.org/abs/1910.09862v2",
+    "year": "2019",
+    "authors": [
+     "Doras",
+     "Peeters"
+    ]
+   }
+  ],
+  "openalex": [
+   {
+    "title": "Whatever next? Predictive brains, situated agents, and the future of cognitive science",
+    "doi": "https://doi.org/10.1017/s0140525x12000477",
+    "year": 2013,
+    "cites": 6131,
+    "venue": "Behavioral and Brain Sciences",
+    "authors": [
+     "Clark"
+    ]
+   },
+   {
+    "title": "A Survey of Convolutional Neural Networks: Analysis, Applications, and Prospects",
+    "doi": "https://doi.org/10.1109/tnnls.2021.3084827",
+    "year": 2021,
+    "cites": 5150,
+    "venue": "IEEE Transactions on Neural Networks and Learning Systems",
+    "authors": [
+     "Li",
+     "Liu",
+     "Yang",
+     "Peng"
+    ]
+   },
+   {
+    "title": "Quasinormal modes of black holes and black branes",
+    "doi": "https://doi.org/10.1088/0264-9381/26/16/163001",
+    "year": 2009,
+    "cites": 2351,
+    "venue": "Classical and Quantum Gravity",
+    "authors": [
+     "Berti",
+     "Cardoso",
+     "Starinets"
+    ]
+   },
+   {
+    "title": "Recent advances in physical reservoir computing: A review",
+    "doi": "https://doi.org/10.1016/j.neunet.2019.03.005",
+    "year": 2019,
+    "cites": 2156,
+    "venue": "Neural Networks",
+    "authors": [
+     "Tanaka",
+     "Yamane",
+     "H\u00e9roux",
+     "Nakane"
+    ]
+   },
+   {
+    "title": "PaLM: Scaling Language Modeling with Pathways",
+    "doi": "https://doi.org/10.48550/arxiv.2204.02311",
+    "year": 2022,
+    "cites": 2138,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+     "Chowdhery",
+     "Narang",
+     "Devlin",
+     "Bosma"
+    ]
+   },
+   {
+    "title": "Rudiments of rough sets",
+    "doi": "https://doi.org/10.1016/j.ins.2006.06.003",
+    "year": 2006,
+    "cites": 2064,
+    "venue": "Information Sciences",
+    "authors": [
+     "Pawlak",
+     "Skowron"
+    ]
+   },
+   {
+    "title": "Random Walks and Electric Networks",
+    "doi": "https://doi.org/10.5948/upo9781614440222",
+    "year": 1984,
+    "cites": 1850,
+    "venue": "\u0098The \u009cCarus mathematical monographs",
+    "authors": [
+     "Doyle",
+     "Snell"
+    ]
+   },
+   {
+    "title": "A Metaverse: Taxonomy, Components, Applications, and Open Challenges",
+    "doi": "https://doi.org/10.1109/access.2021.3140175",
+    "year": 2022,
+    "cites": 1832,
+    "venue": "IEEE Access",
+    "authors": [
+     "Park",
+     "Kim"
+    ]
+   },
+   {
+    "title": "Profiting from innovation in the digital economy: Enabling technologies, standards, and licensing models in the wireless world",
+    "doi": "https://doi.org/10.1016/j.respol.2017.01.015",
+    "year": 2018,
+    "cites": 1761,
+    "venue": "Research Policy",
+    "authors": [
+     "Teece"
+    ]
+   },
+   {
+    "title": "Understanding Conspiracy Theories",
+    "doi": "https://doi.org/10.1111/pops.12568",
+    "year": 2019,
+    "cites": 1557,
+    "venue": "Political Psychology",
+    "authors": [
+     "Douglas",
+     "Uscinski",
+     "Sutton",
+     "Cichocka"
+    ]
+   },
+   {
+    "title": "The Future of the Internet--And How to Stop It",
+    "doi": null,
+    "year": 2008,
+    "cites": 1379,
+    "venue": "Digital Access to Scholarship at Harvard (DASH) (Harvard University)",
+    "authors": [
+     "Zittrain"
+    ]
+   },
+   {
+    "title": "Interactive evolutionary computation: fusion of the capabilities of EC optimization and human evaluation",
+    "doi": "https://doi.org/10.1109/5.949485",
+    "year": 2001,
+    "cites": 1338,
+    "venue": "Proceedings of the IEEE",
+    "authors": [
+     "Takagi"
+    ]
+   }
+  ]
+ }
+}

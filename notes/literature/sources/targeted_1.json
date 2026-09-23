@@ -1,0 +1,801 @@
+{
+ "twolevel": [
+  {
+   "DOI": "10.3390/app8081383",
+   "title": [
+    "A Robust Cover Song Identification System with Two-Level Similarity Fusion and Post-Processing"
+   ],
+   "author": [
+    {
+     "ORCID": "https://orcid.org/0000-0002-7241-2261",
+     "authenticated-orcid": false,
+     "given": "Mingyu",
+     "family": "Li",
+     "sequence": "first",
+     "affiliation": [
+      {
+       "name": "School of Information Science and Engineering, East China University of Science and Technology, 130 Meilong Road, Shanghai 200237, China"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "ORCID": "https://orcid.org/0000-0002-8171-267X",
+     "authenticated-orcid": false,
+     "given": "Ning",
+     "family": "Chen",
+     "sequence": "additional",
+     "affiliation": [
+      {
+       "name": "School of Information Science and Engineering, East China University of Science and Technology, 130 Meilong Road, Shanghai 200237, China"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2018,
+      8,
+      16
+     ]
+    ]
+   },
+   "container-title": [
+    "Applied Sciences"
+   ]
+  },
+  {
+   "DOI": "10.1186/s13636-017-0108-2",
+   "title": [
+    "Two-layer similarity fusion model for cover song identification"
+   ],
+   "author": [
+    {
+     "ORCID": "https://orcid.org/0000-0002-8171-267X",
+     "authenticated-orcid": false,
+     "given": "Ning",
+     "family": "Chen",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Mingyu",
+     "family": "Li",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Haidong",
+     "family": "Xiao",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2017,
+      5,
+      22
+     ]
+    ]
+   },
+   "container-title": [
+    "EURASIP Journal on Audio, Speech, and Music Processing"
+   ]
+  },
+  {
+   "DOI": "10.1109/icassp40776.2020.9053257",
+   "title": [
+    "Similarity Learning For Cover Song Identification Using Cross-Similarity Matrices of Multi-Level Deep Sequences"
+   ],
+   "author": [
+    {
+     "given": "Chaoya",
+     "family": "Jiang",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Deshun",
+     "family": "Yang",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Xiaoou",
+     "family": "Chen",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2020,
+      5
+     ]
+    ]
+   },
+   "container-title": [
+    "ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)"
+   ]
+  },
+  {
+   "DOI": "10.1049/el.2015.4013",
+   "title": [
+    "Similarity fusion scheme for cover song identification"
+   ],
+   "author": [
+    {
+     "given": "Ning",
+     "family": "Chen",
+     "sequence": "first",
+     "affiliation": [
+      {
+       "name": "School of Information Science and Engineering East China University of Science and Technology Shanghai 200237 People's Republic of China"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Hai\u2010dong",
+     "family": "Xiao",
+     "sequence": "additional",
+     "affiliation": [
+      {
+       "name": "Chinese Academy of Sciences, Shanghai Advanced Research Institute Shanghai 201210 People's Republic of China"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2016,
+      6
+     ]
+    ]
+   },
+   "container-title": [
+    "Electronics Letters"
+   ]
+  }
+ ],
+ "subseq_hubness": [
+  {
+   "DOI": "10.21105/joss.01957",
+   "title": [
+    "scikit-hubness: Hubness Reduction and Approximate Neighbor Search"
+   ],
+   "author": [
+    {
+     "ORCID": "https://orcid.org/0000-0003-2216-4295",
+     "authenticated-orcid": false,
+     "given": "Roman",
+     "family": "Feldbauer",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "vocabulary": "crossref",
+       "role": "author"
+      }
+     ]
+    },
+    {
+     "ORCID": "https://orcid.org/0000-0002-0592-7791",
+     "authenticated-orcid": false,
+     "given": "Thomas",
+     "family": "Rattei",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "vocabulary": "crossref",
+       "role": "author"
+      }
+     ]
+    },
+    {
+     "ORCID": "https://orcid.org/0000-0002-1691-737X",
+     "authenticated-orcid": false,
+     "given": "Arthur",
+     "family": "Flexer",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "vocabulary": "crossref",
+       "role": "author"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2020,
+      1,
+      17
+     ]
+    ]
+   },
+   "container-title": [
+    "Journal of Open Source Software"
+   ]
+  },
+  {
+   "DOI": "10.5220/0010646400003064",
+   "title": [
+    "An Evaluation of Hubness Reduction Methods for Entity Alignment with Knowledge Graph Embeddings"
+   ],
+   "author": [
+    {
+     "given": "Daniel",
+     "family": "Obraczka",
+     "sequence": "first",
+     "affiliation": [
+      {
+       "name": "ScaDS.AI/Database Group, Leipzig University, Germany, --- Select a Country ---"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Erhard",
+     "family": "Rahm",
+     "sequence": "first",
+     "affiliation": [
+      {
+       "name": "ScaDS.AI/Database Group, Leipzig University, Germany, --- Select a Country ---"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2021
+     ]
+    ]
+   },
+   "container-title": [
+    "Proceedings of the 13th International Joint Conference on Knowledge Discovery, Knowledge Engineering and Knowledge Management"
+   ]
+  },
+  {
+   "DOI": "10.1109/icassp.2018.8461395",
+   "title": [
+    "Cover Song Identification Using Song-to-Song Cross-Similarity Matrix with Convolutional Neural Network"
+   ],
+   "author": [
+    {
+     "given": "Juheon",
+     "family": "Lee",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Sungkyun",
+     "family": "Chang",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Sang Keun",
+     "family": "Choe",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Kyogu",
+     "family": "Lee",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2018,
+      4
+     ]
+    ]
+   },
+   "container-title": [
+    "2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)"
+   ]
+  },
+  {
+   "DOI": "10.1587/transinf.2021edl8075",
+   "title": [
+    "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy"
+   ],
+   "author": [
+    {
+     "given": "Jin S.",
+     "family": "SEO",
+     "sequence": "first",
+     "affiliation": [
+      {
+       "name": "Department of Electrical Engineering, Gangneung-Wonju National University"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2022,
+      5,
+      1
+     ]
+    ]
+   },
+   "container-title": [
+    "IEICE Transactions on Information and Systems"
+   ]
+  }
+ ],
+ "seo2024": [
+  {
+   "DOI": "10.1587/transinf.2021edl8075",
+   "title": [
+    "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy"
+   ],
+   "author": [
+    {
+     "given": "Jin S.",
+     "family": "SEO",
+     "sequence": "first",
+     "affiliation": [
+      {
+       "name": "Department of Electrical Engineering, Gangneung-Wonju National University"
+      }
+     ],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2022,
+      5,
+      1
+     ]
+    ]
+   },
+   "container-title": [
+    "IEICE Transactions on Information and Systems"
+   ]
+  },
+  {
+   "DOI": "10.1109/ibssc47189.2019.8973064",
+   "title": [
+    "Cover Song Identification with Pairwise Cross-Similarity Matrix using Deep Learning"
+   ],
+   "author": [
+    {
+     "given": "Manan",
+     "family": "Mehta",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Anmol",
+     "family": "Sajnani",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Radhika",
+     "family": "Chapaneri",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2019,
+      7
+     ]
+    ]
+   },
+   "container-title": [
+    "2019 IEEE Bombay Section Signature Conference (IBSSC)"
+   ]
+  },
+  {
+   "DOI": "10.7717/peerj-cs.3713/table-3",
+   "title": [
+    "Table 3: Pairwise hotel similarity based on aspect-level semantic similarity."
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      null
+     ]
+    ]
+   }
+  },
+  {
+   "DOI": "10.1023/a:1012730924277",
+   "title": [
+    "Some Formal Analysis of Rocchio's Similarity-Based Relevance Feedback Algorithm"
+   ],
+   "author": [
+    {
+     "given": "Zhixiang",
+     "family": "Chen",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Binhai",
+     "family": "Zhu",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2002,
+      1
+     ]
+    ]
+   },
+   "container-title": [
+    "Information Retrieval"
+   ]
+  }
+ ],
+ "mp_audio": [
+  {
+   "DOI": "10.1002/0470093366.ch3",
+   "title": [
+    "Sound Classification and Similarity"
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2005,
+      10,
+      28
+     ]
+    ]
+   },
+   "container-title": [
+    "MPEG\u20107 Audio and Beyond"
+   ]
+  },
+  {
+   "DOI": "10.30871/jaic.v9i6.10516",
+   "title": [
+    "A Hybrid Approach to Music Recommendations Based on Audio Similarity Using Autoencoder and LightGBM"
+   ],
+   "author": [
+    {
+     "given": "Winda Ardelia",
+     "family": "Aristawidya",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    },
+    {
+     "given": "Majid",
+     "family": "Rahardi",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2025,
+      12,
+      6
+     ]
+    ]
+   },
+   "container-title": [
+    "Journal of Applied Informatics and Computing"
+   ]
+  },
+  {
+   "DOI": "10.11591/ijece.v11i1.pp879-891",
+   "title": [
+    "Similarity-preserving hash for content-based audio retrieval using unsupervised deep neural networks"
+   ],
+   "author": [
+    {
+     "given": "Petcharat",
+     "family": "Panyapanuwat",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "vocabulary": "crossref",
+       "role": "author"
+      }
+     ]
+    },
+    {
+     "given": "Suwatchai",
+     "family": "Kamonsantiroj",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "vocabulary": "crossref",
+       "role": "author"
+      }
+     ]
+    },
+    {
+     "given": "Luepol",
+     "family": "Pipanmaekaporn",
+     "sequence": "additional",
+     "affiliation": [],
+     "role": [
+      {
+       "vocabulary": "crossref",
+       "role": "author"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2021,
+      2,
+      1
+     ]
+    ]
+   },
+   "container-title": [
+    "International Journal of Electrical and Computer Engineering (IJECE)"
+   ]
+  },
+  {
+   "DOI": "10.32920/ryerson.14655894",
+   "title": [
+    "Content Based Audio Watermarking and Retrieval Using Time-Frequency Analysis"
+   ],
+   "author": [
+    {
+     "given": "Shahrzad",
+     "family": "Esmaili",
+     "sequence": "first",
+     "affiliation": [],
+     "role": [
+      {
+       "role": "author",
+       "vocabulary": "crossref"
+      }
+     ]
+    }
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2021,
+      5,
+      23
+     ]
+    ]
+   }
+  }
+ ],
+ "flexer_mirex": [
+  {
+   "DOI": "10.1002/9781119890980.ch12",
+   "title": [
+    "Music Similarity Detection and Music Genre Classification"
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2022,
+      10,
+      25
+     ]
+    ]
+   },
+   "container-title": [
+    "An Introduction to Audio Content Analysis"
+   ]
+  },
+  {
+   "DOI": "10.55776/l511",
+   "issued": {
+    "date-parts": [
+     [
+      2008,
+      5,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "DOI": "10.55776/p24095",
+   "issued": {
+    "date-parts": [
+     [
+      2012,
+      2,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "DOI": "10.1002/9781118393550.ch8",
+   "title": [
+    "Musical Genre, Similarity, and Mood"
+   ],
+   "issued": {
+    "date-parts": [
+     [
+      2012,
+      7,
+      30
+     ]
+    ]
+   },
+   "container-title": [
+    "An Introduction to Audio Content Analysis"
+   ]
+  }
+ ]
+}

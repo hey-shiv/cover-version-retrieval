@@ -1,0 +1,292 @@
+{
+ "id": "Q04",
+ "query": "cover song identification score normalization",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy",
+    "doi": "10.1587/transinf.2021edl8075",
+    "year": 2022,
+    "venue": "IEICE Transactions on Information and Systems",
+    "cites": 0,
+    "authors": [
+     "SEO"
+    ]
+   },
+   {
+    "title": "Score Normalization",
+    "doi": "10.1007/springerreference_71391",
+    "year": null,
+    "venue": "SpringerReference",
+    "cites": 2,
+    "authors": []
+   },
+   {
+    "title": "Score Normalization Rules in Iris Recognition",
+    "doi": "10.1007/springerreference_70925",
+    "year": null,
+    "venue": "SpringerReference",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Score Normalization Methods Applied to Topic Identification",
+    "doi": "10.1007/978-3-319-10816-2_17",
+    "year": 2014,
+    "venue": "Lecture Notes in Computer Science",
+    "cites": 3,
+    "authors": [
+     "Skorkovsk\u00e1",
+     "Zaj\u00edc"
+    ]
+   },
+   {
+    "title": "Score Normalization",
+    "doi": "10.1007/978-0-387-73003-5_767",
+    "year": 2009,
+    "venue": "Encyclopedia of Biometrics",
+    "cites": 2,
+    "authors": []
+   },
+   {
+    "title": "Music similarity models applied to cover song identification and classification",
+    "doi": "10.11606/t.45.2021.tde-27092021-104421",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Bodo"
+    ]
+   },
+   {
+    "title": "From adaptive score normalization to adaptive data normalization for speaker verification systems",
+    "doi": "10.21437/interspeech.2023-266",
+    "year": 2023,
+    "venue": "INTERSPEECH 2023",
+    "cites": 4,
+    "authors": [
+     "Cumani",
+     "Sarni"
+    ]
+   },
+   {
+    "title": "Relative Effectiveness of Score Normalization Methods in Speaker Identification Fusing Acoustic and Prosodic Information",
+    "doi": "10.1109/nlpke.2005.1598727",
+    "year": null,
+    "venue": "2005 International Conference on Natural Language Processing and Knowledge Engineering",
+    "cites": 0,
+    "authors": [
+     "Rong Zheng",
+     "Shuwu Zhang",
+     "Bo Xu"
+    ]
+   },
+   {
+    "title": "Improving CNN-based Person Re-identification using score Normalization",
+    "doi": "10.1109/icip49359.2023.10222062",
+    "year": 2023,
+    "venue": "2023 IEEE International Conference on Image Processing (ICIP)",
+    "cites": 20,
+    "authors": [
+     "Chouchane",
+     "Ouamane",
+     "Himeur",
+     "Mansoor"
+    ]
+   },
+   {
+    "title": "Combination of SVM and Score Normalization for Person Identification Based on Audio-Visual Feature Fusion",
+    "doi": "10.4028/www.scientific.net/amr.186.236",
+    "year": 2011,
+    "venue": "Advanced Materials Research",
+    "cites": 0,
+    "authors": [
+     "Cao",
+     "Wu",
+     "Liu",
+     "Pan"
+    ]
+   },
+   {
+    "title": "Phonetic normalization using z-score in segmental prosody estimation for corpus-based TTS system",
+    "doi": "10.21437/icslp.2002-103",
+    "year": 2002,
+    "venue": "7th International Conference on Spoken Language Processing (ICSLP 2002)",
+    "cites": 0,
+    "authors": [
+     "Song",
+     "Kim",
+     "Lee",
+     "Kim"
+    ]
+   },
+   {
+    "title": "Cohort-Based Score Normalization",
+    "doi": "10.1007/978-3-642-27733-7_9200-1",
+    "year": 2014,
+    "venue": "Encyclopedia of Biometrics",
+    "cites": 1,
+    "authors": [
+     "Tistarelli",
+     "Sun"
+    ]
+   }
+  ],
+  "arxiv": [],
+  "openalex": [
+   {
+    "title": "An integrated encyclopedia of DNA elements in the human genome",
+    "doi": "https://doi.org/10.1038/nature11247",
+    "year": 2012,
+    "cites": 19751,
+    "venue": "Nature",
+    "authors": [
+     "Dunham",
+     "Birney",
+     "Herrero",
+     "Wilder"
+    ]
+   },
+   {
+    "title": "Recommendations for Cardiac Chamber Quantification by Echocardiography in Adults: An Update from the American Society of Echocardiography and the European Association of Cardiovascular Imaging",
+    "doi": "https://doi.org/10.1016/j.echo.2014.10.003",
+    "year": 2015,
+    "cites": 18398,
+    "venue": "Journal of the American Society of Echocardiography",
+    "authors": [
+     "Lang",
+     "Badano",
+     "Mor\u2010Avi",
+     "Afilalo"
+    ]
+   },
+   {
+    "title": "A survey on deep learning in medical image analysis",
+    "doi": "https://doi.org/10.1016/j.media.2017.07.005",
+    "year": 2017,
+    "cites": 15309,
+    "venue": "Medical Image Analysis",
+    "authors": [
+     "Litjens",
+     "Kooi",
+     "Bejnordi",
+     "Setio"
+    ]
+   },
+   {
+    "title": "Recommendations for Cardiac Chamber Quantification by Echocardiography in Adults: An Update from the American Society of Echocardiography and the European Association of Cardiovascular Imaging",
+    "doi": "https://doi.org/10.1093/ehjci/jev014",
+    "year": 2015,
+    "cites": 8508,
+    "venue": "European Heart Journal - Cardiovascular Imaging",
+    "authors": [
+     "Lang",
+     "Badano",
+     "Mor\u2010Avi",
+     "Afilalo"
+    ]
+   },
+   {
+    "title": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock: 2016",
+    "doi": "https://doi.org/10.1007/s00134-017-4683-6",
+    "year": 2017,
+    "cites": 6868,
+    "venue": "Intensive Care Medicine",
+    "authors": [
+     "Rhodes",
+     "Evans",
+     "Alhazzani",
+     "Levy"
+    ]
+   },
+   {
+    "title": "2016 ESC Guidelines for the management of atrial fibrillation developed in collaboration with EACTS",
+    "doi": "https://doi.org/10.1093/eurheartj/ehw210",
+    "year": 2016,
+    "cites": 6496,
+    "venue": "European Heart Journal",
+    "authors": [
+     "Kirchhof",
+     "Benussi",
+     "Kotecha",
+     "Ahlsson"
+    ]
+   },
+   {
+    "title": "2016 ESC Guidelines for the management of atrial fibrillation developed in collaboration with EACTS",
+    "doi": "https://doi.org/10.1093/europace/euw295",
+    "year": 2016,
+    "cites": 6480,
+    "venue": "EP Europace",
+    "authors": [
+     "Kirchhof",
+     "Benussi",
+     "Kotecha",
+     "Ahlsson"
+    ]
+   },
+   {
+    "title": "A Survey of Convolutional Neural Networks: Analysis, Applications, and Prospects",
+    "doi": "https://doi.org/10.1109/tnnls.2021.3084827",
+    "year": 2021,
+    "cites": 5150,
+    "venue": "IEEE Transactions on Neural Networks and Learning Systems",
+    "authors": [
+     "Li",
+     "Liu",
+     "Yang",
+     "Peng"
+    ]
+   },
+   {
+    "title": "Deep learning in agriculture: A survey",
+    "doi": "https://doi.org/10.1016/j.compag.2018.02.016",
+    "year": 2018,
+    "cites": 5070,
+    "venue": "Computers and Electronics in Agriculture",
+    "authors": [
+     "Kamilaris",
+     "Prenafeta-Bold\u00fa"
+    ]
+   },
+   {
+    "title": "Circular RNAs are abundant, conserved, and associated with ALU repeats",
+    "doi": "https://doi.org/10.1261/rna.035667.112",
+    "year": 2012,
+    "cites": 4612,
+    "venue": "RNA",
+    "authors": [
+     "Jeck",
+     "Sorrentino",
+     "Wang",
+     "Slevin"
+    ]
+   },
+   {
+    "title": "Comparative Protein Structure Modeling Using MODELLER",
+    "doi": "https://doi.org/10.1002/cpbi.3",
+    "year": 2016,
+    "cites": 4607,
+    "venue": "Current Protocols in Bioinformatics",
+    "authors": [
+     "Webb",
+     "\u0160ali"
+    ]
+   },
+   {
+    "title": "Update on prevention, diagnosis, and treatment of chronic hepatitis B: AASLD 2018 hepatitis B guidance",
+    "doi": "https://doi.org/10.1002/hep.29800",
+    "year": 2018,
+    "cites": 4390,
+    "venue": "Hepatology",
+    "authors": [
+     "Terrault",
+     "Lok",
+     "McMahon",
+     "Chang"
+    ]
+   }
+  ]
+ }
+}

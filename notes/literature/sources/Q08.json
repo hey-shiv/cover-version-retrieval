@@ -1,0 +1,262 @@
+{
+ "id": "Q08",
+ "query": "Da-TACOS cover song identification benchmark",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Chapter 2. Golden and Crunchy. Crispy tacos, taquitos and flautas, fry bread tacos, tacos dorados, and San Antonio\u2013style puffy tacos",
+    "doi": "10.7560/316528-003",
+    "year": 2020,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "CHAPTER 2. GOLDEN AND CRUNCHY",
+    "doi": "10.7560/329368-003",
+    "year": 2024,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "CHAPTER 6. JEWISH AND KOSHER TACOS, OR DELI-MEX",
+    "doi": "10.7560/329368-007",
+    "year": 2024,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Chapter 1. Breakfast Tacos From dawn until whenever",
+    "doi": "10.7560/316528-002",
+    "year": 2020,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Chapter 6. Jewish and Kosher Tacos, or Deli-Mex. Glatt, good eating, and pastrami tacos",
+    "doi": "10.7560/316528-007",
+    "year": 2020,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Music similarity models applied to cover song identification and classification",
+    "doi": "10.11606/t.45.2021.tde-27092021-104421",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Bodo"
+    ]
+   },
+   {
+    "title": "CHAPTER 4. K-MEX",
+    "doi": "10.7560/329368-005",
+    "year": 2024,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "The TACOs Method",
+    "doi": "10.1201/b22442-4",
+    "year": null,
+    "venue": "Working Posture Assessment: The TACOs (Time-Based Assessment Computerized Strategy) Method",
+    "cites": 0,
+    "authors": [
+     "Colombini"
+    ]
+   },
+   {
+    "title": "CHAPTER 3. BARBACOA AND BARBECUE TACOS",
+    "doi": "10.7560/329368-004",
+    "year": 2024,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "CHAPTER 8. EL TACO MODERNO",
+    "doi": "10.7560/329368-009",
+    "year": 2024,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Chapter 4. K-Mex. Korean tacos go on a roll",
+    "doi": "10.7560/316528-005",
+    "year": 2020,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "CHAPTER 9. PANDEMIC TACOS",
+    "doi": "10.7560/329368-010",
+    "year": 2024,
+    "venue": "American Tacos",
+    "cites": 0,
+    "authors": []
+   }
+  ],
+  "arxiv": [],
+  "openalex": [
+   {
+    "title": "Hardware implementation of memristor-based artificial neural networks",
+    "doi": "https://doi.org/10.1038/s41467-024-45670-9",
+    "year": 2024,
+    "cites": 491,
+    "venue": "Nature Communications",
+    "authors": [
+     "Aguirre",
+     "Sebastian",
+     "Gallo",
+     "Song"
+    ]
+   },
+   {
+    "title": "GLM-130B: An Open Bilingual Pre-trained Model",
+    "doi": "https://doi.org/10.48550/arxiv.2210.02414",
+    "year": 2022,
+    "cites": 298,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+     "Zeng",
+     "Liu",
+     "Du",
+     "Wang"
+    ]
+   },
+   {
+    "title": "Accurately identifying hemagglutinin using sequence information and machine learning methods",
+    "doi": "https://doi.org/10.3389/fmed.2023.1281880",
+    "year": 2023,
+    "cites": 138,
+    "venue": "Frontiers in Medicine",
+    "authors": [
+     "Zou",
+     "Ren",
+     "Cai",
+     "Zhang"
+    ]
+   },
+   {
+    "title": "Deep learning for detecting macroplastic litter in water bodies: A review",
+    "doi": "https://doi.org/10.1016/j.watres.2023.119632",
+    "year": 2023,
+    "cites": 113,
+    "venue": "Water Research",
+    "authors": [
+     "Jia",
+     "Kapelan",
+     "Vries",
+     "Vriend"
+    ]
+   },
+   {
+    "title": "A Review of Population-Based Metaheuristics for Large-Scale Black-Box Global Optimization\u2014Part II",
+    "doi": "https://doi.org/10.1109/tevc.2021.3130835",
+    "year": 2021,
+    "cites": 89,
+    "venue": "IEEE Transactions on Evolutionary Computation",
+    "authors": [
+     "Omidvar",
+     "Li",
+     "Yao"
+    ]
+   },
+   {
+    "title": "Physics-Informed Computer Vision: A Review and Perspectives",
+    "doi": "https://doi.org/10.1145/3689037",
+    "year": 2024,
+    "cites": 72,
+    "venue": "ACM Computing Surveys",
+    "authors": [
+     "Banerjee",
+     "Nguyen",
+     "Fookes",
+     "Karniadakis"
+    ]
+   },
+   {
+    "title": "Production of indigo by recombinant bacteria",
+    "doi": "https://doi.org/10.1186/s40643-023-00626-7",
+    "year": 2023,
+    "cites": 60,
+    "venue": "Bioresources and Bioprocessing",
+    "authors": [
+     "Linke",
+     "Rayat",
+     "Ward"
+    ]
+   },
+   {
+    "title": "De novo genome assembly and in natura epigenomics reveal salinity\u2010induced DNA methylation in the mangrove tree Bruguiera gymnorhiza",
+    "doi": "https://doi.org/10.1111/nph.17738",
+    "year": 2021,
+    "cites": 55,
+    "venue": "New Phytologist",
+    "authors": [
+     "Miryeganeh",
+     "Marl\u00e9taz",
+     "Gavriouchkina",
+     "Saze"
+    ]
+   },
+   {
+    "title": "Machine Learning and Physics: A Survey of Integrated Models",
+    "doi": "https://doi.org/10.1145/3611383",
+    "year": 2023,
+    "cites": 54,
+    "venue": "ACM Computing Surveys",
+    "authors": [
+     "Seyyedi",
+     "Bohlouli",
+     "Oskoee"
+    ]
+   },
+   {
+    "title": "Commonsense Knowledge Reasoning and Generation with Pre-trained Language Models: A Survey",
+    "doi": "https://doi.org/10.1609/aaai.v36i11.21496",
+    "year": 2022,
+    "cites": 47,
+    "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+    "authors": [
+     "Bhargava",
+     "Ng"
+    ]
+   },
+   {
+    "title": "Accurate and scalable version identification using musically-motivated embeddings",
+    "doi": "https://doi.org/10.1109/icassp40776.2020.9053793",
+    "year": 2020,
+    "cites": 46,
+    "venue": "Repositori digital de la UPF (Universitat Pompeu Fabra)",
+    "authors": [
+     "Yesiler",
+     "Joan",
+     "1975-"
+    ]
+   },
+   {
+    "title": "Enhancing Capacity for Food and Nutrient Intake Assessment in Population Sciences Research",
+    "doi": "https://doi.org/10.1146/annurev-publhealth-071521-121621",
+    "year": 2022,
+    "cites": 37,
+    "venue": "Annual Review of Public Health",
+    "authors": [
+     "Neuhouser",
+     "Prentice",
+     "Tinker",
+     "Lampe"
+    ]
+   }
+  ]
+ }
+}

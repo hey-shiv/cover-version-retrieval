@@ -1,0 +1,296 @@
+{
+ "id": "Q07",
+ "query": "cross-domain similarity local scaling word translation",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Cross-lingual lexical matching with word translation and local similarity optimization",
+    "doi": "10.1145/2814864.2814888",
+    "year": 2015,
+    "venue": "Proceedings of the 11th International Conference on Semantic Systems",
+    "cites": 3,
+    "authors": [
+     "Helou",
+     "Palmonari"
+    ]
+   },
+   {
+    "title": "Similarity in Consonants, Difference in Meaning: Word Image and Semantic Domain",
+    "doi": "10.1163/9789004256583_010",
+    "year": 2013,
+    "venue": "Language System, Translation Technique, and Textual Tradition in the Peshitta of Kings",
+    "cites": 0,
+    "authors": [
+     "Dyk",
+     "van Keulen"
+    ]
+   },
+   {
+    "title": "Local Similarity Groups with Context-free Co-word Problem",
+    "doi": "10.1017/9781108526203.006",
+    "year": null,
+    "venue": "Topological Methods in Group Theory",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Boosting Knowledge Distillation Via Local Categories Similarity Scaling",
+    "doi": "10.2139/ssrn.5022526",
+    "year": 2024,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Chen",
+     "Shen",
+     "Teng",
+     "Lan"
+    ]
+   },
+   {
+    "title": "CDS-GAN: Unpaired Infrared to Visible Image Translation Using Cross-domain Regional Similarity Matching",
+    "doi": "10.1109/ijcnn64981.2025.11228504",
+    "year": 2025,
+    "venue": "2025 International Joint Conference on Neural Networks (IJCNN)",
+    "cites": 0,
+    "authors": [
+     "Li",
+     "Jin",
+     "Zhang",
+     "Zhang"
+    ]
+   },
+   {
+    "title": "Word Translation using Cross-Lingual Word Embedding: Case of Sanskrit to Hindi Translation",
+    "doi": "10.1109/aisp53593.2022.9760564",
+    "year": 2022,
+    "venue": "2022 2nd International Conference on Artificial Intelligence and Signal Processing (AISP)",
+    "cites": 2,
+    "authors": [
+     "Kumar",
+     "Sahula"
+    ]
+   },
+   {
+    "title": "Combining Local Context and WordNet Similarity for Word Sense Identification",
+    "doi": "10.7551/mitpress/7287.003.0018",
+    "year": 1998,
+    "venue": "WordNet",
+    "cites": 713,
+    "authors": [
+     "Leacock"
+    ]
+   },
+   {
+    "title": "HuaAMS at SemEval-2022 Task 8: Combining Translation and Domain Pre-training for Cross-lingual News Article Similarity",
+    "doi": "10.18653/v1/2022.semeval-1.162",
+    "year": 2022,
+    "venue": "Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022)",
+    "cites": 0,
+    "authors": [
+     "Chittilla",
+     "Khalil"
+    ]
+   },
+   {
+    "title": "Domain Adaptation Using Domain Similarity- and Domain Complexity-Based Instance Selection for Cross-Domain Sentiment Analysis",
+    "doi": "10.1109/icdmw.2012.46",
+    "year": 2012,
+    "venue": "2012 IEEE 12th International Conference on Data Mining Workshops",
+    "cites": 33,
+    "authors": [
+     "Remus"
+    ]
+   },
+   {
+    "title": "Reconstructed similarity for faster GANs-based word translation to mitigate hubness",
+    "doi": "10.1016/j.neucom.2019.06.082",
+    "year": 2019,
+    "venue": "Neurocomputing",
+    "cites": 9,
+    "authors": [
+     "Zhang",
+     "Luo",
+     "He"
+    ]
+   },
+   {
+    "title": "ROMA: Cross-Domain Region Similarity Matching for Unpaired Nighttime Infrared to Daytime Visible Video Translation",
+    "doi": "10.1145/3503161.3548221",
+    "year": 2022,
+    "venue": "Proceedings of the 30th ACM International Conference on Multimedia",
+    "cites": 18,
+    "authors": [
+     "Yu",
+     "Chen",
+     "Li",
+     "Han"
+    ]
+   },
+   {
+    "title": "Text similarity calculation based on domain feature word",
+    "doi": "10.1049/cp.2012.1399",
+    "year": 2012,
+    "venue": "International Conference on Automatic Control and Artificial Intelligence (ACAI 2012)",
+    "cites": 0,
+    "authors": [
+     "Yan Luo",
+     "Ning OuYang"
+    ]
+   }
+  ],
+  "arxiv": [],
+  "openalex": [
+   {
+    "title": "A survey on Image Data Augmentation for Deep Learning",
+    "doi": "https://doi.org/10.1186/s40537-019-0197-0",
+    "year": 2019,
+    "cites": 13152,
+    "venue": "Journal Of Big Data",
+    "authors": [
+     "Shorten",
+     "Khoshgoftaar"
+    ]
+   },
+   {
+    "title": "Least angle regression",
+    "doi": "https://doi.org/10.1214/009053604000000067",
+    "year": 2004,
+    "cites": 9594,
+    "venue": "The Annals of Statistics",
+    "authors": [
+     "Efron",
+     "Hastie",
+     "Johnstone",
+     "Tibshirani"
+    ]
+   },
+   {
+    "title": "Quantum cryptography",
+    "doi": "https://doi.org/10.1103/revmodphys.74.145",
+    "year": 2002,
+    "cites": 8510,
+    "venue": "Reviews of Modern Physics",
+    "authors": [
+     "Gisin",
+     "Ribordy",
+     "Tittel",
+     "Zbinden"
+    ]
+   },
+   {
+    "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text\\n Transformer",
+    "doi": "https://doi.org/10.48550/arxiv.1910.10683",
+    "year": 2019,
+    "cites": 8346,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+     "Raffel",
+     "Shazeer",
+     "Roberts",
+     "Lee"
+    ]
+   },
+   {
+    "title": "The automated computation of tree-level and next-to-leading order differential cross sections, and their matching to parton shower simulations",
+    "doi": "https://doi.org/10.1007/jhep07(2014)079",
+    "year": 2014,
+    "cites": 7957,
+    "venue": "Journal of High Energy Physics",
+    "authors": [
+     "Alwall",
+     "Frederix",
+     "Frixione",
+     "Hirschi"
+    ]
+   },
+   {
+    "title": "Review of deep learning: concepts, CNN architectures, challenges, applications, future directions",
+    "doi": "https://doi.org/10.1186/s40537-021-00444-8",
+    "year": 2021,
+    "cites": 7920,
+    "venue": "Journal Of Big Data",
+    "authors": [
+     "Alzubaidi",
+     "Zhang",
+     "Humaidi",
+     "Al-Dujaili"
+    ]
+   },
+   {
+    "title": "Macromolecular structure determination using X-rays, neutrons and electrons: recent developments in Phenix",
+    "doi": "https://doi.org/10.1107/s2059798319011471",
+    "year": 2019,
+    "cites": 7679,
+    "venue": "Acta Crystallographica Section D Structural Biology",
+    "authors": [
+     "Liebschner",
+     "Afonine",
+     "Baker",
+     "Bunk\u00f2czi"
+    ]
+   },
+   {
+    "title": "Genome sequence-based species delimitation with confidence intervals and improved distance functions",
+    "doi": "https://doi.org/10.1186/1471-2105-14-60",
+    "year": 2013,
+    "cites": 6885,
+    "venue": "BMC Bioinformatics",
+    "authors": [
+     "Meier\u2010Kolthoff",
+     "Auch",
+     "Klenk",
+     "G\u00f6ker"
+    ]
+   },
+   {
+    "title": "OrthoMCL: Identification of Ortholog Groups for Eukaryotic Genomes",
+    "doi": "https://doi.org/10.1101/gr.1224503",
+    "year": 2003,
+    "cites": 6221,
+    "venue": "Genome Research",
+    "authors": [
+     "Li",
+     "Stoeckert",
+     "Roos"
+    ]
+   },
+   {
+    "title": "Power laws, Pareto distributions and Zipf's law",
+    "doi": "https://doi.org/10.1080/00107510500052444",
+    "year": 2005,
+    "cites": 5876,
+    "venue": "Contemporary Physics",
+    "authors": [
+     "Newman"
+    ]
+   },
+   {
+    "title": "Stochastic resonance",
+    "doi": "https://doi.org/10.1103/revmodphys.70.223",
+    "year": 1998,
+    "cites": 5398,
+    "venue": "Reviews of Modern Physics",
+    "authors": [
+     "Gammaitoni",
+     "H\u00e4nggi",
+     "Jung",
+     "Marchesoni"
+    ]
+   },
+   {
+    "title": "A refined compilation of implementation strategies: results from the Expert Recommendations for Implementing Change (ERIC) project",
+    "doi": "https://doi.org/10.1186/s13012-015-0209-1",
+    "year": 2015,
+    "cites": 5317,
+    "venue": "Implementation Science",
+    "authors": [
+     "Powell",
+     "Waltz",
+     "Chinman",
+     "Damschroder"
+    ]
+   }
+  ]
+ }
+}

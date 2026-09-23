@@ -1,0 +1,309 @@
+{
+ "id": "Q01",
+ "query": "hubness music similarity",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "",
+    "doi": "10.55776/p24095",
+    "year": 2012,
+    "venue": "",
+    "cites": null,
+    "authors": []
+   },
+   {
+    "title": "Reconstructed similarity for faster GANs-based word translation to mitigate hubness",
+    "doi": "10.1016/j.neucom.2019.06.082",
+    "year": 2019,
+    "venue": "Neurocomputing",
+    "cites": 9,
+    "authors": [
+     "Zhang",
+     "Luo",
+     "He"
+    ]
+   },
+   {
+    "title": "Reducing Hubness for Kernel Regression",
+    "doi": "10.1007/978-3-319-25087-8_33",
+    "year": 2015,
+    "venue": "Lecture Notes in Computer Science",
+    "cites": 0,
+    "authors": [
+     "Hara",
+     "Suzuki",
+     "Kobayashi",
+     "Fukumizu"
+    ]
+   },
+   {
+    "title": "Spatial Hubness Alignment: Reducing hubness in graph few-shot learning",
+    "doi": "10.1016/j.knosys.2026.116494",
+    "year": 2026,
+    "venue": "Knowledge-Based Systems",
+    "cites": 0,
+    "authors": [
+     "Chen",
+     "Fu",
+     "Shao"
+    ]
+   },
+   {
+    "title": "Music Similarity Estimation",
+    "doi": "10.31979/etd.8nz2-b9ya",
+    "year": null,
+    "venue": "",
+    "cites": 1,
+    "authors": [
+     "Sridharan"
+    ]
+   },
+   {
+    "title": "Collaborative Music Similarity and Recommendation",
+    "doi": "10.1007/978-3-662-49722-7_8",
+    "year": 2016,
+    "venue": "The Information Retrieval Series",
+    "cites": 2,
+    "authors": [
+     "Knees",
+     "Schedl"
+    ]
+   },
+   {
+    "title": "scikit-hubness: Hubness Reduction and Approximate Neighbor Search",
+    "doi": "10.21105/joss.01957",
+    "year": 2020,
+    "venue": "Journal of Open Source Software",
+    "cites": 5,
+    "authors": [
+     "Feldbauer",
+     "Rattei",
+     "Flexer"
+    ]
+   },
+   {
+    "title": "Hubness as a Case of Technical Algorithmic Bias in Music Recommendation",
+    "doi": "10.1109/icdmw.2018.00154",
+    "year": 2018,
+    "venue": "2018 IEEE International Conference on Data Mining Workshops (ICDMW)",
+    "cites": 6,
+    "authors": [
+     "Flexer",
+     "Dorfler",
+     "Schluter",
+     "Grill"
+    ]
+   },
+   {
+    "title": "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy",
+    "doi": "10.1587/transinf.2021edl8075",
+    "year": 2022,
+    "venue": "IEICE Transactions on Information and Systems",
+    "cites": 0,
+    "authors": [
+     "SEO"
+    ]
+   },
+   {
+    "title": "Contextual Music Similarity, Indexing, and Retrieval",
+    "doi": "10.1007/978-3-662-49722-7_6",
+    "year": 2016,
+    "venue": "The Information Retrieval Series",
+    "cites": 2,
+    "authors": [
+     "Knees",
+     "Schedl"
+    ]
+   },
+   {
+    "title": "Introduction to Music Similarity and Retrieval",
+    "doi": "10.1007/978-3-662-49722-7_1",
+    "year": 2016,
+    "venue": "The Information Retrieval Series",
+    "cites": 5,
+    "authors": [
+     "Knees",
+     "Schedl"
+    ]
+   },
+   {
+    "title": "Explaining Hubness by\u00a0the\u00a0Expected k-Occurrences",
+    "doi": "10.1007/978-3-032-06069-3_28",
+    "year": 2025,
+    "venue": "Lecture Notes in Computer Science",
+    "cites": 0,
+    "authors": [
+     "Reyes"
+    ]
+   }
+  ],
+  "arxiv": [
+   {
+    "title": "Are we describing the same sound? An analysis of word embedding spaces of expressive piano performance",
+    "id": "http://arxiv.org/abs/2401.02979v1",
+    "year": "2023",
+    "authors": [
+     "Peter",
+     "Chowdhury",
+     "Cancino-Chac\u00f3n",
+     "Widmer"
+    ]
+   },
+   {
+    "title": "Peace Sells, But Whose Songs Connect? Bayesian Multilayer Network Analysis of the Big 4 of Thrash Metal",
+    "id": "http://arxiv.org/abs/2512.10254v1",
+    "year": "2025",
+    "authors": [
+     "Sosa",
+     "Mart\u00ednez",
+     "Cruz-Reyes"
+    ]
+   },
+   {
+    "title": "ASTRA: Mapping Art-Technology Institutions via Conceptual Axes, Text Embeddings, and Unsupervised Clustering",
+    "id": "http://arxiv.org/abs/2603.28816v2",
+    "year": "2026",
+    "authors": [
+     "Bae"
+    ]
+   }
+  ],
+  "openalex": [
+   {
+    "title": "Comprehensive molecular portraits of human breast tumours",
+    "doi": "https://doi.org/10.1038/nature11412",
+    "year": 2012,
+    "cites": 12624,
+    "venue": "Nature",
+    "authors": [
+     "Network"
+    ]
+   },
+   {
+    "title": "Maftools: efficient and comprehensive analysis of somatic variants in cancer",
+    "doi": "https://doi.org/10.1101/gr.239244.118",
+    "year": 2018,
+    "cites": 5587,
+    "venue": "Genome Research",
+    "authors": [
+     "Mayakonda",
+     "Lin",
+     "Assenov",
+     "Plass"
+    ]
+   },
+   {
+    "title": "4 Research Methods: Quantitative and Qualitative Approaches",
+    "doi": "https://doi.org/10.21832/9781800417151-006",
+    "year": 2023,
+    "cites": 5000,
+    "venue": "Multilingual Matters eBooks",
+    "authors": [
+     "Gorter",
+     "Cenoz"
+    ]
+   },
+   {
+    "title": "Building dynamic capabilities for digital transformation: An ongoing process of strategic renewal",
+    "doi": "https://doi.org/10.1016/j.lrp.2018.12.001",
+    "year": 2018,
+    "cites": 3368,
+    "venue": "Long Range Planning",
+    "authors": [
+     "Warner",
+     "W\u00e4ger"
+    ]
+   },
+   {
+    "title": "The Nature of Theory in Information Systems1",
+    "doi": "https://doi.org/10.2307/25148742",
+    "year": 2006,
+    "cites": 3296,
+    "venue": "MIS Quarterly",
+    "authors": [
+     "Gregor"
+    ]
+   },
+   {
+    "title": "A survey of socially interactive robots",
+    "doi": "https://doi.org/10.1016/s0921-8890(02)00372-x",
+    "year": 2003,
+    "cites": 3159,
+    "venue": "Robotics and Autonomous Systems",
+    "authors": [
+     "Fong",
+     "Nourbakhsh",
+     "Dautenhahn"
+    ]
+   },
+   {
+    "title": "The descent of man, and selection in relation to sex",
+    "doi": "https://doi.org/10.5962/bhl.title.2112",
+    "year": 1872,
+    "cites": 2435,
+    "venue": "D. Appleton and company eBooks",
+    "authors": [
+     "Darwin"
+    ]
+   },
+   {
+    "title": "The brain basis of emotion: A meta-analytic review",
+    "doi": "https://doi.org/10.1017/s0140525x11000446",
+    "year": 2012,
+    "cites": 2376,
+    "venue": "Behavioral and Brain Sciences",
+    "authors": [
+     "Lindquist",
+     "Wager",
+     "Kober",
+     "Bliss\u2010Moreau"
+    ]
+   },
+   {
+    "title": "A review and synthesis of the first 20years of PET and fMRI studies of heard speech, spoken language and reading",
+    "doi": "https://doi.org/10.1016/j.neuroimage.2012.04.062",
+    "year": 2012,
+    "cites": 2227,
+    "venue": "NeuroImage",
+    "authors": [
+     "Price"
+    ]
+   },
+   {
+    "title": "Economic Analysis of Social Interactions",
+    "doi": "https://doi.org/10.1257/jep.14.3.115",
+    "year": 2000,
+    "cites": 2106,
+    "venue": "The Journal of Economic Perspectives",
+    "authors": [
+     "Manski"
+    ]
+   },
+   {
+    "title": "Online Social Networking and Addiction\u2014A Review of the Psychological Literature",
+    "doi": "https://doi.org/10.3390/ijerph8093528",
+    "year": 2011,
+    "cites": 2053,
+    "venue": "International Journal of Environmental Research and Public Health",
+    "authors": [
+     "Kuss",
+     "Griffiths"
+    ]
+   },
+   {
+    "title": "Network Dynamics and Field Evolution: The Growth of Interorganizational Collaboration in the Life Sciences",
+    "doi": "https://doi.org/10.1086/421508",
+    "year": 2005,
+    "cites": 2037,
+    "venue": "American Journal of Sociology",
+    "authors": [
+     "Powell",
+     "White",
+     "Koput",
+     "Owen\u2010Smith"
+    ]
+   }
+  ]
+ }
+}

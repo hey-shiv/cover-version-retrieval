@@ -1,0 +1,301 @@
+{
+ "id": "Q05",
+ "query": "cover song identification hubness",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy",
+    "doi": "10.1587/transinf.2021edl8075",
+    "year": 2022,
+    "venue": "IEICE Transactions on Information and Systems",
+    "cites": 0,
+    "authors": [
+     "SEO"
+    ]
+   },
+   {
+    "title": "Music similarity models applied to cover song identification and classification",
+    "doi": "10.11606/t.45.2021.tde-27092021-104421",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "Bodo"
+    ]
+   },
+   {
+    "title": "Spatial Hubness Alignment: Reducing hubness in graph few-shot learning",
+    "doi": "10.1016/j.knosys.2026.116494",
+    "year": 2026,
+    "venue": "Knowledge-Based Systems",
+    "cites": 0,
+    "authors": [
+     "Chen",
+     "Fu",
+     "Shao"
+    ]
+   },
+   {
+    "title": "Guiding ontology translation with hubness-aware translation memory",
+    "doi": "10.1016/j.eswa.2024.125650",
+    "year": 2025,
+    "venue": "Expert Systems with Applications",
+    "cites": 2,
+    "authors": [
+     "Tian",
+     "Giunchiglia",
+     "Song",
+     "Xu"
+    ]
+   },
+   {
+    "title": "scikit-hubness: Hubness Reduction and Approximate Neighbor Search",
+    "doi": "10.21105/joss.01957",
+    "year": 2020,
+    "venue": "Journal of Open Source Software",
+    "cites": 5,
+    "authors": [
+     "Feldbauer",
+     "Rattei",
+     "Flexer"
+    ]
+   },
+   {
+    "title": "",
+    "doi": "10.55776/p24095",
+    "year": 2012,
+    "venue": "",
+    "cites": null,
+    "authors": []
+   },
+   {
+    "title": "Cover Song Identification Using Song-to-Song Cross-Similarity Matrix with Convolutional Neural Network",
+    "doi": "10.1109/icassp.2018.8461395",
+    "year": 2018,
+    "venue": "2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    "cites": 6,
+    "authors": [
+     "Lee",
+     "Chang",
+     "Choe",
+     "Lee"
+    ]
+   },
+   {
+    "title": "Cover song",
+    "doi": "10.1093/gmo/9781561592630.article.a2262167",
+    "year": 2014,
+    "venue": "Oxford Music Online",
+    "cites": 0,
+    "authors": [
+     "Weinstein"
+    ]
+   },
+   {
+    "title": "Dynamic chroma feature vectors with applications to cover song identification",
+    "doi": "10.1109/mmsp.2008.4665217",
+    "year": 2008,
+    "venue": "2008 IEEE 10th Workshop on Multimedia Signal Processing",
+    "cites": 14,
+    "authors": [
+     "Kim",
+     "Narayanan"
+    ]
+   },
+   {
+    "title": "Similarity fusion scheme for cover song identification",
+    "doi": "10.1049/el.2015.4013",
+    "year": 2016,
+    "venue": "Electronics Letters",
+    "cites": 8,
+    "authors": [
+     "Chen",
+     "Xiao"
+    ]
+   },
+   {
+    "title": "Time complexity evaluation of cover song identification algorithms",
+    "doi": "10.1016/j.apacoust.2020.107777",
+    "year": 2021,
+    "venue": "Applied Acoustics",
+    "cites": 5,
+    "authors": [
+     "Ferreira",
+     "de Mello"
+    ]
+   },
+   {
+    "title": "Music fingerprint extraction for classical music cover song identification",
+    "doi": "10.1109/icme.2008.4607671",
+    "year": 2008,
+    "venue": "2008 IEEE International Conference on Multimedia and Expo",
+    "cites": 13,
+    "authors": [
+     "Kim",
+     "Unal",
+     "Narayanan"
+    ]
+   }
+  ],
+  "arxiv": [],
+  "openalex": [
+   {
+    "title": "An integrated encyclopedia of DNA elements in the human genome",
+    "doi": "https://doi.org/10.1038/nature11247",
+    "year": 2012,
+    "cites": 19751,
+    "venue": "Nature",
+    "authors": [
+     "Dunham",
+     "Birney",
+     "Herrero",
+     "Wilder"
+    ]
+   },
+   {
+    "title": "The STRING database in 2023: protein\u2013protein association networks and functional enrichment analyses for any sequenced genome of interest",
+    "doi": "https://doi.org/10.1093/nar/gkac1000",
+    "year": 2022,
+    "cites": 9763,
+    "venue": "Nucleic Acids Research",
+    "authors": [
+     "Szklarczyk",
+     "Kirsch",
+     "Koutrouli",
+     "Nastou"
+    ]
+   },
+   {
+    "title": "Internet of Things: A Survey on Enabling Technologies, Protocols, and Applications",
+    "doi": "https://doi.org/10.1109/comst.2015.2444095",
+    "year": 2015,
+    "cites": 8629,
+    "venue": "IEEE Communications Surveys & Tutorials",
+    "authors": [
+     "Al\u2010Fuqaha",
+     "Guizani",
+     "Mohammadi",
+     "Aledhari"
+    ]
+   },
+   {
+    "title": "Antibiotic resistance threats in the United States, 2019",
+    "doi": "https://doi.org/10.15620/cdc:82532",
+    "year": 2019,
+    "cites": 5928,
+    "venue": null,
+    "authors": [
+     "Pauline",
+     "Juliette",
+     "Delphine",
+     "Eric"
+    ]
+   },
+   {
+    "title": "Natural products in drug discovery: advances and opportunities",
+    "doi": "https://doi.org/10.1038/s41573-020-00114-z",
+    "year": 2021,
+    "cites": 5395,
+    "venue": "Nature Reviews Drug Discovery",
+    "authors": [
+     "Atanasov",
+     "Zotchev",
+     "Dirsch",
+     "Taskforce"
+    ]
+   },
+   {
+    "title": "Gut microbiome modulates response to anti\u2013PD-1 immunotherapy in melanoma patients",
+    "doi": "https://doi.org/10.1126/science.aan4236",
+    "year": 2017,
+    "cites": 4849,
+    "venue": "Science",
+    "authors": [
+     "Gopalakrishnan",
+     "Spencer",
+     "Nezi",
+     "Reuben"
+    ]
+   },
+   {
+    "title": "Guidelines for the Prevention of Intravascular Catheter-related Infections",
+    "doi": "https://doi.org/10.1093/cid/cir257",
+    "year": 2011,
+    "cites": 4713,
+    "venue": "Clinical Infectious Diseases",
+    "authors": [
+     "O\u2019Grady",
+     "Alexander",
+     "Burns",
+     "Dellinger"
+    ]
+   },
+   {
+    "title": "Minimal information for studies of extracellular vesicles (MISEV2023): From basic to advanced approaches",
+    "doi": "https://doi.org/10.1002/jev2.12404",
+    "year": 2024,
+    "cites": 4377,
+    "venue": "Journal of Extracellular Vesicles",
+    "authors": [
+     "Welsh",
+     "Goberdhan",
+     "O\u2019Driscoll",
+     "Buz\u00e1s"
+    ]
+   },
+   {
+    "title": "2014 ESC Guidelines on diagnosis and management of hypertrophic cardiomyopathy",
+    "doi": "https://doi.org/10.1093/eurheartj/ehu284",
+    "year": 2014,
+    "cites": 4371,
+    "venue": "European Heart Journal",
+    "authors": [
+     "Members",
+     "Elliott",
+     "Anastasakis",
+     "Borger"
+    ]
+   },
+   {
+    "title": "The 5th edition of the World Health Organization Classification of Haematolymphoid Tumours: Lymphoid Neoplasms",
+    "doi": "https://doi.org/10.1038/s41375-022-01620-2",
+    "year": 2022,
+    "cites": 4010,
+    "venue": "Leukemia",
+    "authors": [
+     "Alaggio",
+     "Amador",
+     "Anagnostopoulos",
+     "Attygalle"
+    ]
+   },
+   {
+    "title": "Local-Global Parcellation of the Human Cerebral Cortex from Intrinsic Functional Connectivity MRI",
+    "doi": "https://doi.org/10.1093/cercor/bhx179",
+    "year": 2017,
+    "cites": 3968,
+    "venue": "Cerebral Cortex",
+    "authors": [
+     "Schaefer",
+     "Kong",
+     "Gordon",
+     "Laumann"
+    ]
+   },
+   {
+    "title": "Human MicroRNA Targets",
+    "doi": "https://doi.org/10.1371/journal.pbio.0020363",
+    "year": 2004,
+    "cites": 3928,
+    "venue": "PLoS Biology",
+    "authors": [
+     "John",
+     "Enright",
+     "Aravin",
+     "Tuschl"
+    ]
+   }
+  ]
+ }
+}

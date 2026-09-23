@@ -1,0 +1,319 @@
+{
+ "id": "Q11",
+ "query": "query bank normalization hubness retrieval",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Hubness Reduction with Dual Bank Sinkhorn Normalization for Cross-Modal Retrieval",
+    "doi": "10.1145/3746027.3755468",
+    "year": 2025,
+    "venue": "Proceedings of the 33rd ACM International Conference on Multimedia",
+    "cites": 2,
+    "authors": [
+     "Pan",
+     "Wang",
+     "Wu",
+     "Zhang"
+    ]
+   },
+   {
+    "title": "",
+    "doi": "10.55776/p24095",
+    "year": 2012,
+    "venue": "",
+    "cites": null,
+    "authors": []
+   },
+   {
+    "title": "Balance Act: Mitigating Hubness in Cross-Modal Retrieval with Query and Gallery Banks",
+    "doi": "10.18653/v1/2023.emnlp-main.652",
+    "year": 2023,
+    "venue": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+    "cites": 10,
+    "authors": [
+     "Wang",
+     "Jian",
+     "Xue"
+    ]
+   },
+   {
+    "title": "Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy",
+    "doi": "10.1587/transinf.2021edl8075",
+    "year": 2022,
+    "venue": "IEICE Transactions on Information and Systems",
+    "cites": 0,
+    "authors": [
+     "SEO"
+    ]
+   },
+   {
+    "title": "Improving Neighborhood-Based Collaborative Filtering by Reducing Hubness",
+    "doi": "10.1145/2578726.2578747",
+    "year": 2014,
+    "venue": "Proceedings of International Conference on Multimedia Retrieval",
+    "cites": 16,
+    "authors": [
+     "Knees",
+     "Schnitzer",
+     "Flexer"
+    ]
+   },
+   {
+    "title": "Deconstructing Centrality: Scale-Hierarchy for Hubness in Text-Video Retrieval",
+    "doi": "10.1145/3805622.3810651",
+    "year": 2026,
+    "venue": "Proceedings of the 2026 International Conference on Multimedia Retrieval",
+    "cites": 0,
+    "authors": [
+     "Zhu",
+     "Liu",
+     "Zhang",
+     "Deng"
+    ]
+   },
+   {
+    "title": "Adversarial Hubness in Multi-Modal Retrieval",
+    "doi": "10.1109/sp63933.2026.00158",
+    "year": 2026,
+    "venue": "2026 IEEE Symposium on Security and Privacy (SP)",
+    "cites": 0,
+    "authors": [
+     "Zhang",
+     "Suya",
+     "Jha",
+     "Zhang"
+    ]
+   },
+   {
+    "title": "Z-Score Normalization, Hubness, and Few-Shot Learning",
+    "doi": "10.1109/iccv48922.2021.00021",
+    "year": 2021,
+    "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+    "cites": 175,
+    "authors": [
+     "Fei",
+     "Gao",
+     "Lu",
+     "Xiang"
+    ]
+   },
+   {
+    "title": "Query Expansion for Information Retrieval",
+    "doi": "10.1007/springerreference_63965",
+    "year": null,
+    "venue": "SpringerReference",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "Semantic Visual Query and Retrieval",
+    "doi": "10.1007/springerreference_73056",
+    "year": null,
+    "venue": "SpringerReference",
+    "cites": 0,
+    "authors": []
+   },
+   {
+    "title": "The effects of normalization on query errors : an experimental evaluation",
+    "doi": "10.14264/219684",
+    "year": null,
+    "venue": "",
+    "cites": 0,
+    "authors": [
+     "",
+     "Liew"
+    ]
+   },
+   {
+    "title": "A Case for Hubness Removal in High\u2013Dimensional Multimedia Retrieval",
+    "doi": "10.1007/978-3-319-06028-6_77",
+    "year": 2014,
+    "venue": "Lecture Notes in Computer Science",
+    "cites": 8,
+    "authors": [
+     "Schnitzer",
+     "Flexer",
+     "Toma\u0161ev"
+    ]
+   }
+  ],
+  "arxiv": [
+   {
+    "title": "Hubness Reduction with Dual Bank Sinkhorn Normalization for Cross-Modal Retrieval",
+    "id": "http://arxiv.org/abs/2508.02538v1",
+    "year": "2025",
+    "authors": [
+     "Pan",
+     "Wang",
+     "Wu",
+     "Zhang"
+    ]
+   },
+   {
+    "title": "Balance Act: Mitigating Hubness in Cross-Modal Retrieval with Query and Gallery Banks",
+    "id": "http://arxiv.org/abs/2310.11612v1",
+    "year": "2023",
+    "authors": [
+     "Wang",
+     "Jian",
+     "Xue"
+    ]
+   }
+  ],
+  "openalex": [
+   {
+    "title": "SPIRIT 2013 explanation and elaboration: guidance for protocols of clinical trials",
+    "doi": "https://doi.org/10.1136/bmj.e7586",
+    "year": 2013,
+    "cites": 7135,
+    "venue": "BMJ",
+    "authors": [
+     "Chan",
+     "Tetzlaff",
+     "G\u00f8tzsche",
+     "Altman"
+    ]
+   },
+   {
+    "title": "Advances and Open Problems in Federated Learning",
+    "doi": "https://doi.org/10.1561/2200000083",
+    "year": 2020,
+    "cites": 5510,
+    "venue": "Foundations and Trends\u00ae in Machine Learning",
+    "authors": [
+     "Kairouz",
+     "McMahan",
+     "Avent",
+     "Bellet"
+    ]
+   },
+   {
+    "title": "On blockchain and its integration with IoT. Challenges and opportunities",
+    "doi": "https://doi.org/10.1016/j.future.2018.05.046",
+    "year": 2018,
+    "cites": 1924,
+    "venue": "Future Generation Computer Systems",
+    "authors": [
+     "Reyna",
+     "Mart\u00edn",
+     "Chen",
+     "Soler"
+    ]
+   },
+   {
+    "title": "DIANA-TarBase v8: a decade-long collection of experimentally supported miRNA\u2013gene interactions",
+    "doi": "https://doi.org/10.1093/nar/gkx1141",
+    "year": 2017,
+    "cites": 1223,
+    "venue": "Nucleic Acids Research",
+    "authors": [
+     "Karagkouni",
+     "Paraskevopoulou",
+     "Chatzopoulos",
+     "Vlachos"
+    ]
+   },
+   {
+    "title": "Text Mining Infrastructure in R",
+    "doi": "https://doi.org/10.18637/jss.v025.i05",
+    "year": 2008,
+    "cites": 1161,
+    "venue": "Journal of Statistical Software",
+    "authors": [
+     "Feinerer",
+     "Hornik",
+     "MEYER"
+    ]
+   },
+   {
+    "title": "YAGO: A Large Ontology from Wikipedia and WordNet",
+    "doi": "https://doi.org/10.1016/j.websem.2008.06.001",
+    "year": 2008,
+    "cites": 904,
+    "venue": "Journal of Web Semantics",
+    "authors": [
+     "Suchanek",
+     "Kasneci",
+     "Weikum"
+    ]
+   },
+   {
+    "title": "Inferring the molecular and phenotypic impact of amino acid variants with MutPred2",
+    "doi": "https://doi.org/10.1038/s41467-020-19669-x",
+    "year": 2020,
+    "cites": 876,
+    "venue": "Nature Communications",
+    "authors": [
+     "Pejaver",
+     "Urresti",
+     "Lugo-Martinez",
+     "Pagel"
+    ]
+   },
+   {
+    "title": "Information Retrieval in Folksonomies: Search and Ranking",
+    "doi": "https://doi.org/10.1007/11762256_31",
+    "year": 2006,
+    "cites": 852,
+    "venue": "Lecture notes in computer science",
+    "authors": [
+     "Hotho",
+     "J\u00e4schke",
+     "Schmitz",
+     "Stumme"
+    ]
+   },
+   {
+    "title": "Genome, transcriptome and proteome: the rise of omics data and their integration in biomedical sciences",
+    "doi": "https://doi.org/10.1093/bib/bbw114",
+    "year": 2016,
+    "cites": 831,
+    "venue": "Briefings in Bioinformatics",
+    "authors": [
+     "Manzoni",
+     "Kia",
+     "Vandrovcov\u00e1",
+     "Hardy"
+    ]
+   },
+   {
+    "title": "Phospho.ELM: a database of phosphorylation sites--update 2011",
+    "doi": "https://doi.org/10.1093/nar/gkq1104",
+    "year": 2010,
+    "cites": 778,
+    "venue": "Nucleic Acids Research",
+    "authors": [
+     "Dinkel",
+     "Chica",
+     "Via",
+     "Gould"
+    ]
+   },
+   {
+    "title": "Social media analytics: a survey of techniques, tools and platforms",
+    "doi": "https://doi.org/10.1007/s00146-014-0549-4",
+    "year": 2014,
+    "cites": 708,
+    "venue": "AI & Society",
+    "authors": [
+     "Batrinca",
+     "Treleaven"
+    ]
+   },
+   {
+    "title": "The UCSC Genome Browser database: 2023 update",
+    "doi": "https://doi.org/10.1093/nar/gkac1072",
+    "year": 2022,
+    "cites": 686,
+    "venue": "Nucleic Acids Research",
+    "authors": [
+     "Nassar",
+     "Barber",
+     "Benet\u2010Pag\u00e8s",
+     "Casper"
+    ]
+   }
+  ]
+ }
+}

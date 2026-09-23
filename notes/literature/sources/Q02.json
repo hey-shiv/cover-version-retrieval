@@ -1,0 +1,308 @@
+{
+ "id": "Q02",
+ "query": "mutual proximity hubness audio",
+ "date": "2026-09-23",
+ "results": {
+  "crossref": [
+   {
+    "title": "Geographical Proximity and Mutual Funds' Proxy Voting Behavior",
+    "doi": "10.1002/mde.1540",
+    "year": 2011,
+    "venue": "Managerial and Decision Economics",
+    "cites": 3,
+    "authors": [
+     "Das"
+    ]
+   },
+   {
+    "title": "A Proximity and Pressure Touch Screen Using Mutual Capacitance Measurement",
+    "doi": "10.12792/iciae2018.060",
+    "year": 2018,
+    "venue": "Proceedings of The 6th IIAE International Conference on Industrial Application Engineering 2018",
+    "cites": 1,
+    "authors": [
+     "Tsuji",
+     "Kohama"
+    ]
+   },
+   {
+    "title": "Proximity and Pressure Touch Screen Method Using Mutual Capacitance Measurement",
+    "doi": "10.12792/jiiae.6.47",
+    "year": 2018,
+    "venue": "Journal of the Institute of Industrial Applications Engineers",
+    "cites": 0,
+    "authors": [
+     "Tsuji",
+     "Kohama"
+    ]
+   },
+   {
+    "title": "Spatial Hubness Alignment: Reducing hubness in graph few-shot learning",
+    "doi": "10.1016/j.knosys.2026.116494",
+    "year": 2026,
+    "venue": "Knowledge-Based Systems",
+    "cites": 0,
+    "authors": [
+     "Chen",
+     "Fu",
+     "Shao"
+    ]
+   },
+   {
+    "title": "Optimization of Bluetooth Audio Stream basedon the Estimation of Proximity",
+    "doi": "10.7763/ijcee.2010.v2.191",
+    "year": 2010,
+    "venue": "International Journal of Computer and Electrical Engineering",
+    "cites": 1,
+    "authors": [
+     "Selvaradjou",
+     "Shankar",
+     "Anandakumar",
+     "Sivasundar"
+    ]
+   },
+   {
+    "title": "Gaze, Mutual Gaze, and Proximity",
+    "doi": "10.1515/semi.1972.6.1.32",
+    "year": 1972,
+    "venue": "Semiotica",
+    "cites": 123,
+    "authors": [
+     "ARGYLE",
+     "INGHAM"
+    ]
+   },
+   {
+    "title": "scikit-hubness: Hubness Reduction and Approximate Neighbor Search",
+    "doi": "10.21105/joss.01957",
+    "year": 2020,
+    "venue": "Journal of Open Source Software",
+    "cites": 5,
+    "authors": [
+     "Feldbauer",
+     "Rattei",
+     "Flexer"
+    ]
+   },
+   {
+    "title": "Mutual Witness Proximity Drawings of Isomorphic Trees",
+    "doi": "10.2139/ssrn.4673282",
+    "year": 2023,
+    "venue": "",
+    "cites": 1,
+    "authors": [
+     "Haase",
+     "Kindermann",
+     "Lenhart",
+     "Liotta"
+    ]
+   },
+   {
+    "title": "",
+    "doi": "10.55776/p24095",
+    "year": 2012,
+    "venue": "",
+    "cites": null,
+    "authors": []
+   },
+   {
+    "title": "Detecting proximity from personal audio recordings",
+    "doi": "10.21437/interspeech.2014-540",
+    "year": 2014,
+    "venue": "Interspeech 2014",
+    "cites": 0,
+    "authors": [
+     "Ellis",
+     "Satoh",
+     "Chen"
+    ]
+   },
+   {
+    "title": "Proximity of Surfaces \u2014 Acoustic and Perceptual Effects",
+    "doi": "10.17743/jaes.2017.0039",
+    "year": 2017,
+    "venue": "Journal of the Audio Engineering Society",
+    "cites": 6,
+    "authors": [
+     "Paasonen",
+     "Karapetyan",
+     "Plogsties",
+     "Pulkki"
+    ]
+   },
+   {
+    "title": "Pan Air applications to mutual interference effects due to close proximity",
+    "doi": "10.2514/6.1984-217",
+    "year": 1984,
+    "venue": "22nd Aerospace Sciences Meeting",
+    "cites": 3,
+    "authors": [
+     "CENKO",
+     "TINOCO",
+     "TUSTANIWSKYJ"
+    ]
+   }
+  ],
+  "arxiv": [
+   {
+    "title": "Defending a Music Recommender Against Hubness-Based Adversarial Attacks",
+    "id": "http://arxiv.org/abs/2205.12032v1",
+    "year": "2022",
+    "authors": [
+     "Hoedt",
+     "Flexer",
+     "Widmer"
+    ]
+   }
+  ],
+  "openalex": [
+   {
+    "title": "A survey of socially interactive robots",
+    "doi": "https://doi.org/10.1016/s0921-8890(02)00372-x",
+    "year": 2003,
+    "cites": 3159,
+    "venue": "Robotics and Autonomous Systems",
+    "authors": [
+     "Fong",
+     "Nourbakhsh",
+     "Dautenhahn"
+    ]
+   },
+   {
+    "title": "Edge Intelligence: Paving the Last Mile of Artificial Intelligence With Edge Computing",
+    "doi": "https://doi.org/10.1109/jproc.2019.2918951",
+    "year": 2019,
+    "cites": 2398,
+    "venue": "Proceedings of the IEEE",
+    "authors": [
+     "Zhou",
+     "Chen",
+     "Li",
+     "Zeng"
+    ]
+   },
+   {
+    "title": "Particle Swarm Optimization Algorithm and Its Applications: A Systematic Review",
+    "doi": "https://doi.org/10.1007/s11831-021-09694-4",
+    "year": 2022,
+    "cites": 1869,
+    "venue": "Archives of Computational Methods in Engineering",
+    "authors": [
+     "Gad"
+    ]
+   },
+   {
+    "title": "A Survey of Autonomous Driving: Common Practices and Emerging Technologies",
+    "doi": "https://doi.org/10.1109/access.2020.2983149",
+    "year": 2020,
+    "cites": 1818,
+    "venue": "IEEE Access",
+    "authors": [
+     "Yurtsever",
+     "Lambert",
+     "Carballo",
+     "Takeda"
+    ]
+   },
+   {
+    "title": "How Technology Is Changing Work and Organizations",
+    "doi": "https://doi.org/10.1146/annurev-orgpsych-041015-062352",
+    "year": 2016,
+    "cites": 1168,
+    "venue": "Annual Review of Organizational Psychology and Organizational Behavior",
+    "authors": [
+     "Cascio",
+     "Montealegre"
+    ]
+   },
+   {
+    "title": "Visual Analytics: Definition, Process, and Challenges",
+    "doi": "https://doi.org/10.1007/978-3-540-70956-5_7",
+    "year": 2008,
+    "cites": 1070,
+    "venue": "Lecture notes in computer science",
+    "authors": [
+     "Keim",
+     "Andrienko",
+     "Fekete",
+     "G\u00f6rg"
+    ]
+   },
+   {
+    "title": "A Systematic Review of Social Presence: Definition, Antecedents, and Implications",
+    "doi": "https://doi.org/10.3389/frobt.2018.00114",
+    "year": 2018,
+    "cites": 1025,
+    "venue": "Frontiers in Robotics and AI",
+    "authors": [
+     "Oh",
+     "Bailenson",
+     "Welch"
+    ]
+   },
+   {
+    "title": "5G network slicing using SDN and NFV: A survey of taxonomy, architectures and future challenges",
+    "doi": "https://doi.org/10.1016/j.comnet.2019.106984",
+    "year": 2019,
+    "cites": 817,
+    "venue": "Computer Networks",
+    "authors": [
+     "Barakabitze",
+     "Ahmad",
+     "Mijumbi",
+     "Hines"
+    ]
+   },
+   {
+    "title": "Climate change and the city: Building capacity for urban adaptation",
+    "doi": "https://doi.org/10.1016/j.progress.2013.08.001",
+    "year": 2014,
+    "cites": 738,
+    "venue": "Progress in Planning",
+    "authors": [
+     "Carter",
+     "Cavan",
+     "Connelly",
+     "Guy"
+    ]
+   },
+   {
+    "title": "Big data analytics in E-commerce: a systematic review and agenda for future research",
+    "doi": "https://doi.org/10.1007/s12525-016-0219-0",
+    "year": 2016,
+    "cites": 682,
+    "venue": "Electronic Markets",
+    "authors": [
+     "Akter",
+     "Wamba"
+    ]
+   },
+   {
+    "title": "AlphaFold2 and its applications in the fields of biology and medicine",
+    "doi": "https://doi.org/10.1038/s41392-023-01381-z",
+    "year": 2023,
+    "cites": 604,
+    "venue": "Signal Transduction and Targeted Therapy",
+    "authors": [
+     "Yang",
+     "Zeng",
+     "Zhao",
+     "Chen"
+    ]
+   },
+   {
+    "title": "Symbiotic human-robot collaborative assembly",
+    "doi": "https://doi.org/10.1016/j.cirp.2019.05.002",
+    "year": 2019,
+    "cites": 569,
+    "venue": "CIRP Annals",
+    "authors": [
+     "Wang",
+     "Gao",
+     "V\u00e1ncza",
+     "Kr\u00fcger"
+    ]
+   }
+  ]
+ }
+}
