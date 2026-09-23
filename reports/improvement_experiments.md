@@ -144,3 +144,43 @@ Work-level bootstrap vs. the full-data Stage 1 (1,000 cliques, 10,000 resamples)
 | alignment-only (1.95 x 10^8 pairs) | 9,458 s (2.63 h) | about 42 h (not run) |
 
 The probe reference is a one-off per catalogue, not per query.
+
+
+---
+
+## 4. Longer training (the encoder had not converged)
+
+The 60-epoch full-data run still had a falling loss, so the same configuration was trained for 150 epochs (`encoder.run_name=encoder_full_long`), again selecting the checkpoint by validation MAP.
+
+| | 60 epochs | 150 epochs |
+|---|---|---|
+| best validation MAP | 0.319 | **0.431** (epoch 138) |
+| training loss at the end | 2.50 | 1.73 |
+| training time (8 CPU threads) | 56 min | 139 min |
+
+**Development protocol** (alpha recalibrated on calibration works, giving alpha = 0.10): global embedding **0.572**, classical alignment 0.384, hybrid 0.415, rerank-only 0.424, global + test-time rotations 0.566. On development, reranking now *hurts* a strong Stage 1 (0.572 → 0.415).
+
+**Benchmark run 4** — `--tag long384`, long-trained encoder, 384-frame reranking, hubness correction lambda = 0.6:
+
+| system | MAP | MRR | Hit@1 | Hit@10 | Recall@100 | median first rank |
+|---|---|---|---|---|---|---|
+| global embedding (Stage 1) | 0.076 | 0.297 | 0.234 | 0.373 | 0.234 | 23 |
+| hybrid K=30 | 0.113 | 0.373 | 0.330 | 0.443 | 0.234 | 23 |
+| **hybrid K=30 + hub correction** | **0.122** | **0.402** | **0.366** | **0.462** | 0.234 | 21.5 |
+
+Bootstrap vs. Stage 1: hybrid +0.0368 [+0.0340, +0.0395]; hybrid + hub +0.0457 [+0.0426, +0.0487]. Shortlist recall at K = 30 rose to **0.136**.
+
+**The development protocol and the benchmark disagree about reranking.** On 20 queries with one relevant item each, reranking a strong Stage 1 looked harmful (−0.157 MAP). On 13,000 queries with 12 relevant items each it clearly helps (+0.037, interval excluding zero). With 15,000 candidates, reordering the top 30 lifts precision at the head; with 119 candidates and a single target, the same operation mostly adds noise. This is the second time the small protocol misled — the first was the original hybrid-versus-classical ordering.
+
+### Summary across all four benchmark evaluations
+
+| | run 1 | run 2 (96) | run 3 (384) | run 4 (384, long) |
+|---|---|---|---|---|
+| encoder | 1,500 works, 60 ep | full, 60 ep | full, 60 ep | **full, 150 ep** |
+| Stage-1 MAP | 0.010 | 0.034 | 0.034 | **0.076** |
+| best hybrid MAP | 0.018 | 0.062 | 0.068 | **0.122** |
+| shortlist recall (K = 30) | 0.021 | 0.072 | 0.072 | **0.136** |
+| best system overall | 0.084 classical | **0.136 classical + hub** | — | 0.136 classical + hub |
+| hybrid vs. best system | 4.6x worse | 2.2x worse | 2.0x worse | **1.11x worse** |
+
+**Revised verdict.** The two-stage design is no longer clearly the wrong architecture. Every improvement to Stage 1 narrowed the gap — 4.6x, then 2.2x, then 1.11x — while the hybrid keeps its cost advantage (38 ms per query of reranking versus 2.63 h of exhaustive alignment). Extrapolating the trend would be unjustified, but the direction is consistent across four pre-registered evaluations and the mechanism (shortlist recall) is measured, not inferred. Exhaustive corrected alignment still wins on accuracy, and the untested classical 384 + hub configuration (about 42 h) would likely widen its lead again.

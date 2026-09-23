@@ -1,0 +1,42 @@
+{
+  "best_epoch": 138,
+  "best_val_map": 0.43057073753309877,
+  "epochs_run": 150,
+  "n_parameters": 645504,
+  "receptive_field_frames": 253,
+  "device": "cpu",
+  "train_tracks": 9560,
+  "train_wids": 4780,
+  "val_tracks": 300,
+  "total_seconds": 8361.515161458003,
+  "checkpoint": "runs/encoder_full_long/encoder_best.pt",
+  "git_commit": "9a7bfe2-dirty",
+  "config_path": "configs/full_train.yaml",
+  "overrides": [
+    "training.num_threads=8",
+    "training.epochs=150",
+    "encoder.run_name=encoder_full_long"
+  ],
+  "encoder": {
+    "cache_frames": 512,
+    "input_frames": 256,
+    "channels": 128,
+    "n_blocks": 6,
+    "kernel_size": 3,
+    "embedding_dim": 128,
+    "dropout": 0.1,
+    "run_name": "encoder_full_long"
+  },
+  "training": {
+    "device": "cpu",
+    "epochs": 150,
+    "batch_wids": 32,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "temperature": 0.1,
+    "patience": 60,
+    "crop_min_fraction": 0.6,
+    "pitch_shift_augment": true,
+    "num_threads": 8
+  }
+}

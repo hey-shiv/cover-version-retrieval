@@ -127,7 +127,7 @@ The cause is Stage-1 recall, and it is measurable rather than speculative:
 
 All four systems are far below published CSI systems on this benchmark (Da-TACOS paper, Table 2). That is expected: the classical stage runs at a 96-frame pilot resolution (D-005), and the encoder saw 1,500 works of two recordings each (D-010).
 
-> **Later work.** Three follow-up experiments (hubness correction, 384-frame reranking, an encoder trained on all 4,780 works) improved the hybrid from 0.018 to 0.068 MAP and the best system to 0.136. See [improvement_experiments.md](improvement_experiments.md). The numbers in this section are the first evaluation and are left unchanged.
+> **Later work.** Four follow-up experiments (hubness correction, 384-frame reranking, an encoder trained on all 4,780 works, and longer training) improved the hybrid from 0.018 to **0.122** MAP and Stage 1 from 0.010 to **0.076**; the best system overall is corrected exhaustive alignment at 0.136. See [improvement_experiments.md](improvement_experiments.md). The numbers in this section are the **first** evaluation and are left unchanged.
 
 ### Runtime (13,000 queries x 15,000 candidates, laptop CPU)
 

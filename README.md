@@ -9,7 +9,7 @@ It is a two-stage hybrid:
 
 Everything is deterministic from committed configs and ID-only manifests, tested with `pytest`, and runnable from a fresh clone.
 
-> **Headline finding (please read before the architecture).** On the full Da-TACOS benchmark, **exhaustive classical alignment with hubness correction (MAP 0.136) beats the best two-stage hybrid (0.068) by 2x.** Three follow-up experiments improved the hybrid 3.8x (0.018 → 0.068) and Stage 1 3.4x, but shortlist recall at K = 30 is still only 0.072, and that caps the architecture regardless of reranker quality. What the hybrid buys is cost: 38 ms per query versus 2.63 h of exhaustive alignment. This project is a reproducible pipeline **and** an honest negative result about this two-stage design at Da-TACOS scale — not a state-of-the-art system. See [Results](#results) and [reports/improvement_experiments.md](reports/improvement_experiments.md).
+> **Headline finding.** The first benchmark evaluation was a negative result: exhaustive classical alignment beat the two-stage hybrid **4.6x** (MAP 0.084 vs. 0.018), reversing what a 20-query development protocol had suggested. Four follow-up experiments — hubness correction, 384-frame reranking, training on all 4,780 works, and longer training — raised the hybrid **6.8x** (0.018 → 0.122) and Stage 1 **7.6x** (0.010 → 0.076), narrowing the gap to the best system (0.136, corrected exhaustive alignment) to **1.11x** at 38 ms per query versus 2.63 h. The binding constraint throughout was Stage-1 shortlist recall, which rose 0.021 → 0.136. Accuracy remains below published CSI systems. See [Results](#results) and [reports/improvement_experiments.md](reports/improvement_experiments.md).
 
 ---
 
@@ -168,21 +168,25 @@ Encoder: 645,504 parameters, trained on 1,500 works, selected by validation MAP 
 
 Three benchmark evaluations, each with every setting locked beforehand (encoder chosen on validation works; alpha, lambda and resolution on calibration works). No benchmark result selected anything. 12 relevant items per query; random ≈ 0.0008 MAP.
 
+Four evaluations, each with every setting fixed beforehand (encoder from validation works; alpha, lambda and resolution from calibration works). No benchmark result selected anything, and no run was repeated after seeing its result.
+
 | system | encoder | frames | hub corr. | MAP | MRR | Hit@10 | median first rank |
 |---|---|---|---|---|---|---|---|
-| global embedding (Stage 1) | 1,500 works | — | — | 0.010 | 0.052 | 0.096 | 185 |
-| hybrid K=30 | 1,500 works | 96 | no | 0.018 | 0.124 | 0.154 | 185 |
-| global embedding | full | — | — | 0.034 | 0.130 | 0.243 | 59 |
-| hybrid K=30 | full | 384 | no | 0.062 | 0.271 | 0.326 | 59 |
-| **hybrid K=30** | **full** | **384** | **yes** | **0.068** | **0.301** | **0.343** | **59** |
+| global embedding (Stage 1) | 1,500 works, 60 ep | — | — | 0.010 | 0.052 | 0.096 | 185 |
+| hybrid K=30 | 1,500 works, 60 ep | 96 | no | 0.018 | 0.124 | 0.154 | 185 |
+| global embedding | full, 60 ep | — | — | 0.034 | 0.130 | 0.243 | 59 |
+| hybrid K=30 | full, 60 ep | 384 | yes | 0.068 | 0.301 | 0.343 | 59 |
+| global embedding | **full, 150 ep** | — | — | 0.076 | 0.297 | 0.373 | 23 |
+| hybrid K=30 | full, 150 ep | 384 | no | 0.113 | 0.373 | 0.443 | 23 |
+| **hybrid K=30** | **full, 150 ep** | **384** | **yes** | **0.122** | **0.402** | **0.462** | **21.5** |
 | classical alignment (all pairs) | — | 96 | no | 0.084 | 0.282 | 0.352 | 77 |
 | **classical alignment (all pairs)** | — | **96** | **yes** | **0.136** | **0.397** | **0.481** | **14** |
 
-Work-level bootstrap over 1,000 cliques, ΔAP vs. full-data Stage 1: hybrid 384 + hub **+0.0334 [+0.0308, +0.0361]**; classical + hub **+0.1013 [+0.0936, +0.1090]**. All intervals exclude zero.
+Work-level bootstrap over 1,000 cliques, ΔAP vs. the matching Stage 1: hybrid + hub (150 ep) **+0.0457 [+0.0426, +0.0487]**; classical + hub **+0.1013 [+0.0936, +0.1090]**. All intervals exclude zero.
 
-**What the three follow-up experiments bought:** Stage-1 MAP 3.4x (full-data encoder), hybrid MAP 3.8x, best system 1.6x, shortlist recall 0.021 → 0.072, median rank of the first correct cover 77 → 14. The hubness correction — predicted from a development-set correlation (tonal dispersion vs. false positives, ρ = −0.77), calibrated on 10 works, one scalar — is the single biggest win and transfers cleanly to benchmark scale.
+**What the four follow-up experiments bought:** Stage-1 MAP 7.6x, hybrid MAP 6.8x, best system 1.6x, shortlist recall 0.021 → 0.136, median rank of the first correct cover 185 → 21.5 (hybrid) and 77 → 14 (classical). The hubness correction — predicted from a development-set correlation (tonal dispersion vs. false positives, ρ = −0.77), calibrated on 10 works, one scalar — transfers cleanly to benchmark scale and helps every system.
 
-**The architectural verdict stands:** a 30-candidate shortlist over 15,000 discards too many covers for reranking to compensate. The most promising untested system is classical alignment at 384 frames with hubness correction, which needs about 42 h of CPU and was not run; claiming anything about it would be extrapolation.
+**Revised architectural verdict.** Each improvement to Stage 1 narrowed the hybrid's deficit: 4.6x → 2.2x → 2.0x → **1.11x**. The two-stage design is not vindicated — exhaustive corrected alignment is still the most accurate system, and the untested classical 384 + hub configuration (about 42 h of CPU) would likely widen that lead — but the original negative result was as much about a weak Stage 1 as about the architecture, and shortlist recall (now 0.136) remains the measured constraint.
 
 Full tables, runtimes and analysis: [reports/improvement_experiments.md](reports/improvement_experiments.md), [reports/hybrid_results.md](reports/hybrid_results.md).
 
@@ -199,7 +203,8 @@ From a fresh clone with the same data, the manifests rebuild byte-identically, t
 * **Absolute accuracy remains below published CSI systems** on this benchmark, despite a 7x improvement in the best system over the first run. The classical stage still aligns at 96 frames at full-catalogue scale (D-005), and the encoder, though now trained on all 4,780 works, had not converged when training stopped at 60 epochs.
 * **Stage 1 is still the binding constraint.** Shortlist recall improved from 0.021 to 0.072 at K = 30, but the hybrid cannot retrieve what the shortlist omits.
 * **The strongest likely system was not run:** classical alignment at 384 frames with hubness correction (about 42 h of CPU).
-* **Test-time rotation matching** is the best development-set system (MAP 0.436) but was never carried to the benchmark, so its benefit at scale is unmeasured.
+* **Test-time rotation matching** was never carried to the benchmark, so its benefit at scale is unmeasured (on development it helped the weaker encoder, 0.394 → 0.436, and was neutral for the stronger one, 0.572 → 0.566).
+* **The development protocol proved unrepresentative twice** (D-022): it got the hybrid-vs-classical ordering wrong, and with a strong Stage 1 it said reranking hurts while the benchmark showed it helps. Treat its numbers as plumbing checks and hypotheses, not evidence.
 * **Pilot resolution.** The classical stage averages each track down to 96 frames (D-005), which blurs harmonic rhythm. The resolution sweep in `reports/classical_baseline.md` shows how much this costs: dev MAP rises from 0.248 at 96 frames to 0.384 at 384.
 * **Small development protocol.** 20 queries against 120 candidates; bootstrap intervals are wide, and dev-set differences whose interval spans zero are not claimed as improvements. It also proved unrepresentative: its system ordering did not survive at benchmark scale.
 * **Training data budget.** The encoder was trained on 1,500 of the roughly 4,800 usable Cover Analysis works, because of a 0.3–0.45 MB/s link (D-010). With two recordings per work, supervision is thin.
@@ -212,7 +217,7 @@ Ordered by what the benchmark evidence actually demands:
 
 Items 1–3 of the earlier list were carried out; see [reports/improvement_experiments.md](reports/improvement_experiments.md). What remains, ordered by the evidence:
 
-1. **Keep pushing Stage-1 recall**: the encoder had not converged at 60 epochs, and shortlist recall (0.072) still caps the hybrid. Longer training, larger K, and multi-vector (per-section) embeddings are the obvious moves.
+1. **Keep pushing Stage-1 recall**: validation MAP was still drifting upward at epoch 150, and shortlist recall (0.136) still caps the hybrid. More epochs, larger K, and multi-vector (per-section) embeddings are the obvious moves.
 2. **Classical alignment at 384 frames with hubness correction** over the full benchmark (about 42 h), the most likely strongest system.
 3. **Test-time rotation matching at benchmark scale** (best on development at 0.436, 12x the query-embedding cost).
 4. Local alignment (Qmax-style) versus subsequence DTW for covers with changed structure.

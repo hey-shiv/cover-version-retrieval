@@ -152,3 +152,17 @@ Every design choice that can affect validity or compute. Format: date, decision,
 - **Evidence:** Validation MAP 0.181 → 0.319; development global MAP 0.189 → 0.394; benchmark global MAP 0.010 → 0.034 and hybrid 0.018 → 0.058.
 - **Split integrity:** roles are filled along the same seeded permutation, so calibration/query/distractor/validation are unchanged and the old training works are a strict subset of the new ones (asserted before training).
 - **Impact:** No leakage: evaluation and calibration works were never in any training split. The loss was still falling at epoch 60, so this is a lower bound on what the architecture supports.
+
+
+## D-021 — Train the encoder to convergence (150 epochs)
+- **Date:** 2026-09-23
+- **Decision:** The 60-epoch full-data run stopped with a falling loss, so the same configuration was trained for 150 epochs, still selecting the checkpoint by validation MAP (`runs/encoder_full_long`). This checkpoint is used for the fourth and final benchmark evaluation.
+- **Rationale:** Epoch count is a training hyperparameter, selected like any other on validation works. Stopping at 60 was an arbitrary budget, not a result.
+- **Evidence:** Validation MAP 0.319 → 0.431 (best epoch 138); benchmark Stage-1 MAP 0.034 → 0.076; hybrid + hubness correction 0.068 → 0.122; shortlist recall 0.072 → 0.136.
+- **Impact:** The hybrid's deficit against exhaustive corrected alignment fell from 2.0x to 1.11x. Validation MAP was still drifting upward at epoch 150, so this is still not a converged model.
+
+## D-022 — Report the development protocol as unrepresentative
+- **Date:** 2026-09-23
+- **Decision:** State plainly in the reports that the 20-query, 120-candidate development protocol twice gave the wrong ordering: it preferred the hybrid over classical alignment (the benchmark reversed this), and with a strong Stage 1 it said reranking hurts (the benchmark showed it helps, +0.037 with an interval excluding zero).
+- **Rationale:** A protocol with 119 candidates and a single relevant item cannot model a 15,000-candidate pool with 12 relevant items. Reporting only the agreeing results would misrepresent how much the small protocol can be trusted.
+- **Impact:** Future work on this repository should treat development numbers as a smoke test for plumbing and a source of hypotheses, not as evidence of ranking quality. The calibration protocol has the same weakness, which is why alpha and lambda are the only things it selects.
