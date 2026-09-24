@@ -1,0 +1,45 @@
+name: web
+
+# Builds and tests the static research site in web/ and checks that its generated
+# data matches reports/. Deployment is Vercel's (project root web/, see web/vercel.json).
+
+on:
+  push:
+    branches: [main]
+    paths: ['web/**', 'reports/**', 'data/manifests/**', '.github/workflows/web.yml']
+  pull_request:
+    paths: ['web/**', 'reports/**', 'data/manifests/**', '.github/workflows/web.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  data-fresh:
+    # the site's data files are generated from reports/; fail if they are stale
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy matplotlib pillow
+      - run: python web/scripts/extract_figures.py && python web/scripts/build_data.py
+      # WebP bytes vary across Pillow versions, so only the JSON is compared
+      - run: git diff --exit-code -- web/src/data/generated
+
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
