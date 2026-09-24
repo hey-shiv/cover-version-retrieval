@@ -191,10 +191,10 @@ function RankField() {
           })}
           <line x1={xOf(K + 1)} x2={xOf(K + 1)} y1={8} y2={H - 20} stroke="var(--ink)" strokeWidth={1.5} />
           <text x={xOf(K + 1) + 6} y={20} className="axis-t strong">
-            K = 30 · shortlist boundary
+            K = 30{width < 640 ? '' : ' · shortlist boundary'}
           </text>
           <text x={xOf(K + 1) + 6} y={34} className="axis-t">
-            beyond here Stage 2 never sees the cover
+            {width < 640 ? 'Stage 2 never sees these' : 'beyond here Stage 2 never sees the cover'}
           </text>
           {[1, 10, 100, 1000, 10000].map((t) => (
             <text key={t} x={xOf(t)} y={H - 8} textAnchor="middle" className="axis-t">

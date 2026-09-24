@@ -47,3 +47,15 @@ export function costMatrix(query: number[][], candidate: number[][]): number[][]
   const C = Array.from({ length: candidate[0].length }, (_, t) => col(candidate, t))
   return Q.map((q) => C.map((c) => 1 - dot(q, c)))
 }
+
+/**
+ * Rescale a matrix the way the repository's alignment plots do (analysis.py::plot_alignment):
+ * clip to the 1st..99th percentile and map linearly to [0, 1].
+ */
+export function percentileScale(m: number[][]): number[][] {
+  const flat = m.flat().sort((a, b) => a - b)
+  const q = (p: number) => flat[Math.min(flat.length - 1, Math.max(0, Math.round((p / 100) * (flat.length - 1))))]
+  const lo = q(1)
+  const hi = Math.max(q(99), lo + 1e-6)
+  return m.map((row) => row.map((v) => Math.min(1, Math.max(0, (v - lo) / (hi - lo)))))
+}

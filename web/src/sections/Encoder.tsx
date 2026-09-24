@@ -137,7 +137,7 @@ function TrainingCurves() {
     { key: 'encoder_full_long', label: '4,780 works · 150 ep', color: 'var(--ink)' },
   ] as const
   const H = 220
-  const x = linScale([1, 150], [44, width - (width < 640 ? 110 : 190)])
+  const x = linScale([1, 150], [44, width - (width < 640 ? 130 : 190)])
   const y = linScale([0, 0.45], [H - 26, 10])
   return (
     <div className="figure">
@@ -174,8 +174,8 @@ function TrainingCurves() {
               <g key={r.key}>
                 <path d={d} fill="none" stroke={r.color} strokeWidth={r.key === 'encoder_full_long' ? 1.8 : 1.2} />
                 <circle cx={x(best.best_epoch)} cy={y(best.best_val_map)} r={3} fill={r.color} />
-                <text x={x(last[0]) + 8} y={y(last[2]) + 4} className="axis-t" fill={r.color}>
-                  {r.label}
+                <text x={x(last[0]) + 6} y={y(last[2]) + 4} className="axis-t" fill={r.color}>
+                  {width < 640 ? r.label.replace(' works', '') : r.label}
                 </text>
               </g>
             )

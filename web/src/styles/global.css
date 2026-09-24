@@ -313,7 +313,7 @@ p {
 .source {
   font-family: var(--mono);
   font-size: 10.5px;
-  color: var(--faint);
+  color: var(--mute);
   letter-spacing: 0.02em;
   word-break: break-word;
 }
@@ -418,7 +418,7 @@ input[type='range'] {
   color: var(--panel-ink);
 }
 .panel .source {
-  color: #6d6758;
+  color: var(--panel-mute);
 }
 .panel .prose p {
   color: #cfc8b8;

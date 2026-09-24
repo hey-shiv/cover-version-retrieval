@@ -40,7 +40,7 @@ const hollow = (k: SystemKind) => k === 'hybrid' || k === 'classical'
 
 export function Benchmark() {
   return (
-    <Chapter id="results" no="09 · Results" title={<>Thirteen thousand queries, <em>four evaluations</em></>}>
+    <Chapter id="results" no="08 · Results" title={<>Thirteen thousand queries, <em>four evaluations</em></>}>
       <div className="split">
         <div className="body prose">
           <p className="lede">
@@ -50,7 +50,7 @@ export function Benchmark() {
           <p>
             It was evaluated four times, once per configuration, each time with every setting locked beforehand: the encoder from validation works;
             α, λ and resolution from calibration works. No benchmark number selected anything, and no run was repeated after its result was seen.
-            The runs are shown side by side, never merged. Two of them measure systems the others do not.
+            The runs are shown side by side, never merged. Two of them measure systems the others do not. The hubness correction that appears from run 2 on is the subject of the next chapter.
           </p>
         </div>
         <aside className="aside">
@@ -141,7 +141,7 @@ function FirstRankCurves() {
   const r = benchmarkRuns.find((x) => x.id === id)!
   const [ref, width] = useWidth<HTMLDivElement>(900)
   const H = 300
-  const x = logScale([1, 15000], [44, width - (width < 640 ? 16 : 250)])
+  const x = logScale([1, 15000], [44, width - 16])
   const y = linScale([0, 1], [H - 26, 10])
   const keys = Object.keys(r.first_rank).filter((k) => systemKind(k) !== 'rerank')
   return (
@@ -174,24 +174,32 @@ function FirstRankCurves() {
             </text>
           ))}
           <line x1={x(30.5)} x2={x(30.5)} y1={10} y2={H - 26} stroke="var(--ink)" />
-          {keys.map((k, i) => {
+          {keys.map((k) => {
             const kind = systemKind(k)
             const cdf = r.first_rank[k].cdf
             const d = cdf.map((v, j) => `${j ? 'L' : 'M'}${x(rankGrid[j]).toFixed(1)},${y(v).toFixed(1)}`).join(' ')
-            const at = cdf[rankGrid.findIndex((g) => g >= 10)]
             return (
               <g key={k}>
                 <path d={d} fill="none" stroke={KIND_COLOR[kind]} strokeWidth={hollow(kind) ? 1.4 : 2.2} strokeDasharray={hollow(kind) ? '5 3' : undefined} />
-                {width >= 640 && (
-                  <text x={x(15000) + 8} y={24 + i * 16} className="axis-t" fill={KIND_COLOR[kind]}>
-                    {SHORT[kind]} · {(at * 100).toFixed(0)}% in top 10
-                  </text>
-                )}
               </g>
             )
           })}
         </svg>
       </div>
+      <ul className="ecdf-legend">
+        {keys.map((k) => {
+          const kind = systemKind(k)
+          const at10 = r.first_rank[k].cdf[rankGrid.findIndex((g) => g >= 10)]
+          return (
+            <li key={k}>
+              <svg width="22" height="8" aria-hidden="true">
+                <line x1="0" x2="22" y1="4" y2="4" stroke={KIND_COLOR[kind]} strokeWidth={hollow(kind) ? 1.4 : 2.4} strokeDasharray={hollow(kind) ? '5 3' : undefined} />
+              </svg>
+              {SHORT[kind]} <span className="num dim">{(at10 * 100).toFixed(0)}% within rank 10</span>
+            </li>
+          )
+        })}
+      </ul>
       <Caption label="Figure 14" source={r.per_query_source}>
         {r.context}. Cumulative share of the 13,000 queries by rank of the first correct cover (log axis). Dashed = uncorrected variants. Vertical
         line: the K = 30 shortlist.
@@ -293,8 +301,8 @@ function Published() {
             <g key={p.system}>
               <line x1={x(0)} x2={x(p.MAP)} y1={i * 26 + 13} y2={i * 26 + 13} stroke={p.ours ? 'var(--path)' : 'var(--faint)'} strokeWidth={p.ours ? 2 : 1} />
               <circle cx={x(p.MAP)} cy={i * 26 + 13} r={4} fill={p.ours ? 'var(--path)' : 'var(--ink)'} />
-              <text x={x(p.MAP) + (x(p.MAP) > width * (width < 640 ? 0.3 : 0.6) ? -10 : 10)} y={i * 26 + 17} textAnchor={x(p.MAP) > width * (width < 640 ? 0.3 : 0.6) ? 'end' : 'start'} className="axis-t" fill={p.ours ? 'var(--path)' : 'var(--ink-2)'}>
-                {width < 640 ? p.system.replace('This project · ', 'Ours · ').replace(' (Serrà et al. 2009)', '') : `${p.system} · ${p.input}`} · {p.MAP.toFixed(3)}
+              <text x={x(p.MAP) + (x(p.MAP) > width * (width < 640 ? 0.25 : 0.6) ? -10 : 10)} y={i * 26 + 17} textAnchor={x(p.MAP) > width * (width < 640 ? 0.25 : 0.6) ? 'end' : 'start'} className="axis-t" fill={p.ours ? 'var(--path)' : 'var(--ink-2)'}>
+                {width < 640 ? p.system.replace('This project · ', 'Ours · ').replace(' (Serrà et al. 2009)', '').replace('hubness', 'hub') : `${p.system} · ${p.input}`} · {p.MAP.toFixed(3)}
               </text>
             </g>
           ))}

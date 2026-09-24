@@ -7,11 +7,11 @@ import { linScale, logScale } from '../lib/format'
 
 export function Hubness() {
   return (
-    <Chapter id="hubness" no="08 · Failure" title={<>The tracks <em>that match everything</em></>}>
+    <Chapter id="hubness" no="09 · Why it failed" title={<>The tracks <em>that match everything</em></>}>
       <div className="split">
         <div className="body prose">
           <p className="lede">
-            Some recordings barely move harmonically. Every frame sits close to the track's own average chroma, so any path through their matrix is
+            The first benchmark run exposed two failure modes. One, shortlist recall, is chapter 04. The other: some recordings barely move harmonically. Every frame sits close to the track's own average chroma, so any path through their matrix is
             cheap, and they turn up near the top of rankings for queries they have nothing to do with.
           </p>
           <p>
@@ -110,7 +110,7 @@ function HubGraph() {
           })}
           {/* expected count if false positives were spread uniformly */}
           <line x1={barX(hub.summary.expected_top10_fp_count_if_uniform)} x2={barX(hub.summary.expected_top10_fp_count_if_uniform)} y1={16} y2={H - 14} stroke="var(--ink)" strokeDasharray="2 3" />
-          <text x={barX(hub.summary.expected_top10_fp_count_if_uniform) + 4} y={H - 2} className="axis-t">
+          <text x={barX(hub.summary.expected_top10_fp_count_if_uniform) + 4} y={H - 2} className="axis-t" textAnchor={narrow ? 'middle' : 'start'}>
             chance ≈ {hub.summary.expected_top10_fp_count_if_uniform.toFixed(1)}
           </text>
           {shown.map((c, ci) => {

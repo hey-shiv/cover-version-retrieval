@@ -15,13 +15,17 @@ npm run build      # static output in dist/
 
 ## Deploying
 
-**Vercel.** Import the repository and set **Root Directory** to `web`. `vercel.json`
-pins the framework (Vite), install (`npm ci`), build (`npm run build`) and output
-(`dist`). No environment variables are needed; the base path defaults to `/`.
+**Vercel.** Import the GitHub repository in Vercel and set **Root Directory** to
+`web`. `vercel.json` pins the framework (Vite), install (`npm ci`), build
+(`npm run build`) and output (`dist`). No environment variables are needed. With the
+Git integration connected, every push to `main` deploys to production and every PR
+gets a preview.
 
-**GitHub Pages.** `.github/workflows/web.yml` builds with
-`BASE_PATH=/<repo>/` and deploys on pushes to `main` once Pages is set to
-"GitHub Actions" in the repository settings.
+The build is fully static. Any static host works; for a sub-path host (for example
+GitHub Pages at `/<repo>/`) set `BASE_PATH=/<repo>/` when building.
+
+CI (`.github/workflows/web.yml`) runs the tests and the production build, and fails
+if `src/data/generated/` is out of date with `reports/`.
 
 ## Data and licence
 

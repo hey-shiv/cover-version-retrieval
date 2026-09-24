@@ -58,3 +58,21 @@ describe('subsequenceDTW (port of alignment/dtw.py)', () => {
     }
   })
 })
+
+describe('matrices rebuilt from decoded chroma', () => {
+  it('give DTW paths close to the published ones for every calibration pair', async () => {
+    const { hpcp } = await import('../data/figures')
+    const { costMatrix, percentileScale, rotate } = await import('../lib/chroma')
+    for (const key of ['P_510723|P_77960', 'P_242247|P_476324', 'P_510723|P_355091', 'P_242247|P_130947']) {
+      const [q, c] = key.split('|')
+      const a = alignments[key]
+      const cost = percentileScale(costMatrix(hpcp[q].values, rotate(hpcp[c].values, a.shift)))
+      const byRow = new Map<number, number[]>()
+      for (const [i, j] of subsequenceDTW(cost).path) byRow.set(i, [...(byRow.get(i) ?? []), j])
+      const d = a.published_path.filter(([i]) => byRow.has(i)).map(([i, j]) => Math.abs(byRow.get(i)!.reduce((s, x) => s + x, 0) / byRow.get(i)!.length - j))
+      const mean = d.reduce((s, x) => s + x, 0) / d.length
+      // DTW is sensitive in flat regions; measured 1.0-8.0 frames across the four pairs
+      expect(mean, key).toBeLessThan(10)
+    }
+  })
+})

@@ -1,8 +1,7 @@
 name: web
 
-# Builds and tests the static research site in web/. On main it also publishes to
-# GitHub Pages (Settings → Pages → Source: GitHub Actions). Vercel builds the same
-# app independently with web/ as the project root (see web/vercel.json).
+# Builds and tests the static research site in web/ and checks that its generated
+# data matches reports/. Deployment is Vercel's (project root web/, see web/vercel.json).
 
 on:
   push:
@@ -44,23 +43,3 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
-        env:
-          BASE_PATH: /${{ github.event.repository.name }}/
-      - uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        with:
-          path: web/dist
-
-  deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: [build, data-fresh]
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

@@ -54,6 +54,10 @@ export function Hero() {
             <li data-on={stage >= 2}>
               <span className="num">03</span> Different timing. Dynamic time warping pairs each query frame with a candidate frame.
             </li>
+            <li data-on={stage >= 3}>
+              <span className="num">04</span> Same work. Path cost <span className="num">{alignments[`${QUERY}|${CAND}`].published_cost.toFixed(3)}</span>;
+              against a non-cover, <span className="num">{alignments[`${QUERY}|P_130947`].published_cost.toFixed(3)}</span>.
+            </li>
           </ol>
         </div>
 

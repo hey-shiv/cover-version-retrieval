@@ -29,8 +29,8 @@ export default function App() {
         <Rotation />
         <Rescue />
         <Explorer />
-        <Hubness />
         <Benchmark />
+        <Hubness />
         <Journey />
         <Reproducibility />
         <DataLicense />
