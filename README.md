@@ -132,7 +132,10 @@ tests/            unit, property and end-to-end tests
 reports/          dataset_profile, classical_baseline, hybrid_results, error_analysis,
                   improvement_experiments (+ results/, figures/)
 notes/            decisions.md (D-001 onward), papers/
+web/              interactive research site (static React + Vite; see web/README.md)
 ```
+
+**Website.** `web/` is a static, interactive walk-through of the system and every result above, built only from committed files in `reports/` (no audio, no restricted data). `cd web && npm ci && npm run dev`; deployable on Vercel with `web` as the project root, or to GitHub Pages via `.github/workflows/web.yml`.
 
 ## Reproducibility controls
 
