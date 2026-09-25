@@ -1,0 +1,90 @@
+{
+  "experiment_id": "H1s",
+  "evidence": "ANALYSIS of LOCAL-FULL",
+  "sources": [
+    "research/results/H1_alignment_ablation"
+  ],
+  "reference": "profile_cosine_n384",
+  "comparisons": {
+    "none_n96 - profile_cosine_n384": {
+      "delta_AP": {
+        "delta": -0.040241588930769234,
+        "ci_low": -0.04392847885340385,
+        "ci_high": -0.036606353097980764,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": -0.13715384615384615,
+        "ci_low": -0.1463076923076923,
+        "ci_high": -0.12784615384615386,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "profile_cosine_n96 - profile_cosine_n384": {
+      "delta_AP": {
+        "delta": -0.009451422147692309,
+        "ci_low": -0.01048126308328846,
+        "ci_high": -0.008441147340115383,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": -0.038384615384615385,
+        "ci_low": -0.04330769230769231,
+        "ci_high": -0.03353846153846154,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "exhaustive_dtw_n96 - profile_cosine_n384": {
+      "delta_AP": {
+        "delta": -0.008632705495384614,
+        "ci_low": -0.009704692425673078,
+        "ci_high": -0.007576624837711539,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": -0.036076923076923076,
+        "ci_low": -0.04115384615384615,
+        "ci_high": -0.031,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "none_n384 - profile_cosine_n384": {
+      "delta_AP": {
+        "delta": -0.03856516382307692,
+        "ci_low": -0.042182241052461544,
+        "ci_high": -0.03496012385453846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": -0.12553846153846154,
+        "ci_low": -0.13446346153846153,
+        "ci_high": -0.11646153846153846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "exhaustive_dtw_n384 - profile_cosine_n384": {
+      "delta_AP": {
+        "delta": 0.0015435093676923076,
+        "ci_low": 0.0012053068026346154,
+        "ci_high": 0.001911397524653846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.0047692307692307695,
+        "ci_low": 0.003,
+        "ci_high": 0.006615384615384615,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    }
+  }
+}

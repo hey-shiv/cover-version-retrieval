@@ -1,0 +1,64 @@
+{
+  "experiment_id": "D1",
+  "evidence": "ANALYSIS of LOCAL-FULL",
+  "sources": [
+    "research/results/A1_k_sweep_long384"
+  ],
+  "target": "no cover in the top 30",
+  "base_rate": 0.47807692307692307,
+  "cross_fitted_auroc": {
+    "estimate": 0.760205566796759,
+    "ci_low": 0.7481692930065029,
+    "ci_high": 0.7713637795949331
+  },
+  "univariate_auroc": {
+    "top1": {
+      "auroc_for_no_cover": 0.6010753335850993,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "margin_1_2": {
+      "auroc_for_no_cover": 0.40313334926139066,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "margin_1_10": {
+      "auroc_for_no_cover": 0.30394796860947465,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "mean_top10": {
+      "auroc_for_no_cover": 0.6552641616931011,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "std_top10": {
+      "auroc_for_no_cover": 0.302921498193865,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "mean_top100": {
+      "auroc_for_no_cover": 0.6963151881931595,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "entropy_top100": {
+      "auroc_for_no_cover": 0.7290363189350414,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "row_std": {
+      "auroc_for_no_cover": 0.6201651933213616,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "z_top1": {
+      "auroc_for_no_cover": 0.2808038768022073,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "query_kocc10": {
+      "auroc_for_no_cover": 0.5231678653221489,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "top1_kocc10": {
+      "auroc_for_no_cover": 0.5630198055314626,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    },
+    "top1_hub_reference": {
+      "auroc_for_no_cover": 0.4812920460696333,
+      "note": "AUROC < 0.5 means the signal is higher for coverable queries"
+    }
+  }
+}

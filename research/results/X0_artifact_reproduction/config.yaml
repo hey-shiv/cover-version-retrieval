@@ -1,0 +1,14 @@
+experiment_id: X0
+evidence: ARTIFACT-REPRODUCTION
+script: research/scripts/artifact_analysis.py
+seed: 20260817
+n_boot: 10000
+sources:
+- reports/results/benchmark.json
+- reports/results/benchmark_full96.json
+- reports/results/benchmark_full384.json
+- reports/results/benchmark_long384.json
+- reports/results/benchmark_per_query.csv
+- reports/results/benchmark_per_query_full96.csv
+- reports/results/benchmark_per_query_full384.csv
+- reports/results/benchmark_per_query_long384.csv

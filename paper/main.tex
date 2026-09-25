@@ -1,0 +1,143 @@
+% DRAFT. Every number in the prose is a macro from paper/generated/numbers.tex (X* artifact analyses) or
+% paper/generated/numbers_local.tex (local runs A1/F1/H1 and their analyses B1/C1/D1/E1), both written by
+% research/scripts/make_tables.py from research/results/*/metrics.json. Tables and figures are generated too.
+% Evidence: ARTIFACT-ANALYSIS (X*), LOCAL-FULL (A1, F1, H1; run on a local machine, 13,000 queries),
+% LOCAL-FULL also A2; ANALYSIS of LOCAL-FULL (A2s, B1, D1, E1), POST-HOC (C1, not registered). Nothing is pending.
+% Status: see research/PROGRESS.md.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs,graphicx,amsmath,xcolor,hyperref,natbib}
+\input{generated/numbers.tex}
+\input{generated/numbers_local.tex}
+\newcommand{\pending}[1]{\textcolor{orange!80!black}{[PENDING: #1]}}
+\graphicspath{{../research/figures/}}
+
+\title{Where Two-Stage Cover Song Retrieval Loses Its Covers:\\
+Coverage, Reranking and Compute on Da-TACOS}
+\author{Anonymous (draft)}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Scalable cover song identification (CSI) systems shortlist candidates with a learned whole-track embedding and rerank the shortlist with a more expensive, structure-aware comparison.
+Such a system can rank first only a cover that its first stage placed in the shortlist.
+We measure what this costs, on all 13{,}000 queries of the Da-TACOS benchmark, with a transparent HPCP system (a small temporal convolutional encoder, then key-rotated subsequence DTW over the top $K$) whose settings were fixed before the benchmark was run.
+Hit@1 factorises exactly into first-stage coverage and reranker efficiency, which lets us classify every query's failure.
+At the system's original $K=30$, \MissThirty\% of queries have no cover in the shortlist, and about \CoverageShareOfGain\% of the (log) Hit@1 gain across four evaluations came from coverage.
+Sweeping $K$ from 5 to 500 moves the bottleneck: uncovered queries outnumber misranked ones up to $K=50$ (\ClassAFifty\% vs.\ \ClassBFifty\%), the two are close at $K=100$ (\ClassAHundred\% vs.\ \ClassBHundred\%), and misranking dominates from $K=200$ (\ClassBTwoHundred\% vs.\ \ClassATwoHundred\%). Reranker efficiency falls from \EffFive\% to \EffFiveHundred\% as $K$ grows.
+MAP rises from \SweepMapThirty{} at $K=30$ to \SweepMapFiveHundred{} at $K=500$, and hub correction matters more as $K$ grows.
+Label-free first-stage signals predict an uncovered query (AUROC \DOneAuroc), but per-query adaptive $K$, registered in advance, does not beat fixed $K$ at equal cost: it raises MAP slightly and lowers Hit@1.
+One cheap first-stage change does help end to end. Fusing the global embedding with three window embeddings raises coverage at $K=30$ by \FOneFuseThirty{} points, and in a registered follow-up it raises hub-corrected MAP at every $K$ (at $K=30$: \SweepMapThirty{} $\rightarrow$ \ATwoMapThirty, $\Delta$ \ATwoApThirty{} [\ATwoApThirtyLo, \ATwoApThirtyHi]; Hit@1 \ATwoHitDThirty{} points).
+A 20-query development protocol cannot see the bottleneck: it disagreed with the benchmark on the sign of the reranking effect in two of four configurations, and on key handling.
+Our absolute accuracy is far below published systems. The main contribution is the measurement, which applies to any two-stage CSI system that reports per-query ranks.
+\end{abstract}
+
+\section{Introduction}
+\textbf{Problem.} Two-stage retrieval is the standard way to make alignment-quality cover song identification affordable: a learned embedding shortlists $K$ candidates and a structure-aware method reranks them \citep{bytecover3,livi2026}. The second stage cannot recover a cover the first stage excluded.
+
+\textbf{Gap.} We found no CSI study that measures this bound over realistic shortlist sizes, attributes observed gains to the two stages, or checks whether small development protocols can see it. Adaptive candidate depth is established in text retrieval \citep{culpepper2016,wang2011cascade}. Whether it helps alignment-based CSI was open.
+
+\textbf{Hypotheses (registered before the local runs).} (H1) At affordable $K$, first-stage coverage, not reranker quality, is the dominant limitation. (H2) Stage-1 evidence can allocate alignment work per query better than a fixed $K$. (H3) Cheap Stage-1 changes raise coverage at fixed $K$ without retraining.
+
+\textbf{Findings.} H1 holds up to $K\approx 50$–$100$ and fails beyond it, where misranking dominates. H2 is not supported. H3 is supported for one variant, fusion of global and window embeddings. Its coverage gain survives reranking at every $K$ (registered criterion \ATwoMeets).
+
+\textbf{Contributions.}
+(i) Exact coverage ceilings and end-to-end quality for $K\in\{5,\dots,500\}$ from one alignment pass, with the per-pair alignment cost measured.
+(ii) A per-query decomposition, $\text{Hit@1}=C(K)\cdot\eta(K)$, that attributes a \HitOneGain$\times$ Hit@1 improvement to the stages and locates where the bottleneck moves from coverage to reranking.
+(iii) A registered negative result: predictable difficulty does not buy a Pareto gain from adaptive $K$.
+(iv) Paired Stage-1 comparisons, including training scale and test-time key rotations. One of them, global--window fusion, improves the whole system at every $K$ in a registered end-to-end test.
+(v) Evidence that a 20-query development protocol cannot observe this bottleneck.
+We do not claim a new model, state-of-the-art accuracy, or a new hubness correction.
+
+\section{Related work}
+\textit{Classical CSI} uses chroma, transposition by optimal index, and local alignment \citep{serra2008,serra2009qmax}. \textit{Learned CSI} embeds whole tracks \citep{move2020,remove2020,bytecover,bytecover2,coverhunter,discogsvi}. \textit{Local and two-stage CSI}: ByteCover3 retrieves with ANN search and reranks with local features \citep{bytecover3}; LIVI reranks candidates with MaxSim over local embeddings \citep{livi2026}, after late interaction in text retrieval \citep{colbert}. \textit{Hubness} is long known in audio similarity \citep{aucouturier2008,radovanovic2010,schnitzer2012}, and has been corrected in CSI \citep{seo2022,li2018,hu2019}; our correction is a probe-based variant of CSLS/QB-Norm \citep{csls,qbnorm}. \textit{Multi-stage IR} studies cascades and per-query cutoffs \citep{wang2011cascade,culpepper2016}, and reports that rerankers degrade as they score more candidates \citep{jacob2024drowning}. Scalability concerns in CSI are old \citep{bertinmahieux2012}. Our work sits at the interface: it measures the cascade bottleneck of a CSI system rather than proposing a new stage.
+
+\section{Problem formulation}
+For query $q$ with relevant set $\mathcal{R}_q$, let $r_q$ be the Stage-1 rank of the highest-ranked relevant item. A reranker of the first $K$ Stage-1 candidates leaves ranks beyond $K$ unchanged, so the query is \emph{covered} iff $r_q\le K$, and Hit@1 is possible only if it is covered. With coverage $C(K)=\Pr[r_q\le K]$ and reranker efficiency $\eta(K)=\Pr[\text{rank-1 relevant}\mid r_q\le K]$, $\text{Hit@1}(K)=C(K)\,\eta(K)$ exactly. Every query falls in one class: \textbf{A} (not covered), \textbf{B} (covered, not at rank 1; \textbf{B}$_\text{hub}$ if the rank-1 item's probe reference is above the 95th percentile of the catalogue), \textbf{R} (rank 1).
+
+\section{System and protocol}
+HPCP features; a 645{,}504-parameter TCN (six dilated residual blocks, mean$\|$max pooling, 128-d) trained with supervised contrastive loss; exact cosine search; best of 12 key rotations by profile cosine; cosine cross-similarity; subsequence DTW with steps $(1,1),(2,1),(1,2)$ over 384 frames; blend $\alpha z(\text{global})+(1-\alpha)z(\text{alignment})$ with $\alpha=0.10$; probe-based hubness correction with $\lambda=0.6$. $\alpha$, $\lambda$ and resolution were chosen on ten calibration works and checkpoints on validation works; none was changed after the benchmark was run. Table~\ref{tab:t1_protocol} gives the protocol and Table~\ref{tab:t2_baselines} the four frozen evaluations.
+
+\textbf{The $K$ sweep.} We align the top 500 Stage-1 candidates of every query once and derive every smaller $K$ from that pass; a regression test shows the result equals running the pipeline at each $K$. At $K=30$ the sweep reproduces the frozen benchmark file (MAP of all four systems and shortlist recall; match: \ReproPass). Alignment cost was measured at \AlignMsPerPair{} ms per pair on one laptop (Apple arm64, two threads); rerank cost is that figure times $K$.
+
+\textbf{Statistics.} Intervals are 95\% work-level paired bootstraps over the 1{,}000 query cliques (10{,}000 resamples, fixed seed). Policies in D1/E1 are fit by 5-fold work-disjoint cross-fitting, so no query is scored by a model that saw its work.
+\input{generated/t1_protocol.tex}
+\input{generated/t2_baselines.tex}
+
+\section{Results}
+\subsection{Coverage is the ceiling at small $K$}
+Figure~\ref{fig:coverage} shows $C(K)$ for three encoders. At $K=30$, the fraction of queries not covered falls from \MissThirtyRunOne\% to \MissThirty\% as the encoder improves; \NeedOverHundred\% of queries still need $K>100$ and \NeedOverFiveHundred\% need $K>500$.
+\begin{figure}[t]\centering\includegraphics[width=.8\linewidth]{fig2_stage1_coverage.pdf}\caption{First-stage coverage $C(K)$, the exact ceiling on Hit@1 of any $K$-candidate reranker.}\label{fig:coverage}\end{figure}
+
+\subsection{Decomposition and attribution at $K=30$}
+Table~\ref{tab:t5_failures} and Figure~\ref{fig:failures} decompose all 13{,}000 queries at $K=30$. Across the four evaluations coverage rose from \CovRunOne{} to \CovRunFour{} and efficiency from \EffRunOne{} to \EffRunFour{}. Hit@1 rose from \HitOneRunOne{} to \HitOneRunFour{}, and about \CoverageShareOfGain\% of the log-gain is coverage (Figure~\ref{fig:factor}).
+\input{generated/t5_failures.tex}
+\begin{figure}[t]\centering\includegraphics[width=.9\linewidth]{fig4_failure_decomposition.pdf}\caption{Outcome classes at $K=30$ for every benchmark query.}\label{fig:failures}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=.9\linewidth]{fig7_hit1_factorisation.pdf}\caption{$\text{Hit@1}=C(30)\cdot\eta(30)$ across the four evaluations.}\label{fig:factor}\end{figure}
+
+\subsection{The bottleneck moves with $K$}
+Table~\ref{tab:t4_k_sweep} and Figure~\ref{fig:ksweep} give end-to-end quality for $K$ from 5 to 500. Hub-corrected MAP rises from \SweepMapFive{} at $K=5$ to \SweepMapThirty{} at $K=30$, \SweepMapHundred{} at $K=100$ and \SweepMapFiveHundred{} at $K=500$; Hit@1 from \SweepHitFive\% to \SweepHitFiveHundred\%. Quality has not saturated at $K=500$, where reranking costs an estimated \SweepMsFiveHundred{} ms per query against \SweepMsThirty{} ms at $K=30$ (measured per-pair cost times $K$). The original choice $K=30$ was a cost decision, not a quality optimum.
+
+Figure~\ref{fig:failbyk} and Table~\ref{tab:t8_failure_by_K} show why. Class A (not covered) shrinks from \ClassAFive\% at $K=5$ to \ClassAFiveHundred\% at $K=500$, while class B (covered, misranked) grows from \ClassBFive\% to \ClassBFiveHundred\%. They are close at $K=100$ (\ClassAHundred\% vs.\ \ClassBHundred\%), and B dominates from $K=200$. Reranker efficiency falls monotonically, from \EffFive\% to \EffFiveHundred\%: each extra candidate adds a chance of recovering a cover and a chance of being displaced by a non-cover. Text rerankers show the same pattern as they score more candidates \citep{jacob2024drowning}; here we measure it for alignment reranking in CSI. Hypothesis H1 therefore holds only for $K\lesssim 100$. Beyond that, the reranker is the limitation.
+\input{generated/t4_k_sweep.tex}
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{fig8_k_sweep.pdf}\caption{Stage-1 coverage and recall (left) and end-to-end MAP and Hit@1 (right) as a function of $K$, 13{,}000 queries. Grey line: exhaustive corrected alignment of all 14{,}999 candidates (frozen run 2, 96 frames).}\label{fig:ksweep}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{fig9_failure_by_K.pdf}\caption{Outcome classes by $K$, without (left) and with (right) hub correction.}\label{fig:failbyk}\end{figure}
+\input{generated/t8_failure_by_K.tex}
+
+\subsection{Hubness acts only inside the shortlist, and more so at large $K$}
+At $K=30$, hub correction converts \HubFixedShare\% [\HubFixedLo, \HubFixedHi] of class-B queries into successes (run 4) and turns a success into a failure for \HubBroken\% of all queries; efficiency rises from \EffRunFourUncorrPct\% to \EffRunFourPct\%. By construction it cannot change class A. Its MAP gain grows with $K$, from \HubGainFive{} at $K=5$ to \HubGainThirty{} at $K=30$ and \HubGainFiveHundred{} at $K=500$, because every added candidate is another possible hub (Table~\ref{tab:t8_failure_by_K}, last column). At Stage 1 the same correction did not help: on the calibration works the selected strength was $\lambda=\FOneHubLambda$. This is weak evidence that hubness does not distort Stage-1 coverage, not a benchmark test of it.
+
+\subsection{Embedding versus alignment as candidate generators}
+Paired against corrected exhaustive alignment on the same queries, the embedding's coverage differs by \CrossTen{} points at $K=10$, \CrossThirty{} at $K=30$, \CrossFifty{} [\CrossFiftyLo, \CrossFiftyHi] at $K=50$, \CrossHundred{} at $K=100$ and \CrossFiveHundred{} at $K=500$. Alignment is the better precise generator and the embedding the better deep one.
+
+\textbf{Post-hoc comparison (not registered).} Table~\ref{tab:t12_hybrid_vs_exhaustive} compares the hub-corrected hybrid at each $K$ with exhaustive corrected alignment (run 2). On MAP the hybrid is worse at $K=30$ (\COneThirtyAp{} [\COneThirtyApLo, \COneThirtyApHi]), ties at $K=50$ (\COneFiftyAp{} [\COneFiftyApLo, \COneFiftyApHi]) and is better from $K=100$ (\COneHundredAp{} [\COneHundredApLo, \COneHundredApHi]), with 100 instead of 14{,}999 alignments per query. On Hit@1 it is already better at $K=30$ (\COneThirtyHit{} points [\COneThirtyHitLo, \COneThirtyHitHi]). Three caveats: this comparison was chosen after seeing A1; the exhaustive system used 96 frames and $\lambda=0.5$ while the hybrid uses 384 frames and $\lambda=0.6$; and the two were run on different machines. An exhaustive run at 384 frames was not performed.
+\input{generated/t12_hybrid_vs_exhaustive.tex}
+
+\subsection{Accuracy against computation}
+Figure~\ref{fig:compute} places every evaluated system by alignments per query; Figure~\ref{fig:ksweep} gives the full curve for the hybrid.
+\begin{figure}[t]\centering\includegraphics[width=.9\linewidth]{fig3_quality_vs_compute.pdf}\caption{Measured accuracy against alignment work.}\label{fig:compute}\end{figure}
+
+\subsection{Adaptive allocation: predictable, but not useful}
+An oracle that knew each query's $r_q$ would reach the coverage of fixed $K=30$ with \OraclePairs{} alignments per query on average (Figure~\ref{fig:oracle}). This is an upper bound.
+
+\textbf{Difficulty is predictable (D1).} A cross-fitted logistic model on label-free Stage-1 signals (score statistics of the top 10/100, margins, entropy, $k$-occurrence, hub reference) predicts ``no cover in the top 30'' (base rate \DOneBase\%) with AUROC \DOneAuroc{} [\DOneAurocLo, \DOneAurocHi] (Table~\ref{tab:t9_query_uncertainty}).
+
+\textbf{Prediction does not become a better policy (E1).} Registered criterion: an adaptive three-tier policy counts as an improvement only if its paired $\Delta$AP interval excludes zero \emph{and} its realised mean $K$ does not exceed the budget. \EOneMeets{} of \EOneCells{} menu/budget cells meet it (Table~\ref{tab:t7_adaptive_k}, Figure~\ref{fig:adaptive}). \EOneApPositive{} cells have a $\Delta$AP interval above zero (at most \EOneApMax), but four of them exceed the budget by less than 0.4\% (a fraction of one alignment per query), and every one of them \emph{lowers} Hit@1 (up to \EOneHitWorstPts{} points across all cells; \EOneHitBetter{} cells raise it). The fitted policies are triage: on the training folds they chose to give \emph{fewer} alignments to queries predicted to be uncovered and more to the rest, which finds more of the 12 covers of easy queries (MAP) at the price of first-rank hits on hard ones (Hit@1). This is a trade-off, not a Pareto improvement, and we report H2 as not supported.
+\input{generated/t9_query_uncertainty.tex}
+\input{generated/t7_adaptive_k.tex}
+\begin{figure}[t]\centering\includegraphics[width=.8\linewidth]{fig5_oracle_allocation.pdf}\caption{Headroom for per-query shortlist size (oracle upper bound).}\label{fig:oracle}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=.9\linewidth]{fig10_adaptive_vs_fixed.pdf}\caption{Adaptive policies (points) against fixed $K$ (line) at equal mean alignment work, cross-fitted.}\label{fig:adaptive}\end{figure}
+
+\subsection{What changes Stage-1 coverage}
+Table~\ref{tab:t10_stage1_variants} and Figure~\ref{fig:stage1} compare Stage-1 variants on the same queries. Training scale dominates: the 60-epoch encoder loses \FOneSixtyThirty{} points of coverage at $K=30$, and an encoder trained on 1{,}500 instead of 4{,}780 works loses \FOneSmallThirty. Among changes that need no retraining, test-time key rotation of the query adds \FOneTtrThirty{} [\FOneTtrThirtyLo, \FOneTtrThirtyHi] points, and fusing the global score with MaxSim over three 60\%-length windows adds \FOneFuseThirty{} [\FOneFuseThirtyLo, \FOneFuseThirtyHi] at $K=30$ and \FOneFuseHundred{} [\FOneFuseHundredLo, \FOneFuseHundredHi] at $K=100$. Windows alone lose \FOneWinMaxThirty{} points: the gain comes from combining global and local evidence. Window fusion and weights were fixed in advance, not tuned on the benchmark.
+
+\textbf{The coverage gain survives reranking (A2).} After F1, and before any end-to-end result, we registered A2: the full $K$ sweep with the fused Stage 1, all other settings as in A1. The fused score replaces the global score everywhere, including the global term of the $\alpha$ blend. The criterion was a paired $\Delta$MAP interval above zero at both $K=30$ and $K=100$. It is \ATwoMeets{} (Table~\ref{tab:t13_a2_end_to_end}, Figure~\ref{fig:a2}). The interval excludes zero at \ATwoAllKPositive{} $K$ we measured: $\Delta$AP is \ATwoApFive{} [\ATwoApFiveLo, \ATwoApFiveHi] at $K=5$, \ATwoApThirty{} [\ATwoApThirtyLo, \ATwoApThirtyHi] at $K=30$ (a \ATwoRelThirty\% relative gain), \ATwoApHundred{} [\ATwoApHundredLo, \ATwoApHundredHi] at $K=100$ and \ATwoApFiveHundred{} [\ATwoApFiveHundredLo, \ATwoApFiveHundredHi] at $K=500$. Hit@1 rises by \ATwoHitDThirty{} points [\ATwoHitDThirtyLo, \ATwoHitDThirtyHi] at $K=30$. With the fused Stage 1, $K=\ATwoMatchK$ already matches the MAP of the global Stage 1 at $K=30$. The gain shrinks with $K$, as the decomposition predicts: a better first stage matters most where coverage is the bottleneck. Computing the window embeddings and fused scores took \ATwoFuseSeconds{} s for the whole benchmark on the laptop, against \ATwoAlignMinutes{} minutes for the $K=500$ alignment pass.
+\input{generated/t13_a2_end_to_end.tex}
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{fig12_a2_end_to_end.pdf}\caption{Registered A2: hub-corrected hybrid MAP with the global and the fused Stage 1 (left), and the paired differences with 95\% intervals (right).}\label{fig:a2}\end{figure}
+\input{generated/t10_stage1_variants.tex}
+\begin{figure}[t]\centering\includegraphics[width=.9\linewidth]{fig11_stage1_variants.pdf}\caption{Paired change in coverage at $K=30$ against the 150-epoch encoder.}\label{fig:stage1}\end{figure}
+
+\subsection{Development protocols cannot see the bottleneck}
+On the 20-query development protocol, shortlist recall at $K=30$ is \DevRecallMin--\DevRecallMax{}; on the benchmark it is \BenchRecallMin--\BenchRecallMax{}. The sign of the reranking effect disagreed with the benchmark in \DevSignFlips{} of \DevConfigs{} configurations. Key handling is a third case: on development, ``no key handling'' had the higher point estimate, with an interval that included zero. On the benchmark, removing the rotation costs \HOneNoRotAp{} AP [\HOneNoRotApLo, \HOneNoRotApHi] and \HOneNoRotHit{} points of Hit@1 (Table~\ref{tab:t11_alignment_ablation}).
+
+\subsection{Ablations}
+Table~\ref{tab:t3_ablations} lists the paired ablations available from the frozen runs; Table~\ref{tab:t11_alignment_ablation} gives the alignment ablation at $K=30$ (rerank only). Exhaustive 12-rotation DTW improves on the profile-selected rotation by \HOneExhAp{} AP [\HOneExhApLo, \HOneExhApHi] at twelve times the alignment cost. Reducing the resolution from 384 to 96 frames costs \HOneShortAp{} [\HOneShortApLo, \HOneShortApHi].
+\input{generated/t3_ablations.tex}
+\input{generated/t11_alignment_ablation.tex}
+
+\section{Discussion}
+At small $K$ a better reranker has little to work with, and effort belongs in the first stage or in aligning more of its ranking. At large $K$ the picture reverses: coverage is high, and the reranker's inability to keep non-covers below covers is the main loss. Hub correction is one remedy whose value grows with $K$. The crossover lies at $K\approx 100$--$200$ for this system. Its location depends on the encoder and the reranker, but the decomposition that finds it applies to any two-stage system with per-query ranks.
+
+That adaptive $K$ fails despite AUROC \DOneAuroc{} is informative. A plausible explanation, which we have not tested formally, is that the tail of $r_q$ is heavy even for queries predicted to be hard: moving them from $K=30$ to $K=100$ covers only some of them, so the alignments are better spent finding additional covers of easy queries (MAP) than first covers of hard ones (Hit@1). If so, better difficulty prediction alone will not make allocation a Pareto improvement.
+
+\section{Limitations}
+Absolute accuracy is far below published systems on the same benchmark (e.g.\ Qmax 0.333 MAP on HPCP; \citealp{datacos}). One dataset, HPCP features only, training works with two recordings each, whole-query (not local) alignment. The local runs were made on one laptop from a working tree with uncommitted changes (recorded in each run's \texttt{env.json}). The A1 reproduction check matches the frozen benchmark exactly, which bounds the effect of those changes on A1. The post-hoc comparison with exhaustive alignment mixes resolutions and machines. The E1 criterion is strict about budget, and four cells miss it by less than 0.4\% of the budget; all of them also lower Hit@1, so relaxing the criterion would not change the conclusion. A2 was registered after F1 had shown the coverage gain, so it tests whether a known first-stage effect survives reranking, not a blind hypothesis. Only one fusion setting was ever evaluated, and A2 was also run from a working tree with uncommitted changes; its first-stage coverage equals F1's \texttt{win\_fuse} exactly at every $K$. Related work tagged [S] in \texttt{research/literature\_review.md} must be re-read in full before submission.
+
+\section{Conclusion}
+In a two-stage CSI system on Da-TACOS, the first stage bounds accuracy at small shortlists, and the reranker bounds it at large ones. The decomposition $\text{Hit@1}=C(K)\,\eta(K)$ locates the crossover, attributes past gains mostly to the first stage, and shows that a 20-query development protocol cannot see the problem. Per-query adaptive $K$, although difficulty is predictable, trades Hit@1 for MAP and is not an improvement. Fusing global and window embeddings is the one cheap Stage-1 change that raised coverage, and a registered end-to-end test shows the gain reaches the final ranking at every shortlist size, most at small $K$ where the first stage is the bottleneck.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

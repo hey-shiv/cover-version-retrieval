@@ -4,7 +4,7 @@
 import { results } from './results'
 
 /** `pytest --collect-only` at commit 879c9e3: 119 tests collected, 119 passed (the README still says 112). */
-export const TEST_COUNT = 119
+export const TEST_COUNT = 142
 
 export const SEED = results.dataset.seed // data/manifests/manifest_info.json
 
@@ -64,11 +64,11 @@ export const REPRO = [
   },
 ] as const
 
-/** README → "Next research directions", in the README's order (by what the evidence demands). */
+/** README → "What's next" and research/PROGRESS.md, in the order the evidence demands. */
 export const FUTURE = [
-  { id: 'recall', title: 'Keep pushing Stage-1 recall', body: 'Validation MAP was still drifting upward at epoch 150; shortlist recall (0.136) still caps the hybrid. More epochs, larger K, multi-vector (per-section) embeddings.', target: 'Stage 1' },
+  { id: 'recall', title: 'Tune the fused Stage 1 properly', body: 'Global + window fusion lifted MAP at every K in its registered test, but only one setting (3 windows, 60%, 50/50) was ever tried. Choose it on calibration works; test key rotations end to end.', target: 'Stage 1' },
   { id: 'classical384', title: 'Classical 384 frames + hubness correction', body: 'Over the full benchmark, about 42 h of CPU. The most likely strongest system; never run.', target: 'Stage 2' },
-  { id: 'ttr', title: 'Test-time rotation matching at scale', body: 'Best development system (0.436 with the 60-epoch encoder), 12× the query-embedding cost. Never evaluated on the benchmark.', target: 'Stage 1' },
+  { id: 'ttr', title: 'A reranker that holds up at large K', body: 'From K ≈ 200 most failures are covers outranked inside the list. Hub correction helps more as K grows; stronger in-list discrimination is the open problem.', target: 'Stage 2' },
   { id: 'local', title: 'Local alignment (Qmax-style)', body: 'Versus whole-query subsequence DTW, for covers that drop, add or reorder sections.', target: 'Stage 2' },
   { id: 'fusion', title: 'CREMA / HPCP feature fusion', body: 'And error-stratified evaluation by rotation shift and length ratio.', target: 'Representation' },
 ] as const

@@ -1,0 +1,594 @@
+{
+  "experiment_id": "E1",
+  "evidence": "ANALYSIS of LOCAL-FULL",
+  "sources": [
+    "research/results/A1_k_sweep_long384"
+  ],
+  "system": "hybrid + hub correction (alpha, lambda locked)",
+  "menus": {
+    "(10, 30, 100)": {
+      "budget10": {
+        "realised_mean_K": 10.02076923076923,
+        "fixed_K": 10,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.007445896717712472,
+            "t2": 0.007445896717712472,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.010295976992765724,
+            "t2": 0.010295976992765724,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.008694329550639562,
+            "t2": 0.008694329550639562,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.006299711456706194,
+            "t2": 0.006299711456706194,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0102080778135203,
+            "t2": 0.0102080778135203,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.09494593628153847,
+        "fixed_MAP": 0.09493544764153847,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 1.0488640000000006e-05,
+          "ci_low": 0.0,
+          "ci_high": 2.7575524615384628e-05,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "k_distribution": {
+          "10": 0.9997692307692307,
+          "30": 0.0,
+          "100": 0.00023076923076923076
+        },
+        "meets_registered_criterion": false
+      },
+      "budget20": {
+        "realised_mean_K": 20.053076923076922,
+        "fixed_K": 20,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.007445896717712472,
+            "t2": 0.5180232488351841,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.010295976992765724,
+            "t2": 0.5188083391770992,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.008694329550639562,
+            "t2": 0.5140458803928871,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.006299711456706194,
+            "t2": 0.5206851069774827,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0102080778135203,
+            "t2": 0.49457094737657536,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.11683915574538462,
+        "fixed_MAP": 0.11046679767538461,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.0063723580699999996,
+          "ci_low": 0.005403878031461539,
+          "ci_high": 0.007336149557192307,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.004,
+          "ci_low": -0.00776923076923077,
+          "ci_high": -0.0003076923076923077,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.49815384615384617,
+          "30": 0.5016153846153846,
+          "100": 0.00023076923076923076
+        },
+        "meets_registered_criterion": false
+      },
+      "budget30": {
+        "realised_mean_K": 29.924615384615386,
+        "fixed_K": 30,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.18436361863571585,
+            "t2": 0.4772759000910284,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.20007781984565068,
+            "t2": 0.479506328423407,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.1925183086161678,
+            "t2": 0.4729477736242388,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.1922806406391178,
+            "t2": 0.47808599051642103,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.14420756396478462,
+            "t2": 0.6017907321326504,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.12592111435923078,
+        "fixed_MAP": 0.12166442587230769,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.004256688486923077,
+          "ci_low": 0.002660817507673077,
+          "ci_high": 0.005883452237923076,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.027384615384615386,
+          "ci_low": -0.031615384615384615,
+          "ci_high": -0.023153846153846153,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.5093846153846154,
+          "30": 0.34615384615384615,
+          "100": 0.14446153846153847
+        },
+        "meets_registered_criterion": true
+      },
+      "budget50": {
+        "realised_mean_K": 50.098461538461535,
+        "fixed_K": 50,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.43243313896062957,
+            "t2": 0.5907735634824697,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.4332789473509471,
+            "t2": 0.5911899370255648,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.4294029415079244,
+            "t2": 0.585917371438256,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.43177526841929487,
+            "t2": 0.5952954956113832,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.408295261839253,
+            "t2": 0.5684945301909604,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.14327741854615383,
+        "fixed_MAP": 0.13743651083384614,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.005840907712307692,
+          "ci_low": 0.004085189543826924,
+          "ci_high": 0.0076017511783653844,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.03569230769230769,
+          "ci_low": -0.04107692307692308,
+          "ci_high": -0.03023076923076923,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.401,
+          "30": 0.1973076923076923,
+          "100": 0.4016923076923077
+        },
+        "meets_registered_criterion": false
+      },
+      "budget100": {
+        "realised_mean_K": 99.97923076923077,
+        "fixed_K": 100,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.007445896717712472,
+            "t2": 0.007445896717712472,
+            "order": "more_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.010295976992765724,
+            "t2": 0.010295976992765724,
+            "order": "more_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.008694329550639562,
+            "t2": 0.008694329550639562,
+            "order": "more_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.006299711456706194,
+            "t2": 0.006299711456706194,
+            "order": "more_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0102080778135203,
+            "t2": 0.0102080778135203,
+            "order": "more_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.15989615038846156,
+        "fixed_MAP": 0.15990663902846153,
+        "delta_AP_policy_minus_fixed": {
+          "delta": -1.0488640000000006e-05,
+          "ci_low": -2.7575524615384628e-05,
+          "ci_high": 0.0,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "k_distribution": {
+          "10": 0.00023076923076923076,
+          "30": 0.0,
+          "100": 0.9997692307692307
+        },
+        "meets_registered_criterion": false
+      }
+    },
+    "(10, 50, 200)": {
+      "budget10": {
+        "realised_mean_K": 10.043846153846154,
+        "fixed_K": 10,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.007445896717712472,
+            "t2": 0.007445896717712472,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.010295976992765724,
+            "t2": 0.010295976992765724,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.008694329550639562,
+            "t2": 0.008694329550639562,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.006299711456706194,
+            "t2": 0.006299711456706194,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0102080778135203,
+            "t2": 0.0102080778135203,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.0949467090746154,
+        "fixed_MAP": 0.09493544764153847,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 1.1261433076923084e-05,
+          "ci_low": -6.032076923076886e-07,
+          "ci_high": 2.979767076923078e-05,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "k_distribution": {
+          "10": 0.9997692307692307,
+          "50": 0.0,
+          "200": 0.00023076923076923076
+        },
+        "meets_registered_criterion": false
+      },
+      "budget20": {
+        "realised_mean_K": 20.043846153846154,
+        "fixed_K": 20,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.007445896717712472,
+            "t2": 0.2825097177768498,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.010295976992765724,
+            "t2": 0.2926399350727906,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.008694329550639562,
+            "t2": 0.28848793396639605,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.006299711456706194,
+            "t2": 0.2879254065181849,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0102080778135203,
+            "t2": 0.2720707266405989,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.11676867718615384,
+        "fixed_MAP": 0.11046679767538461,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.00630187951076923,
+          "ci_low": 0.0047106426436538465,
+          "ci_high": 0.00789770166176923,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.02130769230769231,
+          "ci_low": -0.02569230769230769,
+          "ci_high": -0.017,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.7497692307692307,
+          "50": 0.25,
+          "200": 0.00023076923076923076
+        },
+        "meets_registered_criterion": false
+      },
+      "budget30": {
+        "realised_mean_K": 30.108461538461537,
+        "fixed_K": 30,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.007445896717712472,
+            "t2": 0.5180232488351841,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.010295976992765724,
+            "t2": 0.5188083391770992,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.008694329550639562,
+            "t2": 0.5140458803928871,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.006299711456706194,
+            "t2": 0.5206851069774827,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0102080778135203,
+            "t2": 0.49457094737657536,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.12889231665384615,
+        "fixed_MAP": 0.12166442587230769,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.0072278907815384605,
+          "ci_low": 0.005886613846846155,
+          "ci_high": 0.00857559592951923,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.01646153846153846,
+          "ci_low": -0.021076923076923076,
+          "ci_high": -0.011846153846153847,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.49815384615384617,
+          "50": 0.5016153846153846,
+          "200": 0.00023076923076923076
+        },
+        "meets_registered_criterion": false
+      },
+      "budget50": {
+        "realised_mean_K": 49.66153846153846,
+        "fixed_K": 50,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.0906383022638497,
+            "t2": 0.7031541393107179,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.10643207650887128,
+            "t2": 0.7018833305191406,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.09628599279921822,
+            "t2": 0.6990603820811584,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.09980240815798085,
+            "t2": 0.7072046733886357,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.0994651920994544,
+            "t2": 0.686395421792934,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.13769955653307692,
+        "fixed_MAP": 0.13743651083384614,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.0002630456992307691,
+          "ci_low": -0.00047516324934615393,
+          "ci_high": 0.0010080356195384613,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.01376923076923077,
+          "ci_low": -0.016692307692307694,
+          "ci_high": -0.011,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.20115384615384616,
+          "50": 0.7474615384615385,
+          "200": 0.05138461538461538
+        },
+        "meets_registered_criterion": false
+      },
+      "budget100": {
+        "realised_mean_K": 100.20461538461538,
+        "fixed_K": 100,
+        "folds": [
+          {
+            "fold": 0,
+            "t1": 0.43243313896062957,
+            "t2": 0.6768305447446625,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 1,
+            "t1": 0.4332789473509471,
+            "t2": 0.6771689559043643,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 2,
+            "t1": 0.4294029415079244,
+            "t2": 0.6725480819377266,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 3,
+            "t1": 0.43177526841929487,
+            "t2": 0.6832581264791748,
+            "order": "less_k_when_uncertain"
+          },
+          {
+            "fold": 4,
+            "t1": 0.408295261839253,
+            "t2": 0.6594443546194515,
+            "order": "less_k_when_uncertain"
+          }
+        ],
+        "policy_MAP": 0.16004700339000003,
+        "fixed_MAP": 0.15990663902846153,
+        "delta_AP_policy_minus_fixed": {
+          "delta": 0.00014036436153846155,
+          "ci_low": -0.0015725170838653847,
+          "ci_high": 0.0018161524677692304,
+          "n_groups": 1000,
+          "excludes_zero": false
+        },
+        "delta_Hit1_policy_minus_fixed": {
+          "delta": -0.044,
+          "ci_low": -0.049692307692307695,
+          "ci_high": -0.038538461538461535,
+          "n_groups": 1000,
+          "excludes_zero": true
+        },
+        "k_distribution": {
+          "10": 0.25123076923076926,
+          "50": 0.34707692307692306,
+          "200": 0.4016923076923077
+        },
+        "meets_registered_criterion": false
+      }
+    }
+  }
+}
