@@ -1,0 +1,213 @@
+# Experiment registry: the contract for every experiment in research/.
+# Written BEFORE any LOCAL experiment was run (2026-09-24). Changing a registered setting
+# after seeing a result requires a NEW entry with a new ID, never an edit of this one.
+#
+# Evidence labels (research/ENVIRONMENT.md):
+#   ARTIFACT-REPRODUCTION  recomputed from committed per-query files (cloud)
+#   ARTIFACT-ANALYSIS      new analysis of committed files (cloud)
+#   LOCAL-FULL             executed on Da-TACOS features + checkpoints (author's machine)
+#   ANALYSIS of LOCAL-FULL cloud analysis of committed LOCAL-FULL outputs
+#
+# Locked everywhere unless an entry says otherwise:
+#   protocol: Da-TACOS benchmark, 13,000 queries x 15,000 candidates, self excluded, 12 relevant per query
+#   encoder:  runs/encoder_full_long/encoder_best.pt (4,780 works, 150 epochs; D-021)
+#   alpha:    0.10  (reports/results/hybrid_calibration_long384.json, calibration works only)
+#   hub:      mean probe reference, 200 training probes, lambda 0.6 at 384 frames (hubness_correction_n384.json)
+#   frames:   384 for reranking
+#   seed:     20260817; bootstrap: work-level, 10,000 resamples, 95% percentile intervals
+#   no benchmark result may select any setting that is then reported on the benchmark
+
+defaults:
+  dataset_split: benchmark (test only; never trained, tuned or calibrated on)
+  seed: 20260817
+  checkpoint: runs/encoder_full_long/encoder_best.pt
+  statistics: research/statistics.md
+
+experiments:
+
+  # ------------------------------------------------------------------ executed in the cloud
+  - id: X0
+    name: artifact_reproduction
+    evidence: ARTIFACT-REPRODUCTION
+    status: done
+    hypothesis: The committed aggregate metrics are exactly the means of the committed per-query files.
+    independent_variables: []
+    fixed_variables: [all four benchmark runs as committed]
+    metrics: [MAP, MRR, Hit@1, Hit@10, mean/median first rank]
+    purpose: Internal consistency of the frozen baseline before any new claim is built on it.
+    implementation: research/scripts/artifact_analysis.py::x0_reproduction
+    results: research/results/X0_artifact_reproduction/
+    success_criterion: max absolute difference < 1e-9
+
+  - id: X1
+    name: stage1_coverage
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: Stage-1 coverage C(K) (share of queries with >= 1 cover in the top K) is low at K = 30 and heavy-tailed in K.
+    independent_variables: [K in 1..14999, encoder (runs 1, 2, 4)]
+    fixed_variables: [benchmark protocol]
+    metrics: [coverage C(K) with work-level CI, shortlist recall at K = 30]
+    purpose: RQ1 ceiling; exact upper bound on Hit@1 of any reranker at every K.
+    implementation: research/scripts/artifact_analysis.py::x1_coverage
+    results: research/results/X1_stage1_coverage/
+
+  - id: X2
+    name: failure_decomposition_K30
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: At K = 30 most failures are class A (no cover in the shortlist), not reranking errors.
+    independent_variables: [run, hub correction on/off]
+    fixed_variables: [K = 30]
+    metrics: [share A, B (demoted / not promoted), R; reranker efficiency R | covered; hub transitions]
+    purpose: RQ4/RQ6 at the only measured K.
+    implementation: research/scripts/artifact_analysis.py::x2_failure_decomposition
+    results: research/results/X2_failure_decomposition_K30/
+
+  - id: X3
+    name: compute_frontier_measured
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: The hybrid reaches comparable Hit@1 to exhaustive alignment at ~500x fewer alignments; MAP lags.
+    metrics: [MAP, MRR, Hit@1, Hit@10 vs DTW pairs/query and ms/query]
+    purpose: RQ7 with measured points only.
+    implementation: research/scripts/artifact_analysis.py::x3_compute_frontier
+    results: research/results/X3_compute_frontier_measured/
+
+  - id: X4
+    name: oracle_allocation_bound
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: Per-query variation in the first-cover rank leaves large headroom for adaptive shortlist size.
+    metrics: [oracle coverage vs mean pairs; pairs needed to match fixed K = 30]
+    purpose: RQ3 upper bound. Not a policy; motivates D1/E1.
+    implementation: research/scripts/artifact_analysis.py::x4_oracle_allocation
+    results: research/results/X4_oracle_allocation_bound/
+
+  - id: X5
+    name: paired_ablations_benchmark
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: Resolution, hub correction, reranking and encoder training each change AP with intervals excluding zero.
+    metrics: [paired delta AP, Hit@1, Hit@10]
+    purpose: RQ6/Series H/I from existing runs.
+    implementation: research/scripts/artifact_analysis.py::x5_paired_ablations
+    results: research/results/X5_paired_ablations_benchmark/
+
+  - id: X6
+    name: dev_benchmark_transfer
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: The 20-query development protocol cannot predict benchmark behaviour because its shortlist recall is near 1.
+    purpose: Section 31 of the brief.
+    implementation: research/scripts/artifact_analysis.py::x6_dev_transfer
+    results: research/results/X6_dev_benchmark_transfer/
+
+  - id: X7
+    name: training_scale
+    evidence: ARTIFACT-ANALYSIS
+    status: done
+    hypothesis: Stage-1 quality is data- and duration-limited; the 150-epoch run has plateaued.
+    purpose: Series I from existing checkpoints' logs.
+    implementation: research/scripts/artifact_analysis.py::x7_training_scale
+    results: research/results/X7_training_scale/
+
+  # ------------------------------------------------------------------ LOCAL (author's machine)
+  - id: A1
+    name: k_sweep_long384
+    evidence: LOCAL-FULL
+    status: registered, not executed
+    tier: 1
+    hypothesis: >
+      Hybrid MAP and Hit@1 rise with K while coverage rises, with diminishing returns; reranker efficiency
+      (Hit@1 | covered) falls as K grows because more hubs enter the shortlist. Also reproduces the frozen run-4
+      result exactly at K = 30 (serves as the baseline reproduction).
+    independent_variables: {K: [5, 10, 20, 30, 50, 100, 200, 500]}
+    fixed_variables: [encoder_full_long, alpha 0.10, lambda 0.6 (mean, 200 probes), 384 frames, profile-cosine rotation]
+    systems: [hyb (alpha locked), rr (alpha 0), hub (hub-corrected, alpha locked)]
+    metrics: [MAP, MRR, Hit@1, Hit@10, Hit@100, first rank, coverage, shortlist recall, pairs/query, ms/query]
+    dependencies: [Da-TACOS benchmark HPCP, runs/encoder_full_long/encoder_best.pt, reports/results/hybrid_calibration_long384.json,
+                   reports/results/hubness_correction_n384.json, runs/probe_reference/ cache (reused if present)]
+    runtime_budget: "~2.3 h alignment (6.5e6 pairs at ~1.27 ms/pair, 384 frames) + ~5 min Stage 1; resumable in 500-query blocks"
+    memory: "~1 GB for the 13,000 x 15,000 float32 score matrix + features"
+    command: see research/LOCAL_EXPERIMENTS.md step 3
+    implementation: research/scripts/local/run_shortlist_sweep.py
+    results: research/results/A1_k_sweep_long384/
+    success_criterion: validator passes, including reproduction PASS at K = 30
+    scientific_purpose: RQ1, RQ4, RQ7; input to B1, D1, E1
+
+  - id: B1
+    name: failure_by_K
+    evidence: ANALYSIS of LOCAL-FULL
+    status: registered, depends on A1
+    hypothesis: Class A dominates at small K; as K grows, class B (and its hub subclass) takes a growing share.
+    fixed_variables: [hub class = rank-1 item with probe reference >= 95th percentile of the catalogue (fixed in advance)]
+    implementation: research/scripts/analyze_local.py::b1
+    results: research/results/B1_failure_by_K/
+
+  - id: D1
+    name: query_uncertainty
+    evidence: ANALYSIS of LOCAL-FULL
+    status: registered, depends on A1
+    hypothesis: Label-free Stage-1 signals predict "no cover in the top 30" better than chance (AUROC > 0.5, CI excluding 0.5).
+    independent_variables: [signals: top1, margins, top-10/100 statistics, entropy, row statistics, k-occurrence, hub reference]
+    fixed_variables: [L2 logistic regression (lambda 1.0), 5-fold work-disjoint cross-fitting, seed 20260817]
+    metrics: [cross-fitted AUROC with work-level CI, univariate AUROCs]
+    implementation: research/scripts/analyze_local.py::d1_e1
+    results: research/results/D1_query_uncertainty/
+
+  - id: E1
+    name: adaptive_k
+    evidence: ANALYSIS of LOCAL-FULL
+    status: registered, depends on A1 and D1
+    hypothesis: A three-tier adaptive K beats fixed K at equal mean alignment budget.
+    independent_variables: {menu: [[10, 30, 100], [10, 50, 200]], budget: [10, 20, 30, 50, 100]}
+    fixed_variables: [thresholds fit on training folds only, direction searched (more or less K when uncertain), hub-corrected hybrid]
+    metrics: [policy MAP / Hit@1 vs fixed K = budget, paired work-level delta, realised mean K]
+    implementation: research/scripts/analyze_local.py::d1_e1
+    results: research/results/E1_adaptive_k/
+    success_criterion: >
+      Claimed as an improvement ONLY if the delta-AP interval excludes zero AND realised mean K <= budget.
+      Otherwise reported as a negative result.
+
+  - id: F1
+    name: stage1_variants
+    evidence: LOCAL-FULL
+    status: registered, not executed
+    tier: 1
+    hypothesis: >
+      Cheap Stage-1 changes raise coverage at fixed K without retraining: test-time rotations (ttr), windowed
+      multi-vector MaxSim (win_max), its fusion with the global vector (win_fuse), and Stage-1 hubness correction (s1_hub).
+      Training-scale series I: coverage improves 1,500 -> 4,780 works and 60 -> 150 epochs (already expected from X7).
+    independent_variables: [Stage-1 scorer, checkpoint]
+    fixed_variables: [3 windows of 60% length at offsets 0/20/40%, equal-weight fusion, s1_hub lambda on calibration Stage-1 MAP (grid 0..1)]
+    metrics: [coverage and shortlist recall at K in 1..1000, MAP; paired delta coverage@30/@100 vs global:full_long]
+    runtime_budget: "~15-30 min (embeddings for 3 checkpoints, 12 rotations, 3 windows; dot products in 500-query chunks)"
+    command: see research/LOCAL_EXPERIMENTS.md step 4
+    implementation: research/scripts/local/run_stage1_variants.py
+    results: research/results/F1_stage1_variants/
+    success_criterion: validator passes; a variant is an improvement only if its paired coverage@30 interval excludes zero
+    scientific_purpose: RQ5 (local / multi-vector), RQ6 (hubness in Stage 1), series I
+
+  - id: H1
+    name: alignment_ablation
+    evidence: LOCAL-FULL
+    status: registered, not executed
+    tier: 2
+    hypothesis: Inside a fixed shortlist, 384 frames beats 96, and key handling (profile rotation) beats none; exhaustive 12-rotation DTW adds little over the profile heuristic.
+    independent_variables: {rotation: [none, profile_cosine, exhaustive_dtw], frames: [96, 384]}
+    fixed_variables: [K = 30 shortlist from encoder_full_long, rerank only (alpha = 0)]
+    runtime_budget: "none/profile: ~10 min total; exhaustive: ~14 min at 96 + ~99 min at 384"
+    command: see research/LOCAL_EXPERIMENTS.md step 5
+    implementation: research/scripts/local/run_alignment_ablation.py
+    results: research/results/H1_alignment_ablation/
+
+  - id: I2
+    name: longer_training
+    evidence: LOCAL-FULL
+    status: registered, OPTIONAL, not recommended now
+    tier: 3
+    hypothesis: More epochs improve Stage-1 coverage.
+    evidence_against_running: >
+      X7: validation MAP slope over epochs 121-150 is -0.00013 per epoch (plateau; best at 138). Expected gain is small
+      relative to ~4.6 h of training. Run only if tier 1-2 finish and time remains.
+    command: python scripts/train_encoder.py --config configs/full_train.yaml --set training.epochs=300 --set encoder.run_name=encoder_full_300

@@ -1,0 +1,7 @@
+experiment_id: X4
+evidence: ARTIFACT-ANALYSIS
+script: research/scripts/artifact_analysis.py
+seed: 20260817
+n_boot: 10000
+sources:
+- reports/results/benchmark_per_query*.csv

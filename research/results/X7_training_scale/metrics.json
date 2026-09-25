@@ -1,0 +1,70 @@
+{
+  "experiment_id": "X7",
+  "evidence": "ARTIFACT-ANALYSIS",
+  "sources": [
+    "reports/results/training_summary_*.json",
+    "reports/results/training_history_*.csv",
+    "reports/results/benchmark*.json"
+  ],
+  "validation": {
+    "1,500 works, 60 ep": {
+      "best_val_map": 0.18097026232938931,
+      "best_epoch": 50,
+      "epochs": 60,
+      "train_works": 1500,
+      "total_seconds": 2220.7512084169975,
+      "val_map_slope_last30_per_epoch": 0.001023340139320931,
+      "val_map_mean_last30": 0.16156958670092184
+    },
+    "4,780 works, 60 ep": {
+      "best_val_map": 0.31870621265987625,
+      "best_epoch": 58,
+      "epochs": 60,
+      "train_works": 4780,
+      "total_seconds": 3369.4670569590016,
+      "val_map_slope_last30_per_epoch": 0.0021618576394959064,
+      "val_map_mean_last30": 0.29372809074457185
+    },
+    "4,780 works, 150 ep": {
+      "best_val_map": 0.43057073753309877,
+      "best_epoch": 138,
+      "epochs": 150,
+      "train_works": 4780,
+      "total_seconds": 8361.515161458003,
+      "val_map_slope_last30_per_epoch": -0.0001266209548443645,
+      "val_map_mean_last30": 0.42130464059313916
+    }
+  },
+  "benchmark_stage1": {
+    "1,500 works, 60 ep": {
+      "stage1_MAP": 0.01008277727449048,
+      "stage1_median_first_rank": 185.0,
+      "coverage_K30": {
+        "estimate": 0.18661538461538463,
+        "ci_low": 0.17546153846153847,
+        "ci_high": 0.19792307692307692,
+        "n_groups": 1000
+      }
+    },
+    "4,780 works, 60 ep": {
+      "stage1_MAP": 0.03437645976921654,
+      "stage1_median_first_rank": 59.0,
+      "coverage_K30": {
+        "estimate": 0.38976923076923076,
+        "ci_low": 0.37415384615384617,
+        "ci_high": 0.4052307692307692,
+        "n_groups": 1000
+      }
+    },
+    "4,780 works, 150 ep": {
+      "stage1_MAP": 0.07601250555082811,
+      "stage1_median_first_rank": 26.0,
+      "coverage_K30": {
+        "estimate": 0.5219230769230769,
+        "ci_low": 0.5052307692307693,
+        "ci_high": 0.538,
+        "n_groups": 1000
+      }
+    }
+  }
+}

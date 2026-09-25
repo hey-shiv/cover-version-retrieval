@@ -1,0 +1,180 @@
+{
+  "experiment_id": "X0",
+  "evidence": "ARTIFACT-REPRODUCTION",
+  "sources": [
+    "reports/results/benchmark.json",
+    "reports/results/benchmark_full96.json",
+    "reports/results/benchmark_full384.json",
+    "reports/results/benchmark_long384.json",
+    "reports/results/benchmark_per_query.csv",
+    "reports/results/benchmark_per_query_full96.csv",
+    "reports/results/benchmark_per_query_full384.csv",
+    "reports/results/benchmark_per_query_long384.csv"
+  ],
+  "systems": {
+    "run1/global_embedding": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run1/hybrid_K30_alpha0.05": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run1/rerank_only_K30_alpha0.00": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run1/classical_alignment": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run2/global_embedding": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run2/hybrid_K30_alpha0.15": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run2/rerank_only_K30_alpha0.00": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run2/classical_alignment": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run2/hybrid_hubcorr_K30_alpha0.15": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run2/classical_alignment_hubcorr": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run3/global_embedding": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run3/hybrid_K30_alpha0.15": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run3/rerank_only_K30_alpha0.00": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run3/hybrid_hubcorr_K30_alpha0.15": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run4/global_embedding": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run4/hybrid_K30_alpha0.10": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run4/rerank_only_K30_alpha0.00": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    },
+    "run4/hybrid_hubcorr_K30_alpha0.10": {
+      "max_abs_diff": 0.0,
+      "diff_MAP": 0.0,
+      "diff_MRR": 0.0,
+      "diff_Hit@1": 0.0,
+      "diff_Hit@10": 0.0,
+      "diff_mean_first_rank": 0.0,
+      "diff_median_first_rank": 0.0
+    }
+  },
+  "max_abs_diff_overall": 0.0,
+  "pass": true
+}

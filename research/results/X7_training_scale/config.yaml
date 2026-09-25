@@ -1,0 +1,9 @@
+experiment_id: X7
+evidence: ARTIFACT-ANALYSIS
+script: research/scripts/artifact_analysis.py
+seed: 20260817
+n_boot: 10000
+sources:
+- reports/results/training_summary_*.json
+- reports/results/training_history_*.csv
+- reports/results/benchmark*.json

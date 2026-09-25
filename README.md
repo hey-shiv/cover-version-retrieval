@@ -98,7 +98,7 @@ The alignment code is written from the textbook DTW recurrence (Müller, *FMP* �
 
 **3 · Resolution mattered more than the algorithm.** Averaging a recording down to 96 frames blurs its harmonic rhythm. At 384 frames, development MAP for classical alignment rose from 0.248 to 0.384. That is only affordable inside the 30-item shortlist ([D-019](notes/decisions.md)).
 
-**4 · Data beat architecture.** The same encoder trained on all 4,780 works instead of 1,500 went from 0.181 to 0.319 validation MAP. Training to 150 epochs took it to 0.431, and it was still climbing ([D-020](notes/decisions.md), [D-021](notes/decisions.md)).
+**4 · Data beat architecture.** The same encoder trained on all 4,780 works instead of 1,500 went from 0.181 to 0.319 validation MAP. Training to 150 epochs took it to 0.431 (best at epoch 138); over the last 30 epochs it was flat, so more epochs alone are unlikely to help much ([D-020](notes/decisions.md), [D-021](notes/decisions.md), [research/results/X7](research/results/X7_training_scale/metrics.json)).
 
 **5 · A small test set lied twice.** The 20-query development protocol preferred the hybrid (reversed at scale). Later it said reranking hurts a strong Stage 1 (−0.157), while the benchmark showed it helps (+0.037, interval excluding zero) ([D-022](notes/decisions.md)).
 
@@ -271,7 +271,7 @@ From a fresh clone with the same data, the manifests rebuild byte-identically, t
 
 In the order the evidence asks for:
 
-1. **Push Stage-1 recall further:** more epochs, a larger K, multi-vector (per-section) embeddings.
+1. **Push Stage-1 coverage further:** a larger or adaptive K, multi-vector (per-section) embeddings, more training data. Registered and ready to run in [research/](research/LOCAL_EXPERIMENTS.md).
 2. **Classical alignment at 384 frames + hubness correction** over the full benchmark (about 42 h).
 3. **Test-time rotation matching at benchmark scale** (12× the query-embedding cost).
 4. **Local alignment** (Qmax-style) against subsequence DTW, for covers with changed structure.

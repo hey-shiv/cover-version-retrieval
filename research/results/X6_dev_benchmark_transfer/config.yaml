@@ -1,0 +1,8 @@
+experiment_id: X6
+evidence: ARTIFACT-ANALYSIS
+script: research/scripts/artifact_analysis.py
+seed: 20260817
+n_boot: 10000
+sources:
+- reports/results/hybrid_dev*.json
+- reports/results/benchmark*.json
