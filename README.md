@@ -27,7 +27,7 @@ A cover changes the key, the tempo, the instruments, the singer, sometimes the s
 >
 > **Stage 2 learns to listen closely.** Each of those 30 is key-rotated and **aligned frame by frame** with subsequence DTW, and the alignment decides the final order.
 
-It is built from textbook recurrences, deterministic from a single seed, covered by 119 tests, and evaluated four times on the full Da-TACOS benchmark with every setting locked beforehand.
+It is built from textbook recurrences, deterministic from a single seed, covered by 142 tests, and evaluated four times on the full Da-TACOS benchmark with every setting locked beforehand.
 
 The first of those evaluations was a **negative result**. This README is mostly about what that result taught.
 
@@ -162,13 +162,17 @@ Paired work-level bootstrap (10,000 resamples), ΔAP [95% CI]: hybrid − global
 
 Full write-ups: [improvement_experiments.md](reports/improvement_experiments.md) · [error_analysis.md](reports/error_analysis.md) · [hybrid_results.md](reports/hybrid_results.md) · [dataset_profile.md](reports/dataset_profile.md)
 
+## Paper
+
+The draft paper is in [`paper/`](paper/) ([PDF](paper/main.pdf)): *Where Two-Stage Cover Song Retrieval Loses Its Covers*. Every number in it is generated from the result files, and the folder includes the audits behind it (repository, results, novelty, reviewer, citations). Status and remaining work: [`paper/README.md`](paper/README.md).
+
 ## Run it
 
 ```bash
 git clone https://github.com/hey-shiv/cover-version-retrieval && cd cover-version-retrieval
 python3.12 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"        # add ".[faiss]" for the optional FAISS backend
-pytest                          # 119 tests, including a synthetic end-to-end pipeline
+pytest                          # 142 tests, including a synthetic end-to-end pipeline
 ```
 
 Python 3.11 or newer (developed on 3.12). No data needed for the tests. To run everything on synthetic data, writing to `runs/smoke/` and never to `reports/`:
@@ -273,6 +277,7 @@ From a fresh clone with the same data, the manifests rebuild byte-identically, t
 
 In the order the evidence asks for:
 
+0. **A strong baseline through the same analysis:** MOVE or Re-MOVE on the CREMA-PCP features Da-TACOS ships. Audio models such as Discogs-VINet cannot run here, because Da-TACOS has no audio.
 1. **Carry the fused Stage 1 further:** window count, length and fusion weight chosen on calibration works (only one setting has been tested), and test-time key rotations end to end. Adaptive K was tested and did not help.
 2. **Classical alignment at 384 frames + hubness correction** over the full benchmark (about 42 h).
 3. **A reranker that holds up at large K.** From K ≈ 200 most failures are covers outranked inside the list; hub correction helps more as K grows ([B1](research/results/B1_failure_by_K/metrics.json)).

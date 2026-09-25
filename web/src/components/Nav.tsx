@@ -19,6 +19,7 @@ const STAGES = [
 ]
 
 export const REPO_URL = 'https://github.com/hey-shiv/cover-version-retrieval'
+export const PAPER_URL = `${REPO_URL}/blob/main/paper/main.pdf`
 
 export function Nav() {
   const [progress, setProgress] = useState(0)
@@ -76,6 +77,9 @@ export function Nav() {
             <a href={l.href}>{l.label}</a>
           </li>
         ))}
+        <li className="keep">
+          <a href={PAPER_URL}>Paper ↗</a>
+        </li>
         <li className="keep">
           <a href={REPO_URL}>GitHub ↗</a>
         </li>

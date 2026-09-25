@@ -3,6 +3,7 @@ import { Chapter, Caption, Seg } from '../components/Chapter'
 import { results, type ClassPoint, type KPoint, type Research } from '../data/results'
 import { benchmarkRuns } from '../data/benchmark-data'
 import { useWidth } from '../lib/hooks'
+import { PAPER_URL } from '../components/Nav'
 import { linScale, logScale } from '../lib/format'
 
 /**
@@ -52,6 +53,21 @@ export function Beyond() {
         <Adaptive res={res} />
       </div>
       <Stage1 res={res} />
+      <div className="split">
+        <div className="body prose">
+          <h3 className="sub">The argument, in one paragraph</h3>
+          <p>
+            In coarse-to-fine cover retrieval, the shortlist is a measurable bottleneck. Alignment can only reorder covers the first stage admits. At
+            K = 30 exclusion is the main failure, and improving the first stage produced most of the gains. Enlarging the shortlist keeps paying but
+            hands the bottleneck to the reranker. A 20-query development set could not have shown any of this.{' '}
+            <a href={PAPER_URL}>Read the paper ↗</a>
+          </p>
+        </div>
+        <aside className="aside">
+          The paper is a draft. Every number in it is generated from the same result files as this page, and its audits list what is still
+          unverified.
+        </aside>
+      </div>
     </Chapter>
   )
 }

@@ -1,0 +1,93 @@
+{
+  "experiment_id": "P2",
+  "evidence": "ANALYSIS of FROZEN-RUN + DEV (+ LOCAL-FULL for key rotation)",
+  "sources": [
+    "reports/results/hybrid_dev*.json",
+    "reports/results/classical_dev.json",
+    "reports/results/hubness_correction.json",
+    "reports/results/benchmark_per_query*.csv",
+    "research/results/H1_alignment_ablation/per_query.csv"
+  ],
+  "comparisons": [
+    {
+      "question": "hybrid (1,500-work encoder) minus exhaustive classical alignment, 96 frames",
+      "dev": {
+        "delta": 0.014084796534827734,
+        "ci_low": -0.009496875644799334,
+        "ci_high": 0.042029287832268385,
+        "n_groups": 20
+      },
+      "benchmark": {
+        "delta": -0.06505666283713553,
+        "ci_low": -0.07111740344863261,
+        "ci_high": -0.05913434273099439,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "benchmark_source": "run 1",
+      "dev_interval_includes_zero": true,
+      "benchmark_interval_excludes_zero": true,
+      "point_estimates_disagree_in_sign": true
+    },
+    {
+      "question": "reranking minus Stage 1 (150-epoch encoder, 384 frames)",
+      "dev": {
+        "delta": -0.1569576001483896,
+        "ci_low": -0.3400939436112133,
+        "ci_high": 0.02258075212433759,
+        "n_groups": 20
+      },
+      "benchmark": {
+        "delta": 0.03676553294355409,
+        "ci_low": 0.034038030020844476,
+        "ci_high": 0.03949463913844098,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "benchmark_source": "run 4",
+      "dev_interval_includes_zero": true,
+      "benchmark_interval_excludes_zero": true,
+      "point_estimates_disagree_in_sign": true
+    },
+    {
+      "question": "hub correction of exhaustive classical alignment, 96 frames",
+      "dev": {
+        "delta": 0.04120891066655106,
+        "ci_low": -0.04484967895243019,
+        "ci_high": 0.13076152638199198,
+        "n_groups": 20
+      },
+      "benchmark": {
+        "delta": 0.05211418874166239,
+        "ci_low": 0.048453701632547086,
+        "ci_high": 0.05582530129005272,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "benchmark_source": "run 2",
+      "dev_interval_includes_zero": true,
+      "benchmark_interval_excludes_zero": true,
+      "point_estimates_disagree_in_sign": false
+    },
+    {
+      "question": "profile-cosine key rotation minus no key handling, 96 frames",
+      "dev": {
+        "delta": -0.055247842597169215,
+        "ci_low": -0.21500603643456553,
+        "ci_high": 0.09774933573221789,
+        "n_groups": 20
+      },
+      "benchmark": {
+        "delta": 0.030790166783076924,
+        "ci_low": 0.027544068949769233,
+        "ci_high": 0.03410225111857692,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "benchmark_source": "H1 (LOCAL-FULL, K = 30 rerank only)",
+      "dev_interval_includes_zero": true,
+      "benchmark_interval_excludes_zero": true,
+      "point_estimates_disagree_in_sign": true
+    }
+  ]
+}
