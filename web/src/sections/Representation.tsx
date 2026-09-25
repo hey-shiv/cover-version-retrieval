@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Chapter, Caption } from '../components/Chapter'
 import { Heatmap } from '../components/Heatmap'
 import { profileFigure } from '../data/figures'
@@ -11,7 +11,26 @@ const N = 96
 export function Representation() {
   const pre = profileFigure.preprocessed
   const raw = profileFigure.raw_pixels
-  const [t, setT] = useState(52)
+  const [pos, setPos] = useState(52)
+  const held = useRef(false)
+  const t = Math.min(N - 1, Math.floor(pos))
+  const setT = (v: number | ((x: number) => number)) =>
+    setPos((p) => (typeof v === 'function' ? v(Math.floor(p)) : v))
+
+  // Slow, endless drift along the strip; pauses only while the pointer is on it.
+  useEffect(() => {
+    const SPEED = 1.2 // frames per second
+    let raf = 0
+    let last = performance.now()
+    const tick = (now: number) => {
+      const dt = Math.min(0.1, (now - last) / 1000)
+      last = now
+      if (!held.current) setPos((p) => (p + dt * SPEED) % N)
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [])
   const per = RAW / N
   const rawFrom = Math.round(t * per)
   const rawTo = Math.round((t + 1) * per) - 1
@@ -67,6 +86,8 @@ export function Representation() {
             style={{ aspectRatio: '96 / 22' }}
             onPointerMove={onMove}
             onPointerDown={onMove}
+            onPointerEnter={() => (held.current = true)}
+            onPointerLeave={() => (held.current = false)}
             onKeyDown={onKey}
             tabIndex={0}
             role="slider"
@@ -76,9 +97,9 @@ export function Representation() {
             aria-valuenow={t}
           >
             <Heatmap data={pre} ramp="ember" ariaLabel="Preprocessed HPCP, 12 by 96" />
-            <div className="cursor" style={{ left: `${((t + 0.5) / N) * 100}%` }} />
+            <div className="cursor" style={{ left: `${(pos / N) * 100}%` }} />
           </div>
-          <div className="scrub-hint label">Drag across the strip · ← → keys</div>
+          <div className="scrub-hint label">Drifts on its own · hover or drag to take over · ← → keys</div>
         </div>
 
         <div className="hpcp-readout">
