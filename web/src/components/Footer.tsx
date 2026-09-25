@@ -1,4 +1,4 @@
-import { REPO_URL } from './Nav'
+import { PAPER_URL, REPO_URL } from './Nav'
 
 const REFS = [
   'Yesiler et al. Da-TACOS: A Dataset for Cover Song Identification and Understanding. ISMIR 2019.',
@@ -21,6 +21,9 @@ export function Footer() {
           <p className="footer-answer">Sometimes. This page shows when, and why not.</p>
           <p>
             <a href={REPO_URL}>Code, reports and every result file on GitHub ↗</a>
+          </p>
+          <p>
+            <a href={PAPER_URL}>The paper (draft PDF), built from the same result files ↗</a>
           </p>
         </div>
         <div>

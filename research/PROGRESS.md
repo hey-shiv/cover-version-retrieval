@@ -74,9 +74,24 @@ Nothing was re-run in the cloud; this reads the files pushed in `ca67dea`.
 - **Outputs:** fig12, table t13 and `ATwo*` macros were added. The paper, audits (round 3), RQ5, README and website were updated.
 - **Housekeeping:** re-running the analyses and figures only changed timestamps in unrelated `runtime.json` and PDF files; those changes were reverted.
 
+## Paper phase (2026-09-25)
+
+The paper was rebuilt around the audited evidence. Everything is in `paper/`; see `paper/README.md`.
+- **Audits.** Repository, baseline specification and result verification. Two claims from the brief were corrected:
+  - "validation still drifting upward at epoch 150": the history is flat over the last 30 epochs as the learning rate decays to zero;
+  - "119 tests": 142 are collected.
+- **New analyses** (`make_paper_assets.py`):
+  - P1: rank-1 false positives concentrate in high-hub-reference candidates without correction, and are near-uniform with it;
+  - P2: the development protocol was inconclusive in 4 of 4 paired comparisons and had the wrong sign in 3.
+- **Literature.** DiVers, CLEWS, LIVI and unified track/version ID were added.
+  - The MIREX 2024/2025 numbers and Qmax 0.333 could not be verified here, because the proxy blocks primary sources. MIREX numbers are kept out of the paper; Qmax is flagged in `citation_audit.md`.
+  - Re-MOVE is ISMIR 2020, not TASLP.
+- **Paper.** `main.tex` compiles to a 21-page PDF (TeX Live installed in the cloud session) with 0 undefined references and 0 overfull boxes. Every number is a generated macro, enforced by `check_paper_consistency.py`.
+- **Correction to earlier advice.** Discogs-VINet cannot be run on Da-TACOS, which has no audio. The feasible strong baseline is MOVE or Re-MOVE on CREMA-PCP.
+
 ## Current state
 
-**PAPER READY WITH MINOR ADDITIONS**, as an empirical analysis paper **with one registered positive intervention** (global + window fusion in Stage 1). This is not a method paper.
+**PAPER READY WITH MINOR REVISIONS** (paper phase, see `paper/README.md`), as an empirical analysis paper **with one registered positive intervention** (global + window fusion in Stage 1). This is not a method paper.
 
 What is supported, by executed and validated experiments:
 - the K sweep: MAP 0.122 → 0.212 from K = 30 to 500, not saturated;

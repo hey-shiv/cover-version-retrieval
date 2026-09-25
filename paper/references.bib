@@ -1,122 +1,191 @@
-% Entries marked note={[R]} come from notes/literature/novelty_assessment.md (verified against Crossref/arXiv/ISMIR).
-% Entries marked note={[S]} were confirmed only by web search in this environment; re-verify before submission.
+% Verification tag in the `verification` field (ignored by BibTeX) (details and sources: paper/citation_audit.md):
+%   [C] metadata matches a Crossref record stored in notes/literature/sources/ (title, DOI, year, venue, surnames)
+%   [G] read on the authors' own GitHub README
+%   [S] seen only in web-search results in this environment (primary pages were blocked); re-read before submission
+% Given names are written in full only where a source listed them; otherwise initials.
 
 @inproceedings{datacos,
   author = {Yesiler, Furkan and Tralie, Chris and Correya, Albin and Silva, Diego F. and Tovstogan, Philip and G{\'o}mez, Emilia and Serra, Xavier},
   title = {{Da-TACOS}: A Dataset for Cover Song Identification and Understanding},
-  booktitle = {Proc. ISMIR}, year = {2019}, pages = {327--334}, note = {[R]}}
+  booktitle = {Proc. 20th International Society for Music Information Retrieval Conference (ISMIR)}, year = {2019}, pages = {327--334},
+  verification = {[C][G]}}
 
 @article{serra2008,
-  author = {Serr{\`a}, J. and G{\'o}mez, E. and Herrera, P. and Serra, X.},
+  author = {Serr{\`a}, Joan and G{\'o}mez, Emilia and Herrera, Perfecto and Serra, Xavier},
   title = {Chroma Binary Similarity and Local Alignment Applied to Cover Song Identification},
-  journal = {IEEE Trans. Audio, Speech, and Language Processing}, year = {2008}, volume = {16}, number = {6}, pages = {1138--1151},
-  doi = {10.1109/TASL.2008.924595}, note = {[R]}}
+  journal = {IEEE Transactions on Audio, Speech, and Language Processing}, year = {2008}, volume = {16}, number = {6}, pages = {1138--1151},
+  doi = {10.1109/TASL.2008.924595}, verification = {[C]}}
 
 @article{serra2009qmax,
-  author = {Serr{\`a}, J. and Serra, X. and Andrzejak, R. G.},
+  author = {Serr{\`a}, Joan and Serra, Xavier and Andrzejak, Ralph G.},
   title = {Cross Recurrence Quantification for Cover Song Identification},
-  journal = {New Journal of Physics}, year = {2009}, volume = {11}, pages = {093017}, doi = {10.1088/1367-2630/11/9/093017}, note = {[R]}}
+  journal = {New Journal of Physics}, year = {2009}, volume = {11}, pages = {093017}, doi = {10.1088/1367-2630/11/9/093017}, verification = {[S]}}
+
+@phdthesis{gomez2006,
+  author = {G{\'o}mez, Emilia},
+  title = {Tonal Description of Music Audio Signals},
+  school = {Universitat Pompeu Fabra}, year = {2006}, verification = {[S]}}
+
+@article{sakoe1978,
+  author = {Sakoe, Hiroaki and Chiba, Seibi},
+  title = {Dynamic Programming Algorithm Optimization for Spoken Word Recognition},
+  journal = {IEEE Transactions on Acoustics, Speech, and Signal Processing}, year = {1978}, volume = {26}, number = {1}, pages = {43--49},
+  doi = {10.1109/TASSP.1978.1163055}, verification = {[S]}}
+
+@book{muller2015,
+  author = {M{\"u}ller, Meinard},
+  title = {Fundamentals of Music Processing: Audio, Analysis, Algorithms, Applications},
+  publisher = {Springer}, year = {2015}, doi = {10.1007/978-3-319-21945-5}, verification = {[S]}}
 
 @inproceedings{move2020,
-  author = {Yesiler, F. and Serr{\`a}, J. and G{\'o}mez, E.},
+  author = {Yesiler, Furkan and Serr{\`a}, Joan and G{\'o}mez, Emilia},
   title = {Accurate and Scalable Version Identification Using Musically-Motivated Embeddings},
-  booktitle = {Proc. ICASSP}, year = {2020}, doi = {10.1109/ICASSP40776.2020.9053793}, note = {[R]}}
+  booktitle = {Proc. IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, year = {2020},
+  doi = {10.1109/ICASSP40776.2020.9053793}, verification = {[C]}}
 
 @inproceedings{remove2020,
-  author = {Yesiler, F. and Serr{\`a}, J. and G{\'o}mez, E.},
+  author = {Yesiler, Furkan and Serr{\`a}, Joan and G{\'o}mez, Emilia},
   title = {Less is More: Faster and Better Music Version Identification with Embedding Distillation},
-  booktitle = {Proc. ISMIR}, year = {2020}, note = {[R] arXiv:2010.03284}}
+  booktitle = {Proc. 21st International Society for Music Information Retrieval Conference (ISMIR)}, year = {2020},
+  verification = {[G]}, eprint = {2010.03284}, archivePrefix = {arXiv}}
 
 @inproceedings{bytecover,
-  author = {Du, X. and Yu, Z. and Zhu, B. and Chen, X. and Ma, Z.},
+  author = {Du, Xingjian and Yu, Zhesong and Zhu, Bilei and Chen, Xiaoou and Ma, Zejun},
   title = {{ByteCover}: Cover Song Identification via Multi-Loss Training},
-  booktitle = {Proc. ICASSP}, year = {2021}, pages = {551--555}, doi = {10.1109/ICASSP39728.2021.9414128}, note = {[R]}}
+  booktitle = {Proc. IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, year = {2021}, pages = {551--555},
+  doi = {10.1109/ICASSP39728.2021.9414128}, verification = {[C]}, eprint = {2010.14022}, archivePrefix = {arXiv}}
 
 @inproceedings{bytecover2,
   author = {Du, Xingjian and Chen, Ke and Wang, Zijie and Zhu, Bilei and Ma, Zejun},
   title = {{ByteCover2}: Towards Dimensionality Reduction of Latent Embedding for Efficient Cover Song Identification},
-  booktitle = {Proc. ICASSP}, year = {2022}, note = {[S] authors from search result}}
+  booktitle = {Proc. IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, year = {2022}, verification = {[S]}}
 
 @inproceedings{bytecover3,
+  author = {Du, Xingjian and Wang, Zijie and Liang, Xia and Liang, Huidong and Zhu, Bilei and Ma, Zejun},
   title = {{ByteCover3}: Accurate Cover Song Identification on Short Queries},
-  booktitle = {Proc. ICASSP}, year = {2023}, note = {[S] arXiv:2303.11692; author list to be completed after reading the paper}}
+  booktitle = {Proc. IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, year = {2023}, verification = {[S]}, eprint = {2303.11692}, archivePrefix = {arXiv}}
 
 @inproceedings{coverhunter,
+  author = {Liu, Feng and Tuo, Deyi and Xu, Yinan and Han, Xintong},
   title = {{CoverHunter}: Cover Song Identification with Refined Attention and Alignments},
-  booktitle = {Proc. ICME}, year = {2023}, note = {[S] arXiv:2306.09025; author list to be completed}}
+  booktitle = {Proc. IEEE International Conference on Multimedia and Expo (ICME)}, year = {2023}, verification = {[G][S]}, eprint = {2306.09025}, archivePrefix = {arXiv}}
 
 @inproceedings{discogsvi,
-  author = {Araz, R. O. and Serra, X. and Bogdanov, D.},
+  author = {Araz, R. Oguz and Serra, Xavier and Bogdanov, Dmitry},
   title = {{Discogs-VI}: A Musical Version Identification Dataset Based on Public Editorial Metadata},
-  booktitle = {Proc. ISMIR}, year = {2024}, note = {[S] arXiv:2410.17400}}
+  booktitle = {Proc. 25th International Society for Music Information Retrieval Conference (ISMIR)}, year = {2024}, verification = {[G][S]}, eprint = {2410.17400}, archivePrefix = {arXiv}}
+
+@inproceedings{clews,
+  author = {Serr{\`a}, Joan and Araz, R. Oguz and Bogdanov, Dmitry and Mitsufuji, Yuki},
+  title = {Supervised Contrastive Learning from Weakly-Labeled Audio Segments for Musical Version Matching},
+  booktitle = {Proc. International Conference on Machine Learning (ICML)}, year = {2025}, verification = {[S]}, eprint = {2502.16936}, archivePrefix = {arXiv}}
+
+@inproceedings{divers,
+  author = {Hachmeier, Simon and Araz, R. Oguz and Bogdanov, Dmitry and J{\"a}schke, Robert and Serra, Xavier},
+  title = {Towards Robust Version Identification in the Wild: A Dataset, Benchmark, and Fine-Tuning Study},
+  booktitle = {Proc. 27th International Society for Music Information Retrieval Conference (ISMIR)}, year = {2026}, verification = {[S]}, eprint = {2608.04543}, archivePrefix = {arXiv}}
+
+@inproceedings{hachmeier2025,
+  author = {Hachmeier, Simon and J{\"a}schke, Robert},
+  title = {On the Robustness of Cover Version Identification Models: A Study Using Cover Versions from {YouTube}},
+  booktitle = {Proc. iConference}, year = {2025}, verification = {[S]}, eprint = {2501.01333}, archivePrefix = {arXiv}}
+
+@misc{araz2026unified,
+  author = {Araz, R. Oguz and Serr{\`a}, Joan and Mitsufuji, Yuki and Serra, Xavier and Bogdanov, Dmitry},
+  title = {Unified Music Identification for Tracks and Versions},
+  year = {2026}, eprint = {2608.19919}, archivePrefix = {arXiv}, verification = {[S]}}
 
 @inproceedings{livi2026,
-  author = {Affolter, J. and Martin, B. and Epure, E. V. and Meseguer-Brocal, G. and Kaplan, F.},
+  author = {Affolter, Joanne and Martin, B. and Epure, Elena V. and Meseguer-Brocal, Gabriel and Kaplan, Fr{\'e}d{\'e}ric},
   title = {Scalable Music Cover Retrieval Using Lyrics-Aligned Audio Embeddings},
-  booktitle = {Proc. ECIR}, year = {2026}, doi = {10.1007/978-3-032-21289-4_4}, note = {[S] arXiv:2601.11262}}
+  booktitle = {Proc. European Conference on Information Retrieval (ECIR)}, year = {2026}, doi = {10.1007/978-3-032-21289-4_4},
+  verification = {[S]}, eprint = {2601.11262}, archivePrefix = {arXiv}}
 
 @inproceedings{colbert,
-  author = {Khattab, O. and Zaharia, M.},
+  author = {Khattab, Omar and Zaharia, Matei},
   title = {{ColBERT}: Efficient and Effective Passage Search via Contextualized Late Interaction over {BERT}},
-  booktitle = {Proc. SIGIR}, year = {2020}, note = {[S]}}
+  booktitle = {Proc. 43rd International ACM SIGIR Conference}, year = {2020}, pages = {39--48}, verification = {[S]}}
 
 @article{aucouturier2008,
-  author = {Aucouturier, J.-J. and Pachet, F.},
+  author = {Aucouturier, Jean-Julien and Pachet, Fran{\c{c}}ois},
   title = {A Scale-Free Distribution of False Positives for a Large Class of Audio Similarity Measures},
-  journal = {Pattern Recognition}, year = {2008}, volume = {41}, number = {1}, pages = {272--284}, doi = {10.1016/j.patcog.2007.04.012}, note = {[R]}}
+  journal = {Pattern Recognition}, year = {2008}, volume = {41}, number = {1}, pages = {272--284}, doi = {10.1016/j.patcog.2007.04.012}, verification = {[C]}}
 
 @article{radovanovic2010,
-  author = {Radovanovi{\'c}, M. and Nanopoulos, A. and Ivanovi{\'c}, M.},
+  author = {Radovanovi{\'c}, Milo{\v{s}} and Nanopoulos, Alexandros and Ivanovi{\'c}, Mirjana},
   title = {Hubs in Space: Popular Nearest Neighbors in High-Dimensional Data},
-  journal = {JMLR}, year = {2010}, volume = {11}, pages = {2487--2531}, note = {[R]}}
+  journal = {Journal of Machine Learning Research}, year = {2010}, volume = {11}, pages = {2487--2531}, verification = {[S]}}
 
 @article{schnitzer2012,
-  author = {Schnitzer, D. and Flexer, A. and Schedl, M. and Widmer, G.},
+  author = {Schnitzer, Dominik and Flexer, Arthur and Schedl, Markus and Widmer, Gerhard},
   title = {Local and Global Scaling Reduce Hubs in Space},
-  journal = {JMLR}, year = {2012}, volume = {13}, pages = {2871--2902}, note = {[R]}}
+  journal = {Journal of Machine Learning Research}, year = {2012}, volume = {13}, pages = {2871--2902}, verification = {[S]}}
 
 @article{seo2022,
-  author = {Seo, J. S.},
+  author = {Seo, Jin S.},
   title = {Pairwise Similarity Normalization Based on a Hubness Score for Improving Cover Song Retrieval Accuracy},
-  journal = {IEICE Trans. Inf. \& Syst.}, year = {2022}, volume = {E105-D}, number = {5}, pages = {1130--1134}, doi = {10.1587/transinf.2021EDL8075}, note = {[R]}}
+  journal = {IEICE Transactions on Information and Systems}, year = {2022}, volume = {E105-D}, number = {5}, pages = {1130--1134},
+  doi = {10.1587/transinf.2021EDL8075}, verification = {[C]}}
 
 @article{li2018,
-  author = {Li, M. and Chen, N.},
+  author = {Li, Mingyu and Chen, Ning},
   title = {A Robust Cover Song Identification System with Two-Level Similarity Fusion and Post-Processing},
-  journal = {Applied Sciences}, year = {2018}, volume = {8}, number = {8}, pages = {1383}, doi = {10.3390/app8081383}, note = {[R]}}
+  journal = {Applied Sciences}, year = {2018}, volume = {8}, number = {8}, pages = {1383}, doi = {10.3390/app8081383}, verification = {[C]}}
 
 @article{hu2019,
-  author = {Hu, J. and Chen, N.},
+  author = {Hu, Jingyi and Chen, Ning},
   title = {Enhanced Feature Summarizing for Effective Cover Song Identification},
-  journal = {IEEE/ACM Trans. Audio, Speech, and Language Processing}, year = {2019}, volume = {27}, number = {12}, pages = {2113--2126},
-  doi = {10.1109/TASLP.2019.2942157}, note = {[R]}}
+  journal = {IEEE/ACM Transactions on Audio, Speech, and Language Processing}, year = {2019}, volume = {27}, number = {12}, pages = {2113--2126},
+  doi = {10.1109/TASLP.2019.2942157}, verification = {[C]}}
 
 @inproceedings{csls,
-  author = {Conneau, A. and Lample, G. and Ranzato, M. and Denoyer, L. and J{\'e}gou, H.},
+  author = {Conneau, Alexis and Lample, Guillaume and Ranzato, Marc'Aurelio and Denoyer, Ludovic and J{\'e}gou, Herv{\'e}},
   title = {Word Translation Without Parallel Data},
-  booktitle = {Proc. ICLR}, year = {2018}, note = {[R] arXiv:1710.04087}}
+  booktitle = {Proc. International Conference on Learning Representations (ICLR)}, year = {2018}, verification = {[C]}, eprint = {1710.04087}, archivePrefix = {arXiv}}
 
 @inproceedings{qbnorm,
-  author = {Bogolin, S.-V. and Croitoru, I. and Jin, H. and Liu, Y. and Albanie, S.},
+  author = {Bogolin, Simion-Vlad and Croitoru, Ioana and Jin, Hailin and Liu, Yang and Albanie, Samuel},
   title = {Cross Modal Retrieval with Querybank Normalisation},
-  booktitle = {Proc. CVPR}, year = {2022}, pages = {5184--5195}, doi = {10.1109/CVPR52688.2022.00513}, note = {[R]}}
+  booktitle = {Proc. IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, year = {2022},
+  doi = {10.1109/CVPR52688.2022.00513}, verification = {[C]}}
 
 @inproceedings{wang2011cascade,
-  author = {Wang, L. and Lin, J. and Metzler, D.},
+  author = {Wang, Lidan and Lin, Jimmy and Metzler, Donald},
   title = {A Cascade Ranking Model for Efficient Ranked Retrieval},
-  booktitle = {Proc. SIGIR}, year = {2011}, doi = {10.1145/2009916.2009934}, note = {[S]}}
+  booktitle = {Proc. 34th International ACM SIGIR Conference}, year = {2011}, pages = {105--114}, doi = {10.1145/2009916.2009934}, verification = {[S]}}
 
 @inproceedings{culpepper2016,
   author = {Culpepper, J. Shane and Clarke, Charles L. A. and Lin, Jimmy},
   title = {Dynamic Cutoff Prediction in Multi-Stage Retrieval Systems},
-  booktitle = {Proc. 21st Australasian Document Computing Symposium (ADCS)}, year = {2016}, doi = {10.1145/3015022.3015026}, note = {[S]}}
-
-@inproceedings{bertinmahieux2012,
-  author = {Bertin-Mahieux, T. and Ellis, D. P. W.},
-  title = {Large-Scale Cover Song Recognition Using the {2D} {Fourier} Transform Magnitude},
-  booktitle = {Proc. ISMIR}, year = {2012}, pages = {241--246}, note = {[S]}}
+  booktitle = {Proc. 21st Australasian Document Computing Symposium (ADCS)}, year = {2016}, doi = {10.1145/3015022.3015026}, verification = {[S]}}
 
 @misc{jacob2024drowning,
-  author = {Jacob, M. and Lindgren, E. and Zaharia, M. and Carbin, M. and Khattab, O. and Drozdov, A.},
+  author = {Jacob, Mathew and Lindgren, Erik and Zaharia, Matei and Carbin, Michael and Khattab, Omar and Drozdov, Andrew},
   title = {Drowning in Documents: Consequences of Scaling Reranker Inference},
-  year = {2024}, eprint = {2411.11767}, archivePrefix = {arXiv}, note = {[S]}}
+  year = {2024}, eprint = {2411.11767}, archivePrefix = {arXiv}, verification = {[S]}}
+
+@inproceedings{bertinmahieux2012,
+  author = {Bertin-Mahieux, Thierry and Ellis, Daniel P. W.},
+  title = {Large-Scale Cover Song Recognition Using the {2D} {Fourier} Transform Magnitude},
+  booktitle = {Proc. 13th International Society for Music Information Retrieval Conference (ISMIR)}, year = {2012}, pages = {241--246}, verification = {[S]}}
+
+@misc{bai2018tcn,
+  author = {Bai, Shaojie and Kolter, J. Zico and Koltun, Vladlen},
+  title = {An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling},
+  year = {2018}, eprint = {1803.01271}, archivePrefix = {arXiv}, verification = {[S]}}
+
+@inproceedings{khosla2020supcon,
+  author = {Khosla, Prannay and Teterwak, Piotr and Wang, Chen and Sarna, Aaron and Tian, Yonglong and Isola, Phillip and Maschinot, Aaron and Liu, Ce and Krishnan, Dilip},
+  title = {Supervised Contrastive Learning},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)}, year = {2020}, verification = {[S]}}
+
+@book{efron1993,
+  author = {Efron, Bradley and Tibshirani, Robert J.},
+  title = {An Introduction to the Bootstrap},
+  publisher = {Chapman \& Hall}, address = {New York}, year = {1993}, verification = {[S]}}
+
+@article{field2007,
+  author = {Field, Christopher A. and Welsh, Alan H.},
+  title = {Bootstrapping Clustered Data},
+  journal = {Journal of the Royal Statistical Society: Series B}, year = {2007}, volume = {69}, number = {3}, pages = {369--390},
+  doi = {10.1111/j.1467-9868.2007.00593.x}, verification = {[S]}}

@@ -3,7 +3,7 @@
  */
 import { results } from './results'
 
-/** `pytest --collect-only` at commit 879c9e3: 119 tests collected, 119 passed (the README still says 112). */
+/** `pytest --collect-only` on main at 1bf4107: 142 tests collected, 142 passed. */
 export const TEST_COUNT = 142
 
 export const SEED = results.dataset.seed // data/manifests/manifest_info.json
@@ -66,6 +66,7 @@ export const REPRO = [
 
 /** README → "What's next" and research/PROGRESS.md, in the order the evidence demands. */
 export const FUTURE = [
+  { id: 'baseline', title: 'A strong baseline through the same analysis', body: 'MOVE or Re-MOVE on the CREMA-PCP features Da-TACOS ships, decomposed exactly like this system. Audio models cannot run here, because Da-TACOS has no audio.', target: 'Stage 1' },
   { id: 'recall', title: 'Tune the fused Stage 1 properly', body: 'Global + window fusion lifted MAP at every K in its registered test, but only one setting (3 windows, 60%, 50/50) was ever tried. Choose it on calibration works; test key rotations end to end.', target: 'Stage 1' },
   { id: 'classical384', title: 'Classical 384 frames + hubness correction', body: 'Over the full benchmark, about 42 h of CPU. The most likely strongest system; never run.', target: 'Stage 2' },
   { id: 'ttr', title: 'A reranker that holds up at large K', body: 'From K ≈ 200 most failures are covers outranked inside the list. Hub correction helps more as K grows; stronger in-list discrimination is the open problem.', target: 'Stage 2' },
