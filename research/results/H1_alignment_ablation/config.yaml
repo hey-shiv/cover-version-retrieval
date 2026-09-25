@@ -1,0 +1,83 @@
+experiment_id: H1
+evidence: LOCAL-FULL
+args:
+  config: configs/full_train.yaml
+  set: []
+  checkpoint: runs/encoder_full_long/encoder_best.pt
+  k: 30
+  frames:
+  - 96
+  - 384
+  rotations:
+  - none
+  - profile_cosine
+  - exhaustive_dtw
+  max_queries: 0
+  out: research/results/H1_alignment_ablation
+  force: false
+config:
+  seed: 20260817
+  paths:
+    datacos_root: data/external/da-tacos
+    manifests_dir: data/manifests
+    cache_dir: data/cache
+    runs_dir: runs
+    reports_dir: reports
+  data:
+    metadata_dir: da-tacos_metadata
+    coveranalysis_features_dir: da-tacos_coveranalysis_subset_hpcp
+    benchmark_features_dir: da-tacos_benchmark_subset_hpcp
+    zenodo_record: '4717628'
+    nonfinite_policy: reject
+    min_frames: 96
+  splits:
+    seed: 20260817
+    n_calibration: 10
+    n_query: 20
+    n_distractor: 40
+    n_validation: 150
+    n_train: all
+  features:
+    layout: auto
+    n_frames: 96
+  alignment:
+    rotation_selection: profile_cosine
+    step_sizes:
+    - - 1
+      - 1
+    - - 2
+      - 1
+    - - 1
+      - 2
+    step_weights:
+    - 1.0
+    - 2.0
+    - 1.0
+    subsequence: true
+  encoder:
+    cache_frames: 512
+    input_frames: 256
+    channels: 128
+    n_blocks: 6
+    kernel_size: 3
+    embedding_dim: 128
+    dropout: 0.1
+    run_name: encoder_full_train
+  training:
+    device: cpu
+    epochs: 60
+    batch_wids: 32
+    lr: 0.001
+    weight_decay: 0.0001
+    temperature: 0.1
+    patience: 60
+    crop_min_fraction: 0.6
+    pitch_shift_augment: true
+    num_threads: 2
+  retrieval:
+    shortlist_k: 30
+    alpha_grid_step: 0.05
+    test_time_rotations: false
+    backend: numpy
+    dtw_batch_size: 4096
+  _config_path: configs/full_train.yaml

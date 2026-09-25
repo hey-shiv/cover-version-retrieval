@@ -1,0 +1,14 @@
+{
+  "none_n96_s": 68.57601391699973,
+  "none_n96_ms_per_pair": 0.17583593312051213,
+  "profile_cosine_n96_s": 67.91072933400028,
+  "profile_cosine_n96_ms_per_pair": 0.17413007521538534,
+  "exhaustive_dtw_n96_s": 808.5312917500005,
+  "exhaustive_dtw_n96_ms_per_pair": 2.0731571583333346,
+  "none_n384_s": 491.9478921250002,
+  "none_n384_ms_per_pair": 1.2614048516025647,
+  "profile_cosine_n384_s": 493.60043858300014,
+  "profile_cosine_n384_ms_per_pair": 1.265642150212821,
+  "exhaustive_dtw_n384_s": 5879.246598624999,
+  "exhaustive_dtw_n384_ms_per_pair": 15.074991278525637
+}

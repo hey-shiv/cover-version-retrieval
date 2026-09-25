@@ -36,9 +36,10 @@ The brief asks for installed skills per task. The skills installed in this envir
 
 *(One line per experiment after running `LOCAL_EXPERIMENTS.md`: ID · completed / partial / failed · wall-clock · deviations.)*
 
-- A1 · not yet run
-- F1 · not yet run
-- H1 · not yet run
+- A1 · completed · ~80 min (alignment 4708 s, 6.5M pairs, 0.72 ms/pair; probe cache reused) · reproduction of benchmark_long384.json: PASS · no deviations
+- F1 · completed · ~20 min · all three checkpoints (full_long, full_60, base_1500) · no deviations
+- H1 · completed · ~2 h 12 min · full rotation set including exhaustive_dtw · no deviations
+- Environment notes (no effect on results): the venv is uv-managed, so step 0 used `uv pip install -e ".[dev]"` instead of `pip`; pytest gave 142 passed; the step-2 sanity outputs went to a session scratch dir instead of `/tmp`, and both passed (A1 per_query.csv had 200 rows); `validate_results.py`: 43 ok, 0 failed.
 
 ## Current state
 

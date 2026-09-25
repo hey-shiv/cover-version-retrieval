@@ -1,0 +1,10 @@
+{
+  "feature_loading_s": 0.11243491699997321,
+  "embedding_s": 67.7864084580001,
+  "global_search_s": 0.07109891699997206,
+  "stage1_ranking_s": 9.116017915999919,
+  "hub_reference_s": 0.2001452499999914,
+  "align_top_kmax_s": 4708.272515957002,
+  "align_pairs": 6500000,
+  "ms_per_aligned_pair": 0.7243496178395387
+}
