@@ -17,7 +17,7 @@ Run [`LOCAL_EXPERIMENTS.md`](LOCAL_EXPERIMENTS.md) steps 0–6. That creates exa
 | `research/results/A1_k_sweep_long384/` | metrics.json, per_query.csv (13,000 rows), signals.csv (13,000 rows), candidates.csv (15,000 rows), runtime.json, config.yaml, env.json, README.md | ~10 MB | **yes** (tier 1) |
 | `research/results/F1_stage1_variants/` | metrics.json, per_query.csv (13,000 rows), runtime.json, config.yaml, env.json, README.md | ~6 MB | **yes** (tier 1) |
 | `research/results/H1_alignment_ablation/` | the same six files | ~2 MB | tier 2 |
-| `research/results/A2_k_sweep_win_fuse/` | as A1 | ~10 MB | next cycle (registered; see `LOCAL_EXPERIMENTS.md`, "Next cycle: A2") |
+| `research/results/A2_k_sweep_win_fuse/` | as A1 | ~10 MB | registered follow-up; see `LOCAL_EXPERIMENTS.md`, "Next cycle: A2" |
 
 Every file is written by a runner. Do not create, rename or edit any of them by hand.
 
@@ -67,4 +67,4 @@ If a hypothesis is not supported, adaptive K for example, the paper's thesis is 
 | A1 | `6cf9999` | yes; reproduction of `benchmark_long384.json` exact (\|Δ\| = 0) | run from a dirty tree at `e6c9c9e` (disclosed) |
 | F1 | `6cf9999` | yes; F1's reference Stage 1 equals A1's exactly | all three checkpoints |
 | H1 | `6cf9999` | yes; the locked variant equals A1's rerank-only K = 30 exactly | full rotation set including exhaustive |
-| A2 | — | — | next cycle |
+| A2 | `ca67dea` | yes; Stage-1 coverage equals F1 `win_fuse` at every K; registered criterion met | run from a dirty tree at `e3ff315` (disclosed) |

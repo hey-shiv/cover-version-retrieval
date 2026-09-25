@@ -226,7 +226,7 @@ experiments:
   - id: A2
     name: k_sweep_win_fuse_shortlist
     evidence: LOCAL-FULL
-    status: registered 2026-09-25, not executed (next research cycle)
+    status: done (2026-09-25, ~82 min; registered criterion MET: hub dMAP +0.017 [+0.015, +0.019] at K = 30, +0.014 [+0.013, +0.016] at K = 100; interval above zero at every K; analysis research/results/A2s_win_fuse_end_to_end)
     tier: 1
     hypothesis: >
       The win_fuse Stage-1 scorer (F1: +3.8 coverage points at K = 30) raises end-to-end hybrid quality at every K,

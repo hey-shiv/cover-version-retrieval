@@ -68,6 +68,12 @@ export interface Research {
   classes: Record<'hyb' | 'hub', ClassPoint[]>
   adaptive: AdaptiveCell[]
   stage1_coverage30: { variant: string; delta: number; lo: number; hi: number }[]
+  a2: {
+    source: string
+    evidence: string
+    meets_registered_criterion: boolean
+    k_sweep: { K: number; coverage: number; hub_MAP: number; 'hub_Hit@1': number; dAP: number; dAP_lo: number; dAP_hi: number; dHit1: number }[]
+  } | null
 }
 
 interface ResultsFile {

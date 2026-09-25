@@ -68,3 +68,10 @@ New attacks, and the answers the evidence supports:
 8. **"Weak absolute accuracy."** Unchanged. Still the main threat. The hybrid at K = 500 (0.212 MAP) is below Qmax on HPCP (0.333).
 
 **Honest state.** The analysis paper is supported by executed, validated experiments. The positive-intervention paper depends on A2.
+
+## Round 3 (2026-09-25, after A2)
+
+1. **"A2 was registered after you saw F1 — isn't that forking paths?"** A2 was registered after the coverage gain was known but before any end-to-end number. Its fusion setting is the only one ever evaluated, and its criterion (K = 30 and K = 100) was fixed in advance. The paper states the ordering. The residual risk is that one setting is not a study of fusion.
+2. **"Is the gain just coverage?"** Mostly. ΔMAP is largest at small K (+0.017) and shrinks as coverage saturates (+0.010 at K = 500), which is what a coverage effect predicts. The fused score also enters the α blend, so a small in-shortlist effect cannot be excluded.
+3. **"Dirty tree again."** `env.json` for A2 records `dirty: True` at `e3ff315`. The validator now checks that A2's Stage-1 coverage equals F1's `win_fuse` at every K (it does, exactly), and A1 reproduced the frozen run exactly. Disclosed in the paper.
+4. **"Cost?"** Window embeddings and fused scores took 198 s for the whole benchmark, against 78 min of alignment at K = 500. Fusion at K = 20 matches the global Stage 1 at K = 30 in MAP.

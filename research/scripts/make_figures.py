@@ -326,9 +326,41 @@ def fig_stage1_variants() -> None:
     save(fig, "fig11_stage1_variants", "LOCAL-FULL · F1 · 13,000 queries")
 
 
+def fig_a2() -> None:
+    got = need("fig12_a2_end_to_end", "A1_k_sweep_long384", "A2_k_sweep_win_fuse", "A2s_win_fuse_end_to_end")
+    if not got:
+        return
+    a1, a2, a2s = got
+    ks = [e["K"] for e in a2["by_k"]]
+    fig, axes = plt.subplots(1, 2, figsize=(8.0, 3.0))
+    for ax, m in ((axes[0], "MAP"),):
+        for run, c, lab in ((a1, SLOT[0], "global Stage 1 (A1)"), (a2, SLOT[1], "global + windows (A2)")):
+            ys = [e["hub"][m] for e in run["by_k"] if e["K"] in ks]
+            ax.plot(ks, ys, color=c)
+            ax.text(ks[-1] * 1.12, ys[-1], lab, color=c, fontsize=7, va="center")
+        ax.set_title("MAP, hub-corrected hybrid")
+        ax.set_xlim(4, 4000)
+    comp = a2s["comparisons"]
+    for key, c, lab, off in (("delta_AP", SLOT[1], "Δ AP", 0.94), ("delta_Hit1", SLOT[2], "Δ Hit@1", 1.06)):
+        d = [comp[f"K{k}/hub"][key] for k in ks]
+        scale = 100
+        ax = axes[1]
+        for k, e in zip(ks, d):
+            ax.plot([k * off, k * off], [scale * e["ci_low"], scale * e["ci_high"]], color=c, lw=2)
+        ax.plot([k * off for k in ks], [scale * e["delta"] for e in d], "o", color=c, ms=4, label=lab)
+    axes[1].axhline(0, color=MUTED, lw=1)
+    axes[1].set_title("A2 − A1 in points (AP × 100, Hit@1 %)")
+    axes[1].legend(frameon=False, fontsize=7.5, loc="upper right")
+    for ax in axes:
+        ax.set_xscale("log")
+        ax.set_xlabel("K (alignments per query)")
+    fig.subplots_adjust(wspace=0.35)
+    save(fig, "fig12_a2_end_to_end", f"{a2['evidence']} · A2 vs A1 · {a2['stage1']['n_queries']:,} queries · registered criterion met: {a2s['meets_registered_criterion']}")
+
+
 def main() -> int:
     FIG.mkdir(parents=True, exist_ok=True)
-    for fn in (fig_coverage, fig_compute, fig_failure, fig_oracle, fig_factorisation, fig_k_sweep, fig_failure_by_k, fig_adaptive, fig_stage1_variants):
+    for fn in (fig_coverage, fig_compute, fig_failure, fig_oracle, fig_factorisation, fig_k_sweep, fig_failure_by_k, fig_adaptive, fig_stage1_variants, fig_a2):
         fn()
     (FIG / "MISSING.txt").write_text("\n".join(MISSING) + ("\n" if MISSING else ""))
     if MISSING:

@@ -60,9 +60,23 @@ Nothing was re-run in the cloud. Everything below reads the files pushed in `6cf
    - `analyze_local.py` wrote absolute machine paths into `sources`; they are now repository-relative, and the outputs were regenerated. Seeds are fixed, so the numbers are unchanged.
 10. **Next experiment (A2).** A2 is registered, with commands in `LOCAL_EXPERIMENTS.md`. On the synthetic fixture, its fused Stage 1 ranks identically to F1's `win_fuse` (48/48 queries).
 
+## Cloud analysis of A2 (2026-09-25)
+
+Nothing was re-run in the cloud; this reads the files pushed in `ca67dea`.
+- **Validation:** 71 ok, 0 failed. A new check confirms that A2's Stage-1 coverage equals F1's `win_fuse` exactly at every K.
+- **Disclosure:** `env.json` records a dirty tree at `e3ff315`, although the run log says "no deviations". This is disclosed in the paper and in the reviewer audit.
+- **Result (A2s):** the registered criterion is **met**. Hub-corrected ΔMAP versus A1 is:
+  - +0.017 [+0.015, +0.019] at K = 30 (0.122 → 0.139);
+  - +0.014 [+0.013, +0.016] at K = 100;
+  - above zero at every K, shrinking to +0.010 at K = 500.
+
+  Hit@1 is +3.0 points at K = 30. With fusion, K = 20 matches the MAP of the global Stage 1 at K = 30.
+- **Outputs:** fig12, table t13 and `ATwo*` macros were added. The paper, audits (round 3), RQ5, README and website were updated.
+- **Housekeeping:** re-running the analyses and figures only changed timestamps in unrelated `runtime.json` and PDF files; those changes were reverted.
+
 ## Current state
 
-**PAPER READY WITH MINOR ADDITIONS**, as an **empirical analysis paper** (Option C). It is **not** ready as a positive-intervention paper (Option B).
+**PAPER READY WITH MINOR ADDITIONS**, as an empirical analysis paper **with one registered positive intervention** (global + window fusion in Stage 1). This is not a method paper.
 
 What is supported, by executed and validated experiments:
 - the K sweep: MAP 0.122 → 0.212 from K = 30 to 500, not saturated;
@@ -70,11 +84,11 @@ What is supported, by executed and validated experiments:
 - hub correction's value growing with K;
 - the Hit@1 decomposition and attribution;
 - a registered negative result for adaptive K;
+- a registered positive end-to-end result for Stage-1 fusion, at every K;
 - development-protocol blindness, with three cases.
 
 Minor additions before submission:
 1. Read every [S] reference in full and fix the tags.
 2. Compile the LaTeX on a machine that has it; the cloud has none. Proofread the generated tables.
-3. Run A2 (~80 min, local). If ΔMAP > 0 at K = 30 and 100, the fusion result becomes an end-to-end claim. Otherwise it stays a coverage-only result, stated as such.
 
-The main threat to the paper is unchanged: the system is weak in absolute terms (0.212 MAP at K = 500 vs Qmax 0.333). Whether the bottleneck shift holds for a strong system is untested.
+The main threat to the paper is unchanged: the system is weak in absolute terms (best measured 0.222 MAP, with fusion at K = 500, vs Qmax 0.333). Whether the findings hold for a strong system is untested.

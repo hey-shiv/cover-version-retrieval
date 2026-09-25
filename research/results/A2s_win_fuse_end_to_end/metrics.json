@@ -1,0 +1,379 @@
+{
+  "experiment_id": "A2s",
+  "evidence": "ANALYSIS of LOCAL-FULL",
+  "sources": [
+    "research/results/A1_k_sweep_long384",
+    "research/results/A2_k_sweep_win_fuse"
+  ],
+  "comparisons": {
+    "K5/hyb": {
+      "delta_AP": {
+        "delta": 0.01675082307153846,
+        "ci_low": 0.01491349842446154,
+        "ci_high": 0.01859991409575,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.029153846153846155,
+        "ci_low": 0.02346153846153846,
+        "ci_high": 0.034846153846153846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03653846153846154,
+        "ci_low": 0.02976923076923077,
+        "ci_high": 0.04323076923076923,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K5/hub": {
+      "delta_AP": {
+        "delta": 0.01691930599076923,
+        "ci_low": 0.015073034109846157,
+        "ci_high": 0.018792152383153845,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.030923076923076925,
+        "ci_low": 0.024846153846153848,
+        "ci_high": 0.03676923076923077,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03653846153846154,
+        "ci_low": 0.02976923076923077,
+        "ci_high": 0.04323076923076923,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K10/hyb": {
+      "delta_AP": {
+        "delta": 0.01696113552,
+        "ci_low": 0.015146434179961539,
+        "ci_high": 0.018829978981442303,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.03130769230769231,
+        "ci_low": 0.026076923076923077,
+        "ci_high": 0.03661538461538461,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03907692307692308,
+        "ci_low": 0.03215384615384615,
+        "ci_high": 0.046,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K10/hub": {
+      "delta_AP": {
+        "delta": 0.017645939136153845,
+        "ci_low": 0.01576928277396154,
+        "ci_high": 0.01956652601811538,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.033615384615384616,
+        "ci_low": 0.027846153846153847,
+        "ci_high": 0.039384615384615386,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03907692307692308,
+        "ci_low": 0.03215384615384615,
+        "ci_high": 0.046,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K20/hyb": {
+      "delta_AP": {
+        "delta": 0.01617507353769231,
+        "ci_low": 0.014415690604038463,
+        "ci_high": 0.01799868060226923,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.024307692307692308,
+        "ci_low": 0.018923076923076924,
+        "ci_high": 0.02969230769230769,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03753846153846154,
+        "ci_low": 0.030615384615384614,
+        "ci_high": 0.04461538461538461,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K20/hub": {
+      "delta_AP": {
+        "delta": 0.017294287409230773,
+        "ci_low": 0.015436211798134616,
+        "ci_high": 0.019225250023634614,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.03130769230769231,
+        "ci_low": 0.025615384615384616,
+        "ci_high": 0.037,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03753846153846154,
+        "ci_low": 0.030615384615384614,
+        "ci_high": 0.04461538461538461,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K30/hyb": {
+      "delta_AP": {
+        "delta": 0.01591176430923077,
+        "ci_low": 0.014155666619000001,
+        "ci_high": 0.017717272420461536,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.022,
+        "ci_low": 0.016846153846153848,
+        "ci_high": 0.027153846153846153,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.038307692307692306,
+        "ci_low": 0.03169230769230769,
+        "ci_high": 0.04492307692307692,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K30/hub": {
+      "delta_AP": {
+        "delta": 0.01713403516,
+        "ci_low": 0.015275549903153846,
+        "ci_high": 0.01903856448634615,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.02969230769230769,
+        "ci_low": 0.024384615384615383,
+        "ci_high": 0.035153846153846154,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.038307692307692306,
+        "ci_low": 0.03169230769230769,
+        "ci_high": 0.04492307692307692,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K50/hyb": {
+      "delta_AP": {
+        "delta": 0.014615228853846156,
+        "ci_low": 0.012998466750576925,
+        "ci_high": 0.016321272802923077,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.022923076923076924,
+        "ci_low": 0.01823076923076923,
+        "ci_high": 0.02776923076923077,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03561538461538462,
+        "ci_low": 0.029461538461538463,
+        "ci_high": 0.041846153846153845,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K50/hub": {
+      "delta_AP": {
+        "delta": 0.01603364389153846,
+        "ci_low": 0.014276292949211542,
+        "ci_high": 0.017861076121903848,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.025538461538461538,
+        "ci_low": 0.02053846153846154,
+        "ci_high": 0.030615384615384614,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03561538461538462,
+        "ci_low": 0.029461538461538463,
+        "ci_high": 0.041846153846153845,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K100/hyb": {
+      "delta_AP": {
+        "delta": 0.012675687904615384,
+        "ci_low": 0.011259113733115386,
+        "ci_high": 0.01415164663076923,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.017153846153846155,
+        "ci_low": 0.012538461538461538,
+        "ci_high": 0.02176923076923077,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03346153846153846,
+        "ci_low": 0.027307692307692307,
+        "ci_high": 0.039538461538461536,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K100/hub": {
+      "delta_AP": {
+        "delta": 0.014453756144615384,
+        "ci_low": 0.012855151514288461,
+        "ci_high": 0.016092687801749998,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.022076923076923077,
+        "ci_low": 0.017384615384615384,
+        "ci_high": 0.026846153846153846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.03346153846153846,
+        "ci_low": 0.027307692307692307,
+        "ci_high": 0.039538461538461536,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K200/hyb": {
+      "delta_AP": {
+        "delta": 0.011313032373076922,
+        "ci_low": 0.010030101793826924,
+        "ci_high": 0.012666250213692307,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.016153846153846154,
+        "ci_low": 0.011846153846153847,
+        "ci_high": 0.02046153846153846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.024846153846153848,
+        "ci_low": 0.019692307692307693,
+        "ci_high": 0.029848076923076894,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K200/hub": {
+      "delta_AP": {
+        "delta": 0.013114612764615384,
+        "ci_low": 0.011601705717634615,
+        "ci_high": 0.01466630981096154,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.022846153846153846,
+        "ci_low": 0.018384615384615385,
+        "ci_high": 0.02746153846153846,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.024846153846153848,
+        "ci_low": 0.019692307692307693,
+        "ci_high": 0.029848076923076894,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K500/hyb": {
+      "delta_AP": {
+        "delta": 0.008545424654615386,
+        "ci_low": 0.007534687047000001,
+        "ci_high": 0.009603337677442307,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.011692307692307693,
+        "ci_low": 0.00776923076923077,
+        "ci_high": 0.015615384615384616,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.008923076923076922,
+        "ci_low": 0.005538461538461538,
+        "ci_high": 0.012307692307692308,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    },
+    "K500/hub": {
+      "delta_AP": {
+        "delta": 0.01009825149769231,
+        "ci_low": 0.008819812515096155,
+        "ci_high": 0.011418826816384616,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_Hit1": {
+        "delta": 0.011461538461538462,
+        "ci_low": 0.007461538461538461,
+        "ci_high": 0.015615384615384616,
+        "n_groups": 1000,
+        "excludes_zero": true
+      },
+      "delta_coverage": {
+        "delta": 0.008923076923076922,
+        "ci_low": 0.005538461538461538,
+        "ci_high": 0.012307692307692308,
+        "n_groups": 1000,
+        "excludes_zero": true
+      }
+    }
+  },
+  "meets_registered_criterion": true
+}

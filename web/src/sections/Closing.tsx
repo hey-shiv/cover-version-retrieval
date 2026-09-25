@@ -122,7 +122,7 @@ export function Limits() {
   const r4 = benchmarkRuns[3]
   const items = [
     ['Precomputed only', 'Every visual here comes from committed result files. There is no model running, no search box, and no audio upload.'],
-    ['Below published systems', 'The best locked system (0.136 MAP) and even the K = 500 research run (0.212) are well below Qmax on the same HPCP input (0.333), and far below learned systems like MOVE or ByteCover.'],
+    ['Below published systems', 'The best locked system (0.136 MAP) and even the best research run (0.222: fused Stage 1, K = 500) are well below Qmax on the same HPCP input (0.333), and far below learned systems like MOVE or ByteCover.'],
     ['Stage 1 is still the constraint', `Shortlist recall at K = 30 is ${r4.shortlist_recall.toFixed(3)} in the final run. The hybrid cannot retrieve what the shortlist omits. Larger K helps, but beyond K ≈ 100 the reranker, not the shortlist, loses most queries.`],
     ['The strongest likely system was never run', 'Classical alignment at 384 frames with hubness correction over all 1.95 × 10⁸ pairs: about 42 h of CPU.'],
     ['Whole-query alignment', 'Subsequence DTW aligns the entire query in order. Covers that drop, add or reorder sections are penalised; local alignment is not implemented.'],

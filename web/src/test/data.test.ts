@@ -73,3 +73,12 @@ describe('research runs quoted in the README', () => {
       for (const c of rows) expect(c.A_no_cover + c.B_hub_top1 + c.B_other + c.R_rank1).toBeCloseTo(1, 5)
   })
 })
+
+describe('A2 quoted in the README', () => {
+  it('fused Stage 1: MAP 0.139 at K = 30 and the registered criterion is met', () => {
+    const a2 = results.research!.a2!
+    expect(a2.meets_registered_criterion).toBe(true)
+    expect(Math.round(a2.k_sweep.find((p) => p.K === 30)!.hub_MAP * 1000) / 1000).toBe(0.139)
+    for (const p of a2.k_sweep) expect(p.dAP_lo).toBeGreaterThan(0)
+  })
+})

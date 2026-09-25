@@ -66,7 +66,7 @@ export const REPRO = [
 
 /** README → "What's next" and research/PROGRESS.md, in the order the evidence demands. */
 export const FUTURE = [
-  { id: 'recall', title: 'Fused Stage 1, end to end (A2)', body: 'Global + window fusion added 3.8 points of coverage at K = 30. The registered next run tests whether that survives reranking, at every K from 5 to 500 (about 80 min).', target: 'Stage 1' },
+  { id: 'recall', title: 'Tune the fused Stage 1 properly', body: 'Global + window fusion lifted MAP at every K in its registered test, but only one setting (3 windows, 60%, 50/50) was ever tried. Choose it on calibration works; test key rotations end to end.', target: 'Stage 1' },
   { id: 'classical384', title: 'Classical 384 frames + hubness correction', body: 'Over the full benchmark, about 42 h of CPU. The most likely strongest system; never run.', target: 'Stage 2' },
   { id: 'ttr', title: 'A reranker that holds up at large K', body: 'From K ≈ 200 most failures are covers outranked inside the list. Hub correction helps more as K grows; stronger in-list discrimination is the open problem.', target: 'Stage 2' },
   { id: 'local', title: 'Local alignment (Qmax-style)', body: 'Versus whole-query subsequence DTW, for covers that drop, add or reorder sections.', target: 'Stage 2' },

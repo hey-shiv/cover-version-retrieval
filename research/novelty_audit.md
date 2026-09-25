@@ -81,3 +81,9 @@ Exactness and openness:
 | a development protocol misleads design | **supported**, now with a third case (key handling) | X6, H1 |
 
 **Decision gate (round 2).** **Option C, an empirical analysis paper,** is supported and stronger than in round 1. **Option B is not supported yet**: its only candidate, window fusion, is unproven end to end. A2 (one local run, ~80 min) decides whether B becomes available. No method novelty is claimed.
+
+## Round 3 (2026-09-25, after A2)
+
+- **New evidence:** A2 meets its registered criterion. Fusing global and window embeddings in Stage 1 raises hub-corrected MAP at every K, from +0.017 at K = 30 to +0.010 at K = 500, all intervals above zero.
+- **Novelty of that result:** low as a method. Multi-vector late interaction (ColBERT) and local-embedding MaxSim in CSI (LIVI) are prior art. The new part is the controlled, registered demonstration that a first-stage coverage gain carries through alignment reranking, and that its size tracks the coverage bottleneck (largest at small K).
+- **Decision gate (round 3):** an empirical analysis paper with one registered positive intervention. No method claim.

@@ -314,7 +314,19 @@ def research() -> dict | None:
     base_v = m["f1"]["base"]
     stage1 = [{"variant": v, "delta": r(d["delta"]), "lo": r(d["ci_low"]), "hi": r(d["ci_high"])}
               for key, d in m["f1"]["paired_coverage"].items() if key.endswith("@30") for v in [key.split(" - ")[0]] if v != base_v]
+    a2_path, a2s_path = base / "A2_k_sweep_win_fuse" / "metrics.json", base / "A2s_win_fuse_end_to_end" / "metrics.json"
+    a2 = None
+    if a2_path.exists() and a2s_path.exists():
+        m2, s2 = json.loads(a2_path.read_text()), json.loads(a2s_path.read_text())
+        a2 = {"source": "research/results/A2_k_sweep_win_fuse, research/results/A2s_win_fuse_end_to_end", "evidence": m2["evidence"],
+              "meets_registered_criterion": s2["meets_registered_criterion"],
+              "k_sweep": [{"K": e["K"], "coverage": r(e["coverage"]), "hub_MAP": r(e["hub"]["MAP"]), "hub_Hit@1": r(e["hub"]["Hit@1"]),
+                           "dAP": r(s2["comparisons"][f"K{e['K']}/hub"]["delta_AP"]["delta"]),
+                           "dAP_lo": r(s2["comparisons"][f"K{e['K']}/hub"]["delta_AP"]["ci_low"]),
+                           "dAP_hi": r(s2["comparisons"][f"K{e['K']}/hub"]["delta_AP"]["ci_high"]),
+                           "dHit1": r(s2["comparisons"][f"K{e['K']}/hub"]["delta_Hit1"]["delta"])} for e in m2["by_k"]]}
     return {
+        "a2": a2,
         "source": ", ".join(f"research/results/{n}" for n in names.values()),
         "evidence": {"a1": m["a1"]["evidence"], "b1": m["b1"]["evidence"], "e1": m["e1"]["evidence"], "f1": m["f1"]["evidence"]},
         "reproduction_pass": m["a1"]["reproduction"]["pass"],

@@ -124,6 +124,12 @@ def cross(rep: Report, root: Path) -> None:
         f = root / name / "metrics.json"
         return json.loads(f.read_text()) if f.exists() else None
     a1, f1, h1 = m("A1_k_sweep_long384"), m("F1_stage1_variants"), m("H1_alignment_ablation")
+    a2 = m("A2_k_sweep_win_fuse")
+    if a2 and f1 and "win_fuse" in f1["variants"]:
+        for e in a2["by_k"]:
+            ref = f1["variants"]["win_fuse"]["coverage"].get(f"@{e['K']}")
+            if ref is not None:
+                rep.check(abs(e["coverage"] - ref) < 1e-9, f"cross: A2 Stage-1 coverage at K = {e['K']} equals F1 win_fuse")
     if a1 and f1 and "global:full_long" in f1["variants"]:
         rep.check(abs(f1["variants"]["global:full_long"]["MAP"] - a1["stage1"]["MAP"]) < 1e-9, "cross: F1 global:full_long Stage-1 MAP equals A1 Stage 1")
     if a1 and h1 and "profile_cosine_n384" in h1["variants"]:

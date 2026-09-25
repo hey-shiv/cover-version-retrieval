@@ -67,16 +67,22 @@ function Sweep({ res }: { res: Research }) {
   const pts = res.k_sweep
   const x = logScale([pts[0].K, pts[pts.length - 1].K], [L, width - R])
   const run2 = benchmarkRuns[1].metrics.classical_alignment_hubcorr
+  const fused = new Map((res.a2?.k_sweep ?? []).map((p) => [p.K, p]))
+  const hasFused = pts.every((p) => fused.has(p.K))
   const series: { key: string; label: string; color: string; dash?: string; get: (p: KPoint) => number }[] =
     m === 'coverage'
       ? [
           { key: 'cov', label: 'coverage (≥ 1 cover in top K)', color: 'var(--query)', get: (p) => p.coverage },
           { key: 'rec', label: 'recall (all 12 covers)', color: 'var(--query)', dash: '5 3', get: (p) => p.recall },
+          ...(hasFused ? [{ key: 'fcov', label: 'coverage, fused', color: 'var(--cover)', get: (p: KPoint) => fused.get(p.K)!.coverage }] : []),
         ]
       : [
           { key: 'hub', label: 'hybrid + hub corr.', color: 'var(--path)', get: (p) => (m === 'MAP' ? p.hub_MAP : p['hub_Hit@1']) },
           { key: 'hyb', label: 'hybrid', color: 'var(--path)', dash: '5 3', get: (p) => (m === 'MAP' ? p.hyb_MAP : p['hyb_Hit@1']) },
           { key: 'rr', label: 'rerank only', color: 'var(--faint)', get: (p) => (m === 'MAP' ? p.rr_MAP : p['rr_Hit@1']) },
+          ...(hasFused
+            ? [{ key: 'fuse', label: 'fused + hub corr.', color: 'var(--cover)', get: (p: KPoint) => (m === 'MAP' ? fused.get(p.K)!.hub_MAP : fused.get(p.K)!['hub_Hit@1']) }]
+            : []),
         ]
   const refVal = m === 'MAP' ? run2.MAP : m === 'Hit@1' ? run2['Hit@1'] : undefined
   const vals = series.flatMap((s) => pts.map(s.get)).concat(refVal ?? [])
@@ -157,9 +163,9 @@ function Sweep({ res }: { res: Research }) {
           ))}
         </ul>
       )}
-      <Caption label="Figure 17" source={[`research/results/A1_k_sweep_long384 (${res.evidence.a1})`, 'reports/results/benchmark_full96.json (reference line)']}>
+      <Caption label="Figure 17" source={[`research/results/A1_k_sweep_long384 (${res.evidence.a1})`, ...(res.a2 ? [`${res.a2.source} (${res.a2.evidence})`] : []), 'reports/results/benchmark_full96.json (reference line)']}>
         Quality against shortlist size, with every other setting as locked for run 4. Vertical line: the original K = 30. Dotted line: exhaustive alignment of all 14,999 candidates. Rerank time is the measured
-        cost per alignment times K. The dotted reference is a different run with 96-frame alignment, so the crossing is indicative, not a paired test.
+        cost per alignment times K. Green: the same system with the fused global + window Stage 1 (registered run A2). The dotted reference is a different run with 96-frame alignment, so the crossing is indicative, not a paired test.
       </Caption>
     </div>
   )
@@ -292,6 +298,7 @@ function Stage1({ res }: { res: Research }) {
   const x = linScale([Math.min(...rows.map((r) => r.lo)) * 100 - 2, Math.max(...rows.map((r) => r.hi)) * 100 + 4], [labelW, width - 60])
   const H = rows.length * 30 + 30
   const fuse = rows.find((r) => r.variant === 'win_fuse')
+  const a2 = res.a2?.meets_registered_criterion ? res.a2 : null
   return (
     <div className="figure">
       <div className="split">
@@ -300,7 +307,14 @@ function Stage1({ res }: { res: Research }) {
           <p>
             Training data and training time dominate. Among changes that need no retraining, one stands out: adding the best match between three
             overlapping windows of each recording to the global score. It puts a cover into the top 30 for {fuse ? (fuse.delta * 100).toFixed(1) : '?'} more
-            queries in a hundred. Whether that survives reranking is the next run.
+            queries in a hundred.{' '}
+            {a2 && (
+              <>
+                A test registered before any end-to-end number showed the gain survives reranking: MAP at K = 30 rose from{' '}
+                {res.k_sweep.find((p) => p.K === 30)!.hub_MAP.toFixed(3)} to {a2.k_sweep.find((p) => p.K === 30)!.hub_MAP.toFixed(3)}, and it rose at every
+                K from 5 to 500 (green line in Figure 17).
+              </>
+            )}
           </p>
         </div>
       </div>
