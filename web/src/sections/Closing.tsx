@@ -7,7 +7,7 @@ export function Reproducibility() {
   const [open, setOpen] = useState<string>('SEED')
   const active = REPRO.find((r) => r.key === open)!
   return (
-    <Chapter id="reproducibility" no="11 · Method" title={<>Every number <em>can be rebuilt</em></>}>
+    <Chapter id="reproducibility" no="12 · Method" title={<>Every number <em>can be rebuilt</em></>}>
       <div className="split">
         <div className="body prose">
           <p className="lede">
@@ -91,7 +91,7 @@ export function Reproducibility() {
 
 export function DataLicense() {
   return (
-    <Chapter id="data" no="12 · Data" title={<>No audio, <em>by design</em></>}>
+    <Chapter id="data" no="13 · Data" title={<>No audio, <em>by design</em></>}>
       <div className="split">
         <div className="body prose">
           <p>
@@ -122,15 +122,15 @@ export function Limits() {
   const r4 = benchmarkRuns[3]
   const items = [
     ['Precomputed only', 'Every visual here comes from committed result files. There is no model running, no search box, and no audio upload.'],
-    ['Below published systems', 'The best system here (0.136 MAP) is well below Qmax on the same HPCP input (0.333) and far below learned systems like MOVE or ByteCover.'],
-    ['Stage 1 is still the constraint', `Shortlist recall at K = 30 is ${r4.shortlist_recall.toFixed(3)} in the final run. The hybrid cannot retrieve what the shortlist omits, and validation MAP was still rising when training stopped.`],
+    ['Below published systems', 'The best locked system (0.136 MAP) and even the K = 500 research run (0.212) are well below Qmax on the same HPCP input (0.333), and far below learned systems like MOVE or ByteCover.'],
+    ['Stage 1 is still the constraint', `Shortlist recall at K = 30 is ${r4.shortlist_recall.toFixed(3)} in the final run. The hybrid cannot retrieve what the shortlist omits. Larger K helps, but beyond K ≈ 100 the reranker, not the shortlist, loses most queries.`],
     ['The strongest likely system was never run', 'Classical alignment at 384 frames with hubness correction over all 1.95 × 10⁸ pairs: about 42 h of CPU.'],
     ['Whole-query alignment', 'Subsequence DTW aligns the entire query in order. Covers that drop, add or reorder sections are penalised; local alignment is not implemented.'],
-    ['A small development protocol', '20 queries against 120 candidates. It reversed two conclusions at benchmark scale. Its numbers are plumbing checks and hypotheses.'],
+    ['A small development protocol', '20 queries against 120 candidates. It reversed two conclusions at benchmark scale and hid the value of key rotation. Its numbers are plumbing checks and hypotheses.'],
     ['Dataset scope', 'Feature-only, from 2019, Western-pop-centric. Nothing here establishes robustness to short, live, noisy or partial queries, or to production-scale catalogues.'],
   ]
   return (
-    <Chapter id="limits" no="13 · Limits" title={<>What remains <em>unsolved</em></>}>
+    <Chapter id="limits" no="14 · Limits" title={<>What remains <em>unsolved</em></>}>
       <dl className="limits">
         {items.map(([k, v]) => (
           <div key={k} className="limit">
@@ -167,9 +167,9 @@ function Future() {
           </div>
         ))}
       </div>
-      <Caption label="Map" source="README.md → Next research directions">
+      <Caption label="Map" source="README.md → What's next">
         Only directions the repository itself documents, numbered in its priority order and placed on the part of the pipeline they would change. None
-        of them has been run.
+        of them has been run yet.
       </Caption>
     </div>
   )

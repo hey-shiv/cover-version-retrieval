@@ -46,7 +46,7 @@ from cover_retrieval.pipeline import aligner_from_config, global_scores, protoco
 from cover_retrieval.retrieval.normalization import hub_reference  # noqa: E402
 from cover_retrieval.utils.io import load_config, parse_overrides, read_json  # noqa: E402
 
-EXPERIMENT_ID = "A1"
+EXPERIMENT_ID = "A1"  # "A2" when --stage1 win_fuse
 DEFAULT_KS = [5, 10, 20, 30, 50, 100, 200, 500]
 
 
@@ -98,6 +98,8 @@ def main(argv=None) -> int:
     p.add_argument("--n-probes", type=int, default=200)
     p.add_argument("--ks", type=int, nargs="+", default=DEFAULT_KS)
     p.add_argument("--frozen", type=Path, default=None, help="benchmark result JSON to reproduce at the locked K")
+    p.add_argument("--stage1", choices=["global", "win_fuse"], default="global",
+                   help="Stage-1 scorer: global embedding (A1) or win_fuse, as defined in run_stage1_variants.py (A2)")
     p.add_argument("--block", type=int, default=500)
     p.add_argument("--max-queries", type=int, default=0, help="sanity check on the first N queries only (0 = all)")
     p.add_argument("--out", type=Path, required=True)
@@ -118,7 +120,8 @@ def main(argv=None) -> int:
     checkpoint = args.checkpoint or Path(locked["checkpoint"])
     ks = sorted(set(args.ks))
     k_max = ks[-1]
-    rrlib.write_meta(out, EXPERIMENT_ID, config, {**vars(args), "alpha": alpha, "lambda": lam, "checkpoint": str(checkpoint)}, label)
+    exp_id = "A2" if args.stage1 == "win_fuse" else EXPERIMENT_ID
+    rrlib.write_meta(out, exp_id, config, {**vars(args), "alpha": alpha, "lambda": lam, "checkpoint": str(checkpoint)}, label)
 
     # ---- data + Stage 1 ------------------------------------------------------------
     protocol = load_protocol(config["paths"]["manifests_dir"], "benchmark")
@@ -128,6 +131,28 @@ def main(argv=None) -> int:
     model = load_encoder(checkpoint)
     scores, timings = global_scores(config, model, protocol, store)
     runtime.update({"embedding_s": timings["embedding_seconds"], "global_search_s": timings["global_search_seconds"]})
+    if args.stage1 == "win_fuse":
+        # identical definition to F1 (run_stage1_variants.py): 3 windows of 60% at offsets 0/20/40%,
+        # MaxSim over the 3 x 3 window pairs, fused 50/50 with the global cosine
+        from run_stage1_variants import windows  # noqa: E402
+
+        from cover_retrieval.models.training import embed  # noqa: E402
+
+        t0 = time.perf_counter()
+        wins = [embed(model, w) for w in windows(store.views["encoder"])]
+        q_idx = store.index([t.pid for t in protocol.queries])
+        for start in range(0, len(q_idx), 500):
+            sl = q_idx[start : start + 500]
+            best = None
+            for wq in wins:
+                for wc in wins:
+                    s_ = wq[sl] @ wc.T
+                    best = s_ if best is None else np.maximum(best, s_)
+            scores[start : start + len(sl)] = 0.5 * scores[start : start + len(sl)] + 0.5 * best
+        runtime["win_fuse_s"] = time.perf_counter() - t0
+        if args.frozen:
+            print("[A2] --frozen ignored: the frozen run used the global Stage 1")
+            args.frozen = None
     relevance = protocol.relevance_matrix()
     self_mask = protocol.self_mask()
     n_q = len(protocol.queries) if not args.max_queries else min(args.max_queries, len(protocol.queries))
@@ -159,7 +184,7 @@ def main(argv=None) -> int:
     import json as _json
 
     key = hashlib.sha1(_json.dumps({"alignment": config["alignment"], "n_frames": config["features"]["n_frames"],
-                                    "checkpoint": str(checkpoint)}, sort_keys=True).encode()).hexdigest()[:10]
+                                    "checkpoint": str(checkpoint), "stage1": args.stage1}, sort_keys=True).encode()).hexdigest()[:10]
     cache = run_dir(config, "research") / f"shortlist_sweep{tag}_n{config['features']['n_frames']}_{key}{'_sanity' + str(n_q) if args.max_queries else ''}"
     align, align_s = align_heads(config, store, q_pids, orders, k_max, args.block, cache)
     runtime["align_top_kmax_s"] = align_s
@@ -212,7 +237,7 @@ def main(argv=None) -> int:
 
     # ---- aggregate + reproduction check ------------------------------------------------
     per_pair_ms = runtime["ms_per_aligned_pair"]
-    metrics = {"experiment_id": EXPERIMENT_ID, "evidence": label, "alpha": alpha, "lambda": lam, "k_locked": k_locked,
+    metrics = {"experiment_id": exp_id, "stage1_scorer": args.stage1, "evidence": label, "alpha": alpha, "lambda": lam, "k_locked": k_locked,
                "stage1": rrlib.summarize(np.array(s1_first), np.array(s1_ap)), "by_k": []}
     for k in ks:
         entry = {"K": k, "pairs_per_query": k, "est_rerank_ms_per_query": k * per_pair_ms,

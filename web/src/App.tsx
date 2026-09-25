@@ -11,6 +11,7 @@ import { Explorer } from './sections/Explorer'
 import { Hubness } from './sections/Hubness'
 import { Benchmark } from './sections/Benchmark'
 import { Journey } from './sections/Journey'
+import { Beyond } from './sections/Beyond'
 import { DataLicense, Limits, Reproducibility } from './sections/Closing'
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
         <Benchmark />
         <Hubness />
         <Journey />
+        <Beyond />
         <Reproducibility />
         <DataLicense />
         <Limits />

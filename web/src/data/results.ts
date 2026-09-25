@@ -49,7 +49,29 @@ export interface DevRun {
   top10: { query: string; rank: number; candidate: string; cos: number; relevant: boolean }[]
 }
 
+export interface KPoint {
+  K: number; coverage: number; recall: number; ms_per_query: number
+  hyb_MAP: number; 'hyb_Hit@1': number; hub_MAP: number; 'hub_Hit@1': number; rr_MAP: number; 'rr_Hit@1': number
+}
+export interface ClassPoint { K: number; A_no_cover: number; B_hub_top1: number; B_other: number; R_rank1: number; efficiency: number }
+export interface AdaptiveCell {
+  menu: string; budget: number; mean_K: number
+  dAP: number; dAP_lo: number; dAP_hi: number; dHit1: number; dHit1_lo: number; dHit1_hi: number; meets: boolean
+}
+export interface Research {
+  source: string
+  evidence: Record<'a1' | 'b1' | 'e1' | 'f1', string>
+  reproduction_pass: boolean
+  n_queries: number
+  ms_per_pair: number
+  k_sweep: KPoint[]
+  classes: Record<'hyb' | 'hub', ClassPoint[]>
+  adaptive: AdaptiveCell[]
+  stage1_coverage30: { variant: string; delta: number; lo: number; hi: number }[]
+}
+
 interface ResultsFile {
+  research: Research | null
   benchmark: { rank_grid: number[]; rank_edges: number[]; runs: BenchmarkRun[] }
   dev: { protocol: { n_queries: number; n_candidates: number }; runs: DevRun[] }
   classical: {

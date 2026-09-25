@@ -9,6 +9,7 @@ Checks, per experiment directory present:
     unique query ids, no missing values
   * ranks >= 1, AP in [0, 1], coverage non-decreasing in K, first rank >= 1
   * A1: the reproduction self-check against the frozen benchmark file PASSED
+  * cross-experiment: F1's reference Stage 1 equals A1's; H1's locked variant equals A1's rerank-only at K = 30
   * A1: at every K the hybrid first rank equals the Stage-1 first rank whenever no
     cover is in the shortlist (the structural property the whole analysis relies on)
 Exit code 1 on any failure, so CI and the analysis scripts can refuse bad inputs.
@@ -29,6 +30,7 @@ import rrlib  # noqa: E402
 N_BENCH = 13000
 REQUIRED = {
     "A1": ["metrics.json", "per_query.csv", "signals.csv", "candidates.csv", "runtime.json", "config.yaml", "env.json", "README.md"],
+    "A2": ["metrics.json", "per_query.csv", "signals.csv", "candidates.csv", "runtime.json", "config.yaml", "env.json", "README.md"],
     "F1": ["metrics.json", "per_query.csv", "runtime.json", "config.yaml", "env.json", "README.md"],
     "H1": ["metrics.json", "per_query.csv", "runtime.json", "config.yaml", "env.json", "README.md"],
 }
@@ -64,14 +66,15 @@ def common(rep: Report, d: Path, exp: str, synthetic: bool) -> list[dict] | None
     return pq
 
 
-def a1(rep: Report, d: Path, synthetic: bool) -> None:
-    pq = common(rep, d, "A1", synthetic)
+def a1(rep: Report, d: Path, synthetic: bool, exp: str = "A1") -> None:
+    pq = common(rep, d, exp, synthetic)
     if pq is None:
         return
     m = json.loads((d / "metrics.json").read_text())
     ks = [e["K"] for e in m["by_k"]]
     rep.check(30 in ks, f"{d.name}: K = 30 (the locked K) is in the sweep")
-    rep.check(m.get("reproduction", {}).get("pass") is True, f"{d.name}: reproduces the frozen benchmark at the locked K")
+    if exp == "A1":  # A2 changes Stage 1, so there is no frozen result to reproduce
+        rep.check(m.get("reproduction", {}).get("pass") is True, f"{d.name}: reproduces the frozen benchmark at the locked K")
     cov = [e["coverage"] for e in m["by_k"]]
     rep.check(all(b >= a - 1e-12 for a, b in zip(cov, cov[1:])), f"{d.name}: coverage non-decreasing in K")
     bad_struct = bad_range = 0
@@ -115,6 +118,20 @@ def h1(rep: Report, d: Path, synthetic: bool) -> None:
     rep.check(bad == 0, f"{d.name}: no-cover queries keep their Stage-1 first rank ({bad} violations)")
 
 
+def cross(rep: Report, root: Path) -> None:
+    """Experiments that share a configuration must agree exactly."""
+    def m(name):
+        f = root / name / "metrics.json"
+        return json.loads(f.read_text()) if f.exists() else None
+    a1, f1, h1 = m("A1_k_sweep_long384"), m("F1_stage1_variants"), m("H1_alignment_ablation")
+    if a1 and f1 and "global:full_long" in f1["variants"]:
+        rep.check(abs(f1["variants"]["global:full_long"]["MAP"] - a1["stage1"]["MAP"]) < 1e-9, "cross: F1 global:full_long Stage-1 MAP equals A1 Stage 1")
+    if a1 and h1 and "profile_cosine_n384" in h1["variants"]:
+        rr = next((e["rr"]["MAP"] for e in a1["by_k"] if e["K"] == h1["K"]), None)
+        if rr is not None:
+            rep.check(abs(h1["variants"]["profile_cosine_n384"]["MAP"] - rr) < 1e-9, f"cross: H1 profile_cosine_n384 equals A1 rerank-only at K = {h1['K']}")
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--root", type=Path, default=rrlib.REPO / "research" / "results")
@@ -124,10 +141,11 @@ def main(argv=None) -> int:
     found = 0
     for d in sorted(args.root.glob("*")):
         prefix = d.name.split("_")[0]
-        fn = {"A1": a1, "F1": f1, "H1": h1}.get(prefix)
+        fn = {"A1": a1, "A2": lambda r, d, s: a1(r, d, s, "A2"), "F1": f1, "H1": h1}.get(prefix)
         if fn and d.is_dir():
             found += 1
             fn(rep, d, args.synthetic)
+    cross(rep, args.root)
     for msg in rep.ok:
         print(f"  ok    {msg}")
     for msg in rep.errors:

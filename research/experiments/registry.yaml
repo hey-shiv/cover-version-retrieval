@@ -115,7 +115,7 @@ experiments:
   - id: A1
     name: k_sweep_long384
     evidence: LOCAL-FULL
-    status: registered, not executed
+    status: done (2026-09-25, author's Mac, ~80 min; reproduction PASS, |diff| = 0)
     tier: 1
     hypothesis: >
       Hybrid MAP and Hit@1 rise with K while coverage rises, with diminishing returns; reranker efficiency
@@ -138,7 +138,7 @@ experiments:
   - id: B1
     name: failure_by_K
     evidence: ANALYSIS of LOCAL-FULL
-    status: registered, depends on A1
+    status: done
     hypothesis: Class A dominates at small K; as K grows, class B (and its hub subclass) takes a growing share.
     fixed_variables: [hub class = rank-1 item with probe reference >= 95th percentile of the catalogue (fixed in advance)]
     implementation: research/scripts/analyze_local.py::b1
@@ -147,7 +147,7 @@ experiments:
   - id: D1
     name: query_uncertainty
     evidence: ANALYSIS of LOCAL-FULL
-    status: registered, depends on A1
+    status: done (hypothesis supported: AUROC 0.76 [0.75, 0.77])
     hypothesis: Label-free Stage-1 signals predict "no cover in the top 30" better than chance (AUROC > 0.5, CI excluding 0.5).
     independent_variables: [signals: top1, margins, top-10/100 statistics, entropy, row statistics, k-occurrence, hub reference]
     fixed_variables: [L2 logistic regression (lambda 1.0), 5-fold work-disjoint cross-fitting, seed 20260817]
@@ -158,7 +158,7 @@ experiments:
   - id: E1
     name: adaptive_k
     evidence: ANALYSIS of LOCAL-FULL
-    status: registered, depends on A1 and D1
+    status: done (hypothesis NOT supported: 1 of 10 cells meets the criterion, and every policy lowers Hit@1)
     hypothesis: A three-tier adaptive K beats fixed K at equal mean alignment budget.
     independent_variables: {menu: [[10, 30, 100], [10, 50, 200]], budget: [10, 20, 30, 50, 100]}
     fixed_variables: [thresholds fit on training folds only, direction searched (more or less K when uncertain), hub-corrected hybrid]
@@ -172,7 +172,7 @@ experiments:
   - id: F1
     name: stage1_variants
     evidence: LOCAL-FULL
-    status: registered, not executed
+    status: done (2026-09-25, ~20 min; win_fuse +3.8 [+3.2, +4.5] coverage@30; s1_hub locked lambda = 0 on calibration)
     tier: 1
     hypothesis: >
       Cheap Stage-1 changes raise coverage at fixed K without retraining: test-time rotations (ttr), windowed
@@ -191,7 +191,7 @@ experiments:
   - id: H1
     name: alignment_ablation
     evidence: LOCAL-FULL
-    status: registered, not executed
+    status: done (2026-09-25, ~2 h 12 min, full rotation set)
     tier: 2
     hypothesis: Inside a fixed shortlist, 384 frames beats 96, and key handling (profile rotation) beats none; exhaustive 12-rotation DTW adds little over the profile heuristic.
     independent_variables: {rotation: [none, profile_cosine, exhaustive_dtw], frames: [96, 384]}
@@ -211,3 +211,31 @@ experiments:
       X7: validation MAP slope over epochs 121-150 is -0.00013 per epoch (plateau; best at 138). Expected gain is small
       relative to ~4.6 h of training. Run only if tier 1-2 finish and time remains.
     command: python scripts/train_encoder.py --config configs/full_train.yaml --set training.epochs=300 --set encoder.run_name=encoder_full_300
+
+  # ------------------------------------------------------------------ added AFTER the local results (2026-09-25)
+  - id: C1
+    name: hybrid_vs_exhaustive_posthoc
+    evidence: POST-HOC ANALYSIS of LOCAL-FULL + frozen run 2
+    status: done
+    registered: NO. Defined after A1's aggregates showed the hybrid passing 0.136 MAP at K = 50. Every use is labelled post-hoc.
+    comparison: hybrid (+ hub) at each K in A1 vs run-2 classical_alignment_hubcorr, paired by query, work-level bootstrap
+    caveats: [384 vs 96 frames, different runs and machines for wall-clock, 384-frame exhaustive never run (~42 h)]
+    implementation: research/scripts/analyze_local.py::c1
+    results: research/results/C1_hybrid_vs_exhaustive_posthoc/
+
+  - id: A2
+    name: k_sweep_win_fuse_shortlist
+    evidence: LOCAL-FULL
+    status: registered 2026-09-25, not executed (next research cycle)
+    tier: 1
+    hypothesis: >
+      The win_fuse Stage-1 scorer (F1: +3.8 coverage points at K = 30) raises end-to-end hybrid quality at every K,
+      i.e. its coverage gain survives reranking. F1 measured coverage only.
+    independent_variables: {stage1_scorer: [global (A1, reused), win_fuse], K: [5, 10, 20, 30, 50, 100, 200, 500]}
+    fixed_variables: [identical to A1: alpha 0.10, lambda 0.6, 384 frames, encoder_full_long; win_fuse = 3 windows of 60%, equal-weight fusion as in F1]
+    metrics: [as A1; paired delta vs A1 at every K]
+    runtime_budget: "~80 min on the author's Mac (A1 took 80 min)"
+    implementation: research/scripts/local/run_shortlist_sweep.py --stage1 win_fuse (fused score identical to F1's win_fuse on the synthetic fixture, 48/48 queries); analysis research/scripts/analyze_local.py::a2
+    command: research/LOCAL_EXPERIMENTS.md, "Next cycle: A2"
+    success_criterion: paired delta MAP at K = 30 and K = 100 with intervals excluding zero
+    scientific_purpose: the only positive intervention found so far; must be shown end to end before it is claimed

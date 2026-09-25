@@ -1,4 +1,6 @@
-# Reviewer audit (round 1, before the local experiments)
+# Reviewer audit
+
+## Round 1 (before the local experiments)
 
 A simulated skeptical review of the work as it stands. Items marked **→** are actions; their status is tracked here.
 
@@ -45,3 +47,24 @@ Many related-work entries are verified only by search results (tag [S]).
 **→** Before submission, read every [S] paper in full and replace the tag with [V]. The MIREX numbers remain uncited (tag [U]).
 
 **Honest state.** Promising, but the positive-intervention half (E1/F1) is unrun. See the decision in `PROGRESS.md`.
+
+
+## Round 2 (2026-09-25, after the local runs)
+
+Status of the round-1 actions:
+- **"How to choose K" takeaway**: done. The paper now states that K = 30 was a cost choice, that MAP has not saturated at K = 500, and where the bottleneck moves (B1).
+- **Per-K timing**: done, as measured ms per pair × K. The per-pair cost was measured once on the local laptop; the per-K cost is derived, and the paper says so.
+- **Leaderboard hygiene**: the post-hoc hybrid-vs-exhaustive comparison (C1) is labelled POST-HOC in its result directory, its table caption and the paper, with its three caveats.
+
+New attacks, and the answers the evidence supports:
+
+1. **"Your hypothesis failed: coverage is not dominant at large K."** Correct, and the paper says so. H1 is restated as holding for K ≲ 100. The decomposition that shows the shift is the contribution.
+2. **"The adaptive-K result is a tuning failure, not a finding."** The policy family, menus, budgets, direction search and criterion were registered before any local result. The difficulty model is good (AUROC 0.76). The failure is a Hit@1/MAP trade-off, consistent across cells. **Residual risk:** other policy families (continuous K, cost-sensitive objectives) were not tried; say so.
+3. **"The E1 budget criterion is pedantic."** Four cells miss it by < 0.4% of the budget. Every one of them lowers Hit@1, so relaxing the criterion does not change the conclusion. Both facts are in the paper.
+4. **"Window fusion might be tuned on the benchmark."** Window count, length, offsets and the 50/50 weight were fixed in the registry before F1 ran, and no other fusion setting was evaluated. **Residual risk:** one setting is not a study of fusion; A2 plus a calibration-only sweep would be.
+5. **"Stage-1 hubness: λ = 0 does not show hubness is absent."** Agreed; the paper calls it weak evidence. A benchmark sweep of λ at Stage 1 would be tuning on the test set, so it is not proposed.
+6. **"Local runs came from a dirty working tree."** Disclosed (`env.json`: `dirty: True` at e6c9c9e). A1's exact reproduction of the frozen benchmark bounds the effect on the shared pipeline. F1 and H1 have no frozen counterpart except H1's profile-cosine/384 row, which equals A1's rerank-only K = 30 exactly (MAP 0.11159). **→** Future local runs should start from a clean, committed tree (added to `LOCAL_EXPERIMENTS.md`).
+7. **"Different machines for the frozen runs and the local runs."** It affects timing only. Results are deterministic and A1 reproduced the frozen numbers bit for bit.
+8. **"Weak absolute accuracy."** Unchanged. Still the main threat. The hybrid at K = 500 (0.212 MAP) is below Qmax on HPCP (0.333).
+
+**Honest state.** The analysis paper is supported by executed, validated experiments. The positive-intervention paper depends on A2.

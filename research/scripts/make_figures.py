@@ -221,30 +221,114 @@ def fig_factorisation() -> None:
 
 # ------------------------------------------------------------------------------ local figures (skipped until the data exists)
 def fig_k_sweep() -> None:
-    got = need("figA_k_sweep", "A1_k_sweep_long384")
+    got = need("fig8_k_sweep", "A1_k_sweep_long384", "X3_compute_frontier_measured")
     if not got:
         return
-    by_k = got[0]["by_k"]
+    a1, x3 = got
+    by_k = a1["by_k"]
     ks = [e["K"] for e in by_k]
-    fig, axes = plt.subplots(1, 3, figsize=(7.6, 2.9))
-    axes[0].plot(ks, [e["coverage"] for e in by_k], color=SLOT[0], label="coverage")
-    axes[0].plot(ks, [e["shortlist_recall"] for e in by_k], "--", color=SLOT[0], label="shortlist recall")
+    ref = next(p for p in x3["points"] if p["system"] == "classical_alignment_hubcorr")
+    fig, axes = plt.subplots(1, 3, figsize=(8.2, 3.0))
+    axes[0].plot(ks, [e["coverage"] for e in by_k], color=SLOT[0])
+    axes[0].plot(ks, [e["shortlist_recall"] for e in by_k], "--", color=SLOT[0])
+    axes[0].text(6, by_k[0]["coverage"] + 0.05, "coverage", color=SLOT[0], fontsize=7.5)
+    axes[0].text(40, 0.08, "recall (all 12 covers)", color=SLOT[0], fontsize=7.5)
+    axes[0].set_title("Stage 1 at K")
+    axes[0].set_ylim(0, 1)
     for ax, m in zip(axes[1:], ("MAP", "Hit@1")):
-        for s, c, lab in (("hyb", SLOT[1], "hybrid"), ("hub", SLOT[2], "hybrid + hub"), ("rr", SLOT[3], "rerank only")):
-            ax.plot(ks, [e[s][m] for e in by_k], color=c, label=lab)
+        for sname, c, lab in (("rr", SLOT[3], "rerank only"), ("hyb", SLOT[1], "hybrid"), ("hub", SLOT[2], "hybrid + hub corr.")):
+            ys = [e[sname][m] for e in by_k]
+            ax.plot(ks, ys, color=c)
+            ax.text(ks[-1] * 1.1, ys[-1], lab, color=c, fontsize=7, va="center")
+        ax.axhline(ref[m], color=MUTED, lw=1)
+        ax.text(2400, ref[m], "run 2 ", color=MUTED, fontsize=6.8, ha="right", va="bottom")
         ax.set_title(m)
-    axes[0].set_title("Stage 1")
+        ax.set_xlim(4, 3000)
     for ax in axes:
         ax.set_xscale("log")
+        ax.set_xlabel("K (alignments per query)")
+    fig.subplots_adjust(wspace=0.3)
+    save(fig, "fig8_k_sweep", f"{a1['evidence']} · A1 · {a1['stage1']['n_queries']:,} queries · grey line: exhaustive alignment + hub corr. (frozen run 2)")
+
+
+def fig_failure_by_k() -> None:
+    got = need("fig9_failure_by_K", "B1_failure_by_K")
+    if not got:
+        return
+    cls = got[0]["classes"]
+    ks = sorted({int(k.split("/")[0][1:]) for k in cls})
+    parts = [("A_no_cover", "A · no cover in top K", SLOT[0]), ("B_hub_top1", "B · hub at rank 1", SLOT[4]),
+             ("B_other", "B · other misranking", SLOT[3]), ("R_rank1", "R · cover at rank 1", SLOT[2])]
+    fig, axes = plt.subplots(1, 2, figsize=(8.0, 3.2), sharey=True)
+    for ax, sname, title in ((axes[0], "hyb", "uncorrected reranker"), (axes[1], "hub", "hub-corrected reranker")):
+        bottom = np.zeros(len(ks))
+        for key, lab, c in parts:
+            v = np.array([cls[f"K{k}/{sname}"][key]["estimate"] for k in ks])
+            ax.bar(range(len(ks)), v - 0.004, bottom=bottom + 0.002, width=0.66, color=c, label=lab)
+            bottom += v
+        ax.set_xticks(range(len(ks)), [str(k) for k in ks])
         ax.set_xlabel("K")
-    axes[0].legend(fontsize=7)
-    axes[2].legend(fontsize=7)
-    save(fig, "figA_k_sweep", f"{got[0]['evidence']} · A1 · {got[0]['stage1']['n_queries']:,} queries")
+        ax.set_title(title)
+        ax.grid(axis="x", visible=False)
+        ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
+    axes[0].legend(loc="lower center", ncol=4, fontsize=7.2, bbox_to_anchor=(1.05, -0.36))
+    save(fig, "fig9_failure_by_K", "ANALYSIS of LOCAL-FULL · B1 · hub = rank-1 item above the 95th percentile of the probe reference")
+
+
+def fig_adaptive() -> None:
+    got = need("fig10_adaptive_vs_fixed", "E1_adaptive_k", "A1_k_sweep_long384")
+    if not got:
+        return
+    e1, a1 = got
+    fixed = [(e["K"], e["hub"]["MAP"], e["hub"]["Hit@1"]) for e in a1["by_k"] if e["K"] <= 200]
+    fig, axes = plt.subplots(1, 2, figsize=(7.6, 3.0))
+    for ax, j, m in ((axes[0], 1, "MAP"), (axes[1], 2, "Hit@1")):
+        ax.plot([f[0] for f in fixed], [f[j] for f in fixed], color=SLOT[0], label="fixed K")
+        for menu, c in zip(e1["menus"], (SLOT[1], SLOT[4])):
+            pts = [(r["realised_mean_K"], r["policy_MAP"] if m == "MAP" else None, r) for r in e1["menus"][menu].values()]
+            xs = [p[0] for p in pts]
+            if m == "MAP":
+                ys = [p[1] for p in pts]
+            else:
+                fixed_h = {f[0]: f[2] for f in fixed}
+                ys = [fixed_h[r["fixed_K"]] + r["delta_Hit1_policy_minus_fixed"]["delta"] for _, _, r in pts]
+            for x, y, (_, _, r) in zip(xs, ys, pts):
+                dot(ax, x, y, c)
+            ax.plot([], [], "o", color=c, label=f"adaptive, menu {menu}")
+        ax.set_xscale("log")
+        ax.set_xlabel("mean alignments per query")
+        ax.set_title(m)
+    axes[0].legend(fontsize=7, loc="lower right")
+    fig.subplots_adjust(wspace=0.3)
+    save(fig, "fig10_adaptive_vs_fixed", "ANALYSIS of LOCAL-FULL · E1 · work-disjoint cross-fitting · policy optimised for MAP on training folds")
+
+
+def fig_stage1_variants() -> None:
+    got = need("fig11_stage1_variants", "F1s_stage1_summary")
+    if not got:
+        return
+    comp = got[0]["paired_coverage"]
+    rows = [(k.split(" - ")[0], v) for k, v in comp.items() if k.endswith("@30")]
+    names = {"ttr": "test-time 12 rotations", "win_max": "windows only (MaxSim)", "win_fuse": "global + windows (fused)",
+             "s1_hub": "Stage-1 hub corr. (λ = 0 chosen)", "global:full_60": "encoder: 60 epochs", "global:base_1500": "encoder: 1,500 works"}
+    rows.sort(key=lambda r: r[1]["delta"])
+    fig, ax = plt.subplots(figsize=(6.4, 2.9))
+    for i, (v, d) in enumerate(rows):
+        c = SLOT[2] if d["ci_low"] > 0 else SLOT[1] if d["ci_high"] < 0 else MUTED
+        ax.plot([100 * d["ci_low"], 100 * d["ci_high"]], [i, i], color=c, lw=2)
+        dot(ax, 100 * d["delta"], i, c)
+        ax.text(100 * d["ci_high"] + 0.8, i, f"{100 * d['delta']:+.1f}", va="center", fontsize=7.5, color=INK)
+    ax.axvline(0, color=MUTED, lw=1)
+    ax.set_yticks(range(len(rows)), [names.get(v, v) for v, _ in rows], fontsize=8)
+    ax.set_xlabel("Δ coverage at K = 30 vs the 150-epoch encoder (points, paired 95% CI)")
+    ax.set_title("What changes Stage-1 coverage at fixed alignment work")
+    ax.grid(axis="y", visible=False)
+    save(fig, "fig11_stage1_variants", "LOCAL-FULL · F1 · 13,000 queries")
 
 
 def main() -> int:
     FIG.mkdir(parents=True, exist_ok=True)
-    for fn in (fig_coverage, fig_compute, fig_failure, fig_oracle, fig_factorisation, fig_k_sweep):
+    for fn in (fig_coverage, fig_compute, fig_failure, fig_oracle, fig_factorisation, fig_k_sweep, fig_failure_by_k, fig_adaptive, fig_stage1_variants):
         fn()
     (FIG / "MISSING.txt").write_text("\n".join(MISSING) + ("\n" if MISSING else ""))
     if MISSING:

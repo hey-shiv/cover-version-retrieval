@@ -62,7 +62,7 @@ The reference configuration is **benchmark run 4** (`reports/results/benchmark_l
 
 **Reproduction status.**
 - **ARTIFACT-REPRODUCTION** (done, cloud; X0): every aggregate metric of all four runs is exactly the mean of its committed per-query file (max |Δ| = 0).
-- **Full reproduction** needs the features and checkpoint, which are not in the cloud environment. It is built into experiment A1, which must reproduce the table above at K = 30 to within 1e-6 or the run is rejected. The mechanism was verified on the synthetic fixture (|Δ| = 0).
+- **Full reproduction** (done, local, 2026-09-25; LOCAL-FULL): experiment A1 recomputed run 4 from features and checkpoint on the author's machine and reproduced MAP of all four systems and the shortlist recall at K = 30 exactly (|Δ| = 0; `research/results/A1_k_sweep_long384/metrics.json` → `reproduction`). The run was made from a working tree with uncommitted changes at `e6c9c9e` (`env.json`).
 
 ## Known inconsistencies in the repository's documentation
 

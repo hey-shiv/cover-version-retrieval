@@ -55,6 +55,8 @@ def out_dir(root: Path, name: str) -> Path:
 def finish(d: Path, exp: str, label: str, metrics: dict, sources: list[str], readme: str, per_query: list[dict] | None = None) -> None:
     import yaml
 
+    repo = str(rrlib.REPO) + "/"
+    sources = [s[len(repo):] if s.startswith(repo) else s for s in map(str, sources)]  # no machine paths in results
     rrlib.write_json(d / "metrics.json", {"experiment_id": exp, "evidence": label, "sources": sources, **metrics})
     (d / "config.yaml").write_text(yaml.safe_dump({"experiment_id": exp, "evidence": label, "script": "research/scripts/analyze_local.py",
                                                     "seed": stats.SEED, "n_folds": N_FOLDS, "menus": [list(m) for m in MENUS],
@@ -128,9 +130,10 @@ def d1_e1(root: Path, a1: Path) -> None:
     boot = []
     rng = np.random.default_rng(stats.SEED)
     uniq, inv = np.unique(groups, return_inverse=True)
+    members = [np.flatnonzero(inv == g) for g in range(uniq.size)]  # precomputed once
     for _ in range(1000):
         pick = rng.integers(0, uniq.size, uniq.size)
-        idx = np.concatenate([np.flatnonzero(inv == g) for g in pick])
+        idx = np.concatenate([members[g] for g in pick])
         boot.append(stats.auroc(p_oof[idx], y[idx]))
     d1 = {"target": f"no cover in the top {k_target}", "base_rate": float(y.mean()),
           "cross_fitted_auroc": {"estimate": stats.auroc(p_oof, y), "ci_low": float(np.nanquantile(boot, 0.025)), "ci_high": float(np.nanquantile(boot, 0.975))},
@@ -167,6 +170,8 @@ def d1_e1(root: Path, a1: Path) -> None:
                 p_te = stats.predict_logistic(xte, stats.fit_logistic(xtr_all, y[tr].astype(float)))
                 best = None
                 qs = np.quantile(p_tr, np.linspace(0, 1, 21))
+                ap_tr = np.column_stack([ap[k][tr] for k in menu])  # (n_train, 3): AP under each tier
+                rows_tr = np.arange(ap_tr.shape[0])
                 for order in ("more_k_when_uncertain", "less_k_when_uncertain"):
                     for t1, t2 in product(qs, qs):
                         if t2 < t1:
@@ -177,7 +182,7 @@ def d1_e1(root: Path, a1: Path) -> None:
                         kk = np.array(menu)[tier]
                         if kk.mean() > budget + 1e-9:
                             continue
-                        score = np.mean([ap[k][tr][i] for i, k in enumerate(kk)])
+                        score = ap_tr[rows_tr, tier].mean()
                         if best is None or score > best[0]:
                             best = (score, t1, t2, order)
                 if best is None:  # budget below the smallest tier everywhere: fall back to the smallest K
@@ -199,11 +204,61 @@ def d1_e1(root: Path, a1: Path) -> None:
                 "delta_Hit1_policy_minus_fixed": stats.boot_delta(first[budget] == 1, pol_first == 1, groups),
                 "k_distribution": {str(k): float(np.mean(pol_k == k)) for k in menu},
             }
+            r = res_menu[f"budget{budget}"]
+            # the registered success criterion, evaluated mechanically (registry.yaml, E1)
+            r["meets_registered_criterion"] = bool(r["delta_AP_policy_minus_fixed"]["ci_low"] > 0 and r["realised_mean_K"] <= budget + 1e-9)
         out["menus"][str(menu)] = res_menu
     finish(out_dir(root, "E1_adaptive_k"), "E1", f"ANALYSIS of {m['evidence']}", out, [str(a1)],
            "Three-tier adaptive shortlist size chosen per query from the cross-fitted difficulty score. Thresholds are fit on "
            "training folds only, subject to mean K <= budget, and evaluated on the held-out works. Compared with fixed K = budget "
            "on the same queries (paired, work-level). A policy is only a contribution if it beats fixed K at equal or lower realised cost.")
+
+
+# ---------------------------------------------------------------------------- C1 (POST-HOC)
+def c1(root: Path, a1: Path) -> None:
+    """POST-HOC (not pre-registered): hybrid at each K vs corrected exhaustive alignment (run 2), paired by query.
+
+    Added after A1's aggregates showed the hybrid passing 0.136 MAP at K = 50. Reported as post-hoc.
+    The two systems differ in resolution (384 vs 96 frames) and run; exhaustive alignment at 384 frames was never run.
+    """
+    m, pq, _, _, ks = a1_inputs(a1)
+    frozen = read_csv(rrlib.REPO / "reports" / "results" / "benchmark_per_query_full96.csv")
+    by_pid = {r["query_pid"]: r for r in frozen}
+    groups = [r["query_wid"] for r in pq]
+    ref_ap = np.array([float(by_pid[r["query_pid"]]["classical_alignment_hubcorr_ap"]) for r in pq])
+    ref_first = np.array([int(by_pid[r["query_pid"]]["classical_alignment_hubcorr_first_rank"]) for r in pq])
+    res = {}
+    for k in ks:
+        for s in ("hyb", "hub"):
+            res[f"K{k}/{s}"] = {"delta_AP_hybrid_minus_exhaustive": stats.boot_delta(ref_ap, col(pq, f"{s}_ap_K{k}"), groups),
+                                "delta_Hit1_hybrid_minus_exhaustive": stats.boot_delta(ref_first == 1, col(pq, f"{s}_first_K{k}", int) == 1, groups),
+                                "alignments_per_query_hybrid": k, "alignments_per_query_exhaustive": 14999}
+    finish(out_dir(root, "C1_hybrid_vs_exhaustive_posthoc"), "C1", f"POST-HOC ANALYSIS of {m['evidence']} + frozen run 2",
+           {"reference": "run 2 classical_alignment_hubcorr (96 frames, lambda 0.5)", "comparisons": res},
+           [str(a1), "reports/results/benchmark_per_query_full96.csv"],
+           "POST-HOC, not pre-registered: defined after seeing A1. Paired per-query comparison of the hybrid at each K "
+           "(384-frame rerank, alpha 0.10, lambda 0.6) against exhaustive hub-corrected alignment at 96 frames from run 2. "
+           "Resolutions differ; the 384-frame exhaustive system (~42 h) was never evaluated.")
+
+
+# ---------------------------------------------------------------------------- A2 vs A1
+def a2(root: Path, a1dir: Path, a2dir: Path) -> None:
+    """Registered A2: win_fuse shortlist vs global shortlist, end to end, paired by query at every K."""
+    m1, p1, _, _, ks1 = a1_inputs(a1dir)
+    m2, p2, _, _, ks2 = a1_inputs(a2dir)
+    assert [r["query_pid"] for r in p1] == [r["query_pid"] for r in p2], "A1 and A2 must cover the same queries in the same order"
+    groups = [r["query_wid"] for r in p1]
+    res = {}
+    for k in sorted(set(ks1) & set(ks2)):
+        for s in ("hyb", "hub"):
+            res[f"K{k}/{s}"] = {"delta_AP": stats.boot_delta(col(p1, f"{s}_ap_K{k}"), col(p2, f"{s}_ap_K{k}"), groups),
+                                "delta_Hit1": stats.boot_delta(col(p1, f"{s}_first_K{k}", int) == 1, col(p2, f"{s}_first_K{k}", int) == 1, groups),
+                                "delta_coverage": stats.boot_delta(col(p1, f"cov_K{k}", int) > 0, col(p2, f"cov_K{k}", int) > 0, groups)}
+    # registered criterion needs both K = 30 and K = 100; a sweep missing either cannot meet it
+    crit = all(f"K{k}/hub" in res and res[f"K{k}/hub"]["delta_AP"]["ci_low"] > 0 for k in (30, 100))
+    finish(out_dir(root, "A2s_win_fuse_end_to_end"), "A2s", f"ANALYSIS of {m2['evidence']}",
+           {"comparisons": res, "meets_registered_criterion": bool(crit)}, [str(a1dir), str(a2dir)],
+           "Registered A2 analysis: does the win_fuse Stage-1 coverage gain survive reranking? Paired A2 - A1 at every K.")
 
 
 # ---------------------------------------------------------------------------- F1 / H1 summaries
@@ -270,6 +325,12 @@ def main(argv=None) -> int:
         b1(args.root, args.root / args.a1)
         d1_e1(args.root, args.root / args.a1)
         done += ["B1", "D1", "E1"]
+        if (rrlib.REPO / "reports" / "results" / "benchmark_per_query_full96.csv").exists() and "smoke" not in str(args.root):
+            c1(args.root, args.root / args.a1)
+            done.append("C1 (post-hoc)")
+    if (args.root / "A2_k_sweep_win_fuse" / "metrics.json").exists() and (args.root / args.a1 / "metrics.json").exists():
+        a2(args.root, args.root / args.a1, args.root / "A2_k_sweep_win_fuse")
+        done.append("A2s")
     if (args.root / args.f1 / "metrics.json").exists():
         f1(args.root, args.root / args.f1)
         done.append("F1s")

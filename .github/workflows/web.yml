@@ -6,9 +6,9 @@ name: web
 on:
   push:
     branches: [main]
-    paths: ['web/**', 'reports/**', 'data/manifests/**', '.github/workflows/web.yml']
+    paths: ['web/**', 'reports/**', 'research/results/**', 'data/manifests/**', '.github/workflows/web.yml']
   pull_request:
-    paths: ['web/**', 'reports/**', 'data/manifests/**', '.github/workflows/web.yml']
+    paths: ['web/**', 'reports/**', 'research/results/**', 'data/manifests/**', '.github/workflows/web.yml']
   workflow_dispatch:
 
 permissions:

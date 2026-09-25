@@ -104,6 +104,8 @@ The alignment code is written from the textbook DTW recurrence (Müller, *FMP* �
 
 **6 · The idea isn't new; the evidence is.** Hubness correction for cover identification is prior art (Seo 2022; Li & Chen 2018). What this adds is a held-out-calibrated measurement at Da-TACOS scale, on a baseline about 4× weaker than Qmax ([literature check](notes/literature/novelty_assessment.md)).
 
+**7 · A bigger shortlist keeps paying, until the reranker becomes the problem.** Aligning the top 500 instead of the top 30 raises hub-corrected MAP from 0.122 to **0.212** and Hit@1 from 36.6% to 51.5%. That costs about 362 ms per query instead of 22 ms, at 0.72 ms per alignment. Up to K = 50, most failures are covers missing from the shortlist. From K = 200, most are covers that are present but ranked below a non-cover, and hub correction matters more and more. Choosing K per query from Stage-1 signals did not help: it traded Hit@1 for MAP. Fusing the global embedding with three window embeddings added 3.8 points of coverage at K = 30; whether that survives reranking is the next run ([research/](research/PROGRESS.md), [A1](research/results/A1_k_sweep_long384/metrics.json), [B1](research/results/B1_failure_by_K/metrics.json), [E1](research/results/E1_adaptive_k/metrics.json), [F1](research/results/F1s_stage1_summary/metrics.json)).
+
 ## Results
 
 ### Final benchmark (Da-TACOS, 13,000 × 15,000)
@@ -259,10 +261,10 @@ From a fresh clone with the same data, the manifests rebuild byte-identically, t
 
 ## Limitations
 
-- **Accuracy is below published CSI systems.** The best system here scores 0.136 MAP; Qmax on the same input scores 0.333.
-- **Stage 1 still limits the hybrid.** Shortlist recall is 0.136 at K = 30, and validation MAP was still rising when training stopped.
+- **Accuracy is below published CSI systems.** The best locked system scores 0.136 MAP. The same pipeline with K = 500 (the research sweep) reaches 0.212. Qmax on the same input scores 0.333.
+- **Stage 1 still limits the hybrid at small K.** Shortlist recall is 0.136 at K = 30. Encoder validation MAP was flat over the last 30 of 150 epochs.
 - **The likely strongest configuration was never run:** classical alignment at 384 frames with hubness correction over all pairs, about 42 h of CPU.
-- **Test-time rotation matching was never evaluated on the benchmark.** It was the best development system with the 60-epoch encoder (0.436).
+- **Test-time rotation matching was evaluated on the benchmark only at Stage 1** (research run F1): it adds 1.4 points [0.8, 2.0] of coverage at K = 30. It was never run end to end.
 - **Whole-query alignment.** Subsequence DTW aligns the entire query in order, so covers that drop or reorder sections are penalised. Qmax-style local alignment isn't implemented.
 - **Thin supervision.** The Cover Analysis subset has two recordings per work.
 - **Dataset scope.** Da-TACOS is feature-only, from 2019, and Western-pop-centric. Nothing here establishes robustness to short, live, noisy or partial queries, or to production-scale catalogues.
@@ -271,9 +273,9 @@ From a fresh clone with the same data, the manifests rebuild byte-identically, t
 
 In the order the evidence asks for:
 
-1. **Push Stage-1 coverage further:** a larger or adaptive K, multi-vector (per-section) embeddings, more training data. Registered and ready to run in [research/](research/LOCAL_EXPERIMENTS.md).
+1. **A2: the K sweep with the fused global + window Stage 1.** Registered, about 80 min locally; see [research/LOCAL_EXPERIMENTS.md](research/LOCAL_EXPERIMENTS.md). Adaptive K was tested and did not help.
 2. **Classical alignment at 384 frames + hubness correction** over the full benchmark (about 42 h).
-3. **Test-time rotation matching at benchmark scale** (12× the query-embedding cost).
+3. **A reranker that holds up at large K.** From K ≈ 200 most failures are covers outranked inside the list; hub correction helps more as K grows ([B1](research/results/B1_failure_by_K/metrics.json)).
 4. **Local alignment** (Qmax-style) against subsequence DTW, for covers with changed structure.
 5. **CREMA / HPCP feature fusion**, and error-stratified evaluation by key shift and length ratio.
 

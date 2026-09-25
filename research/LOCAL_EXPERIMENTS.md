@@ -104,6 +104,32 @@ git push origin claude/compassionate-cray-q8bxmt
 
 Never `git add` any of these: `data/`, `runs/`, `*.npz`, `*.npy`, `*.pt`, `*.h5`. `.gitignore` already blocks them.
 
+## Next cycle: A2, the K sweep with the fused Stage 1 (~80 min, resumable)
+
+Registered 2026-09-25 in [`experiments/registry.yaml`](experiments/registry.yaml), after F1 showed a +3.8-point coverage gain for `win_fuse` and before any end-to-end result. Success criterion: paired ΔMAP versus A1 with intervals excluding zero at K = 30 **and** K = 100.
+
+Start from a **clean, committed tree** (the tier-1 runs were made from a dirty tree; see `reviewer_audit.md`, round 2):
+
+```bash
+git fetch origin && git checkout claude/compassionate-cray-q8bxmt && git pull
+git status --short                                   # must print nothing (untracked data/, runs/ are ignored)
+pytest -q                                            # all pass
+python research/scripts/local/run_shortlist_sweep.py --config configs/full_train.yaml --tag long384 \
+  --set features.n_frames=384 --hub-correction reports/results/hubness_correction_n384.json \
+  --stage1 win_fuse --max-queries 200 --out /tmp/sanity_A2          # ~5 min sanity; 200 rows expected
+python research/scripts/local/run_shortlist_sweep.py --config configs/full_train.yaml --tag long384 \
+  --set features.n_frames=384 --hub-correction reports/results/hubness_correction_n384.json \
+  --stage1 win_fuse --ks 5 10 20 30 50 100 200 500 \
+  --out research/results/A2_k_sweep_win_fuse
+python research/scripts/validate_results.py                        # must end "0 failed"
+git add research/results/A2_k_sweep_win_fuse research/PROGRESS.md
+git commit -m "results: local run A2 (LOCAL-FULL)" && git push origin claude/compassionate-cray-q8bxmt
+```
+
+- There is no reproduction check: the frozen run used the global Stage 1, so `--frozen` is not passed.
+- The fused score replaces the global score everywhere downstream, including the global term of the α blend. That is what "the system with a fused Stage 1" means. α and λ stay locked at the A1 values.
+- The alignment cache key includes the Stage-1 scorer, so A1's cached blocks are not reused by mistake. The probe reference is reused.
+
 ## Optional, not recommended now
 
 - **I2: 300-epoch training** (~4.6 h). The registry records why it is deprioritised: validation MAP was flat over epochs 121–150.

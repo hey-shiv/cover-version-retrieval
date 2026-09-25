@@ -33,7 +33,8 @@ No number is typed into the paper or the website if a script can generate it.
 | synthetic mechanics test of every runner | no | see below | ~1 min |
 | A1 / F1 / H1 | **yes**, plus checkpoints | [`LOCAL_EXPERIMENTS.md`](LOCAL_EXPERIMENTS.md) | ~3 h tier 1 |
 | validate local outputs | no | `python research/scripts/validate_results.py` | seconds |
-| analyses of local outputs B1, D1, E1, F1s, H1s | no | `python research/scripts/analyze_local.py` | ~1 min |
+| analyses of local outputs B1, D1, E1, C1 (post-hoc), F1s, H1s (A2s once A2 exists) | no | `python research/scripts/analyze_local.py` | ~40 s |
+| A2 (next cycle) | **yes** | [`LOCAL_EXPERIMENTS.md`](LOCAL_EXPERIMENTS.md), "Next cycle: A2" | ~80 min |
 
 ## Synthetic mechanics test (no data needed)
 

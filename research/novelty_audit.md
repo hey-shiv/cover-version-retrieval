@@ -1,4 +1,8 @@
-# Novelty audit (round 1, before the local experiments)
+# Novelty audit
+
+Round 1 (before the local experiments) is kept unchanged below; round 2 (after A1, F1, H1 and their analyses) is at the end.
+
+## Round 1
 
 This is conservative by design. It will be repeated after A1, D1, E1 and F1 (round 2).
 Sources: [`literature_review.md`](literature_review.md). Many entries are verified only by search results; see the verification tags there.
@@ -58,3 +62,22 @@ Exactness and openness:
 **Option C, an empirical analysis paper,** is supported by the evidence already in hand. Options B and A are **not yet** supported. Round 2 decides between C and B, based on:
 - E1: adaptive K beating fixed K at equal cost, with the interval excluding zero;
 - F1: a cheap Stage-1 change raising coverage@30, with the interval excluding zero.
+
+
+## Round 2 (2026-09-25, after the local runs)
+
+**New prior art found in this round.** Jacob et al. (2024, arXiv:2411.11767, [S]) report that text rerankers give diminishing and eventually negative returns as they score more candidates. B1's falling reranker efficiency (85.1% at K = 5 → 56.7% at K = 500) is the CSI version of that pattern. It is a **measurement in a new setting, not a new phenomenon**, and the paper now cites it.
+
+**Claim by claim.**
+
+| candidate claim | status | why |
+|---|---|---|
+| exact coverage ceilings and full K sweep for two-stage CSI, 13,000 queries | **supported (measurement)** | A1 reproduces the frozen benchmark exactly and sweeps K = 5–500; no CSI paper found reporting this |
+| the bottleneck moves from coverage to reranking at K ≈ 100–200 | **supported (measurement)**; the mechanism has IR precedent | B1; Jacob et al. 2024 |
+| hub correction's value grows with K | **supported (measurement)**; hub correction itself is prior art | B1, A1 |
+| adaptive K for CSI | **negative result** | E1: 1/10 cells meet the criterion; all MAP gains cost Hit@1. Adaptive depth is IR prior art (Culpepper et al. 2016), so the value is the negative transfer result |
+| global + window fusion raises Stage-1 coverage | **supported at the coverage level only** | F1 +3.8 [+3.2, +4.5] @30; multi-vector late interaction is prior art (ColBERT, LIVI); end-to-end effect unknown until A2 |
+| two-stage hybrid matches exhaustive alignment at 1/150 of the alignments | **post-hoc, not claimable as a finding** | C1 was chosen after seeing A1 and mixes 96/384 frames and machines; reported as exploratory |
+| a development protocol misleads design | **supported**, now with a third case (key handling) | X6, H1 |
+
+**Decision gate (round 2).** **Option C, an empirical analysis paper,** is supported and stronger than in round 1. **Option B is not supported yet**: its only candidate, window fusion, is unproven end to end. A2 (one local run, ~80 min) decides whether B becomes available. No method novelty is claimed.

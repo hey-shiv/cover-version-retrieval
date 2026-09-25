@@ -21,16 +21,18 @@ So the question is about the **interface between the stages**, not about a new m
 
 ## Research questions
 
-| RQ | question | status | evidence |
+Status as of 2026-09-25, after the local runs (A1, F1, H1; LOCAL-FULL) and their cloud analyses (B1, D1, E1, F1s, H1s; C1 post-hoc).
+
+| RQ | question | answer | evidence |
 |---|---|---|---|
-| **RQ1** | How does shortlist size K control coverage, recall and final quality, and at what cost in alignments per query? | coverage exact at every K (done); final quality needs reranking at K ≠ 30 | X1 (done); **A1** (local) |
-| **RQ2** | Why do some queries need very large K? | partly answerable: the rank distribution is heavy-tailed (done); *why* needs per-query signals | X1, X4 (done); **A1 + D1** |
-| **RQ3** | Can shortlist size be chosen per query, from Stage-1 evidence alone, and beat fixed K at equal cost? | upper bound known (done); realisable gain open | X4 bound (done); **D1, E1** |
-| **RQ4** | Which failure mode dominates at each budget? | at K = 30, exact (done); across K needs reranking at every K | X2 (done); **B1** |
-| **RQ5** | Can cheap Stage-1 changes (test-time rotations, windowed multi-vector MaxSim, fusion) raise coverage at fixed K without retraining? | open | **F1** |
-| **RQ6** | How much error is attributable to hubness, and does hubness act in Stage 1 or only in reranking? | reranking side measured (done); Stage-1 side open | X2, X5 (done); **F1 (s1_hub), B1** |
-| **RQ7** | What is the whole system's accuracy/computation trade-off? | measured at three operating points (done); full curve needs A1 | X3 (done); **A1** |
-| **RQ8** | Does the small development protocol predict benchmark behaviour of a two-stage system? | answered: no, because its shortlist recall is near 1 (done) | X6 (done) |
+| **RQ1** | How does shortlist size K control coverage, recall and final quality, and at what cost? | MAP rises monotonically with K and has not saturated at 500 (hub-corrected hybrid 0.085 at K = 5, 0.122 at 30, 0.160 at 100, 0.212 at 500). Rerank cost is 0.72 ms per pair on the local laptop, so about 22 ms/query at K = 30 and 362 ms/query at K = 500. | A1 (LOCAL-FULL); X1 |
+| **RQ2** | Why do some queries need very large K? | Only partly answered. The first-cover rank is heavy-tailed (X1, X4). Label-free Stage-1 signals predict "no cover in the top 30" with AUROC 0.76 [0.75, 0.77], so hardness is partly visible in the score distribution; the strongest single signal is top-100 entropy (0.73). The *cause* (e.g. structure, transposition, arrangement) is not tested. | X1, X4, D1 |
+| **RQ3** | Can K be chosen per query and beat fixed K at equal cost? | **No** (registered negative). 1 of 10 cells meets the criterion; 5 have ΔAP > 0 with CI excluding zero (at most +0.0072), but every one of them lowers Hit@1 (up to −4.4 points across cells). The fitted policies are triage: fewer alignments for predicted-hard queries. A trade-off, not a Pareto gain. | D1, E1 |
+| **RQ4** | Which failure mode dominates at each budget? | Class A (no cover in the shortlist) dominates up to K = 50 (40.0% vs 20.2%); the two are close at K = 100 (29.4% vs 26.9%); class B (misranked) dominates from K = 200 (33.1% vs 19.5%). Reranker efficiency falls from 85.1% at K = 5 to 56.7% at K = 500. | B1 |
+| **RQ5** | Can cheap Stage-1 changes raise coverage at fixed K without retraining? | **Yes, for one variant, at the coverage level.** Global + 3-window fusion: +3.8 [+3.2, +4.5] points coverage@30, +3.3 [+2.7, +4.0] @100. Test-time rotations: +1.4 [+0.8, +2.0]. Windows alone: −1.5 [−2.5, −0.5]. End-to-end effect unmeasured → **A2** (registered). Training scale matters far more: 60 epochs −13.2, 1,500 works −33.5 points. | F1, F1s |
+| **RQ6** | How much error is due to hubness, and where does it act? | Inside the shortlist, and increasingly with K: hub-corrected minus uncorrected MAP is +0.001 at K = 5, +0.009 at 30, +0.043 at 500; the uncorrected "hub at rank 1" class grows from 1.2% to 11.2% of queries, the corrected one from 0.6% to 2.8%. At Stage 1, calibration chose λ = 0 (no correction); weak evidence that hubness does not limit coverage. | X2, X5, B1, F1 |
+| **RQ7** | What is the system's accuracy/computation trade-off? | Full curve in A1 (table t4, fig 8). Post-hoc (C1, not registered, 96 vs 384 frames, different machines): the hub-corrected hybrid ties exhaustive corrected alignment on MAP at K = 50 (+0.0018 [−0.0046, +0.0081]) and beats it from K = 100 (+0.0243 [+0.0179, +0.0304]) with 100 instead of 14,999 alignments per query; on Hit@1 it is ahead from K = 30. | A1, X3, C1 |
+| **RQ8** | Does the development protocol predict benchmark behaviour? | No. Shortlist recall 0.75–0.90 vs 0.02–0.14; sign of the reranking effect wrong in 2 of 4 configurations; key handling looked useless on development (point estimate favoured none, CI included zero) and is essential on the benchmark (−0.039 AP without it, H1). | X6, H1 |
 
 ## What is already established (ARTIFACT-ANALYSIS, 13,000 benchmark queries, work-level 95% CI)
 
@@ -49,12 +51,15 @@ These results come from committed per-query files and are exact up to bootstrap 
 5. **The first-cover rank is heavy-tailed.** 29% of queries need K > 100 and 9% need K > 500 (run 4). An oracle allocating K per query would match fixed-K = 30 coverage with **3.9** alignments per query on average. This is an upper bound, not a method.
 6. **The development protocol cannot test this bottleneck.** Its shortlist recall at K = 30 is 0.75–0.90, against 0.02–0.14 on the benchmark. The sign of the reranking effect disagreed with the benchmark in 2 of 4 configurations.
 
-## Refined thesis (provisional until A1/D1/E1/F1)
+## Revised thesis (after the local runs)
 
-> *A scalable cover-song retrieval system is limited by the coverage of its first stage: structure-aware alignment cannot recover covers excluded from the shortlist. On Da-TACOS we measure this bottleneck exactly across shortlist sizes and encoders, decompose every query's outcome into coverage and reranking failures, show that first-stage training — not reranking — produced most of the observed improvement, and test whether first-stage evidence can allocate alignment work per query.*
+> *In a two-stage cover song retrieval system, the first stage bounds accuracy at small shortlists and the reranker bounds it at large ones. On Da-TACOS we measure both bounds exactly across K from 5 to 500, locate where the bottleneck moves from coverage to reranking (K ≈ 100–200 for this system), attribute most past gains to the first stage, and show that per-query adaptive K — although difficulty is predictable — trades Hit@1 for MAP rather than improving both. Fusing global and window embeddings is the one cheap first-stage change that raised coverage.*
 
-The last clause stays in the thesis **only if E1 shows a gain over fixed K at equal cost**. Otherwise it becomes a reported negative result, and the thesis ends at the decomposition. If F1 shows that a cheap Stage-1 change raises coverage, that becomes a second positive claim.
+What changed from the provisional thesis, and why:
+- "Coverage is the dominant limitation at any affordable K" is **withdrawn**. It holds for K ≤ 50–100 only (B1). Whether K = 100–500 is "affordable" depends on the deployment; at 0.72 ms/pair it is 72–362 ms per query here.
+- The adaptive-allocation clause is now a **reported negative result** (E1), as pre-committed.
+- The fusion result (F1) is a **coverage** result until A2 measures it end to end. It is not claimed as a system improvement.
 
 ## Contribution type (decision gate, see `novelty_audit.md`)
 
-Current evidence supports **Option C, an empirical analysis paper** on the coverage bottleneck, hubness and computation in two-stage CSI. **Option B**, an empirical/system paper with a positive intervention, requires E1 or F1 to succeed. **Option A**, a new method, is not supported.
+Round 2 (after the local runs): **Option C, an empirical analysis paper**, remains the supported contribution, now with the full K sweep, the bottleneck shift and a registered negative result. **Option B** (positive intervention) is **not yet** supported: E1 failed and F1 succeeded only at the coverage level; A2 decides. **Option A**, a new method, is not supported.

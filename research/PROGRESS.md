@@ -16,7 +16,7 @@ The brief asks for installed skills per task. The skills installed in this envir
 | statistics | none installed; the repository's work-level bootstrap (D-009) extended in `scripts/stats.py` | `statistics.md` |
 | figures | **`dataviz` skill**: palette validated with its script (first palette FAILED CVD and chroma checks and was replaced by the validated slots 1–5); mark specs; one axis per panel; direct labels plus tables for the contrast WARN | `figures/fig2–fig7` |
 | code review | **`code-review` skill** (medium) on research/scripts + tests | 4 findings, all fixed: alignment-cache key now covers alignment settings and checkpoint, and sanity runs use a separate cache; oracle index float rounding; K-sweep figure label read from the result; F1 summary guarded when no global variant |
-| code quality / testing | synthetic end-to-end runs; regression tests pinning the shortcut to `HybridRun`; negative test of the validator | `tests/test_research_lib.py` (23 tests); full suite 142 passed |
+| code quality / testing | synthetic end-to-end runs; regression tests pinning the shortcut to `HybridRun`; negative test of the validator; cross-experiment equality checks | `tests/test_research_lib.py`; see the test count in the final report |
 | scientific writing | none installed; claims only from result files | `research_question.md`, audits, `paper/` draft |
 
 ## Cloud work (2026-09-24/25)
@@ -41,10 +41,39 @@ The brief asks for installed skills per task. The skills installed in this envir
 - H1 · completed · ~2 h 12 min · full rotation set including exhaustive_dtw · no deviations
 - Environment notes (no effect on results): the venv is uv-managed, so step 0 used `uv pip install -e ".[dev]"` instead of `pip`; pytest gave 142 passed; the step-2 sanity outputs went to a session scratch dir instead of `/tmp`, and both passed (A1 per_query.csv had 200 rows); `validate_results.py`: 43 ok, 0 failed.
 
+## Cloud analysis of the local runs (2026-09-25)
+
+Nothing was re-run in the cloud. Everything below reads the files pushed in `6cf9999`.
+
+1. **Validation.** `validate_results.py`: 45 ok, 0 failed. This includes two cross-experiment checks added in this round: F1's reference Stage 1 equals A1's, and H1's locked variant equals A1's rerank-only K = 30, both exactly.
+2. **Reproduction.** A1 reproduces the frozen run-4 file exactly (|Δ| = 0 for four MAPs and shortlist recall). All three runs record a dirty tree at `e6c9c9e` in `env.json`; this is disclosed in the paper and in `reviewer_audit.md`.
+3. **Analyses.** `analyze_local.py` wrote B1, D1, E1, C1 (post-hoc) and F1s/H1s. It took 40 s after vectorising the D1/E1 bootstrap; the first version timed out.
+4. **Figures.** fig8–fig11 were added (K sweep, failure classes by K, adaptive vs fixed, Stage-1 variants) and inspected visually. The fig8 reference label was moved off the curves.
+5. **Tables and macros.** t8–t12 were added, plus `paper/generated/numbers_local.tex`. The LaTeX tables now escape Δ, ·, − and scale wide tables to the text width.
+6. **Literature (round 2).** One new directly relevant paper was found and added to the review, the matrix and the bib: Jacob et al. 2024, rerankers degrade with depth [S].
+7. **Audits.** Round 2 of `novelty_audit.md` and `reviewer_audit.md` is done. `research_question.md` now answers RQ1–RQ8 and gives the revised thesis.
+8. **Paper.** `paper/main.tex` was rewritten around the supported findings. Only A2 is still `\pending`.
+9. **Corrections made while writing.**
+   - A discussion sentence ("predicted-hard queries remain uncovered at K = 100 or 200") was checked and found true at 100 but not at 200. It was not in any result file, so it was rewritten as an untested explanation.
+   - The E1 budget overshoot is stated as < 0.4% (max 0.36%), not 0.3%.
+   - `analyze_local.py` wrote absolute machine paths into `sources`; they are now repository-relative, and the outputs were regenerated. Seeds are fixed, so the numbers are unchanged.
+10. **Next experiment (A2).** A2 is registered, with commands in `LOCAL_EXPERIMENTS.md`. On the synthetic fixture, its fused Stage 1 ranks identically to F1's `win_fuse` (48/48 queries).
+
 ## Current state
 
-**PROMISING BUT NEEDS ONE MORE RESEARCH CYCLE** (the local tier-1 run, about 3 h).
+**PAPER READY WITH MINOR ADDITIONS**, as an **empirical analysis paper** (Option C). It is **not** ready as a positive-intervention paper (Option B).
 
-- The analysis contribution (Option C) is supported by executed ARTIFACT analyses.
-- The intervention questions (adaptive K, E1; cheap Stage-1 improvements, F1) and the full K sweep (A1) are designed, implemented, tested and registered, but not executed.
-- The paper in `paper/` is a draft built only on established results. Its A1/E1/F1 sections are marked pending.
+What is supported, by executed and validated experiments:
+- the K sweep: MAP 0.122 → 0.212 from K = 30 to 500, not saturated;
+- the bottleneck moving from coverage to reranking around K = 100–200;
+- hub correction's value growing with K;
+- the Hit@1 decomposition and attribution;
+- a registered negative result for adaptive K;
+- development-protocol blindness, with three cases.
+
+Minor additions before submission:
+1. Read every [S] reference in full and fix the tags.
+2. Compile the LaTeX on a machine that has it; the cloud has none. Proofread the generated tables.
+3. Run A2 (~80 min, local). If ΔMAP > 0 at K = 30 and 100, the fusion result becomes an end-to-end claim. Otherwise it stays a coverage-only result, stated as such.
+
+The main threat to the paper is unchanged: the system is weak in absolute terms (0.212 MAP at K = 500 vs Qmax 0.333). Whether the bottleneck shift holds for a strong system is untested.

@@ -1,1 +1,0 @@
-figA_k_sweep: needs A1_k_sweep_long384

@@ -1,0 +1,32 @@
+experiment_id: H1s
+evidence: ANALYSIS of LOCAL-FULL
+script: research/scripts/analyze_local.py
+seed: 20260817
+n_folds: 5
+menus:
+- - 10
+  - 30
+  - 100
+- - 10
+  - 50
+  - 200
+budgets:
+- 10
+- 20
+- 30
+- 50
+- 100
+hub_percentile: 95
+signals:
+- top1
+- margin_1_2
+- margin_1_10
+- mean_top10
+- std_top10
+- mean_top100
+- entropy_top100
+- row_std
+- z_top1
+- query_kocc10
+- top1_kocc10
+- top1_hub_reference

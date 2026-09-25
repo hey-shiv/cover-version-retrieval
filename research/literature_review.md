@@ -59,8 +59,9 @@ The machine-readable version is [`literature_matrix.csv`](literature_matrix.csv)
 - **Culpepper, Clarke & Lin (2016)**, ADCS: *Dynamic Cutoff Prediction in Multi-Stage Retrieval Systems*. It predicts, per query, the size of the candidate set passed to the next stage, noting that "optimal settings vary across queries". [S]
 - **Efficient cost-aware cascade ranking** (SIGIR 2017); **Ranked List Truncation for LLM-based Re-Ranking** (SIGIR 2024; authors not confirmed here). [S]
 - Query performance prediction from score distributions is a standard IR topic. [S]
+- **Jacob, Lindgren, Zaharia, Carbin, Khattab & Drozdov (2024)**, arXiv:2411.11767: *Drowning in Documents: Consequences of Scaling Reranker Inference*. Strong text rerankers give diminishing returns as they score more candidates, and eventually degrade. Found during round 2 of the novelty audit (2026-09-25), after B1 showed reranker efficiency falling with K; verified by arXiv and dblp listings only. [S]
 
-**Established:** per-query adaptive candidate depth, driven by first-stage evidence, is **prior art in IR**. Applying it to CSI with alignment reranking is a transfer, not a new method. It is worth publishing only if it measurably moves the CSI accuracy/computation frontier.
+**Established:** reranker efficiency falling with candidate depth is reported for text rerankers (Jacob et al. 2024), so B1's version of it in CSI is a measurement in a new setting, not a new phenomenon. Per-query adaptive candidate depth, driven by first-stage evidence, is **prior art in IR**. Applying it to CSI with alignment reranking is a transfer, not a new method. It is worth publishing only if it measurably moves the CSI accuracy/computation frontier.
 
 ## 7. Benchmarks
 
