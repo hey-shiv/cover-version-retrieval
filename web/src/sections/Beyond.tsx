@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Chapter, Caption, Seg } from '../components/Chapter'
 import { results, type ClassPoint, type KPoint, type Research } from '../data/results'
 import { benchmarkRuns } from '../data/benchmark-data'
-import { useWidth } from '../lib/hooks'
+import { useInView, useReducedMotion, useWidth } from '../lib/hooks'
 import { PAPER_URL } from '../components/Nav'
 import { linScale, logScale } from '../lib/format'
 
@@ -74,9 +74,35 @@ export function Beyond() {
 
 type SweepMetric = 'MAP' | 'Hit@1' | 'coverage'
 
+const EASE = 'cubic-bezier(.22,.61,.36,1)'
+
+/** 0 -> 1 over `ms` once `start` is true (ease-out cubic); 1 immediately under reduced motion. */
+function useReveal(start: boolean, reduced: boolean, ms: number): number {
+  const [t, setT] = useState(reduced ? 1 : 0)
+  useEffect(() => {
+    if (reduced) {
+      setT(1)
+      return
+    }
+    if (!start) return
+    let raf = 0
+    const t0 = performance.now()
+    const tick = (now: number) => {
+      const u = Math.min(1, (now - t0) / ms)
+      setT(1 - (1 - u) ** 3)
+      if (u < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [start, reduced, ms])
+  return t
+}
+
 function Sweep({ res }: { res: Research }) {
   const [m, setM] = useState<SweepMetric>('MAP')
   const [ref, width] = useWidth<HTMLDivElement>(900)
+  const [viewRef, seen] = useInView<HTMLDivElement>()
+  const reveal = useReveal(seen, useReducedMotion(), 1800)
   const H = 300
   const L = 48
   const R = width < 560 ? 16 : 190
@@ -117,8 +143,15 @@ function Sweep({ res }: { res: Research }) {
         <Seg label="Metric" value={m} onChange={setM} options={[{ value: 'MAP', label: 'MAP' }, { value: 'Hit@1', label: 'Hit@1' }, { value: 'coverage', label: 'Stage-1 coverage' }]} />
         <span className="label">log axis · second row: rerank time per query</span>
       </div>
-      <div ref={ref}>
+      <div ref={viewRef}>
+        <div ref={ref}>
         <svg width={width} height={H} role="img" aria-label={`${m} against shortlist size K from 5 to 500`}>
+          <defs>
+            {/* the lines draw left to right the first time the chart scrolls into view */}
+            <clipPath id="sweep-reveal">
+              <rect x={0} y={0} width={width * reveal} height={H} />
+            </clipPath>
+          </defs>
           {ticks.map((v) => (
             <g key={v}>
               <line x1={L} x2={width - R} y1={y(v)} y2={y(v)} stroke="var(--rule)" strokeDasharray={v ? '2 3' : undefined} />
@@ -148,6 +181,7 @@ function Sweep({ res }: { res: Research }) {
               </text>
             </g>
           )}
+          <g clipPath="url(#sweep-reveal)">
           {series.map((s, si) => {
             const d = pts.map((p, j) => `${j ? 'L' : 'M'}${x(p.K).toFixed(1)},${y(s.get(p)).toFixed(1)}`).join(' ')
             const last = pts[pts.length - 1]
@@ -165,7 +199,9 @@ function Sweep({ res }: { res: Research }) {
               </g>
             )
           })}
+          </g>
         </svg>
+        </div>
       </div>
       {width < 560 && (
         <ul className="ecdf-legend">
@@ -197,6 +233,9 @@ const CLASS_PARTS: { key: keyof ClassPoint; label: string; color: string }[] = [
 function Classes({ res }: { res: Research }) {
   const [sys, setSys] = useState<'hub' | 'hyb'>('hub')
   const [ref, width] = useWidth<HTMLDivElement>(900)
+  const [viewRef, seen] = useInView<HTMLDivElement>()
+  const reduced = useReducedMotion()
+  const shown = seen || reduced
   const rows = res.classes[sys]
   const H = 240
   const L = 44
@@ -219,7 +258,8 @@ function Classes({ res }: { res: Research }) {
       <div className="controls">
         <Seg label="Reranker" value={sys} onChange={setSys} options={[{ value: 'hub', label: 'with hub correction' }, { value: 'hyb', label: 'without' }]} />
       </div>
-      <div ref={ref}>
+      <div ref={viewRef}>
+        <div ref={ref}>
         <svg width={width} height={H} role="img" aria-label="Share of queries in each outcome class for each K">
           {[0, 0.25, 0.5, 0.75, 1].map((v) => (
             <text key={v} x={L - 6} y={y(v) + 4} textAnchor="end" className="axis-t">
@@ -235,7 +275,22 @@ function Classes({ res }: { res: Research }) {
                   const v = r[p.key] as number
                   const y0 = y(acc)
                   acc += v
-                  return <rect key={p.key} x={cx - bw / 2} y={y(acc) + 1} width={bw} height={Math.max(0, y0 - y(acc) - 2)} fill={p.color} />
+                  return (
+                    <rect
+                      key={p.key}
+                      x={cx - bw / 2}
+                      y={y(acc) + 1}
+                      width={bw}
+                      height={Math.max(0, y0 - y(acc) - 2)}
+                      fill={p.color}
+                      style={{
+                        // bars grow up from the axis, staggered by K, the first time the chart is seen
+                        transform: `scaleY(${shown ? 1 : 0})`,
+                        transformOrigin: `${cx}px ${y(0)}px`,
+                        transition: reduced ? 'none' : `transform 0.9s ${EASE} ${i * 90}ms`,
+                      }}
+                    />
+                  )
                 })}
                 <text x={cx} y={H - 8} textAnchor="middle" className="axis-t" fontWeight={r.K === 30 ? 600 : undefined}>
                   {width < 560 ? r.K : `K ${r.K}`}
@@ -244,6 +299,7 @@ function Classes({ res }: { res: Research }) {
             )
           })}
         </svg>
+        </div>
       </div>
       <ul className="ecdf-legend">
         {CLASS_PARTS.map((p) => (
