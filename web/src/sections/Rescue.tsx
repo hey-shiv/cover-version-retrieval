@@ -7,6 +7,7 @@ import { subsequenceDTW } from '../lib/dtw'
 import { useReducedMotion, useWidth } from '../lib/hooks'
 import { lut } from '../components/ramp'
 import { linScale } from '../lib/format'
+import { NIGHT, alpha } from '../lib/palette'
 
 export function Rescue() {
   return (
@@ -67,7 +68,7 @@ function RankFlip() {
           </button>
         ))}
         <button type="button" className="btn step-next" onClick={() => setStep((step + 1) % 4)}>
-          {step === 3 ? 'Replay' : 'Next →'}
+          {step === 3 ? 'Replay' : 'Next step'}
         </button>
       </div>
       <p className="step-text" aria-live="polite">
@@ -76,16 +77,16 @@ function RankFlip() {
       <div ref={ref}>
         <svg width={width} height={H} role="img" aria-label="Slope chart: the hybrid's final top ten candidates for query P_797406, from Stage-1 cosine to alignment score to final rank.">
           <text x={colA} y={14} textAnchor="middle" className="axis-t light">
-            STAGE-1 COSINE
+            Stage-1 cosine
           </text>
           <text x={colB} y={14} textAnchor="middle" className="axis-t light" opacity={step >= 2 ? 1 : 0.25}>
-            ALIGNMENT SCORE
+            Alignment score
           </text>
           <text x={colC} y={14} textAnchor="middle" className="axis-t light" opacity={step >= 3 ? 1 : 0.25}>
-            FINAL RANK
+            Final rank
           </text>
           {[colA, colB, colC].map((x, i) => (
-            <line key={x} x1={x} x2={x} y1={pad.t - 8} y2={H - pad.b + 8} stroke="#37332a" opacity={i === 0 || step >= i + 1 ? 1 : 0.3} />
+            <line key={x} x1={x} x2={x} y1={pad.t - 8} y2={H - pad.b + 8} stroke="var(--rule)" opacity={i === 0 || step >= i + 1 ? 1 : 0.3} />
           ))}
           {[0.88, 0.9, 0.92, 0.94, 0.96, 0.98].map((v) => (
             <text key={v} x={colA - 10} y={yCos(v) + 4} textAnchor="end" className="axis-t dim">
@@ -100,20 +101,20 @@ function RankFlip() {
             ))}
           {items.map((it) => {
             const isP = it.candidate === CASE_PARTNER
-            const color = isP ? '#56b58f' : '#8f8877'
+            const color = isP ? NIGHT.cover : NIGHT.mute
             const a = yCos(it.cos)
             const b = yAlign(it.align)
             const c = yRank(it.rank)
             return (
               <g key={it.candidate} style={{ transition: 'opacity .4s' }}>
-                {step >= 2 && <line x1={colA} y1={a} x2={colB} y2={b} stroke={isP ? 'var(--path)' : '#4a453a'} strokeWidth={isP ? 2.2 : 1} />}
-                {step >= 3 && <line x1={colB} y1={b} x2={colC} y2={c} stroke={isP ? 'var(--path)' : '#4a453a'} strokeWidth={isP ? 2.2 : 1} />}
+                {step >= 2 && <line x1={colA} y1={a} x2={colB} y2={b} stroke={isP ? 'var(--path)' : 'var(--faint)'} strokeWidth={isP ? 2.2 : 1} />}
+                {step >= 3 && <line x1={colB} y1={b} x2={colC} y2={c} stroke={isP ? 'var(--path)' : 'var(--faint)'} strokeWidth={isP ? 2.2 : 1} />}
                 <circle cx={colA} cy={a} r={isP ? 6 : 3.5} fill={isP ? color : 'none'} stroke={color} strokeWidth={1.4} />
                 {step >= 2 && <circle cx={colB} cy={b} r={isP ? 6 : 3.5} fill={isP ? color : 'none'} stroke={color} strokeWidth={1.4} />}
                 {step >= 3 && (
                   <>
                     <circle cx={colC} cy={c} r={isP ? 6 : 3.5} fill={isP ? color : 'none'} stroke={color} strokeWidth={1.4} />
-                    <text x={colC + 12} y={c + 4} className="axis-t" fill={isP ? '#56b58f' : '#8f8877'}>
+                    <text x={colC + 12} y={c + 4} className="axis-t" fill={isP ? NIGHT.cover : NIGHT.mute}>
                       {narrow ? `#${it.rank}` : `#${it.rank} ${it.candidate}`}
                     </text>
                   </>
@@ -123,7 +124,7 @@ function RankFlip() {
           })}
           {/* partner annotation at Stage 1 */}
           <g>
-            <text x={colA + 14} y={yCos(cs.case.partner_cos) + 4} className="axis-t" fill="#56b58f">
+            <text x={colA + 14} y={yCos(cs.case.partner_cos) + 4} className="axis-t" fill={NIGHT.cover}>
               {CASE_PARTNER} · Stage-1 rank {cs.case.rank_global}
             </text>
           </g>
@@ -245,7 +246,7 @@ function AlignmentLab() {
       <div className="controls">
         <Seg label="Pair" value={key} onChange={setKey} options={PAIRS.map((p) => ({ value: p.key, label: p.label }))} />
         <button type="button" className="btn" onClick={run}>
-          ▶ Run DTW
+          Run DTW
         </button>
       </div>
       <div className="controls">
@@ -449,7 +450,7 @@ function MatrixCanvas({
         }
     }
     if (view === 'D' && prog < 1) {
-      ctx.fillStyle = 'rgba(223,59,30,.9)'
+      ctx.fillStyle = alpha(NIGHT.path, 0.9)
       ctx.fillRect(ox, size - rowsFilled * ch - 1.5, size, 2)
     }
     const drawPath = (pts: [number, number][], color: string, w: number, dash: number[] = []) => {
@@ -466,14 +467,14 @@ function MatrixCanvas({
       ctx.stroke()
       ctx.setLineDash([])
     }
-    if (pub) drawPath(pub, '#f7efdd', 1.5, [4, 3])
+    if (pub) drawPath(pub, NIGHT.hub, 1.5, [4, 3])
     if (prog > 1) {
       const n = Math.ceil((prog - 1) * dtw.path.length)
       const pts = dtw.path.slice(dtw.path.length - n)
-      drawPath(pts, '#df3b1e', 2.4)
+      drawPath(pts, NIGHT.path, 2.4)
       if (pts.length) {
         const [i, j] = pts[0]
-        ctx.fillStyle = '#df3b1e'
+        ctx.fillStyle = NIGHT.path
         ctx.beginPath()
         ctx.arc(ox + (j + 0.5) * cw, size - (i + 0.5) * ch, 4, 0, Math.PI * 2)
         ctx.fill()
@@ -482,10 +483,10 @@ function MatrixCanvas({
     if (hover) {
       // crosshair from the cell out to both representations
       const [i, j] = hover
-      ctx.strokeStyle = 'rgba(127,155,224,.95)'
+      ctx.strokeStyle = alpha(NIGHT.query, 0.95)
       ctx.lineWidth = 1
       ctx.strokeRect(0.5, size - (i + 1) * ch, ox + (j + 1) * cw, ch)
-      ctx.strokeStyle = 'rgba(86,181,143,.95)'
+      ctx.strokeStyle = alpha(NIGHT.cover, 0.95)
       ctx.strokeRect(ox + j * cw, size - (i + 1) * ch + 0.5, cw, (i + 1) * ch + gap + strip - 1)
     }
   }, [W, H, size, strip, gap, strips, cost, accNorm, view, prog, pub, dtw, N, M, hover])
@@ -527,14 +528,14 @@ function StepGlyph() {
     <div className="step-glyph">
       <div className="label">Allowed steps · weights</div>
       <svg width={s * 4} height={s * 3.2} viewBox={`0 0 ${s * 4} ${s * 3.2}`} aria-label="Steps (1,1) weight 1, (2,1) weight 2, (1,2) weight 1">
-        {[0, 1, 2, 3].map((x) => [0, 1, 2].map((y) => <circle key={`${x}${y}`} cx={x * s + 10} cy={(2 - y) * s + 12} r={2} fill="#6d6758" />))}
+        {[0, 1, 2, 3].map((x) => [0, 1, 2].map((y) => <circle key={`${x}${y}`} cx={x * s + 10} cy={(2 - y) * s + 12} r={2} fill="var(--faint)" />))}
         {[
           [1, 1, '1'],
           [2, 1, '2'],
           [1, 2, '1'],
         ].map(([di, dj, w]) => (
           <g key={`${di}${dj}`}>
-            <line x1={10} y1={2 * s + 12} x2={Number(dj) * s + 10} y2={(2 - Number(di)) * s + 12} stroke="#df3b1e" strokeWidth={1.6} />
+            <line x1={10} y1={2 * s + 12} x2={Number(dj) * s + 10} y2={(2 - Number(di)) * s + 12} stroke="var(--path)" strokeWidth={1.6} />
             <text x={Number(dj) * s + 16} y={(2 - Number(di)) * s + 10} className="axis-t light">
               {w}
             </text>

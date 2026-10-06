@@ -4,6 +4,7 @@ import { benchmarkRuns, rankEdges, RUN_SETUP, STAGE1 } from '../data/benchmark-d
 import { devRun } from '../data/retrieval-cases'
 import { useInView, useReducedMotion, useWidth } from '../lib/hooks'
 import { pct } from '../lib/format'
+import { DAY } from '../lib/palette'
 
 const K = 30
 
@@ -81,7 +82,7 @@ function CandidateField() {
       const y = Math.floor(i / cols) * cell + cell / 2
       const inShort = i < K
       ctx.globalAlpha = inShort ? 1 : 1 - 0.55 * collapse
-      ctx.fillStyle = inShort ? '#16140f' : '#a39b89'
+      ctx.fillStyle = inShort ? DAY.ink : DAY.faint
       ctx.beginPath()
       ctx.arc(x, y, inShort ? Math.max(r, 1.6) : r, 0, Math.PI * 2)
       ctx.fill()
@@ -97,8 +98,8 @@ function CandidateField() {
           value={pool}
           onChange={setPool}
           options={[
-            { value: 'dev', label: 'Development · 119' },
-            { value: 'bench', label: 'Benchmark · 14,999' },
+            { value: 'dev', label: 'Development, 119' },
+            { value: 'bench', label: 'Benchmark, 14,999' },
           ]}
         />
         <span className="readout">
@@ -191,7 +192,7 @@ function RankField() {
           })}
           <line x1={xOf(K + 1)} x2={xOf(K + 1)} y1={8} y2={H - 20} stroke="var(--ink)" strokeWidth={1.5} />
           <text x={xOf(K + 1) + 6} y={20} className="axis-t strong">
-            K = 30{width < 640 ? '' : ' · shortlist boundary'}
+            K = 30{width < 640 ? '' : ', the shortlist boundary'}
           </text>
           <text x={xOf(K + 1) + 6} y={34} className="axis-t">
             {width < 640 ? 'Stage 2 never sees these' : 'beyond here Stage 2 never sees the cover'}

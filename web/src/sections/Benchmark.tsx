@@ -79,7 +79,7 @@ function RunPanels() {
     <div className="figure">
       <div className="controls">
         <Seg label="Metric" value={m} onChange={setM} options={METRICS.map((k) => ({ value: k, label: METRIC_LABEL[k] }))} />
-        <span className="label">{isRank ? 'lower is better · log axis' : 'higher is better'} · same axis in every panel</span>
+        <span className="label">{isRank ? 'Lower is better, log axis.' : 'Higher is better.'} Same axis in every panel.</span>
       </div>
       <div ref={ref} className="runs" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
         {benchmarkRuns.map((r) => (
@@ -237,10 +237,10 @@ function Reversal() {
       <div ref={ref}>
         <svg width={width} height={H} role="img" aria-label="Ordering of three systems on the development protocol versus benchmark run 1">
           <text x={xa} y={16} textAnchor="middle" className="axis-t">
-            {narrow ? 'DEV' : 'DEVELOPMENT · 20 × 120'}
+            {narrow ? 'Development' : 'Development, 20 × 120'}
           </text>
           <text x={xb} y={16} textAnchor="middle" className="axis-t">
-            {narrow ? 'BENCHMARK' : 'BENCHMARK RUN 1 · 13,000 × 15,000'}
+            {narrow ? 'Benchmark' : 'Benchmark run 1, 13,000 × 15,000'}
           </text>
           {rows.map((r) => {
             const i = byDev.indexOf(r)

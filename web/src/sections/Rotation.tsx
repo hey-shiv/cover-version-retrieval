@@ -36,7 +36,7 @@ export function Rotation() {
         </aside>
       </div>
 
-      <div className="figure rotation-fig">
+      <div className="figure rotation-fig plate">
         <div className="controls">
           <Seg
             label="Pair"
@@ -45,7 +45,7 @@ export function Rotation() {
               setPi(Number(v))
               setK(0)
             }}
-            options={rotationPairs.map((p, i) => ({ value: String(i), label: `${p.kind === 'cover' ? 'Cover' : 'Non-cover'} · ${p.query.slice(2)}/${p.candidate.slice(2)}` }))}
+            options={rotationPairs.map((p, i) => ({ value: String(i), label: `${p.kind === 'cover' ? 'Cover' : 'Non-cover'} ${p.query.slice(2)}/${p.candidate.slice(2)}` }))}
           />
         </div>
         <div className="rotation-grid">
@@ -149,8 +149,8 @@ function Dial({ qp, cp, k, onK }: { qp: number[]; cp: number[]; k: number; onK: 
             </g>
           )
         })}
-        <polygon points={qp.map(pt).join(' ')} fill="rgba(42,74,148,.12)" stroke="var(--query)" strokeWidth={1.8} />
-        <polygon points={cp.map(pt).join(' ')} fill="rgba(29,115,86,.10)" stroke="var(--cover)" strokeWidth={1.8} strokeDasharray="4 3" style={{ transition: 'all .35s ease' }} />
+        <polygon points={qp.map(pt).join(' ')} fill="var(--query)" fillOpacity={0.12} stroke="var(--query)" strokeWidth={1.8} />
+        <polygon points={cp.map(pt).join(' ')} fill="var(--cover)" fillOpacity={0.1} stroke="var(--cover)" strokeWidth={1.8} strokeDasharray="4 3" style={{ transition: 'all .35s ease' }} />
         <g transform={`rotate(${(k / 12) * 360})`} style={{ transition: 'transform .35s ease' }}>
           <line x1={0} y1={-18} x2={0} y2={-R} stroke="var(--path)" strokeWidth={1.5} strokeDasharray="3 3" />
           <path d={`M 0 ${-R - 26} l -5 -8 h 10 z`} fill="var(--path)" />
@@ -159,7 +159,7 @@ function Dial({ qp, cp, k, onK }: { qp: number[]; cp: number[]; k: number; onK: 
           +{k}
         </text>
       </svg>
-      <div className="label dial-hint">Drag the dial · ← → keys · or pick a bar</div>
+      <div className="label dial-hint">Drag the dial, use the arrow keys, or pick a bar</div>
     </div>
   )
 }

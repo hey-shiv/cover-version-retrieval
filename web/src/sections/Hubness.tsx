@@ -72,13 +72,13 @@ function HubGraph() {
       <div ref={ref}>
         <svg width={width} height={H} role="img" aria-label={`Queries linked to the candidates that appear in their top ten as false positives, ${system}.`}>
           <text x={qx} y={10} textAnchor="end" className="axis-t">
-            20 QUERIES
+            20 queries
           </text>
           <text x={cx + 8} y={10} className="axis-t">
-            {narrow ? 'CANDIDATE' : 'FALSE-POSITIVE CANDIDATE'}
+            {narrow ? 'Candidate' : 'False-positive candidate'}
           </text>
           <text x={width - 4} y={10} className="axis-t" textAnchor="end">
-            TIMES IN A TOP 10
+            Times in a top 10
           </text>
           {shown.map((c, ci) =>
             c.queries.map((q) => {

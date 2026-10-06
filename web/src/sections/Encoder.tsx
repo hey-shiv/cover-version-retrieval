@@ -42,7 +42,7 @@ export function Encoder() {
         </aside>
       </div>
 
-      <div className="figure encoder-fig">
+      <div className="figure encoder-fig plate">
         <ol className="stack" aria-label="Encoder layers">
           {STAGES.map((s) => (
             <li key={s.id}>

@@ -1,4 +1,4 @@
-import { PAPER_URL, REPO_URL } from './Nav'
+import { PAPER_URL, REPO_URL, WheelMark } from './Nav'
 
 const REFS = [
   'Yesiler et al. Da-TACOS: A Dataset for Cover Song Identification and Understanding. ISMIR 2019.',
@@ -13,34 +13,43 @@ const REFS = [
 export function Footer() {
   return (
     <footer className="footer panel">
-      <div className="wrap footer-grid">
-        <div>
-          <div className="statement footer-statement">
-            Can the machine hear <em>through the arrangement?</em>
-          </div>
-          <p className="footer-answer">Sometimes. This page shows when, and why not.</p>
-          <p>
-            <a href={REPO_URL}>Code, reports and every result file on GitHub ↗</a>
-          </p>
-          <p>
-            <a href={PAPER_URL}>The paper (draft PDF), built from the same result files ↗</a>
-          </p>
+      <div className="wrap">
+        <p className="footer-statement">
+          <span>Can the machine hear</span> <span>through the arrangement?</span>
+        </p>
+        <p className="footer-answer">Sometimes. This page shows when, and why not.</p>
+        <div className="footer-actions">
+          <a className="btn solid" href={PAPER_URL}>
+            Read the paper (draft PDF)
+          </a>
+          <a className="btn" href={REPO_URL}>
+            Code, reports and every result file
+          </a>
         </div>
-        <div>
-          <div className="label">References</div>
-          <ol className="refs">
-            {REFS.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ol>
-          <div className="label" style={{ marginTop: 24 }}>
-            Colophon
+        <div className="footer-grid">
+          <div>
+            <h2 className="footer-h">References</h2>
+            <ol className="refs">
+              {REFS.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ol>
           </div>
-          <p className="colophon">
-            Code MIT. Da-TACOS metadata and features CC BY-NC-SA 4.0, © Music Technology Group, Universitat Pompeu Fabra; not redistributed. Figures derived
-            from them are shown for non-commercial research communication with attribution. Set in Newsreader, IBM Plex Sans and IBM Plex Mono. Static site:
-            React, TypeScript, Vite; every chart drawn with SVG or Canvas from repository files.
-          </p>
+          <div>
+            <h2 className="footer-h">Colophon</h2>
+            <p className="colophon">
+              Code MIT. Da-TACOS metadata and features CC BY-NC-SA 4.0, © Music Technology Group, Universitat Pompeu Fabra; not redistributed. Figures
+              derived from them are shown for non-commercial research communication with attribution.
+            </p>
+            <p className="colophon">
+              Set in Spectral and Archivo. Static site: React, TypeScript, Vite. Every chart is drawn with SVG or Canvas from repository files; the
+              fluid at the top is a WebGL simulation fed by decoded chroma.
+            </p>
+            <a href="#top" className="footer-mark">
+              <WheelMark size={22} />
+              Back to the top
+            </a>
+          </div>
         </div>
       </div>
     </footer>

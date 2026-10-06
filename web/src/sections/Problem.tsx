@@ -108,7 +108,7 @@ export function Problem() {
         </aside>
       </div>
 
-      <div className="figure change-lab">
+      <div className="figure change-lab plate">
         <div className="change-list" role="tablist" aria-label="Transformations">
           {CHANGES.map((c) => (
             <button
@@ -126,12 +126,12 @@ export function Problem() {
         </div>
         <div className="change-view" role="tabpanel" aria-live="polite">
           <div className="change-strips">
-            <div className="label">Original · {BASE}</div>
+            <div className="label">Original, {BASE}</div>
             <div className="strip" style={{ aspectRatio: '96 / 12', width: '100%' }}>
               <Heatmap data={base} ramp="ink" ariaLabel={`Chroma of ${BASE}`} />
             </div>
             <div className="label" style={{ marginTop: 18 }}>
-              After: {active.name.toLowerCase()} · {changed[0].length} frames
+              After a {active.name.toLowerCase()} change, {changed[0].length} frames
             </div>
             <div className="strip" style={{ aspectRatio: `${changed[0].length} / 12`, width: `${(changed[0].length / 96) * 100}%` }}>
               <Heatmap data={changed} ramp="ink" ariaLabel={`Chroma after ${active.name} change`} />

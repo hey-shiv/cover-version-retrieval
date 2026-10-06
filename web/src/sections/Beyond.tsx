@@ -141,7 +141,7 @@ function Sweep({ res }: { res: Research }) {
     <div className="figure">
       <div className="controls">
         <Seg label="Metric" value={m} onChange={setM} options={[{ value: 'MAP', label: 'MAP' }, { value: 'Hit@1', label: 'Hit@1' }, { value: 'coverage', label: 'Stage-1 coverage' }]} />
-        <span className="label">log axis · second row: rerank time per query</span>
+        <span className="label">Log axis. The second row is rerank time per query.</span>
       </div>
       <div ref={viewRef}>
         <div ref={ref}>

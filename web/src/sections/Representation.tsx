@@ -66,7 +66,7 @@ export function Representation() {
         </aside>
       </div>
 
-      <div className="figure hpcp-instrument">
+      <div className="figure hpcp-instrument plate">
         <div className="hpcp-raw">
           <div className="label">
             Raw · {RAW.toLocaleString('en-US')} frames · P_130947
@@ -77,7 +77,7 @@ export function Representation() {
           </div>
           <div className="funnel" aria-hidden="true">
             <svg viewBox="0 0 100 10" preserveAspectRatio="none">
-              <path d={`M ${(t / N) * 100} 0 L ${((t + 1) / N) * 100} 0 L ${((t + 1) / N) * 100} 10 L ${(t / N) * 100} 10 Z`} fill="rgba(223,59,30,.35)" />
+              <path d={`M ${(t / N) * 100} 0 L ${((t + 1) / N) * 100} 0 L ${((t + 1) / N) * 100} 10 L ${(t / N) * 100} 10 Z`} fill="var(--path)" fillOpacity={0.3} />
             </svg>
           </div>
           <div className="label">Preprocessed · 96 frames · each averages ≈ {Math.round(per)} raw frames</div>
@@ -99,7 +99,7 @@ export function Representation() {
             <Heatmap data={pre} ramp="ember" ariaLabel="Preprocessed HPCP, 12 by 96" />
             <div className="cursor" style={{ left: `${(pos / N) * 100}%` }} />
           </div>
-          <div className="scrub-hint label">Drifts on its own · hover or drag to take over · ← → keys</div>
+          <div className="scrub-hint label">Drifts on its own. Hover or drag to take over, or use the arrow keys.</div>
         </div>
 
         <div className="hpcp-readout">
@@ -136,8 +136,8 @@ function PitchClock({ values }: { values: number[] }) {
   const r0 = 22
   return (
     <svg viewBox="-136 -136 272 272" className="pitch-clock" role="img" aria-label="Pitch-class energy for the selected frame">
-      <circle r={r0 + R} fill="none" stroke="#37332a" />
-      <circle r={r0} fill="none" stroke="#37332a" />
+      <circle r={r0 + R} fill="none" stroke="var(--rule)" />
+      <circle r={r0} fill="none" stroke="var(--rule)" />
       {values.map((v, p) => {
         const a = (p / 12) * Math.PI * 2 - Math.PI / 2
         const x1 = Math.cos(a) * r0
@@ -145,7 +145,7 @@ function PitchClock({ values }: { values: number[] }) {
         const len = r0 + v * R
         return (
           <g key={p}>
-            <line x1={x1} y1={y1} x2={Math.cos(a) * (r0 + R)} y2={Math.sin(a) * (r0 + R)} stroke="#2a2720" />
+            <line x1={x1} y1={y1} x2={Math.cos(a) * (r0 + R)} y2={Math.sin(a) * (r0 + R)} stroke="var(--paper-3)" />
             <line x1={x1} y1={y1} x2={Math.cos(a) * len} y2={Math.sin(a) * len} stroke={rampCss('ember', 0.35 + v * 0.65)} strokeWidth={9} strokeLinecap="butt" />
             <text
               x={Math.cos(a) * (r0 + R + 13)}
@@ -154,7 +154,7 @@ function PitchClock({ values }: { values: number[] }) {
               dominantBaseline="middle"
               fontSize={10}
               fontFamily="var(--mono)"
-              fill="#8f8877"
+              fill="var(--mute)"
             >
               {PITCH_CLASSES[p]}
             </text>
