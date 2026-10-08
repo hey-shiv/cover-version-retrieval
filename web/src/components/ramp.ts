@@ -1,14 +1,10 @@
-/**
- * Sequential ramps, both printed like a cyanotype.
- * "ink" reads on paper (0 = paper, 1 = Prussian ink); "ember" reads on night panels
- * (0 = night, 1 = paper-white). The name "ember" is kept so call sites stay stable.
- */
+/** Sequential ramps. "ink" reads on paper (0 = paper, 1 = ink); "ember" reads on the dark panels. */
 type RGB = [number, number, number]
 const hex = (h: string): RGB => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) as RGB
 
 const STOPS: Record<'ink' | 'ember', RGB[]> = {
-  ink: ['#eef2f3', '#c4d3df', '#7f9bb8', '#36557e', '#0e2340'].map(hex),
-  ember: ['#081629', '#11305a', '#2a5f98', '#7fb2d9', '#eef7fb'].map(hex),
+  ink: ['#f1ede4', '#d9cfbb', '#a6977a', '#5c5242', '#16140f'].map(hex),
+  ember: ['#14130f', '#33291d', '#7a5a33', '#cfa86a', '#f7efdd'].map(hex),
 }
 
 export type RampName = keyof typeof STOPS

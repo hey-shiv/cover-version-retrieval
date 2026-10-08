@@ -24,7 +24,7 @@ export function Reproducibility() {
           to <span className="mono">runs/smoke/</span>, never to <span className="mono">reports/</span>.
         </aside>
       </div>
-      <div className="figure chain plate">
+      <div className="figure chain">
         <ol className="chain-list" role="tablist" aria-label="Reproducibility controls">
           {REPRO.map((r, i) => (
             <li key={r.key}>

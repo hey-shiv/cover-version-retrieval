@@ -1,6 +1,6 @@
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
-import { Hero, Overture } from './sections/Hero'
+import { Hero } from './sections/Hero'
 import { Problem } from './sections/Problem'
 import { Representation } from './sections/Representation'
 import { Encoder } from './sections/Encoder'
@@ -17,13 +17,12 @@ import { DataLicense, Limits, Reproducibility } from './sections/Closing'
 export default function App() {
   return (
     <>
-      <a className="skip" href="#overture">
+      <a className="skip" href="#problem">
         Skip to content
       </a>
       <Nav />
       <main id="top">
         <Hero />
-        <Overture />
         <Problem />
         <Representation />
         <Encoder />

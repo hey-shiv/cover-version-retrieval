@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Chapter, Caption } from '../components/Chapter'
 import { Heatmap } from '../components/Heatmap'
 import { profileFigure } from '../data/figures'
@@ -11,26 +11,7 @@ const N = 96
 export function Representation() {
   const pre = profileFigure.preprocessed
   const raw = profileFigure.raw_pixels
-  const [pos, setPos] = useState(52)
-  const held = useRef(false)
-  const t = Math.min(N - 1, Math.floor(pos))
-  const setT = (v: number | ((x: number) => number)) =>
-    setPos((p) => (typeof v === 'function' ? v(Math.floor(p)) : v))
-
-  // Slow, endless drift along the strip; pauses only while the pointer is on it.
-  useEffect(() => {
-    const SPEED = 1.2 // frames per second
-    let raf = 0
-    let last = performance.now()
-    const tick = (now: number) => {
-      const dt = Math.min(0.1, (now - last) / 1000)
-      last = now
-      if (!held.current) setPos((p) => (p + dt * SPEED) % N)
-      raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [])
+  const [t, setT] = useState(52)
   const per = RAW / N
   const rawFrom = Math.round(t * per)
   const rawTo = Math.round((t + 1) * per) - 1
@@ -66,7 +47,7 @@ export function Representation() {
         </aside>
       </div>
 
-      <div className="figure hpcp-instrument plate">
+      <div className="figure hpcp-instrument">
         <div className="hpcp-raw">
           <div className="label">
             Raw · {RAW.toLocaleString('en-US')} frames · P_130947
@@ -77,7 +58,7 @@ export function Representation() {
           </div>
           <div className="funnel" aria-hidden="true">
             <svg viewBox="0 0 100 10" preserveAspectRatio="none">
-              <path d={`M ${(t / N) * 100} 0 L ${((t + 1) / N) * 100} 0 L ${((t + 1) / N) * 100} 10 L ${(t / N) * 100} 10 Z`} fill="var(--path)" fillOpacity={0.3} />
+              <path d={`M ${(t / N) * 100} 0 L ${((t + 1) / N) * 100} 0 L ${((t + 1) / N) * 100} 10 L ${(t / N) * 100} 10 Z`} fill="rgba(223,59,30,.35)" />
             </svg>
           </div>
           <div className="label">Preprocessed · 96 frames · each averages ≈ {Math.round(per)} raw frames</div>
@@ -86,8 +67,6 @@ export function Representation() {
             style={{ aspectRatio: '96 / 22' }}
             onPointerMove={onMove}
             onPointerDown={onMove}
-            onPointerEnter={() => (held.current = true)}
-            onPointerLeave={() => (held.current = false)}
             onKeyDown={onKey}
             tabIndex={0}
             role="slider"
@@ -97,9 +76,9 @@ export function Representation() {
             aria-valuenow={t}
           >
             <Heatmap data={pre} ramp="ember" ariaLabel="Preprocessed HPCP, 12 by 96" />
-            <div className="cursor" style={{ left: `${(pos / N) * 100}%` }} />
+            <div className="cursor" style={{ left: `${((t + 0.5) / N) * 100}%` }} />
           </div>
-          <div className="scrub-hint label">Drifts on its own. Hover or drag to take over, or use the arrow keys.</div>
+          <div className="scrub-hint label">Drag across the strip · ← → keys</div>
         </div>
 
         <div className="hpcp-readout">
@@ -136,8 +115,8 @@ function PitchClock({ values }: { values: number[] }) {
   const r0 = 22
   return (
     <svg viewBox="-136 -136 272 272" className="pitch-clock" role="img" aria-label="Pitch-class energy for the selected frame">
-      <circle r={r0 + R} fill="none" stroke="var(--rule)" />
-      <circle r={r0} fill="none" stroke="var(--rule)" />
+      <circle r={r0 + R} fill="none" stroke="#37332a" />
+      <circle r={r0} fill="none" stroke="#37332a" />
       {values.map((v, p) => {
         const a = (p / 12) * Math.PI * 2 - Math.PI / 2
         const x1 = Math.cos(a) * r0
@@ -145,7 +124,7 @@ function PitchClock({ values }: { values: number[] }) {
         const len = r0 + v * R
         return (
           <g key={p}>
-            <line x1={x1} y1={y1} x2={Math.cos(a) * (r0 + R)} y2={Math.sin(a) * (r0 + R)} stroke="var(--paper-3)" />
+            <line x1={x1} y1={y1} x2={Math.cos(a) * (r0 + R)} y2={Math.sin(a) * (r0 + R)} stroke="#2a2720" />
             <line x1={x1} y1={y1} x2={Math.cos(a) * len} y2={Math.sin(a) * len} stroke={rampCss('ember', 0.35 + v * 0.65)} strokeWidth={9} strokeLinecap="butt" />
             <text
               x={Math.cos(a) * (r0 + R + 13)}
@@ -154,7 +133,7 @@ function PitchClock({ values }: { values: number[] }) {
               dominantBaseline="middle"
               fontSize={10}
               fontFamily="var(--mono)"
-              fill="var(--mute)"
+              fill="#8f8877"
             >
               {PITCH_CLASSES[p]}
             </text>
