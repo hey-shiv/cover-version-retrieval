@@ -4,11 +4,11 @@
 % Tables are generated into tables/, figures into figures/ (research/scripts/make_paper_assets.py).
 % Evidence tiers are defined in Section 5.5 and in paper/repository_audit.md. Do not type numbers by hand.
 \documentclass[10pt]{article}
-\usepackage[margin=0.9in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage{mathptmx}
+\usepackage{neurips_draft}
 \usepackage{amsmath,amssymb,booktabs,graphicx,xcolor,natbib,caption,subcaption}
 \usepackage[hidelinks]{hyperref}
+\usepackage{wrapfig}
+\setlength{\bibsep}{2pt}
 \captionsetup{font=small,labelfont=bf}
 \input{tables/numbers.tex}
 \input{tables/numbers_local.tex}
@@ -18,7 +18,7 @@
 
 \title{Where Two-Stage Cover Song Retrieval Loses Its Covers:\\
 Candidate Recall, Hubness and Alignment Cost on Da-TACOS}
-\author{Anonymous submission}
+\author{Shivashant Manohar}
 \date{}
 
 \begin{document}
@@ -55,6 +55,9 @@ We found no CSI study that reports these quantities.
 We measure them on the full Da-TACOS benchmark (13{,}000 queries, 15{,}000 candidates, 12 relevant items per query). The system is deliberately transparent: HPCP features, a \Params-parameter temporal convolutional encoder, exact cosine search, key rotation by chroma-profile cosine, and slope-constrained subsequence DTW.
 Every hyperparameter was locked on held-out works before the benchmark was run.
 The system is far from state-of-the-art accuracy. What it offers is complete control: exact per-query ranks for every stage, four locked benchmark evaluations, a sweep of $K$ from 5 to 500 that reproduces the locked run exactly at $K=30$, and paired, work-level statistics.
+
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{nx_teaser.pdf}
+\caption{\textbf{Overview of the findings} (all 13{,}000 Da-TACOS queries, hub-corrected hybrid, \tier{local-full}). \textbf{(a)}~Hit@1 is bounded by shortlist coverage $C(K)$; the shaded bands split the remaining loss into exclusion (blue) and misranking (pink). \textbf{(b)}~The dominant failure moves from class A (no cover shortlisted) to class B (covered, misranked) near $K=100$--$200$. \textbf{(c)}~MAP keeps rising to $K=500$.}\label{fig:teaser}\end{figure}
 
 \paragraph{Contributions.}
 \begin{enumerate}
@@ -127,7 +130,7 @@ Within B we mark \textbf{B}$_\text{hub}$ when the rank-1 item's hub reference (S
 
 % =====================================================================
 \section{Method}\label{sec:method}
-Figure~\ref{fig:arch} shows the system; Table~\ref{tab:t14_config} lists every setting, read from configuration and result files.
+Figure~\ref{fig:arch} shows the system (Figure~\ref{fig:teaser} previews the results); Table~\ref{tab:t14_config} lists every setting, read from configuration and result files.
 
 \begin{figure}[t]\centering\includegraphics[width=\linewidth]{architecture.pdf}
 \caption{The two-stage system with run-4 settings and measured costs. Stage 1 scores every candidate; Stage 2 aligns only the $K$-item shortlist (\ShortlistPct\% of candidates at $K=30$).}\label{fig:arch}\end{figure}
@@ -239,6 +242,10 @@ Table~\ref{tab:t5_failures} decomposes every query at $K=30$. In run 4, class A 
 \begin{subfigure}{.49\linewidth}\includegraphics[width=\linewidth]{hit1_factorisation.pdf}\caption{Hit@1 $=C(30)\,\eta(30)$ by run.}\label{fig:factor}\end{subfigure}
 \caption{The coverage ceiling (\tier{analysis} of the frozen runs).}\end{figure}
 \input{tables/t5_failures.tex}
+\begin{figure}[t]\centering
+\begin{subfigure}{.49\linewidth}\includegraphics[width=\linewidth]{nx_rank_ecdf.pdf}\caption{Rank of the first cover under Stage 1.}\label{fig:ecdf}\end{subfigure}\hfill
+\begin{subfigure}{.49\linewidth}\includegraphics[width=\linewidth]{nx_scatter.pdf}\caption{Per-query AP, Stage 1 vs.\ reranked.}\label{fig:scatter}\end{subfigure}
+\caption{\textbf{The shortlist cut-off is a heavy tail.} (a)~The first cover sits far down the Stage-1 ranking for many queries, so coverage grows only logarithmically with $K$. (b)~Reranking at $K=30$ helps many queries and rarely hurts, but cannot move queries whose cover was never shortlisted (points on the diagonal). \tier{local-full}.}\end{figure}
 
 \subsection{Shortlist size: accuracy keeps rising, and the bottleneck moves}
 The frozen runs fix $K=30$. Run A1 aligns the top 500 candidates of every query once and derives every $K\le500$ from that pass (\tier{local-full}). Figure~\ref{fig:ksweep} and Table~\ref{tab:t4_k_sweep} give the results.
@@ -255,6 +262,8 @@ The claim that coverage is the dominant limitation therefore holds only for $K\l
 \caption{Shortlist size sweep (A1, \tier{local-full}). Left: coverage and recall. Middle and right: MAP and Hit@1 of the hybrid, with and without hub correction. Grey: exhaustive corrected alignment at 96 frames (run 2).}\label{fig:ksweep}\end{figure}
 \begin{figure}[t]\centering\includegraphics[width=\linewidth]{failure_by_K.pdf}
 \caption{Failure classes by $K$ without (left) and with (right) hub correction (B1). Blue: no cover in the shortlist. Pink and orange: covered but misranked. Green: success.}\label{fig:failbyk}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=.62\linewidth]{nx_gain_by_k.pdf}
+\caption{Paired MAP gain over Stage 1 as a function of $K$ with 95\% work-level bootstrap intervals (1{,}000 works). Hub correction adds more as $K$ grows.}\label{fig:gainbyk}\end{figure}
 \input{tables/t4_k_sweep.tex}
 \input{tables/t8_failure_by_K.tex}
 

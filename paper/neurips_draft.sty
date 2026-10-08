@@ -1,0 +1,38 @@
+% NeurIPS-style layout (letter paper, 5.5in x 9in text block, Times, 10pt, rule-framed bold title).
+% A look-alike for drafting; swap in the official neurips_YYYY.sty when the venue releases it.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neurips_draft}[2026/10/09 NeurIPS-style draft layout]
+\RequirePackage[letterpaper,textwidth=5.5in,textheight=9in,top=1.0in,left=1.5in,headheight=0pt,headsep=0pt,footskip=0.5in]{geometry}
+\RequirePackage{mathptmx}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{microtype}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{etoolbox}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}
+\renewcommand{\baselinestretch}{1.0}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.5ex plus 0.5ex minus 0.2ex}{1.0ex plus 0.2ex}
+\titlespacing*{\subsection}{0pt}{1.2ex plus 0.4ex minus 0.2ex}{0.8ex plus 0.2ex}
+\titleformat{\paragraph}[runin]{\bfseries}{}{0pt}{}[\ ]
+\titlespacing*{\paragraph}{0pt}{0.6ex}{0.5em}
+\newcommand{\@neuripsfoot}{Preprint. Under review.}
+\pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\cfoot{\thepage}}
+\renewcommand{\maketitle}{%
+  \thispagestyle{plain}
+  \begingroup\centering
+  \hrule height 4pt\vskip 0.25in
+  {\Large\bfseries\@title\par}
+  \vskip 0.29in\hrule height 1pt\vskip 0.2in
+  {\large\bfseries\@author\par}
+  \vskip 0.3in
+  \endgroup
+  \let\footnote\relax
+  \gdef\@thanks{}}
+\renewenvironment{abstract}{%
+  \begin{center}{\large\bfseries Abstract}\end{center}\vskip -0.5ex
+  \begin{quote}\small\setlength{\parskip}{0.4\baselineskip}\noindent}{\end{quote}\vskip 1ex}
